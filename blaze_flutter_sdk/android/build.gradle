@@ -1,0 +1,106 @@
+group 'com.blaze.flutterblazesdk'
+version '1.0-SNAPSHOT'
+
+buildscript {
+
+    ext {
+        // Keep only versions that are actually specific to BlazeSDK
+        blaze_default_kotlin_version = '2.0.21'
+        blazesdk_version = '1.10.3'
+        blaze_gson_version = '2.10.1'
+    }
+
+    ext.safeExtGet = { prop, fallback ->
+        rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+    }
+
+    ext.blaze_kotlin_version = safeExtGet('kotlin_version', blaze_default_kotlin_version)
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.7.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$blaze_kotlin_version")
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
+
+android {
+    namespace 'com.blaze.flutterblazesdk'
+
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+    }
+
+    def pubspecFile = file('../pubspec.yaml')
+    def pubspecText = pubspecFile.text
+    def versionMatch = pubspecText =~ /version:\s*([^\s]+)/
+    if (!versionMatch) {
+        throw new GradleException("Failed to extract version from pubspec.yaml: 'version' field not found.")
+    }
+    def packageVersion = versionMatch[0][1]
+
+    defaultConfig {
+        minSdkVersion flutter.minSdkVersion
+
+        consumerProguardFiles "consumer-rules.pro"
+
+        buildConfigField("String", "flutter_sdk_verion", "\"$packageVersion\"")
+    }
+
+    dependencies {
+        testImplementation 'org.jetbrains.kotlin:kotlin-test'
+        testImplementation 'org.mockito:mockito-core:5.0.0'
+
+        implementation 'androidx.appcompat:appcompat:1.6.1'
+
+        implementation group: "com.blaze", name: "blazesdk", version: "$blazesdk_version"
+
+        // Kotlin reflection for memberProperties in NullableTypeAdapterFactory
+        implementation "org.jetbrains.kotlin:kotlin-reflect:$blaze_kotlin_version"
+
+        // Gson.
+        implementation "com.google.code.gson:gson:$blaze_gson_version"
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+
+    buildFeatures {
+        buildConfig = true
+    }
+}

@@ -1,0 +1,17 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          # Generate toJson/fromJson by default
+          map: true
+          # Generate copyWith by default
+          copy_with: true
+          # Make all parameters required by default
+          make_collections_unmodifiable: true
+      json_serializable:
+        options:
+          # Use explicit conversion for better control
+          explicit_to_json: true
+          # Generate for nested objects
+          create_to_json: true 
