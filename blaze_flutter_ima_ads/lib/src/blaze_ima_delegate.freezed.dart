@@ -920,65 +920,61 @@ abstract class _BlazeIMADelegateOnAdEventParams
       get copyWith => throw _privateConstructorUsedError;
 }
 
-BlazeIMAOnAdEventParamsData _$BlazeIMAOnAdEventParamsDataFromJson(
-    Map<String, dynamic> json) {
-  return _BlazeIMAOnAdEventParamsData.fromJson(json);
+_OnAdEventParams _$OnAdEventParamsFromJson(Map<String, dynamic> json) {
+  return __OnAdEventParams.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BlazeIMAOnAdEventParamsData {
+mixin _$OnAdEventParams {
   String get eventType => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdEventParamsData value) $default,
+    TResult Function(__OnAdEventParams value) $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeIMAOnAdEventParamsData value)? $default,
+    TResult? Function(__OnAdEventParams value)? $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdEventParamsData value)? $default, {
+    TResult Function(__OnAdEventParams value)? $default, {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this BlazeIMAOnAdEventParamsData to a JSON map.
+  /// Serializes this _OnAdEventParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of BlazeIMAOnAdEventParamsData
+  /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BlazeIMAOnAdEventParamsDataCopyWith<BlazeIMAOnAdEventParamsData>
-      get copyWith => throw _privateConstructorUsedError;
+  _$OnAdEventParamsCopyWith<_OnAdEventParams> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BlazeIMAOnAdEventParamsDataCopyWith<$Res> {
-  factory $BlazeIMAOnAdEventParamsDataCopyWith(
-          BlazeIMAOnAdEventParamsData value,
-          $Res Function(BlazeIMAOnAdEventParamsData) then) =
-      _$BlazeIMAOnAdEventParamsDataCopyWithImpl<$Res,
-          BlazeIMAOnAdEventParamsData>;
+abstract class _$OnAdEventParamsCopyWith<$Res> {
+  factory _$OnAdEventParamsCopyWith(
+          _OnAdEventParams value, $Res Function(_OnAdEventParams) then) =
+      __$OnAdEventParamsCopyWithImpl<$Res, _OnAdEventParams>;
   @useResult
   $Res call({String eventType});
 }
 
 /// @nodoc
-class _$BlazeIMAOnAdEventParamsDataCopyWithImpl<$Res,
-        $Val extends BlazeIMAOnAdEventParamsData>
-    implements $BlazeIMAOnAdEventParamsDataCopyWith<$Res> {
-  _$BlazeIMAOnAdEventParamsDataCopyWithImpl(this._value, this._then);
+class __$OnAdEventParamsCopyWithImpl<$Res, $Val extends _OnAdEventParams>
+    implements _$OnAdEventParamsCopyWith<$Res> {
+  __$OnAdEventParamsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of BlazeIMAOnAdEventParamsData
+  /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -995,35 +991,32 @@ class _$BlazeIMAOnAdEventParamsDataCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$BlazeIMAOnAdEventParamsDataImplCopyWith<$Res>
-    implements $BlazeIMAOnAdEventParamsDataCopyWith<$Res> {
-  factory _$$BlazeIMAOnAdEventParamsDataImplCopyWith(
-          _$BlazeIMAOnAdEventParamsDataImpl value,
-          $Res Function(_$BlazeIMAOnAdEventParamsDataImpl) then) =
-      __$$BlazeIMAOnAdEventParamsDataImplCopyWithImpl<$Res>;
+abstract class _$$_OnAdEventParamsImplCopyWith<$Res>
+    implements _$OnAdEventParamsCopyWith<$Res> {
+  factory _$$_OnAdEventParamsImplCopyWith(_$_OnAdEventParamsImpl value,
+          $Res Function(_$_OnAdEventParamsImpl) then) =
+      __$$_OnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String eventType});
 }
 
 /// @nodoc
-class __$$BlazeIMAOnAdEventParamsDataImplCopyWithImpl<$Res>
-    extends _$BlazeIMAOnAdEventParamsDataCopyWithImpl<$Res,
-        _$BlazeIMAOnAdEventParamsDataImpl>
-    implements _$$BlazeIMAOnAdEventParamsDataImplCopyWith<$Res> {
-  __$$BlazeIMAOnAdEventParamsDataImplCopyWithImpl(
-      _$BlazeIMAOnAdEventParamsDataImpl _value,
-      $Res Function(_$BlazeIMAOnAdEventParamsDataImpl) _then)
+class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
+    extends __$OnAdEventParamsCopyWithImpl<$Res, _$_OnAdEventParamsImpl>
+    implements _$$_OnAdEventParamsImplCopyWith<$Res> {
+  __$$_OnAdEventParamsImplCopyWithImpl(_$_OnAdEventParamsImpl _value,
+      $Res Function(_$_OnAdEventParamsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of BlazeIMAOnAdEventParamsData
+  /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? eventType = null,
   }) {
-    return _then(_$BlazeIMAOnAdEventParamsDataImpl(
+    return _then(_$_OnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -1034,28 +1027,27 @@ class __$$BlazeIMAOnAdEventParamsDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BlazeIMAOnAdEventParamsDataImpl
+class _$_OnAdEventParamsImpl
     with DiagnosticableTreeMixin
-    implements _BlazeIMAOnAdEventParamsData {
-  const _$BlazeIMAOnAdEventParamsDataImpl({required this.eventType});
+    implements __OnAdEventParams {
+  const _$_OnAdEventParamsImpl({required this.eventType});
 
-  factory _$BlazeIMAOnAdEventParamsDataImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$BlazeIMAOnAdEventParamsDataImplFromJson(json);
+  factory _$_OnAdEventParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$_OnAdEventParamsImplFromJson(json);
 
   @override
   final String eventType;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BlazeIMAOnAdEventParamsData(eventType: $eventType)';
+    return '_OnAdEventParams(eventType: $eventType)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'BlazeIMAOnAdEventParamsData'))
+      ..add(DiagnosticsProperty('type', '_OnAdEventParams'))
       ..add(DiagnosticsProperty('eventType', eventType));
   }
 
@@ -1063,7 +1055,7 @@ class _$BlazeIMAOnAdEventParamsDataImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BlazeIMAOnAdEventParamsDataImpl &&
+            other is _$_OnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType));
   }
@@ -1072,19 +1064,19 @@ class _$BlazeIMAOnAdEventParamsDataImpl
   @override
   int get hashCode => Object.hash(runtimeType, eventType);
 
-  /// Create a copy of BlazeIMAOnAdEventParamsData
+  /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BlazeIMAOnAdEventParamsDataImplCopyWith<_$BlazeIMAOnAdEventParamsDataImpl>
-      get copyWith => __$$BlazeIMAOnAdEventParamsDataImplCopyWithImpl<
-          _$BlazeIMAOnAdEventParamsDataImpl>(this, _$identity);
+  _$$_OnAdEventParamsImplCopyWith<_$_OnAdEventParamsImpl> get copyWith =>
+      __$$_OnAdEventParamsImplCopyWithImpl<_$_OnAdEventParamsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdEventParamsData value) $default,
+    TResult Function(__OnAdEventParams value) $default,
   ) {
     return $default(this);
   }
@@ -1092,7 +1084,7 @@ class _$BlazeIMAOnAdEventParamsDataImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeIMAOnAdEventParamsData value)? $default,
+    TResult? Function(__OnAdEventParams value)? $default,
   ) {
     return $default?.call(this);
   }
@@ -1100,7 +1092,7 @@ class _$BlazeIMAOnAdEventParamsDataImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdEventParamsData value)? $default, {
+    TResult Function(__OnAdEventParams value)? $default, {
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -1111,88 +1103,85 @@ class _$BlazeIMAOnAdEventParamsDataImpl
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BlazeIMAOnAdEventParamsDataImplToJson(
+    return _$$_OnAdEventParamsImplToJson(
       this,
     );
   }
 }
 
-abstract class _BlazeIMAOnAdEventParamsData
-    implements BlazeIMAOnAdEventParamsData {
-  const factory _BlazeIMAOnAdEventParamsData(
-      {required final String eventType}) = _$BlazeIMAOnAdEventParamsDataImpl;
+abstract class __OnAdEventParams implements _OnAdEventParams {
+  const factory __OnAdEventParams({required final String eventType}) =
+      _$_OnAdEventParamsImpl;
 
-  factory _BlazeIMAOnAdEventParamsData.fromJson(Map<String, dynamic> json) =
-      _$BlazeIMAOnAdEventParamsDataImpl.fromJson;
+  factory __OnAdEventParams.fromJson(Map<String, dynamic> json) =
+      _$_OnAdEventParamsImpl.fromJson;
 
   @override
   String get eventType;
 
-  /// Create a copy of BlazeIMAOnAdEventParamsData
+  /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BlazeIMAOnAdEventParamsDataImplCopyWith<_$BlazeIMAOnAdEventParamsDataImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_OnAdEventParamsImplCopyWith<_$_OnAdEventParamsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
-BlazeIMAOnAdErrorParams _$BlazeIMAOnAdErrorParamsFromJson(
-    Map<String, dynamic> json) {
-  return _BlazeIMAOnAdErrorParams.fromJson(json);
+_OnAdErrorParams _$OnAdErrorParamsFromJson(Map<String, dynamic> json) {
+  return __OnAdErrorParams.fromJson(json);
 }
 
 /// @nodoc
-mixin _$BlazeIMAOnAdErrorParams {
+mixin _$OnAdErrorParams {
   String get errorMessage => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdErrorParams value) $default,
+    TResult Function(__OnAdErrorParams value) $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeIMAOnAdErrorParams value)? $default,
+    TResult? Function(__OnAdErrorParams value)? $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdErrorParams value)? $default, {
+    TResult Function(__OnAdErrorParams value)? $default, {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this BlazeIMAOnAdErrorParams to a JSON map.
+  /// Serializes this _OnAdErrorParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of BlazeIMAOnAdErrorParams
+  /// Create a copy of _OnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $BlazeIMAOnAdErrorParamsCopyWith<BlazeIMAOnAdErrorParams> get copyWith =>
+  _$OnAdErrorParamsCopyWith<_OnAdErrorParams> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BlazeIMAOnAdErrorParamsCopyWith<$Res> {
-  factory $BlazeIMAOnAdErrorParamsCopyWith(BlazeIMAOnAdErrorParams value,
-          $Res Function(BlazeIMAOnAdErrorParams) then) =
-      _$BlazeIMAOnAdErrorParamsCopyWithImpl<$Res, BlazeIMAOnAdErrorParams>;
+abstract class _$OnAdErrorParamsCopyWith<$Res> {
+  factory _$OnAdErrorParamsCopyWith(
+          _OnAdErrorParams value, $Res Function(_OnAdErrorParams) then) =
+      __$OnAdErrorParamsCopyWithImpl<$Res, _OnAdErrorParams>;
   @useResult
   $Res call({String errorMessage});
 }
 
 /// @nodoc
-class _$BlazeIMAOnAdErrorParamsCopyWithImpl<$Res,
-        $Val extends BlazeIMAOnAdErrorParams>
-    implements $BlazeIMAOnAdErrorParamsCopyWith<$Res> {
-  _$BlazeIMAOnAdErrorParamsCopyWithImpl(this._value, this._then);
+class __$OnAdErrorParamsCopyWithImpl<$Res, $Val extends _OnAdErrorParams>
+    implements _$OnAdErrorParamsCopyWith<$Res> {
+  __$OnAdErrorParamsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of BlazeIMAOnAdErrorParams
+  /// Create a copy of _OnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -1209,35 +1198,32 @@ class _$BlazeIMAOnAdErrorParamsCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$BlazeIMAOnAdErrorParamsImplCopyWith<$Res>
-    implements $BlazeIMAOnAdErrorParamsCopyWith<$Res> {
-  factory _$$BlazeIMAOnAdErrorParamsImplCopyWith(
-          _$BlazeIMAOnAdErrorParamsImpl value,
-          $Res Function(_$BlazeIMAOnAdErrorParamsImpl) then) =
-      __$$BlazeIMAOnAdErrorParamsImplCopyWithImpl<$Res>;
+abstract class _$$_OnAdErrorParamsImplCopyWith<$Res>
+    implements _$OnAdErrorParamsCopyWith<$Res> {
+  factory _$$_OnAdErrorParamsImplCopyWith(_$_OnAdErrorParamsImpl value,
+          $Res Function(_$_OnAdErrorParamsImpl) then) =
+      __$$_OnAdErrorParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String errorMessage});
 }
 
 /// @nodoc
-class __$$BlazeIMAOnAdErrorParamsImplCopyWithImpl<$Res>
-    extends _$BlazeIMAOnAdErrorParamsCopyWithImpl<$Res,
-        _$BlazeIMAOnAdErrorParamsImpl>
-    implements _$$BlazeIMAOnAdErrorParamsImplCopyWith<$Res> {
-  __$$BlazeIMAOnAdErrorParamsImplCopyWithImpl(
-      _$BlazeIMAOnAdErrorParamsImpl _value,
-      $Res Function(_$BlazeIMAOnAdErrorParamsImpl) _then)
+class __$$_OnAdErrorParamsImplCopyWithImpl<$Res>
+    extends __$OnAdErrorParamsCopyWithImpl<$Res, _$_OnAdErrorParamsImpl>
+    implements _$$_OnAdErrorParamsImplCopyWith<$Res> {
+  __$$_OnAdErrorParamsImplCopyWithImpl(_$_OnAdErrorParamsImpl _value,
+      $Res Function(_$_OnAdErrorParamsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of BlazeIMAOnAdErrorParams
+  /// Create a copy of _OnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorMessage = null,
   }) {
-    return _then(_$BlazeIMAOnAdErrorParamsImpl(
+    return _then(_$_OnAdErrorParamsImpl(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -1248,27 +1234,27 @@ class __$$BlazeIMAOnAdErrorParamsImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$BlazeIMAOnAdErrorParamsImpl
+class _$_OnAdErrorParamsImpl
     with DiagnosticableTreeMixin
-    implements _BlazeIMAOnAdErrorParams {
-  const _$BlazeIMAOnAdErrorParamsImpl({required this.errorMessage});
+    implements __OnAdErrorParams {
+  const _$_OnAdErrorParamsImpl({required this.errorMessage});
 
-  factory _$BlazeIMAOnAdErrorParamsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$BlazeIMAOnAdErrorParamsImplFromJson(json);
+  factory _$_OnAdErrorParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$_OnAdErrorParamsImplFromJson(json);
 
   @override
   final String errorMessage;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BlazeIMAOnAdErrorParams(errorMessage: $errorMessage)';
+    return '_OnAdErrorParams(errorMessage: $errorMessage)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'BlazeIMAOnAdErrorParams'))
+      ..add(DiagnosticsProperty('type', '_OnAdErrorParams'))
       ..add(DiagnosticsProperty('errorMessage', errorMessage));
   }
 
@@ -1276,7 +1262,7 @@ class _$BlazeIMAOnAdErrorParamsImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BlazeIMAOnAdErrorParamsImpl &&
+            other is _$_OnAdErrorParamsImpl &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage));
   }
@@ -1285,19 +1271,19 @@ class _$BlazeIMAOnAdErrorParamsImpl
   @override
   int get hashCode => Object.hash(runtimeType, errorMessage);
 
-  /// Create a copy of BlazeIMAOnAdErrorParams
+  /// Create a copy of _OnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$BlazeIMAOnAdErrorParamsImplCopyWith<_$BlazeIMAOnAdErrorParamsImpl>
-      get copyWith => __$$BlazeIMAOnAdErrorParamsImplCopyWithImpl<
-          _$BlazeIMAOnAdErrorParamsImpl>(this, _$identity);
+  _$$_OnAdErrorParamsImplCopyWith<_$_OnAdErrorParamsImpl> get copyWith =>
+      __$$_OnAdErrorParamsImplCopyWithImpl<_$_OnAdErrorParamsImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdErrorParams value) $default,
+    TResult Function(__OnAdErrorParams value) $default,
   ) {
     return $default(this);
   }
@@ -1305,7 +1291,7 @@ class _$BlazeIMAOnAdErrorParamsImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeIMAOnAdErrorParams value)? $default,
+    TResult? Function(__OnAdErrorParams value)? $default,
   ) {
     return $default?.call(this);
   }
@@ -1313,7 +1299,7 @@ class _$BlazeIMAOnAdErrorParamsImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeIMAOnAdErrorParams value)? $default, {
+    TResult Function(__OnAdErrorParams value)? $default, {
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -1324,26 +1310,26 @@ class _$BlazeIMAOnAdErrorParamsImpl
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$BlazeIMAOnAdErrorParamsImplToJson(
+    return _$$_OnAdErrorParamsImplToJson(
       this,
     );
   }
 }
 
-abstract class _BlazeIMAOnAdErrorParams implements BlazeIMAOnAdErrorParams {
-  const factory _BlazeIMAOnAdErrorParams({required final String errorMessage}) =
-      _$BlazeIMAOnAdErrorParamsImpl;
+abstract class __OnAdErrorParams implements _OnAdErrorParams {
+  const factory __OnAdErrorParams({required final String errorMessage}) =
+      _$_OnAdErrorParamsImpl;
 
-  factory _BlazeIMAOnAdErrorParams.fromJson(Map<String, dynamic> json) =
-      _$BlazeIMAOnAdErrorParamsImpl.fromJson;
+  factory __OnAdErrorParams.fromJson(Map<String, dynamic> json) =
+      _$_OnAdErrorParamsImpl.fromJson;
 
   @override
   String get errorMessage;
 
-  /// Create a copy of BlazeIMAOnAdErrorParams
+  /// Create a copy of _OnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BlazeIMAOnAdErrorParamsImplCopyWith<_$BlazeIMAOnAdErrorParamsImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$_OnAdErrorParamsImplCopyWith<_$_OnAdErrorParamsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

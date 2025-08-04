@@ -20,7 +20,8 @@ import com.blaze.flutterblazesdk.players.extractStoriesPlayerStyle
 import com.blaze.flutterblazesdk.players.extractVideosPlayerStyle
 import com.blaze.flutterblazesdk.shared.BlazeAsyncBridge
 import com.blaze.flutterblazesdk.shared.sendEvent
-//import com.blaze.flutterblazesdk.utils.BlazeFlutterSDKHelper
+import com.blaze.flutterblazesdk.utils.BlazeFlutterError
+import com.blaze.flutterblazesdk.utils.BlazeFlutterSDKHelper
 import com.blaze.flutterblazesdk.utils.handleBlazeResult
 import com.blaze.flutterblazesdk.utils.handleError
 import com.blaze.flutterblazesdk.utils.safeGetArgument
@@ -39,7 +40,7 @@ object BlazeFlutterSDKModule {
         // Match React Native implementation - store appOverridesCTAHandling setting
         private var appOverridesCTAHandling: Boolean = false
 
-//        private val flutterSDKHelper = BlazeFlutterSDKHelper()
+        private val flutterSDKHelper = BlazeFlutterSDKHelper()
 
         fun registerModule(messenger: BinaryMessenger, application: Application) {
                 this.application = application
@@ -49,7 +50,7 @@ object BlazeFlutterSDKModule {
                         handleMethodCall(call = call, result = result)
                 }
 
-//                BlazeExternalModulesBinder.flutterSDKHelper = flutterSDKHelper
+                BlazeExternalModulesBinder.flutterSDKHelper = flutterSDKHelper
         }
 
         fun handleMethodCall(call: MethodCall, result: MethodChannel.Result) {
@@ -210,9 +211,8 @@ object BlazeFlutterSDKModule {
                         geoLocation = geoLocation,
                         completionBlock = { result.success(null) },
                         errorBlock = { e ->
-                                result.handleError(
-                                        errCode = "initSDK",
-                                        errMessage = e.message ?: "Unknown error"
+                                result.handleBlazeResult(
+                                        result = e
                                 )
                         },
                         sdkDelegate = globalDelegate,
@@ -269,7 +269,7 @@ object BlazeFlutterSDKModule {
                         pageId = pageId,
                         storyPlayerStyle = playerStyle,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playStory") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun playStories(call: MethodCall, result: MethodChannel.Result) {
@@ -305,7 +305,7 @@ object BlazeFlutterSDKModule {
                         storyPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playStories") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun playMoment(call: MethodCall, result: MethodChannel.Result) {
@@ -328,7 +328,7 @@ object BlazeFlutterSDKModule {
                         momentId = momentId,
                         momentsPlayerStyle = playerStyle,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playMoment") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun playMoments(call: MethodCall, result: MethodChannel.Result) {
@@ -364,7 +364,7 @@ object BlazeFlutterSDKModule {
                         momentsPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playMoments") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun playVideo(call: MethodCall, result: MethodChannel.Result) {
@@ -387,7 +387,7 @@ object BlazeFlutterSDKModule {
                         videoId = videoId,
                         videosPlayerStyle = playerStyle,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playVideo") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun playVideos(call: MethodCall, result: MethodChannel.Result) {
@@ -423,14 +423,15 @@ object BlazeFlutterSDKModule {
                         videosPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource
-                ) { blazeResult -> result.handleBlazeResult(blazeResult, "playVideos") }
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun setExternalUserId(call: MethodCall, result: MethodChannel.Result) {
                 val externalUserId = call.safeGetArgument<String>("externalUserId")
 
-                BlazeSDK.setExternalUserId(externalUserId)
-                result.success(null)
+                BlazeSDK.setExternalUserId(externalUserId) { blazeResult ->
+                        result.handleBlazeResult(blazeResult)
+                }
         }
 
         private fun handleUniversalLink(call: MethodCall, result: MethodChannel.Result) {
@@ -445,7 +446,7 @@ object BlazeFlutterSDKModule {
                                 }
 
                 BlazeSDK.handleUniversalLink(link) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "handleUniversalLink")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -471,7 +472,7 @@ object BlazeFlutterSDKModule {
                                 }
 
                 BlazeSDK.prepareStories(dataSource) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "prepareStories")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -497,7 +498,7 @@ object BlazeFlutterSDKModule {
                                 }
 
                 BlazeSDK.prepareMoments(dataSource) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "prepareMoments")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -523,7 +524,7 @@ object BlazeFlutterSDKModule {
                                 }
 
                 BlazeSDK.prepareVideos(dataSource) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "prepareVideos")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -566,7 +567,7 @@ object BlazeFlutterSDKModule {
                 val geoLocation = call.safeGetArgument<String>("geoLocation")
 
                 BlazeSDK.updateGeoRestriction(geoLocation) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "updateGeoRestriction")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -601,7 +602,7 @@ object BlazeFlutterSDKModule {
                 // Convert to HashMap<String, String> as required by Android SDK
                 val hashMap = payload.mapValues { it.value.toString() } as HashMap<String, String>
                 BlazeSDK.handlePushNotificationPayload(hashMap) { blazeResult ->
-                        result.handleBlazeResult(blazeResult, "handleNotificationPayload")
+                        result.handleBlazeResult(blazeResult)
                 }
         }
 
@@ -615,13 +616,10 @@ object BlazeFlutterSDKModule {
         // ======================================
 
         private fun onErrorThrown(error: BlazeResult.Error) {
+                val flutterError = BlazeFlutterError.fromBlazeError(error)
                 asyncBridge?.sendEvent(
                         "Blaze.onErrorThrown",
-                        mapOf(
-                                "domain" to error.domain.toString(),
-                                "reason" to error.reason.toString(),
-                                "message" to (error.message ?: "Unknown error")
-                        )
+                        flutterError
                 )
         }
 

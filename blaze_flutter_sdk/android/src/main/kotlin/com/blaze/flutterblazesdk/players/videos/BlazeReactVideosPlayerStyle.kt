@@ -10,7 +10,7 @@ import com.blaze.flutterblazesdk.utils.parsing.BlazeReactTitleFont
 import com.blaze.flutterblazesdk.utils.parsing.gson.BlazeEnumMapper
 
 // =================================
-// VIDEOS PLAYER STYLE - copied exactly from React Native BlazeReactVideosPlayerStyle.kt
+// VIDEOS PLAYER STYLE
 // =================================
 
 @Keep

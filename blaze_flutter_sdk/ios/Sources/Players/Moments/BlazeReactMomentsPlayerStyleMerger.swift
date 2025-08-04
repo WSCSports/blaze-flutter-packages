@@ -2,16 +2,15 @@
 //  BlazeReactMomentsPlayerStyleMerger.swift
 //  blaze_flutter_sdk
 //
-//  Copied exactly from React Native iOS implementation
 //
 
-import Foundation
 import BlazeSDK
+import Foundation
 
 extension BlazeMomentsPlayerStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.headingText = merged.headingText.mergedWith(customization.headingText)
         merged.bodyText = merged.bodyText.mergedWith(customization.bodyText)
@@ -20,11 +19,14 @@ extension BlazeMomentsPlayerStyle {
         merged.cta = merged.cta.mergedWith(customization.cta)
         merged.headerGradient = merged.headerGradient.mergedWith(customization.headerGradient)
         merged.footerGradient = merged.footerGradient.mergedWith(customization.footerGradient)
-        merged.backgroundColor = UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
+        merged.backgroundColor =
+            UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
         merged.firstTimeSlide = merged.firstTimeSlide.mergedWith(customization.firstTimeSlide)
         merged.seekBar = merged.seekBar.mergedWith(customization.seekBar)
-        merged.bottomComponentsAlignment = merged.bottomComponentsAlignment.mergedWith(customization.bottomComponentsAlignment)
-        merged.playerDisplayMode = merged.playerDisplayMode.mergedWith(customization.playerDisplayMode)
+        merged.bottomComponentsAlignment = merged.bottomComponentsAlignment.mergedWith(
+            customization.bottomComponentsAlignment)
+        merged.playerDisplayMode = merged.playerDisplayMode.mergedWith(
+            customization.playerDisplayMode)
         return merged
     }
 }
@@ -32,7 +34,7 @@ extension BlazeMomentsPlayerStyle {
 extension BlazeMomentsPlayerSeekBarStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerSeekBarStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.playingState = merged.playingState.mergedWith(customization.playingState)
@@ -44,9 +46,11 @@ extension BlazeMomentsPlayerSeekBarStyle {
 }
 
 extension BlazeMomentsPlayerFirstTimeSlideInstructionsStyle {
-    func mergedWith(_ customization: BlazeReactMomentsPlayerFirstTimeSlideInstructionsStyle?) -> Self {
+    func mergedWith(_ customization: BlazeReactMomentsPlayerFirstTimeSlideInstructionsStyle?)
+        -> Self
+    {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.next = merged.next.mergedWith(customization.next)
         merged.pause = merged.pause.mergedWith(customization.pause)
@@ -59,9 +63,10 @@ extension BlazeMomentsPlayerFirstTimeSlideInstructionsStyle {
 extension BlazeMomentsPlayerFirstTimeSlideStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerFirstTimeSlideStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
-        merged.backgroundColor = UIColor(hexString: customization.backgroundColor?.colorName) ?? merged.backgroundColor
+        merged.backgroundColor =
+            UIColor(hexString: customization.backgroundColor?.colorName) ?? merged.backgroundColor
         merged.show = customization.show ?? merged.show
         merged.mainTitle = merged.mainTitle.mergedWith(customization.mainTitle)
         merged.cta = merged.cta.mergedWith(customization.cta)
@@ -74,7 +79,7 @@ extension BlazeMomentsPlayerFirstTimeSlideStyle {
 extension BlazeMomentsPlayerHeaderGradientStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerHeaderGradientStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.startColor = UIColor(hexString: customization.startColor) ?? merged.startColor
@@ -86,7 +91,7 @@ extension BlazeMomentsPlayerHeaderGradientStyle {
 extension BlazeMomentsPlayerFooterGradientStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerFooterGradientStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.startColor = UIColor(hexString: customization.startColor) ?? merged.startColor
@@ -97,10 +102,12 @@ extension BlazeMomentsPlayerFooterGradientStyle {
 }
 
 extension BlazeMomentsPlayerFooterGradientStyle.EndPositioning {
-    
-    func mergedWith(_ customization: BlazeReactMomentsPlayerFooterGradientStyle.EndPositioning?) -> Self {
+
+    func mergedWith(_ customization: BlazeReactMomentsPlayerFooterGradientStyle.EndPositioning?)
+        -> Self
+    {
         guard let customization else { return self }
-        
+
         switch customization {
         case .bottomToContainer:
             return .bottomToContainer
@@ -108,20 +115,22 @@ extension BlazeMomentsPlayerFooterGradientStyle.EndPositioning {
             return .bottomToPlayer
         }
     }
-    
+
 }
 
 extension BlazeMomentsPlayerCtaStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerCtaStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.cornerRadius = customization.cornerRadius ?? merged.cornerRadius
         merged.height = customization.height ?? merged.height
         merged.width = customization.width ?? merged.width
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
-        merged.layoutPositioning = merged.layoutPositioning.mergedWith(customization.layoutPositioning)
-        merged.horizontalAlignment = merged.horizontalAlignment.mergedWith(customization.horizontalAlignment)
+        merged.layoutPositioning = merged.layoutPositioning.mergedWith(
+            customization.layoutPositioning)
+        merged.horizontalAlignment = merged.horizontalAlignment.mergedWith(
+            customization.horizontalAlignment)
         merged.icon = UIImage.imageWith(customization.icon?.iconImage)
         return merged
     }
@@ -130,21 +139,23 @@ extension BlazeMomentsPlayerCtaStyle {
 extension BlazeMomentsPlayerCtaStyle.CTAPositioning {
     func mergedWith(_ customization: BlazeReactMomentsPlayerCtaStyle.CTAPositioning?) -> Self {
         guard let customization else { return self }
-        
+
         switch customization {
         case .bellowBottomButtonsBox:
             return .ctaBellowBottomButtonsBox
         case .nextToBottomButtonsBox:
             return .ctaNextToBottomButtonsBox
         }
-        
+
     }
 }
 
 extension BlazeMomentsPlayerCtaStyle.CTAHorizontalAlignment {
-    func mergedWith(_ customization: BlazeReactMomentsPlayerCtaStyle.CTAHorizontalAlignment?) -> Self {
+    func mergedWith(_ customization: BlazeReactMomentsPlayerCtaStyle.CTAHorizontalAlignment?)
+        -> Self
+    {
         guard let customization else { return self }
-        
+
         switch customization {
         case .start:
             return .leading
@@ -161,7 +172,7 @@ extension BlazeMomentsPlayerCtaStyle.CTAHorizontalAlignment {
 extension BlazeMomentsPlayerChipsStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerChipsStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.ad = merged.ad.mergedWith(customization.ad)
         return merged
@@ -171,9 +182,10 @@ extension BlazeMomentsPlayerChipsStyle {
 extension BlazeMomentsPlayerChipStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerChipStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
-        merged.backgroundColor = UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
+        merged.backgroundColor =
+            UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
         merged.text = customization.text ?? merged.text
         merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
         merged.titlePadding = merged.titlePadding.mergedWith(customization.titlePadding)
@@ -185,7 +197,7 @@ extension BlazeMomentsPlayerChipStyle {
 extension BlazeMomentsPlayerButtonsStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerButtonsStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.exit = merged.exit.mergedWith(customization.exit)
         merged.like = merged.like.mergedWith(customization.like)
@@ -199,7 +211,7 @@ extension BlazeMomentsPlayerButtonsStyle {
 extension BlazeMomentsPlayerButtonStyle {
     func mergedWith(_ customization: BlazeReactPlayerButtonStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.color = UIColor(hexString: customization.color) ?? merged.color
         merged.height = customization.height ?? merged.height
@@ -217,14 +229,14 @@ extension BlazeMomentsPlayerButtonStyle {
 extension BlazeMomentsPlayerHeadingTextStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerHeadingTextStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
-        
+
         merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.contentSource = merged.contentSource.mergedWith(customization.contentSource)
-        
+
         return merged
     }
 }
@@ -232,23 +244,24 @@ extension BlazeMomentsPlayerHeadingTextStyle {
 extension BlazeMomentsPlayerBodyTextStyle {
     func mergedWith(_ customization: BlazeReactMomentsPlayerBodyTextStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
-        
+
         merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.contentSource = merged.contentSource.mergedWith(customization.contentSource)
-        
+
         return merged
     }
 }
 
 extension BlazeMomentsPlayerHeadingTextStyle.ContentSource {
-    
-    func mergedWith(_ customization: BlazeReactMomentsPlayerHeadingTextStyle.ContentSource?) -> Self {
+
+    func mergedWith(_ customization: BlazeReactMomentsPlayerHeadingTextStyle.ContentSource?) -> Self
+    {
         guard let customization else { return self }
-        
+
         switch customization {
         case .title:
             return .title
@@ -256,14 +269,14 @@ extension BlazeMomentsPlayerHeadingTextStyle.ContentSource {
             return .subtitle
         }
     }
-    
+
 }
 
 extension BlazeMomentsPlayerBodyTextStyle.ContentSource {
-    
+
     func mergedWith(_ customization: BlazeReactMomentsPlayerBodyTextStyle.ContentSource?) -> Self {
         guard let customization else { return self }
-        
+
         switch customization {
         case .title:
             return .title
@@ -273,13 +286,13 @@ extension BlazeMomentsPlayerBodyTextStyle.ContentSource {
             return .description
         }
     }
-    
+
 }
 extension BlazeMomentsPlayerStyle.BottomComponentsAlignment {
-    
+
     func mergedWith(_ customization: BlazeReactBottomComponentsAlignment?) -> Self {
         guard let customization else { return self }
-        
+
         switch customization {
         case .relativeToContainer:
             return .relativeToContainer
@@ -289,14 +302,14 @@ extension BlazeMomentsPlayerStyle.BottomComponentsAlignment {
             return .fitCTABelowPlayer
         }
     }
-    
+
 }
 
 extension BlazePlayerDisplayMode {
-    
+
     func mergedWith(_ customization: BlazeReactPlayerDisplayMode?) -> Self {
         guard let customization else { return self }
-        
+
         switch customization {
         case .fixedRatio9x16:
             return .fixedRatio_9_16
@@ -307,14 +320,17 @@ extension BlazePlayerDisplayMode {
 }
 
 extension BlazeSDK.BlazeMomentsPlayerButtonCustomImageStates? {
-    
+
     func mergedWith(_ customization: BlazeReactPlayerButtonCustomImageStates?) -> Self {
         guard let customization else { return self }
-        
-        guard let defaultImage = UIImage.imageWith(customization.unselectedImage) else { return self }
-        
-        return .init(default: defaultImage,
-                     selected: UIImage.imageWith(customization.selectedImage))
+
+        guard let defaultImage = UIImage.imageWith(customization.unselectedImage) else {
+            return self
+        }
+
+        return .init(
+            default: defaultImage,
+            selected: UIImage.imageWith(customization.selectedImage))
     }
-    
-} 
+
+}

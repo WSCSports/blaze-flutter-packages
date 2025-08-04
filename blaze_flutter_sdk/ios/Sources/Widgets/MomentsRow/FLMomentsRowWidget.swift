@@ -25,5 +25,10 @@ class FLMomentsRowWidget: BlazeWidgetBase {
         // Use preset from parameters or default
         return presetTheme?.asWidgetLayoutPreset ?? .Presets.MomentsWidget.Row.verticalRectangles
     }
+    
+    override var shouldForceContentInsetAdjustmentBehaviorNever: Bool {
+        // For rows we always disable content inset adjustment behavior.
+        return true
+    }
 
 }

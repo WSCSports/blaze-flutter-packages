@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'blaze_gam_delegate.dart';
+part of 'blaze_gam_custom_native_ads_delegate.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -9,26 +9,26 @@ part of 'blaze_gam_delegate.dart';
 _$BlazeGAMDelegateOnAdEventParamsImpl
     _$$BlazeGAMDelegateOnAdEventParamsImplFromJson(Map<String, dynamic> json) =>
         _$BlazeGAMDelegateOnAdEventParamsImpl(
-          eventType:
-              $enumDecode(_$BlazeOnAdEventEventTypeEnumMap, json['eventType']),
+          eventType: $enumDecode(
+              _$BlazeCustomNativeAdEventTypeEnumMap, json['eventType']),
         );
 
 Map<String, dynamic> _$$BlazeGAMDelegateOnAdEventParamsImplToJson(
         _$BlazeGAMDelegateOnAdEventParamsImpl instance) =>
     <String, dynamic>{
-      'eventType': _$BlazeOnAdEventEventTypeEnumMap[instance.eventType]!,
+      'eventType': _$BlazeCustomNativeAdEventTypeEnumMap[instance.eventType]!,
     };
 
-const _$BlazeOnAdEventEventTypeEnumMap = {
-  BlazeOnAdEventEventType.openedAd: 'openedAd',
-  BlazeOnAdEventEventType.adPageStart: 'adPageStart',
-  BlazeOnAdEventEventType.adPageFirstQuarter: 'adPageFirstQuarter',
-  BlazeOnAdEventEventType.adPageThird: 'adPageThird',
-  BlazeOnAdEventEventType.adPageMid: 'adPageMid',
-  BlazeOnAdEventEventType.adPageComplete: 'adPageComplete',
-  BlazeOnAdEventEventType.pausedAdPage: 'pausedAdPage',
-  BlazeOnAdEventEventType.resumedAdPage: 'resumedAdPage',
-  BlazeOnAdEventEventType.ctaClicked: 'ctaClicked',
+const _$BlazeCustomNativeAdEventTypeEnumMap = {
+  BlazeCustomNativeAdEventType.openedAd: 'openedAd',
+  BlazeCustomNativeAdEventType.adPageStart: 'adPageStart',
+  BlazeCustomNativeAdEventType.adPageFirstQuarter: 'adPageFirstQuarter',
+  BlazeCustomNativeAdEventType.adPageThird: 'adPageThird',
+  BlazeCustomNativeAdEventType.adPageMid: 'adPageMid',
+  BlazeCustomNativeAdEventType.adPageComplete: 'adPageComplete',
+  BlazeCustomNativeAdEventType.pausedAdPage: 'pausedAdPage',
+  BlazeCustomNativeAdEventType.resumedAdPage: 'resumedAdPage',
+  BlazeCustomNativeAdEventType.ctaClicked: 'ctaClicked',
 };
 
 _$BlazeGAMCustomNativeAdRequestInfoImpl
@@ -80,26 +80,26 @@ Map<String, dynamic> _$$BlazeGAMCustomNativeAdsDefaultConfigImplToJson(
       'templateId': instance.templateId,
     };
 
-_$BlazeGAMOnAdErrorParamsImpl _$$BlazeGAMOnAdErrorParamsImplFromJson(
+_$_OnAdErrorParamsImpl _$$_OnAdErrorParamsImplFromJson(
         Map<String, dynamic> json) =>
-    _$BlazeGAMOnAdErrorParamsImpl(
+    _$_OnAdErrorParamsImpl(
       errorMessage: json['errorMessage'] as String,
     );
 
-Map<String, dynamic> _$$BlazeGAMOnAdErrorParamsImplToJson(
-        _$BlazeGAMOnAdErrorParamsImpl instance) =>
+Map<String, dynamic> _$$_OnAdErrorParamsImplToJson(
+        _$_OnAdErrorParamsImpl instance) =>
     <String, dynamic>{
       'errorMessage': instance.errorMessage,
     };
 
-_$BlazeGAMOnAdEventParamsDataImpl _$$BlazeGAMOnAdEventParamsDataImplFromJson(
+_$_OnAdEventParamsImpl _$$_OnAdEventParamsImplFromJson(
         Map<String, dynamic> json) =>
-    _$BlazeGAMOnAdEventParamsDataImpl(
+    _$_OnAdEventParamsImpl(
       eventType: json['eventType'] as String,
     );
 
-Map<String, dynamic> _$$BlazeGAMOnAdEventParamsDataImplToJson(
-        _$BlazeGAMOnAdEventParamsDataImpl instance) =>
+Map<String, dynamic> _$$_OnAdEventParamsImplToJson(
+        _$_OnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
     };

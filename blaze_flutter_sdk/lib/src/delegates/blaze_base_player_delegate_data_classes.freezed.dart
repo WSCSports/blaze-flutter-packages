@@ -262,7 +262,7 @@ mixin _$BlazeOnDataLoadCompleteParams {
   BlazePlayerType get playerType => throw _privateConstructorUsedError;
   String? get sourceId => throw _privateConstructorUsedError;
   int get itemsCount => throw _privateConstructorUsedError;
-  String? get error => throw _privateConstructorUsedError;
+  BlazeError? get error => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -303,7 +303,9 @@ abstract class $BlazeOnDataLoadCompleteParamsCopyWith<$Res> {
       {BlazePlayerType playerType,
       String? sourceId,
       int itemsCount,
-      String? error});
+      BlazeError? error});
+
+  $BlazeErrorCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -343,8 +345,22 @@ class _$BlazeOnDataLoadCompleteParamsCopyWithImpl<$Res,
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BlazeError?,
     ) as $Val);
+  }
+
+  /// Create a copy of BlazeOnDataLoadCompleteParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeErrorCopyWith<$Res>? get error {
+    if (_value.error == null) {
+      return null;
+    }
+
+    return $BlazeErrorCopyWith<$Res>(_value.error!, (value) {
+      return _then(_value.copyWith(error: value) as $Val);
+    });
   }
 }
 
@@ -361,7 +377,10 @@ abstract class _$$BlazeOnDataLoadCompleteParamsImplCopyWith<$Res>
       {BlazePlayerType playerType,
       String? sourceId,
       int itemsCount,
-      String? error});
+      BlazeError? error});
+
+  @override
+  $BlazeErrorCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -400,7 +419,7 @@ class __$$BlazeOnDataLoadCompleteParamsImplCopyWithImpl<$Res>
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as BlazeError?,
     ));
   }
 }
@@ -427,7 +446,7 @@ class _$BlazeOnDataLoadCompleteParamsImpl
   @override
   final int itemsCount;
   @override
-  final String? error;
+  final BlazeError? error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -516,7 +535,7 @@ abstract class _BlazeOnDataLoadCompleteParams
       {required final BlazePlayerType playerType,
       final String? sourceId,
       required final int itemsCount,
-      final String? error}) = _$BlazeOnDataLoadCompleteParamsImpl;
+      final BlazeError? error}) = _$BlazeOnDataLoadCompleteParamsImpl;
 
   factory _BlazeOnDataLoadCompleteParams.fromJson(Map<String, dynamic> json) =
       _$BlazeOnDataLoadCompleteParamsImpl.fromJson;
@@ -528,7 +547,7 @@ abstract class _BlazeOnDataLoadCompleteParams
   @override
   int get itemsCount;
   @override
-  String? get error;
+  BlazeError? get error;
 
   /// Create a copy of BlazeOnDataLoadCompleteParams
   /// with the given fields replaced by the non-null parameter values.

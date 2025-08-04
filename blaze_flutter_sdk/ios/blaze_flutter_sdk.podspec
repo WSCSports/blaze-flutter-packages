@@ -34,7 +34,7 @@ A new Flutter project.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 
-  s.dependency 'BlazeSDK', '1.10.4'
+  s.dependency 'BlazeSDK', '1.11.4'
 
   s.source_files = [
     "Sources/**/*.{h,c,cc,cpp,m,mm,swift}"

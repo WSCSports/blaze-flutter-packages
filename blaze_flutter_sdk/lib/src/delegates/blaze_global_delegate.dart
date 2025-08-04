@@ -1,10 +1,11 @@
 import '../shared/blaze_async_bridge.dart';
 import '../shared/blaze_analytics_event.dart';
 import '../shared/blaze_logger.dart';
+import '../shared/errors/errors.dart';
 import 'blaze_global_delegate_data_classes.dart';
 import 'dart:convert';
 
-/// Global Delegate interface - matches React Native BlazeGlobalDelegate exactly
+/// Global Delegate interface
 class BlazeGlobalDelegate {
   /// This function will be triggered every time an analytics event is triggered.
   ///
@@ -16,7 +17,7 @@ class BlazeGlobalDelegate {
   /// [params] The error data.
   final void Function(BlazeOnErrorThrownParams params)? onErrorThrown;
 
-  /// Constructor with optional function parameters - matches React Native pattern exactly!
+  /// Constructor with optional function parameters
   const BlazeGlobalDelegate({
     this.onEventTriggered,
     this.onErrorThrown,
@@ -40,7 +41,7 @@ class BlazeGlobalDelegateHelper {
         methodName,
         (args) async {
           try {
-            // Parse using freezed object - matches React Native logic
+            // Parse using freezed object
             final eventData =
                 BlazeOnEventTriggeredInternalData.fromJson(args.params);
 
@@ -75,7 +76,7 @@ class BlazeGlobalDelegateHelper {
         methodName,
         (args) async {
           try {
-            // Parse using freezed object - matches React Native logic
+            // Parse using freezed object
             final errorData = BlazeError.fromJson(args.params);
             final errorParams = BlazeOnErrorThrownParams(error: errorData);
             callback(errorParams);

@@ -4,7 +4,7 @@ import '../../widgets/types/widget_layout_common.dart';
 
 part 'shared_player_types.g.dart';
 
-/// Shared types used across all player styles - matches React Native BlazeReactWidgetCommon.kt exactly
+/// Shared types used across all player styles
 
 @JsonSerializable()
 class BlazeReactFirstTimeSlideCTAStyle {

@@ -32,7 +32,9 @@ _$BlazeOnDataLoadCompleteParamsImpl
           playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
           sourceId: json['sourceId'] as String?,
           itemsCount: (json['itemsCount'] as num).toInt(),
-          error: json['error'] as String?,
+          error: json['error'] == null
+              ? null
+              : BlazeError.fromJson(json['error'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeOnDataLoadCompleteParamsImplToJson(
@@ -41,7 +43,7 @@ Map<String, dynamic> _$$BlazeOnDataLoadCompleteParamsImplToJson(
       'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
       'sourceId': instance.sourceId,
       'itemsCount': instance.itemsCount,
-      'error': instance.error,
+      'error': instance.error?.toJson(),
     };
 
 _$BlazeOnPlayerDidAppearParamsImpl _$$BlazeOnPlayerDidAppearParamsImplFromJson(

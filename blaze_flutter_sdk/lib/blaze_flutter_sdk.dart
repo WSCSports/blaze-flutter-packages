@@ -1,8 +1,5 @@
 library blaze_flutter_sdk;
 
-export 'src/blaze_flutter_sdk_method_channel.dart';
-export 'src/blaze_flutter_sdk_platform_interface.dart';
-
 // SDK Module exports
 export 'src/sdk_module/blaze_sdk_module.dart';
 
@@ -36,6 +33,7 @@ export 'src/widgets/types/widget_style_overrides.dart';
 export 'src/shared/blaze_async_bridge.dart';
 export 'src/shared/blaze_logger.dart';
 export 'src/shared/ads/ads_shared.dart';
+export 'src/shared/errors/errors.dart';
 
 // Delegate exports
 export 'src/delegates/blaze_global_delegate.dart';

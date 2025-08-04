@@ -19,11 +19,11 @@ class BlazeFlutterIMAModule {
     }
     
     static let shared = BlazeFlutterIMAModule()
-
+    
     static func registerModule(messenger: FlutterBinaryMessenger) {
         shared.methodChannel = FlutterMethodChannel(name: "blaze-ima-module",
                                                     binaryMessenger: messenger)
-
+        
         shared.methodChannel?.setMethodCallHandler { (call, result) in
             shared.handleMethodCall(call: call, result: result)
         }
@@ -32,7 +32,7 @@ class BlazeFlutterIMAModule {
     private init() {
         
     }
-
+    
     // IMA delegate that communicates with Flutter - defined as property to keep it alive
     lazy var delegate: BlazeIMADelegate = .init(
         onIMAAdError: { [weak self] message in
@@ -56,7 +56,7 @@ class BlazeFlutterIMAModule {
             return await self?.overrideAdTagUrl(params: params)
         }
     )
-
+    
     private func handleMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case MethodNameConstants.enableAds:
@@ -81,6 +81,12 @@ class BlazeFlutterIMAModule {
         BlazeIMA.shared.disableAds()
         result(nil)
     }
+    
+}
+
+// MARK: - IMA ads implementation.
+
+extension BlazeFlutterIMAModule {
 
     private func onIMAAdEvent(eventType: BlazeIMAHandlerEventType,
                               adInfo: BlazeImaAdInfo) {
@@ -186,7 +192,6 @@ extension BlazeRTNIMASettings {
     
 }
 
-// MARK: - Extensions
 fileprivate extension BlazeIMADelegate.RequestDataInfo {
     
     struct RTNBlazeIMAAdRequestParams: Encodable {

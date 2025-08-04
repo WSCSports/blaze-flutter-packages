@@ -26,4 +26,9 @@ class FLVideosRowWidget: BlazeWidgetBase {
         return presetTheme?.asWidgetLayoutPreset ?? .Presets.VideosWidget.Row.horizontalRectangles
     }
     
+    override var shouldForceContentInsetAdjustmentBehaviorNever: Bool {
+        // For rows we always disable content inset adjustment behavior.
+        return true
+    }
+    
 } 

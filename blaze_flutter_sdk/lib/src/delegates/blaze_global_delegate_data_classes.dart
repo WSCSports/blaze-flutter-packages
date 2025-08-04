@@ -1,22 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import '../shared/blaze_analytics_event.dart';
+import '../shared/errors/errors.dart';
 
 part 'blaze_global_delegate_data_classes.freezed.dart';
 part 'blaze_global_delegate_data_classes.g.dart';
-
-/// Error interface - represents data from BlazeError
-@freezed
-class BlazeError with _$BlazeError {
-  const factory BlazeError({
-    required String domain,
-    required String reason,
-    required String message,
-  }) = _BlazeError;
-
-  factory BlazeError.fromJson(Map<String, dynamic> json) =>
-      _$BlazeErrorFromJson(json);
-}
 
 /// Global delegate event triggered parameters
 @freezed

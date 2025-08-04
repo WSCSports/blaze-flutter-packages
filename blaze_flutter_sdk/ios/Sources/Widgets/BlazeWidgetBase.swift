@@ -73,6 +73,13 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             return creationParams["appOverridesCTAHandling"] as? Bool ?? false
         }
     }
+    
+    // Override this property if you want to disable content inset adjustment behavior.
+    // This is critical - in Flutter PlatformViews are embeded inside a ScrollView and widgets may be shrinked by the status bar.
+    // Grids already handling this in the sdk.
+    var shouldForceContentInsetAdjustmentBehaviorNever: Bool {
+        return false
+    }
 
     lazy var widgetView: BlazeWidgetView = {
         return createWidget()
@@ -224,6 +231,10 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         widgetView.reloadLayout()
         
         widgetView.isEmbededInScrollView = isEmbeddedInScrollView
+        
+        if shouldForceContentInsetAdjustmentBehaviorNever {
+            widgetView.disableContentInsetAdjustmentBehaviorRecursively()
+        }
         
         widgetView.reloadData(progressType: .skeleton)
         
@@ -473,4 +484,16 @@ extension BlazeWidgetBase {
         }
     }
     
+}
+
+extension UIView {
+    func disableContentInsetAdjustmentBehaviorRecursively() {
+        if let scrollView = self as? UIScrollView {
+            scrollView.contentInsetAdjustmentBehavior = .never
+        }
+
+        for subview in self.subviews {
+            subview.disableContentInsetAdjustmentBehaviorRecursively()
+        }
+    }
 }

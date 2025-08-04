@@ -27,7 +27,7 @@ class BlazeWidgetItemStyle with _$BlazeWidgetItemStyle {
       _$BlazeWidgetItemStyleFromJson(json);
 }
 
-/// Main widget layout configuration - matches React Native BlazeWidgetLayout interface exactly
+/// Main widget layout configuration
 @freezed
 class BlazeWidgetLayout with _$BlazeWidgetLayout {
   const factory BlazeWidgetLayout({

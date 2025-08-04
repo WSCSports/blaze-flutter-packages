@@ -4,6 +4,7 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.Keep
+import com.blaze.blazesdk.ads.banners.BlazeGAMBannerHandlerEventType
 import com.blaze.blazesdk.ads.custom_native.BlazeGoogleCustomNativeAdsHandler
 import com.blaze.flutterblazegam.utils.handleError
 import com.blaze.flutterblazesdk.ads.BlazeFlutterContentExtraInfo
@@ -12,6 +13,8 @@ import com.blaze.flutterblazesdk.shared.BlazeAsyncBridge
 import com.blaze.flutterblazesdk.shared.callDartMethod
 import com.blaze.flutterblazesdk.shared.sendEvent
 import com.blaze.gam.BlazeGAM
+import com.blaze.gam.banner.BlazeGAMBannerAdsAdData
+import com.blaze.gam.banner.BlazeGAMBannerAdsDelegate
 import com.blaze.gam.custom_native.BlazeCustomNativeAdData
 import com.blaze.gam.custom_native.BlazeGAMCustomNativeAdsDefaultConfig
 import com.blaze.gam.custom_native.BlazeGAMCustomNativeAdsDelegate
@@ -40,6 +43,12 @@ object BlazeFlutterGAMModule {
                 "disableCustomNativeAds" -> {
                     disableCustomNativeAds(call = call, result = result)
                 }
+                "enableBannerAds" -> {
+                    enableBannerAds(call = call, result = result)
+                }
+                "disableBannerAds" -> {
+                    disableBannerAds(call = call, result = result)
+                }
                 else -> {
                     val errorMessage = "Method name ${call.method} hasn't been implemented!!"
                     Log.e(TAG, errorMessage)
@@ -50,40 +59,63 @@ object BlazeFlutterGAMModule {
         }
     }
 
-    // GAM delegate that communicates with Flutter
-    private val delegate: BlazeGAMCustomNativeAdsDelegate =
-            object : BlazeGAMCustomNativeAdsDelegate {
+    private val customNativeAdsDelegate: BlazeGAMCustomNativeAdsDelegate =
+        object : BlazeGAMCustomNativeAdsDelegate {
 
-                override fun onGAMCustomNativeAdEvent(
-                        eventType: BlazeGoogleCustomNativeAdsHandler.EventType,
-                        adData: BlazeCustomNativeAdData
-                ) {
-                    onGAMAdEvent(eventType, adData)
-                }
-
-                override fun onGAMCustomNativeAdError(errMsg: String) {
-                    onGAMAdError(errMsg)
-                }
-
-                override suspend fun customGAMTargetingProperties(
-                        requestData: BlazeGamCustomNativeAdRequestInformation
-                ): Map<String, String> {
-                    return this@BlazeFlutterGAMModule.customGAMTargetingProperties(requestData)
-                            ?: super.customGAMTargetingProperties(requestData)
-                }
-
-                override suspend fun publisherProvidedId(
-                        requestData: BlazeGamCustomNativeAdRequestInformation
-                ): String? {
-                    return this@BlazeFlutterGAMModule.publisherProvidedId(requestData)
-                }
-
-                override suspend fun networkExtras(
-                        requestData: BlazeGamCustomNativeAdRequestInformation
-                ): Bundle? {
-                    return this@BlazeFlutterGAMModule.networkExtras(requestData)
-                }
+            override fun onGAMCustomNativeAdEvent(
+                eventType: BlazeGoogleCustomNativeAdsHandler.EventType,
+                adData: BlazeCustomNativeAdData
+            ) {
+                this@BlazeFlutterGAMModule.onGAMCustomNativeAdEvent(eventType, adData)
             }
+
+            override fun onGAMCustomNativeAdError(errMsg: String) {
+                this@BlazeFlutterGAMModule.onGAMCustomNativeAdError(errMsg)
+            }
+
+            override suspend fun customGAMTargetingProperties(
+                requestData: BlazeGamCustomNativeAdRequestInformation
+            ): Map<String, String> {
+                return this@BlazeFlutterGAMModule.customGAMTargetingProperties(requestData)
+                    ?: super.customGAMTargetingProperties(requestData)
+            }
+
+            override suspend fun publisherProvidedId(
+                requestData: BlazeGamCustomNativeAdRequestInformation
+            ): String? {
+                return this@BlazeFlutterGAMModule.publisherProvidedId(requestData)
+            }
+
+            override suspend fun networkExtras(
+                requestData: BlazeGamCustomNativeAdRequestInformation
+            ): Bundle? {
+                return this@BlazeFlutterGAMModule.networkExtras(requestData)
+            }
+        }
+
+    private val bannerAdsDelegate: BlazeGAMBannerAdsDelegate =
+        object : BlazeGAMBannerAdsDelegate {
+
+            override fun onGAMBannerAdsAdEvent(
+                eventType: BlazeGAMBannerHandlerEventType,
+                adData: BlazeGAMBannerAdsAdData
+            ) {
+                this@BlazeFlutterGAMModule.onGAMBannerAdsAdEvent(
+                    eventType = eventType,
+                    adData = adData
+                )
+            }
+
+            override fun onGAMBannerAdsAdError(
+                errorMsg: String,
+                adData: BlazeGAMBannerAdsAdData
+            ) {
+                this@BlazeFlutterGAMModule.onGAMBannerAdsAdError(
+                    errorMsg = errorMsg,
+                    adData = adData
+                )
+            }
+        }
 
     private fun enableCustomNativeAds(call: MethodCall, result: MethodChannel.Result) {
         // Extract defaultAdConfig if provided
@@ -97,7 +129,7 @@ object BlazeFlutterGAMModule {
         BlazeGAM.enableCustomNativeAds(
             context = application,
             defaultAdsConfig = defaultAdConfig,
-            delegate = delegate
+            delegate = customNativeAdsDelegate
         )
 
         result.success(null)
@@ -108,9 +140,24 @@ object BlazeFlutterGAMModule {
         result.success(null)
     }
 
+    private fun enableBannerAds(call: MethodCall, result: MethodChannel.Result) {
+        BlazeGAM.enableBannerAds(
+            context = application,
+            delegate = bannerAdsDelegate
+        )
+        result.success(null)
+    }
+
+    private fun disableBannerAds(call: MethodCall, result: MethodChannel.Result) {
+        BlazeGAM.disableBannerAds()
+        result.success(null)
+    }
+
+    // MARK: - Custom Native Ads Delegate Implementation Functions
+
     // Helper to parse default ad config from Map
     private fun parseDefaultAdConfig(
-            configMap: Map<String, Any>
+        configMap: Map<String, Any>
     ): BlazeGAMCustomNativeAdsDefaultConfig? {
         return try {
             val adUnit = configMap["adUnit"] as? String ?: return null
@@ -123,16 +170,14 @@ object BlazeFlutterGAMModule {
         }
     }
 
-    // Delegate implementation methods - matching React Native structure
-
-    private fun onGAMAdError(errorMessage: String) {
+    private fun onGAMCustomNativeAdError(errorMessage: String) {
         asyncBridge?.sendEvent(
                 name = "BlazeGAM.onAdError",
                 params = mapOf("errorMessage" to errorMessage)
         )
     }
 
-    private fun onGAMAdEvent(
+    private fun onGAMCustomNativeAdEvent(
             eventType: BlazeGoogleCustomNativeAdsHandler.EventType,
             adData: BlazeCustomNativeAdData
     ) {
@@ -252,6 +297,51 @@ object BlazeFlutterGAMModule {
             BlazeGoogleCustomNativeAdsHandler.EventType.PAUSED_AD_PAGE -> "pausedAdPage"
             BlazeGoogleCustomNativeAdsHandler.EventType.RESUMED_AD_PAGE -> "resumedAdPage"
             BlazeGoogleCustomNativeAdsHandler.EventType.CTA_CLICKED -> "ctaClicked"
+        }
+    }
+
+    // MARK: - Banner Ads Delegate Implementation Functions
+
+    private fun onGAMBannerAdsAdEvent(
+        eventType: BlazeGAMBannerHandlerEventType,
+        adData: BlazeGAMBannerAdsAdData
+    ) {
+        @Keep
+        data class Params(
+            val eventType: String,
+        )
+
+        asyncBridge?.sendEvent(
+            name = "BlazeGAM.onGAMBannerAdsAdEvent",
+            params = Params(
+                eventType = eventType.toReactEventTypeParam()
+            )
+        )
+    }
+
+    private fun onGAMBannerAdsAdError(
+        errorMsg: String,
+        adData: BlazeGAMBannerAdsAdData
+    ) {
+        @Keep
+        data class Params(
+            val errorMessage: String,
+        )
+
+        asyncBridge?.sendEvent(
+            name = "BlazeGAM.onGAMBannerAdsAdError",
+            params = Params(
+                errorMessage = errorMsg
+            )
+        )
+    }
+
+    fun BlazeGAMBannerHandlerEventType.toReactEventTypeParam(): String {
+        return when (this) {
+            BlazeGAMBannerHandlerEventType.AD_LOADED -> "adLoaded"
+            BlazeGAMBannerHandlerEventType.AD_CLICKED -> "adClicked"
+            BlazeGAMBannerHandlerEventType.AD_IMPRESSION -> "adImpression"
+            BlazeGAMBannerHandlerEventType.AD_REQUESTED -> "adRequested"
         }
     }
 }

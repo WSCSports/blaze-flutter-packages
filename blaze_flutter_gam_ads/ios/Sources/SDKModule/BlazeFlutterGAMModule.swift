@@ -11,6 +11,8 @@ class BlazeFlutterGAMModule {
     struct MethodNameConstants {
         static let enableCustomNativeAds = "enableCustomNativeAds"
         static let disableCustomNativeAds = "disableCustomNativeAds"
+        static let enableBannerAds = "enableBannerAds"
+        static let disableBannerAds = "disableBannerAds"
     }
     
     private var methodChannel: FlutterMethodChannel!
@@ -19,11 +21,11 @@ class BlazeFlutterGAMModule {
     }
     
     static let shared = BlazeFlutterGAMModule()
-
+    
     static func registerModule(messenger: FlutterBinaryMessenger) {
         shared.methodChannel = FlutterMethodChannel(name: "blaze-gam-module",
                                                     binaryMessenger: messenger)
-
+        
         shared.methodChannel?.setMethodCallHandler { (call, result) in
             shared.handleMethodCall(call: call, result: result)
         }
@@ -32,9 +34,8 @@ class BlazeFlutterGAMModule {
     private init() {
         
     }
-
-    // GAM delegate that communicates with Flutter
-    lazy var delegate: BlazeGAMCustomNativeAdsDelegate = .init(
+    
+    lazy var customNativeAdsDelegate: BlazeGAMCustomNativeAdsDelegate = .init(
         onGAMAdError: { [weak self] error in
             self?.onGAMAdError(error)
         },
@@ -55,13 +56,32 @@ class BlazeFlutterGAMModule {
             return await self?.networkExtras(params: params)
         }
     )
-
+    
+    lazy var bannerAdsDelegate: BlazeGAMBannerAdsDelegate = .init(
+        onGAMBannerAdsAdError: { [weak self] params in
+            self?.onGAMBannerAdsAdError(
+                error: params.error,
+                adData: params.adData
+            )
+        },
+        
+        onGAMBannerAdsAdEvent: { [weak self] params in
+            self?.onGAMBannerAdsAdEvent(eventType: params.eventType,
+                                        adData: params.adData)
+        }
+    )
+    
     private func handleMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case MethodNameConstants.enableCustomNativeAds:
             enableCustomNativeAds(call: call, result: result)
         case MethodNameConstants.disableCustomNativeAds:
             disableCustomNativeAds(call: call, result: result)
+        case MethodNameConstants.enableBannerAds:
+            enableBannerAds(call: call, result: result)
+        case MethodNameConstants.disableBannerAds:
+            disableBannerAds(call: call, result: result)
+            
         default:
             handleError(result,
                         errCode: "BlazeFlutterGAMModule",
@@ -82,7 +102,7 @@ class BlazeFlutterGAMModule {
             // Enable GAM with delegate and config
             BlazeGAM.shared.enableCustomNativeAds(
                 defaultCustomNativeAdsConfig: defaultConfig,
-                delegate: delegate
+                delegate: customNativeAdsDelegate
             )
             
             result(nil)
@@ -98,6 +118,22 @@ class BlazeFlutterGAMModule {
         result(nil)
     }
     
+    private func enableBannerAds(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        BlazeGAM.shared.enableBannerAds(delegate: bannerAdsDelegate)
+        result(nil)
+    }
+    
+    private func disableBannerAds(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        BlazeGAM.shared.disableBannerAds()
+        result(nil)
+    }
+    
+}
+
+// MARK: - Custom Native Ads implementation.
+
+extension BlazeFlutterGAMModule {
+    
     // Helper to parse default ad config from dictionary
     private func parseDefaultAdConfig(from dict: [String: Any]) throws -> BlazeGAMCustomNativeAdsDefaultConfig? {
         guard let adUnit = dict["adUnit"] as? String,
@@ -110,8 +146,6 @@ class BlazeFlutterGAMModule {
             templateId: templateId
         )
     }
-    
-    // MARK: - Delegate Implementation Methods
     
     private func onGAMAdError(_ error: Error) {
         asyncBridge?.sendEvent(
@@ -177,8 +211,6 @@ class BlazeFlutterGAMModule {
     
 }
 
-// MARK: - Data Models
-
 // Data structures for Flutter model - matching React Native structure
 fileprivate struct BlazeFlutterGAMCustomNativeAdRequestParams: Encodable {
     let requestDataInfo: RequestDataInfo
@@ -190,8 +222,6 @@ fileprivate struct BlazeFlutterGAMCustomNativeAdRequestParams: Encodable {
         let extraInfo: BlazeFlutterContentExtraInfo
     }
 }
-
-// MARK: - Extensions
 
 fileprivate extension BlazeGAMCustomNativeAdsDelegate.RequestDataInfo {
     func toFlutterModel() -> BlazeFlutterGAMCustomNativeAdRequestParams {
@@ -220,4 +250,55 @@ fileprivate extension BlazeGoogleCustomNativeAdsHandlerEventType {
         case .ctaClicked: return "ctaClicked"
         }
     }
+}
+
+// MARK: - Banner Ads implementation.
+
+extension BlazeFlutterGAMModule {
+    
+    func onGAMBannerAdsAdError(error: Error,
+                               adData: BlazeGAMBannerAdsAdData) {
+        struct Params: Codable {
+            let errorMessage: String
+        }
+        
+        asyncBridge?.sendEvent(
+            "BlazeGAM.onGAMBannerAdsAdError",
+            params: Params(
+                errorMessage: error.localizedDescription
+            )
+        )
+    }
+
+    func onGAMBannerAdsAdEvent(eventType: BlazeGAMBannerHandlerEventType,
+                               adData: BlazeGAMBannerAdsAdData) {
+        struct Params: Codable {
+            let eventType: String
+        }
+        
+        asyncBridge?.sendEvent(
+            "BlazeGAM.onGAMBannerAdsAdEvent",
+            params: Params(
+                eventType: eventType.toReactEventTypeParam
+            )
+        )
+    }
+    
+}
+
+fileprivate extension BlazeSDK.BlazeGAMBannerHandlerEventType {
+    
+    var toReactEventTypeParam: String {
+        switch self {
+        case .adRequested:
+            return "adRequested"
+        case .adLoaded:
+            return "adLoaded"
+        case .adImpression:
+            return "adImpression"
+        case .adClicked:
+            return "adClicked"
+        }
+    }
+    
 }

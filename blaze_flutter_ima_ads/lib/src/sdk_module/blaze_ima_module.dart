@@ -28,7 +28,7 @@ class _BlazeIMAInternal {
     BlazeIMADelegate? delegate,
   }) async {
     // Register the delegate if provided
-    BlazeGlobalDelegateHelper.registerDelegate(delegate);
+    BlazeIMADelegateHelper.registerDelegate(delegate);
 
     return _channel.invokeMethod('enableAds', {});
   }
@@ -36,7 +36,7 @@ class _BlazeIMAInternal {
   /// Disable IMA ads
   Future<void> disableAds() async {
     // Unregister the delegate
-    BlazeGlobalDelegateHelper.registerDelegate(null);
+    BlazeIMADelegateHelper.registerDelegate(null);
 
     return _channel.invokeMethod('disableAds', {});
   }

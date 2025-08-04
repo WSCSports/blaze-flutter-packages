@@ -28,7 +28,7 @@ class NativeStoryRowView(
         fun initWidget() {
                 val dataSource = dataSource ?: return
 
-                // Parse widget layout following React Native's exact pattern
+                // Parse widget layout
                 val widgetLayout: BlazeWidgetLayout =
                         parseWidgetLayout(
                                 defaultLayout = BlazeWidgetLayout.Presets.StoriesWidget.Row.circles

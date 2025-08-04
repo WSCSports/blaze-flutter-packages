@@ -26,4 +26,9 @@ class FLStoriesRowWidget: BlazeWidgetBase {
         return presetTheme?.asWidgetLayoutPreset ?? .Presets.StoriesWidget.Row.circles
     }
     
+    override var shouldForceContentInsetAdjustmentBehaviorNever: Bool {
+        // For rows we always disable content inset adjustment behavior.
+        return true
+    }
+    
 }

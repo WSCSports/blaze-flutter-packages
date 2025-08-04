@@ -7,15 +7,13 @@ import com.blaze.flutterblazesdk.utils.parsing.gson.toObject
 
 /**
  * Extension function to convert a Map to BlazeReactWidgetLayout using custom Gson with adapters
- * This follows the exact same pattern as React Native's parsing
  */
 fun Map<String, Any?>.toBlazeReactWidgetLayout(): BlazeReactWidgetLayout? {
     return this.toObject<BlazeReactWidgetLayout>()
 }
 
 /**
- * Extension function to apply widget layout customization over a preset layout This mimics React
- * Native's applyWidgetLayoutCustomization function exactly
+ * Extension function to apply widget layout customization over a preset layout
  */
 fun applyWidgetLayoutCustomization(
         reactWidgetLayout: Map<String, Any?>?,
@@ -31,8 +29,7 @@ fun applyWidgetLayoutCustomization(
 
 /**
  * Transforms the map into a Map of BlazeReactWidgetItemCustomMapping to
- * BlazeReactWidgetItemStyleOverrides This follows the exact same pattern as React Native's
- * toReactWidgetStylesOverridesMap extension
+ * BlazeReactWidgetItemStyleOverrides
  */
 fun Map<String, Any>.toReactWidgetStylesOverridesMap():
         Map<BlazeReactWidgetItemCustomMapping, BlazeReactWidgetItemStyleOverrides>? {

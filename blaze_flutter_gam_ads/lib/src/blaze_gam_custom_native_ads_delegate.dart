@@ -1,12 +1,13 @@
 import 'package:blaze_flutter_sdk/blaze_flutter_sdk.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'blaze_gam_delegate.freezed.dart';
-part 'blaze_gam_delegate.g.dart';
+part 'blaze_gam_custom_native_ads_delegate.freezed.dart';
+part 'blaze_gam_custom_native_ads_delegate.g.dart';
+
+//---------------- Public ----------------//
 
 @JsonEnum()
-enum BlazeOnAdEventEventType {
+enum BlazeCustomNativeAdEventType {
   @JsonValue('openedAd')
   openedAd,
   @JsonValue('adPageStart')
@@ -28,13 +29,15 @@ enum BlazeOnAdEventEventType {
 }
 
 @freezed
-class BlazeGAMDelegateOnAdEventParams with _$BlazeGAMDelegateOnAdEventParams {
-  const factory BlazeGAMDelegateOnAdEventParams({
-    required BlazeOnAdEventEventType eventType,
+class BlazeGAMCustomNativeAdsDelegateOnAdEventParams
+    with _$BlazeGAMCustomNativeAdsDelegateOnAdEventParams {
+  const factory BlazeGAMCustomNativeAdsDelegateOnAdEventParams({
+    required BlazeCustomNativeAdEventType eventType,
   }) = _BlazeGAMDelegateOnAdEventParams;
 
-  factory BlazeGAMDelegateOnAdEventParams.fromJson(Map<String, dynamic> json) =>
-      _$BlazeGAMDelegateOnAdEventParamsFromJson(json);
+  factory BlazeGAMCustomNativeAdsDelegateOnAdEventParams.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeGAMCustomNativeAdsDelegateOnAdEventParamsFromJson(json);
 }
 
 @freezed
@@ -80,32 +83,13 @@ class BlazeGAMCustomNativeAdsDefaultConfig
       _$BlazeGAMCustomNativeAdsDefaultConfigFromJson(json);
 }
 
-@freezed
-class BlazeGAMOnAdErrorParams with _$BlazeGAMOnAdErrorParams {
-  const factory BlazeGAMOnAdErrorParams({
-    required String errorMessage,
-  }) = _BlazeGAMOnAdErrorParams;
-
-  factory BlazeGAMOnAdErrorParams.fromJson(Map<String, dynamic> json) =>
-      _$BlazeGAMOnAdErrorParamsFromJson(json);
-}
-
-@freezed
-class BlazeGAMOnAdEventParamsData with _$BlazeGAMOnAdEventParamsData {
-  const factory BlazeGAMOnAdEventParamsData({
-    required String eventType,
-  }) = _BlazeGAMOnAdEventParamsData;
-
-  factory BlazeGAMOnAdEventParamsData.fromJson(Map<String, dynamic> json) =>
-      _$BlazeGAMOnAdEventParamsDataFromJson(json);
-}
-
 /// GAM Custom Native Ads Delegate
 class BlazeGAMCustomNativeAdsDelegate {
   /// This function will be triggered every time an event on an ad will happen.
   ///
   /// [params] The data associated with the ad involved in the event.
-  final void Function(BlazeGAMDelegateOnAdEventParams params)? onGAMAdEvent;
+  final void Function(BlazeGAMCustomNativeAdsDelegateOnAdEventParams params)?
+      onGAMAdEvent;
 
   /// Called when an error occurs during ad loading or playback.
   ///
@@ -136,7 +120,6 @@ class BlazeGAMCustomNativeAdsDelegate {
   final Future<Map<String, dynamic>> Function(
       BlazeGAMCustomNativeAdRequestParams params)? networkExtras;
 
-  /// Constructor with optional function parameters - matches React Native pattern exactly!
   const BlazeGAMCustomNativeAdsDelegate({
     this.onGAMAdEvent,
     this.onGAMAdError,
@@ -146,7 +129,29 @@ class BlazeGAMCustomNativeAdsDelegate {
   });
 }
 
-class BlazeGlobalDelegateHelper {
+//---------------- Internal ----------------//
+
+@freezed
+class _OnAdErrorParams with _$OnAdErrorParams {
+  const factory _OnAdErrorParams({
+    required String errorMessage,
+  }) = __OnAdErrorParams;
+
+  factory _OnAdErrorParams.fromJson(Map<String, dynamic> json) =>
+      _$OnAdErrorParamsFromJson(json);
+}
+
+@freezed
+class _OnAdEventParams with _$OnAdEventParams {
+  const factory _OnAdEventParams({
+    required String eventType,
+  }) = __OnAdEventParams;
+
+  factory _OnAdEventParams.fromJson(Map<String, dynamic> json) =>
+      _$OnAdEventParamsFromJson(json);
+}
+
+class BlazeCustomNativeAdsDelegateHelper {
   static void registerDelegate(BlazeGAMCustomNativeAdsDelegate? delegate) {
     // Register event listeners for regular events
     _onGAMAdEvent(delegate?.onGAMAdEvent);
@@ -157,7 +162,8 @@ class BlazeGlobalDelegateHelper {
   }
 
   static void _onGAMAdEvent(
-    void Function(BlazeGAMDelegateOnAdEventParams params)? callback,
+    void Function(BlazeGAMCustomNativeAdsDelegateOnAdEventParams params)?
+        callback,
   ) {
     const methodName = 'BlazeGAM.onAdEvent';
     if (callback != null) {
@@ -166,14 +172,14 @@ class BlazeGlobalDelegateHelper {
         (args) async {
           try {
             // Parse using freezed object
-            final eventData = BlazeGAMOnAdEventParamsData.fromJson(args.params);
+            final eventData = _OnAdEventParams.fromJson(args.params);
 
             // Convert string to enum using generated helper
             final eventType = $enumDecode(
-                _$BlazeOnAdEventEventTypeEnumMap, eventData.eventType);
+                _$BlazeCustomNativeAdEventTypeEnumMap, eventData.eventType);
 
-            final eventParams =
-                BlazeGAMDelegateOnAdEventParams(eventType: eventType);
+            final eventParams = BlazeGAMCustomNativeAdsDelegateOnAdEventParams(
+                eventType: eventType);
             callback(eventParams);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(
@@ -199,7 +205,7 @@ class BlazeGlobalDelegateHelper {
         (args) async {
           try {
             // Parse using freezed object
-            final errorData = BlazeGAMOnAdErrorParams.fromJson(args.params);
+            final errorData = _OnAdErrorParams.fromJson(args.params);
             callback(errorData.errorMessage);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(

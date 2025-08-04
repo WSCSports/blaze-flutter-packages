@@ -5,7 +5,7 @@ import '../widgets/types/widget_layout_common.dart';
 part 'moments_player_style.freezed.dart';
 part 'moments_player_style.g.dart';
 
-/// Moments player style configuration - matches React Native BlazeMomentsPlayerStyle exactly
+/// Moments player style configuration
 @freezed
 class BlazeMomentsPlayerStyle with _$BlazeMomentsPlayerStyle {
   const factory BlazeMomentsPlayerStyle({

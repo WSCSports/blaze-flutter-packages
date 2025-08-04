@@ -6,7 +6,7 @@ buildscript {
     ext {
         // Keep only versions that are actually specific to BlazeSDK
         blaze_default_kotlin_version = '2.0.21'
-        blazesdk_version = '1.10.3'
+        blazesdk_version = '1.11.6'
         blaze_gson_version = '2.10.1'
         blaze_ima_version = '3.33.0'
     }

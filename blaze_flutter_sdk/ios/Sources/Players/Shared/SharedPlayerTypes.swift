@@ -2,13 +2,12 @@
 //  SharedPlayerTypes.swift
 //  blaze_flutter_sdk
 //
-//  Shared types used across all player styles - copied exactly from React Native
 //
 
 import Foundation
 
 // =================================
-// SHARED STRUCTS (copied from React Native common files)
+// SHARED STRUCTS
 // =================================
 
 struct BlazeReactFirstTimeSlideCTAStyle: Codable {
@@ -71,4 +70,4 @@ enum BlazeReactBottomComponentsAlignment: String, Codable {
 enum BlazeReactPlayerDisplayMode: String, Codable {
     case fixedRatio9x16 = "FixedRatio_9_16"
     case resizeAspectFillCenterCrop = "ResizeAspectFillCenterCrop"
-} 
+}

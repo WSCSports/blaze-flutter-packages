@@ -8,7 +8,7 @@
 import Foundation
 import Flutter
 
-extension FlutterMethodCall {
+public extension FlutterMethodCall {
     
     var argsAsDict: [String : AnyHashable]? {
         return arguments as? [String : AnyHashable]

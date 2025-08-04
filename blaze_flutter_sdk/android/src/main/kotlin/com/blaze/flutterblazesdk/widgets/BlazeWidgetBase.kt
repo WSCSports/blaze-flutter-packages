@@ -1,8 +1,10 @@
 package com.blaze.flutterblazesdk.widgets
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
+import androidx.core.view.doOnLayout
 import com.blaze.blazesdk.data_source.BlazeDataSourceType
 import com.blaze.blazesdk.delegates.BlazeWidgetDelegate
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
@@ -21,6 +23,7 @@ import com.blaze.flutterblazesdk.parsers.asCachingLevel
 import com.blaze.flutterblazesdk.parsers.asWidgetLayoutPreset
 import com.blaze.flutterblazesdk.parsers.toBlazeDataSourceType
 import com.blaze.flutterblazesdk.utils.convertPixelsToDp
+import com.blaze.flutterblazesdk.utils.disableNestedScrolling
 import com.blaze.flutterblazesdk.utils.invokeMethodWithJsonStringFromObject
 import com.blaze.flutterblazesdk.widgets.customization.applyWidgetLayoutCustomization
 import com.blaze.flutterblazesdk.widgets.customization.mergedWith
@@ -80,7 +83,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         creationParams?.get("appOverridesCTAHandling") as? Boolean ?: false
     }
 
-    val methodChannel: MethodChannel =
+    private var methodChannel: MethodChannel? =
             MethodChannel(binaryMessenger, "blaze-widget-$widgetId").apply {
                 setMethodCallHandler { call, result ->
                     when (call.method) {
@@ -171,7 +174,14 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
 
             onHeightChangedListener = { height ->
                 val dpHeight = context.convertPixelsToDp(height)
-                methodChannel.invokeMethod("updateHeight", mapOf("height" to dpHeight.toDouble()))
+                methodChannel?.invokeMethod("updateHeight", mapOf("height" to dpHeight.toDouble()))
+            }
+
+            doOnLayout {
+                // Disable nested scrolling so that native will stop communicating gestures with
+                // Flutter and just handle them.
+                // Should theoretically optimize the performance.
+                disableNestedScrolling()
             }
         }
     }
@@ -184,7 +194,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     playerType = playerType,
                     sourceId = sourceId
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onDataLoadStarted",
                         params = params
                     )
@@ -203,7 +213,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     itemsCount = itemsCount,
                     result = result
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onDataLoadComplete",
                         params = params
                     )
@@ -215,7 +225,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     playerType = playerType,
                     sourceId = sourceId
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onPlayerDidAppear",
                         params = params
                     )
@@ -227,7 +237,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     playerType = playerType,
                     sourceId = sourceId
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onPlayerDidDismiss",
                         params = params
                     )
@@ -247,7 +257,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     actionParam = actionParam,
                     appOverridesCTAHandling = appOverridesCTAHandling
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onTriggerCTA",
                         params = params
                     )
@@ -264,7 +274,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     sourceId = sourceId,
                     actionParam = actionParam
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onTriggerPlayerBodyTextLink",
                         params = params
                     )
@@ -281,7 +291,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     sourceId = sourceId,
                     event = event
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onPlayerEventTriggered",
                         params = params
                     )
@@ -298,13 +308,12 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     widgetItemId = itemId,
                     widgetItemTitle = itemTitle
                 ) { params ->
-                    methodChannel.invokeMethodWithJsonStringFromObject(
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onWidgetItemClicked",
                         params = params
                     )
                 }
             }
-
         }
     }
 
@@ -312,7 +321,21 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         return widgetContainerView
     }
 
-    override fun dispose() {}
+    override fun dispose() {
+        try {
+            // Clean up method channel to prevent memory leaks
+            methodChannel?.setMethodCallHandler(null)
+            methodChannel = null // Clear the reference
+
+            // Remove widget from container to break view hierarchy references
+            widgetContainerView.removeAllViews()
+
+            widgetContainerView.onHeightChangedListener = null
+        } catch (e: Exception) {
+            // Log but don't crash - disposal should be safe
+            Log.w("BlazeWidgetBase", "Error during disposal: ${e.message}")
+        }
+    }
 
     fun reloadData(call: MethodCall) {
         val isSilentRefresh = call.argument<Boolean>("isSilentRefresh") ?: false

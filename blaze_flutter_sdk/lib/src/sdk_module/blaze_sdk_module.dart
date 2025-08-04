@@ -6,6 +6,7 @@ import '../types/blaze_data_source_type.dart';
 import '../types/shared_types.dart';
 import '../delegates/blaze_global_delegate.dart';
 import '../delegates/blaze_player_entry_point_delegate.dart';
+import '../shared/errors/errors.dart';
 
 class BlazeSDK {
   static final _BlazeSDKInternal _sdk = _BlazeSDKInternal._instance;
@@ -227,11 +228,15 @@ class _BlazeSDKInternal {
       params['defaultVideosPlayerStyle'] = defaultVideosPlayerStyle.toJson();
     }
 
-    // Register delegates if provided during init (matches React Native pattern)
+    // Register delegates if provided during init
     setGlobalDelegate(globalDelegate);
     setPlayerEntryPointDelegate(playerEntryPointDelegate);
 
-    return await _channel.invokeMethod('initSDK', params);
+    try {
+      await _channel.invokeMethod('initSDK', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play a story
@@ -240,7 +245,7 @@ class _BlazeSDKInternal {
     String? pageId,
     BlazeStoryPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'storyId': storyId,
     };
@@ -255,18 +260,26 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playStory', params);
+    try {
+      await _channel.invokeMethod('playStory', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Prepare stories
   Future<void> prepareStories({
     required BlazeDataSourceType dataSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
 
-    return _channel.invokeMethod('prepareStories', params);
+    try {
+      await _channel.invokeMethod('prepareStories', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play stories
@@ -275,7 +288,7 @@ class _BlazeSDKInternal {
     BlazeStoryPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
@@ -290,7 +303,11 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playStories', params);
+    try {
+      await _channel.invokeMethod('playStories', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play a moment
@@ -298,7 +315,7 @@ class _BlazeSDKInternal {
     required String momentId,
     BlazeMomentsPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'momentId': momentId,
     };
@@ -310,18 +327,26 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playMoment', params);
+    try {
+      await _channel.invokeMethod('playMoment', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Prepare moments
   Future<void> prepareMoments({
     required BlazeDataSourceType dataSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
 
-    return _channel.invokeMethod('prepareMoments', params);
+    try {
+      await _channel.invokeMethod('prepareMoments', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play moments
@@ -330,7 +355,7 @@ class _BlazeSDKInternal {
     BlazeMomentsPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
@@ -345,7 +370,11 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playMoments', params);
+    try {
+      await _channel.invokeMethod('playMoments', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play a video
@@ -353,7 +382,7 @@ class _BlazeSDKInternal {
     required String videoId,
     BlazeVideosPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'videoId': videoId,
     };
@@ -365,18 +394,26 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playVideo', params);
+    try {
+      await _channel.invokeMethod('playVideo', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Prepare videos
   Future<void> prepareVideos({
     required BlazeDataSourceType dataSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
 
-    return _channel.invokeMethod('prepareVideos', params);
+    try {
+      await _channel.invokeMethod('prepareVideos', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Play videos
@@ -385,7 +422,7 @@ class _BlazeSDKInternal {
     BlazeVideosPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
-  }) {
+  }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
@@ -400,7 +437,11 @@ class _BlazeSDKInternal {
       params['triggerSource'] = triggerSource.name;
     }
 
-    return _channel.invokeMethod('playVideos', params);
+    try {
+      await _channel.invokeMethod('playVideos', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // NEW: Missing core methods implementation
@@ -424,9 +465,13 @@ class _BlazeSDKInternal {
     return result as bool;
   }
 
-  Future<void> updateGeoRestriction(String? geoLocation) {
-    return _channel
-        .invokeMethod('updateGeoRestriction', {'geoLocation': geoLocation});
+  Future<void> updateGeoRestriction(String? geoLocation) async {
+    try {
+      return await _channel
+          .invokeMethod('updateGeoRestriction', {'geoLocation': geoLocation});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   Future<bool> canHandlePushNotification(Map<String, dynamic> payload) async {
@@ -436,19 +481,31 @@ class _BlazeSDKInternal {
   }
 
   Future<void> handleNotificationPayload(Map<String, dynamic> payload) async {
-    return await _channel
-        .invokeMethod('handleNotificationPayload', {'payload': payload});
+    try {
+      return await _channel
+          .invokeMethod('handleNotificationPayload', {'payload': payload});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Sets the external user ID.
-  Future<void> setExternalUserId(String? externalUserId) {
-    return _channel
-        .invokeMethod('setExternalUserId', {'externalUserId': externalUserId});
+  Future<void> setExternalUserId(String? externalUserId) async {
+    try {
+      await _channel.invokeMethod(
+          'setExternalUserId', {'externalUserId': externalUserId});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // Handles universal link.
-  Future<void> handleUniversalLink(String link) {
-    return _channel.invokeMethod('handleUniversalLink', {'link': link});
+  Future<void> handleUniversalLink(String link) async {
+    try {
+      await _channel.invokeMethod('handleUniversalLink', {'link': link});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
   }
 
   // ======================================

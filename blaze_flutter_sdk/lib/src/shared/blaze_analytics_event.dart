@@ -515,10 +515,10 @@ class InteractionProps with _$InteractionProps {
 }
 
 // ======================================
-// MAIN ANALYTICS EVENT INTERFACE - Matching React Native exactly
+// MAIN ANALYTICS EVENT INTERFACE
 // ======================================
 
-/// Analytics event interface - represents the complete BlazeAnalyticsEvent structure from React Native
+/// Analytics event interface
 @freezed
 class BlazeAnalyticsEvent with _$BlazeAnalyticsEvent {
   const factory BlazeAnalyticsEvent({

@@ -2,7 +2,7 @@
 //  BlazeSharedDelegateHandler.swift
 //  blaze_flutter_sdk
 //
-//  Created by Assistant on 2024.
+//  Created by Reuven Levitsky.
 //
 
 import Foundation
@@ -40,10 +40,10 @@ class BlazeSharedDelegateHandler {
         result: BlazeResult,
         completion: (Encodable) -> Void
     ) {
-        let errorMessage: String? = {
+        let flutterError: BlazeFlutterError? = {
             switch result {
             case .failure(let error):
-                return "\(error)"
+                return BlazeFlutterError.fromBlazeError(error)
             case .success:
                 return nil
             }
@@ -53,14 +53,14 @@ class BlazeSharedDelegateHandler {
             let playerType: String
             let sourceId: String?
             let itemsCount: Int
-            let error: String?
+            let error: BlazeFlutterError?
         }
 
         let params = Params(
             playerType: playerType.toFlutterValue(),
             sourceId: sourceId,
             itemsCount: itemsCount,
-            error: errorMessage
+            error: flutterError
         )
 
         completion(params)

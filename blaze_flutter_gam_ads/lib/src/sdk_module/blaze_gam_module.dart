@@ -1,10 +1,11 @@
 import 'package:flutter/services.dart';
-import '../blaze_gam_delegate.dart';
+import '../blaze_gam_banner_ads_delegate.dart';
+import '../blaze_gam_custom_native_ads_delegate.dart';
 
 class BlazeGAM {
   static final _BlazeGAMInternal _sdk = _BlazeGAMInternal._instance;
 
-  /// Enable GAM Custom Native Ads with configuration and delegate support
+  /// Call this function to enable Google Ads Manager Custom Native ads.
   static Future<void> enableCustomNativeAds({
     BlazeGAMCustomNativeAdsDefaultConfig? defaultAdConfig,
     BlazeGAMCustomNativeAdsDelegate? delegate,
@@ -14,8 +15,19 @@ class BlazeGAM {
         delegate: delegate,
       );
 
-  /// Disable GAM Custom Native Ads
+  /// Call this function to disable Google Ads Manager Custom Native ads.
   static Future<void> disableCustomNativeAds() => _sdk.disableCustomNativeAds();
+
+  /// Call this function to enable Google Ads Manager Banner ads.
+  static Future<void> enableBannerAds({
+    BlazeGAMBannerAdsDelegate? delegate,
+  }) =>
+      _sdk.enableBannerAds(
+        delegate: delegate,
+      );
+
+  /// Call this function to disable Google Ads Manager Banner ads.
+  static Future<void> disableBannerAds() => _sdk.disableBannerAds();
 }
 
 class _BlazeGAMInternal {
@@ -27,13 +39,12 @@ class _BlazeGAMInternal {
   // Private constructor to prevent instantiation.
   _BlazeGAMInternal._();
 
-  /// Enable GAM Custom Native Ads with full options support
   Future<void> enableCustomNativeAds({
     BlazeGAMCustomNativeAdsDefaultConfig? defaultAdConfig,
     BlazeGAMCustomNativeAdsDelegate? delegate,
   }) async {
     // Register the delegate if provided
-    BlazeGlobalDelegateHelper.registerDelegate(delegate);
+    BlazeCustomNativeAdsDelegateHelper.registerDelegate(delegate);
 
     // Convert defaultAdConfig to Map for native side
     final Map<String, dynamic> params = {};
@@ -44,11 +55,26 @@ class _BlazeGAMInternal {
     return _channel.invokeMethod('enableCustomNativeAds', params);
   }
 
-  /// Disable GAM Custom Native Ads
   Future<void> disableCustomNativeAds() async {
     // Unregister the delegate
-    BlazeGlobalDelegateHelper.registerDelegate(null);
+    BlazeCustomNativeAdsDelegateHelper.registerDelegate(null);
 
     return _channel.invokeMethod('disableCustomNativeAds', {});
+  }
+
+  Future<void> enableBannerAds({
+    BlazeGAMBannerAdsDelegate? delegate,
+  }) async {
+    // Register the delegate if provided
+    BlazeBannerAdsDelegateHelper.registerDelegate(delegate);
+
+    return _channel.invokeMethod('enableBannerAds', {});
+  }
+
+  Future<void> disableBannerAds() async {
+    // Unregister the delegate
+    BlazeBannerAdsDelegateHelper.registerDelegate(null);
+
+    return _channel.invokeMethod('disableBannerAds', {});
   }
 }

@@ -210,7 +210,6 @@ object BlazeFlutterIMAModule {
 
 }
 
-// Data classes matching React Native structure exactly
 @Keep
 private data class BlazeFlutterIMAAdRequestParams(val requestDataInfo: RequestDataInfo) {
     @Keep data class RequestDataInfo(val extraInfo: BlazeFlutterContentExtraInfo)

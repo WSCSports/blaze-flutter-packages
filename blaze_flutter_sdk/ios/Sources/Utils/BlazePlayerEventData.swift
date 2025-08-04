@@ -2,7 +2,7 @@
 //  BlazePlayerEventData.swift
 //  blaze_flutter_sdk
 //
-//  Created by AI Assistant for centralizing player event data structure.
+//  Created by Created by Reuven Levitsky.
 //
 
 import Foundation

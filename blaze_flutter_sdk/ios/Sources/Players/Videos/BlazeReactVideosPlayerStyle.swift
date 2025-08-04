@@ -2,7 +2,6 @@
 //  BlazeReactVideosPlayerStyle.swift
 //  blaze_flutter_sdk
 //
-//  Copied exactly from React Native BlazeReactVideosPlayerStyle.swift
 //
 
 import Foundation
@@ -22,7 +21,7 @@ struct BlazeReactVideosPlayerHeadingTextStyle: Codable {
     var contentSource: ContentSource?
     var isVisible: Bool?
     var numberOfLines: Int?
-    
+
     enum ContentSource: String, Codable {
         case title = "Title"
     }
@@ -52,7 +51,7 @@ struct BlazeReactVideosPlayerCtaIconStyle: Codable {
     var iconImage: BlazeReactImage?
     var iconPositioning: IconPositioning?
     var iconTint: String?
-    
+
     enum IconPositioning: String, Codable {
         case start = "Start"
     }
@@ -61,7 +60,7 @@ struct BlazeReactVideosPlayerCtaIconStyle: Codable {
 struct BlazeReactVideosPlayerCtaVisibility: Codable {
     var type: VisibilityType?
     var duration: CGFloat?
-    
+
     enum VisibilityType: String, Codable {
         case visibleAfterOverlayHidden = "visibleAfterOverlayHidden"
         case alwaysVisible = "alwaysVisible"
@@ -74,4 +73,4 @@ struct BlazeReactVideosPlayerSeekBarStyle: Codable {
     var pausedState: BlazeReactSeekBarStyle?
     var horizontalSpacing: CGFloat?
     var bottomSpacing: CGFloat?
-} 
+}

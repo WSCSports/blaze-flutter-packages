@@ -1,11 +1,13 @@
 package com.blaze.flutterblazesdk.delegates
 
+import androidx.annotation.Keep
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.results.BlazeResult
 import com.blaze.flutterblazesdk.sdk_module.toFlutterValue
+import com.blaze.flutterblazesdk.utils.BlazeFlutterError
 import com.blaze.flutterblazesdk.utils.BlazePlayerEventData
 
 // Shared delegate handler that eliminates code duplication between Widget and EntryPoint delegates
@@ -20,6 +22,7 @@ class BlazeSharedDelegateHandler {
         sourceId: String?,
         completion: (Any) -> Unit
     ) {
+        @Keep
         data class Params(val playerType: String, val sourceId: String?)
 
         val params = Params(
@@ -37,24 +40,25 @@ class BlazeSharedDelegateHandler {
         result: BlazeResult<Unit>,
         completion: (Any) -> Unit
     ) {
-        val errorMessage =
+        val flutterError =
             when (result) {
-                is BlazeResult.Error -> result.message
+                is BlazeResult.Error -> BlazeFlutterError.fromBlazeError(result)
                 else -> null
             }
 
+        @Keep
         data class Params(
             val playerType: String,
             val sourceId: String?,
             val itemsCount: Int,
-            val error: String?
+            val error: BlazeFlutterError?
         )
 
         val params = Params(
             playerType = playerType.toFlutterValue(),
             sourceId = sourceId,
             itemsCount = itemsCount,
-            error = errorMessage
+            error = flutterError
         )
 
         completion(params)
@@ -65,6 +69,7 @@ class BlazeSharedDelegateHandler {
         sourceId: String?,
         completion: (Any) -> Unit
     ) {
+        @Keep
         data class Params(val playerType: String, val sourceId: String?)
 
         val params = Params(
@@ -80,6 +85,7 @@ class BlazeSharedDelegateHandler {
         sourceId: String?,
         completion: (Any) -> Unit
     ) {
+        @Keep
         data class Params(val playerType: String, val sourceId: String?)
 
         val params = Params(
@@ -98,6 +104,7 @@ class BlazeSharedDelegateHandler {
         appOverridesCTAHandling: Boolean,
         completion: (Any) -> Unit
     ): Boolean {
+        @Keep
         data class Params(
             val playerType: String,
             val sourceId: String?,
@@ -122,6 +129,7 @@ class BlazeSharedDelegateHandler {
         actionParam: String,
         completion: (Any) -> Unit
     ): BlazeLinkActionHandleType {
+        @Keep
         data class Params(val playerType: String, val sourceId: String?, val actionParam: String)
 
         val params = Params(
@@ -140,6 +148,7 @@ class BlazeSharedDelegateHandler {
         event: BlazePlayerEvent,
         completion: (Any) -> Unit
     ) {
+        @Keep
         data class PlayerEventData(
             val playerType: String,
             val sourceId: String?,
@@ -165,6 +174,7 @@ class BlazeSharedDelegateHandler {
         widgetItemTitle: String?,
         completion: (Any) -> Unit
     ) {
+        @Keep
         data class Params(
             val widgetId: String,
             val widgetItemId: String,

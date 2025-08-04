@@ -5,6 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'blaze_ima_delegate.freezed.dart';
 part 'blaze_ima_delegate.g.dart';
 
+//---------------- Public ----------------//
+
 /// Event types for IMA ad events
 enum BlazeIMAOnAdEventEventType {
   @JsonValue('adStarted')
@@ -93,28 +95,6 @@ class BlazeIMADelegateOnAdEventParams with _$BlazeIMADelegateOnAdEventParams {
       _$BlazeIMADelegateOnAdEventParamsFromJson(json);
 }
 
-/// Raw event data from native side
-@freezed
-class BlazeIMAOnAdEventParamsData with _$BlazeIMAOnAdEventParamsData {
-  const factory BlazeIMAOnAdEventParamsData({
-    required String eventType,
-  }) = _BlazeIMAOnAdEventParamsData;
-
-  factory BlazeIMAOnAdEventParamsData.fromJson(Map<String, dynamic> json) =>
-      _$BlazeIMAOnAdEventParamsDataFromJson(json);
-}
-
-/// Parameters for IMA ad error callbacks
-@freezed
-class BlazeIMAOnAdErrorParams with _$BlazeIMAOnAdErrorParams {
-  const factory BlazeIMAOnAdErrorParams({
-    required String errorMessage,
-  }) = _BlazeIMAOnAdErrorParams;
-
-  factory BlazeIMAOnAdErrorParams.fromJson(Map<String, dynamic> json) =>
-      _$BlazeIMAOnAdErrorParamsFromJson(json);
-}
-
 /// IMA delegate interface for handling ad events and providing custom data
 class BlazeIMADelegate {
   /// This function will be triggered every time an event on an ad will happen.
@@ -144,8 +124,32 @@ class BlazeIMADelegate {
   });
 }
 
+//---------------- Internal ----------------//
+
+/// Raw event data from native side
+@freezed
+class _OnAdEventParams with _$OnAdEventParams {
+  const factory _OnAdEventParams({
+    required String eventType,
+  }) = __OnAdEventParams;
+
+  factory _OnAdEventParams.fromJson(Map<String, dynamic> json) =>
+      _$OnAdEventParamsFromJson(json);
+}
+
+/// Parameters for IMA ad error callbacks
+@freezed
+class _OnAdErrorParams with _$OnAdErrorParams {
+  const factory _OnAdErrorParams({
+    required String errorMessage,
+  }) = __OnAdErrorParams;
+
+  factory _OnAdErrorParams.fromJson(Map<String, dynamic> json) =>
+      _$OnAdErrorParamsFromJson(json);
+}
+
 /// Helper class for registering IMA delegate callbacks with AsyncBridge
-class BlazeGlobalDelegateHelper {
+class BlazeIMADelegateHelper {
   static void registerDelegate(BlazeIMADelegate? delegate) {
     // Register event listeners for regular events
     _onIMAAdEvent(delegate?.onIMAAdEvent);
@@ -165,7 +169,7 @@ class BlazeGlobalDelegateHelper {
         (args) async {
           try {
             // Parse using freezed object
-            final eventData = BlazeIMAOnAdEventParamsData.fromJson(args.params);
+            final eventData = _OnAdEventParams.fromJson(args.params);
 
             // Convert string to enum using generated helper
             final eventType = $enumDecode(
@@ -198,7 +202,7 @@ class BlazeGlobalDelegateHelper {
         (args) async {
           try {
             // Parse using freezed object
-            final errorData = BlazeIMAOnAdErrorParams.fromJson(args.params);
+            final errorData = _OnAdErrorParams.fromJson(args.params);
             callback(errorData.errorMessage);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(

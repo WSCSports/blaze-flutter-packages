@@ -2,7 +2,6 @@
 //  BlazeReactMomentsPlayerStyle.swift
 //  blaze_flutter_sdk
 //
-//  Copied exactly from React Native BlazeReactMomentsPlayerStyle.swift
 //
 
 import Foundation
@@ -23,12 +22,12 @@ struct BlazeReactMomentsPlayerStyle: Codable {
 }
 
 struct BlazeReactMomentsPlayerHeadingTextStyle: Codable {
-    var textSize: CGFloat? // Only Android
+    var textSize: CGFloat?  // Only Android
     var font: BlazeReactTitleFont?
     var textColor: String?
     var contentSource: ContentSource?
     var isVisible: Bool?
-    
+
     enum ContentSource: String, Codable {
         case title = "Title"
         case subtitle = "Subtitle"
@@ -41,7 +40,7 @@ struct BlazeReactMomentsPlayerBodyTextStyle: Codable {
     var textColor: String?
     var contentSource: ContentSource?
     var isVisible: Bool?
-    
+
     enum ContentSource: String, Codable {
         case title = "Title"
         case subtitle = "Subtitle"
@@ -74,16 +73,16 @@ struct BlazeReactMomentsPlayerCtaStyle: Codable {
     var width: CGFloat?
     var height: CGFloat?
     var font: BlazeReactTitleFont?
-    var textSize: CGFloat? // Only for Android
+    var textSize: CGFloat?  // Only for Android
     var layoutPositioning: CTAPositioning?
     var icon: BlazeReactMomentCtaIcon?
     var horizontalAlignment: CTAHorizontalAlignment?
-    
+
     enum CTAPositioning: String, Codable {
         case bellowBottomButtonsBox = "CtaBellowBottomButtonsBox"
         case nextToBottomButtonsBox = "CtaNextToBottomButtonsBox"
     }
-    
+
     enum CTAHorizontalAlignment: String, Codable {
         case start = "Start"
         case center = "Center"
@@ -92,18 +91,18 @@ struct BlazeReactMomentsPlayerCtaStyle: Codable {
     }
 }
 
-struct BlazeReactMomentsPlayerHeaderGradientStyle : Codable {
+struct BlazeReactMomentsPlayerHeaderGradientStyle: Codable {
     var isVisible: Bool?
     var startColor: String?
     var endColor: String?
 }
 
-struct BlazeReactMomentsPlayerFooterGradientStyle : Codable {
+struct BlazeReactMomentsPlayerFooterGradientStyle: Codable {
     var isVisible: Bool?
     var startColor: String?
     var endColor: String?
     var endPositioning: EndPositioning?
-    
+
     enum EndPositioning: String, Codable {
         case bottomToPlayer = "BottomToPlayer"
         case bottomToContainer = "BottomToContainer"
@@ -119,7 +118,7 @@ struct BlazeReactMomentsPlayerFirstTimeSlideStyle: Codable {
     var instructions: BlazeReactMomentsPlayerFirstTimeSlideInstructionsStyle?
 }
 
-struct BlazeReactMomentsPlayerFirstTimeSlideInstructionsStyle: Codable{
+struct BlazeReactMomentsPlayerFirstTimeSlideInstructionsStyle: Codable {
     var next: BlazeReactFirstTimeSlideInstructionStyle?
     var previous: BlazeReactFirstTimeSlideInstructionStyle?
     var pause: BlazeReactFirstTimeSlideInstructionStyle?
@@ -136,4 +135,4 @@ struct BlazeReactMomentsPlayerSeekBarStyle: Codable {
 
 struct BlazeReactMomentCtaIcon: Codable {
     var iconImage: BlazeReactImage?
-} 
+}

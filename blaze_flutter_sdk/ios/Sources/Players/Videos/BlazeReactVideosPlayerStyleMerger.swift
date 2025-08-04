@@ -2,21 +2,21 @@
 //  BlazeReactVideosPlayerStyleMerger.swift
 //  blaze_flutter_sdk
 //
-//  Copied exactly from React Native iOS implementation
 //
 
-import Foundation
 import BlazeSDK
+import Foundation
 
 extension BlazeVideosPlayerStyle {
     func mergedWith(_ customization: BlazeReactVideosPlayerStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.headingText = merged.headingText.mergedWith(customization.headingText)
         merged.buttons = merged.buttons.mergedWith(customization.buttons)
         merged.cta = merged.cta.mergedWith(customization.cta)
-        merged.backgroundColor = UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
+        merged.backgroundColor =
+            UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
         merged.seekBar = merged.seekBar.mergedWith(customization.seekBar)
         return merged
     }
@@ -25,7 +25,7 @@ extension BlazeVideosPlayerStyle {
 extension BlazeVideosPlayerSeekBarStyle {
     func mergedWith(_ customization: BlazeReactVideosPlayerSeekBarStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.playingState = merged.playingState.mergedWith(customization.playingState)
@@ -39,7 +39,7 @@ extension BlazeVideosPlayerSeekBarStyle {
 extension BlazeVideosPlayerCtaStyle {
     func mergedWith(_ customization: BlazeReactVideosPlayerCtaStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.cornerRadius = customization.cornerRadius ?? merged.cornerRadius
         merged.height = customization.height ?? merged.height
@@ -53,7 +53,7 @@ extension BlazeVideosPlayerCtaStyle {
 extension BlazeVideosPlayerButtonsStyle {
     func mergedWith(_ customization: BlazeReactVideosPlayerButtonsStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.exit = merged.exit.mergedWith(customization.exit)
         merged.like = merged.like.mergedWith(customization.like)
@@ -69,7 +69,7 @@ extension BlazeVideosPlayerButtonsStyle {
 extension BlazeVideosPlayerButtonStyle {
     func mergedWith(_ customization: BlazeReactPlayerButtonStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
         merged.color = UIColor(hexString: customization.color) ?? merged.color
         merged.height = customization.height ?? merged.height
@@ -87,41 +87,45 @@ extension BlazeVideosPlayerButtonStyle {
 extension BlazeVideosPlayerHeadingTextStyle {
     func mergedWith(_ customization: BlazeReactVideosPlayerHeadingTextStyle?) -> Self {
         guard let customization else { return self }
-        
+
         var merged = self
-        
+
         merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.contentSource = merged.contentSource.mergedWith(customization.contentSource)
         merged.numberOfLines = customization.numberOfLines ?? merged.numberOfLines
-        
+
         return merged
     }
 }
 
 extension BlazeVideosPlayerHeadingTextStyle.ContentSource {
-    
-    func mergedWith(_ customization: BlazeReactVideosPlayerHeadingTextStyle.ContentSource?) -> Self {
+
+    func mergedWith(_ customization: BlazeReactVideosPlayerHeadingTextStyle.ContentSource?) -> Self
+    {
         guard let customization else { return self }
-        
+
         switch customization {
         case .title:
             return .title
         }
     }
-    
+
 }
 
 extension BlazeSDK.BlazeVideosPlayerButtonCustomImageStates? {
-    
+
     func mergedWith(_ customization: BlazeReactPlayerButtonCustomImageStates?) -> Self {
         guard let customization else { return self }
-        
-        guard let defaultImage = UIImage.imageWith(customization.unselectedImage) else { return self }
-        
-        return .init(default: defaultImage,
-                     selected: UIImage.imageWith(customization.selectedImage))
+
+        guard let defaultImage = UIImage.imageWith(customization.unselectedImage) else {
+            return self
+        }
+
+        return .init(
+            default: defaultImage,
+            selected: UIImage.imageWith(customization.selectedImage))
     }
-    
-} 
+
+}

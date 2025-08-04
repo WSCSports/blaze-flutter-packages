@@ -156,7 +156,7 @@ internal class BlazeAsyncBridgeModule(private val binaryMessenger: BinaryMesseng
         private const val CHANNEL_NAME = "blaze-async-bridge"
     }
 
-    // Thread-safe maps for callbacks - matching React Native structure
+    // Thread-safe maps for callbacks
     private val callbackMap = ConcurrentHashMap<String, CompletionHandler>()
 
     // Main thread handler for UI operations
@@ -165,12 +165,12 @@ internal class BlazeAsyncBridgeModule(private val binaryMessenger: BinaryMesseng
     // Method channel for communication with Dart
     private val methodChannel = MethodChannel(binaryMessenger, CHANNEL_NAME)
 
-    // Completion handler interface - matching React Native callback pattern
+    // Completion handler interface
     private fun interface CompletionHandler {
         fun invoke(result: String?, error: Throwable?)
     }
 
-    // Error types - matching React Native enum
+    // Error types
     sealed class BlazeAsyncError(message: String) : Exception(message) {
         class TimeoutError(methodName: String) :
                 BlazeAsyncError("Dart method call timed out: $methodName")
@@ -246,20 +246,20 @@ internal class BlazeAsyncBridgeModule(private val binaryMessenger: BinaryMesseng
             error: Throwable?,
             continuation: CancellableContinuation<String?>
     ) {
-        // Resume continuation - matching React Native
+        // Resume continuation
         if (error != null) {
             continuation.resumeWithException(error)
         } else {
             continuation.resume(result)
         }
 
-        // Remove callback from map - matching React Native
+        // Remove callback from map
         cleanupCallback(callbackId)
     }
 
-    /** Send Dart request - matches React Native sendJSRequest exactly */
+    // Send Dart request
     private fun <P> sendDartRequest(name: String, params: P, callbackId: String) {
-        // Serialize params to JSON string using GsonUtils - matches React Native
+        // Serialize params to JSON string using GsonUtils
         val paramsJson =
                 try {
                     when (params) {
@@ -298,15 +298,15 @@ internal class BlazeAsyncBridgeModule(private val binaryMessenger: BinaryMesseng
     }
 
     /**
-     * Method called by Dart to resolve/reject a native call - matches React Native
+     * Method called by Dart to resolve/reject a native call
      * resolveJSResponse
      */
     private fun resolveDartResponse(response: Map<String, Any>) {
-        // Run on main thread to match React Native behavior
+        // Run on main thread
         mainHandler.post { handleDartResponse(response) }
     }
 
-    /** Handle Dart response - matching React Native handleJSResponse exactly */
+    // Handle Dart response
     private fun handleDartResponse(response: Map<String, Any>) {
         val callbackId = response["callbackId"] as? String
         if (callbackId == null) {

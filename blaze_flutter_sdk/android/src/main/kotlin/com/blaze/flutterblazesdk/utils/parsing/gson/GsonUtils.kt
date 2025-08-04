@@ -60,7 +60,7 @@ internal fun createCustomGson(): Gson {
 
 /**
  * Extension function to convert a Map to a object of type T using a custom Gson instance with
- * registered custom adapters - matches React Native ReadableMap.toObject<T>()
+ * registered custom adapters
  *
  * @return An instance of type T deserialized from the Map, or null if deserialization fails.
  */

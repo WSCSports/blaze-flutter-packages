@@ -5,7 +5,7 @@ import '../widgets/types/widget_layout_common.dart';
 part 'videos_player_style.freezed.dart';
 part 'videos_player_style.g.dart';
 
-/// Videos player style configuration - matches React Native BlazeVideosPlayerStyle exactly
+/// Videos player style configuration
 @freezed
 class BlazeVideosPlayerStyle with _$BlazeVideosPlayerStyle {
   const factory BlazeVideosPlayerStyle({

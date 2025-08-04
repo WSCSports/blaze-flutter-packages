@@ -1,7 +1,6 @@
 import BlazeSDK
 import Flutter
 import UIKit
-import blaze_flutter_sdk
 
 class BlazeFlutterSDKModule {
 
@@ -32,10 +31,10 @@ class BlazeFlutterSDKModule {
         return BlazeAsyncBridgeModule.getInstance()
     }
 
-    // Match React Native implementation - store appOverridesCTAHandling setting
+    // store appOverridesCTAHandling setting
     private var appOverridesCTAHandling: Bool = false
-    
-//    let flutterSDKHelper = BlazeFlutterSDKHelper()
+
+    let flutterSDKHelper = BlazeFlutterSDKHelper()
 
     static let shared = BlazeFlutterSDKModule()
 
@@ -50,7 +49,7 @@ class BlazeFlutterSDKModule {
     }
 
     private init() {
-//        BlazeExternalModulesBinder.shared.registerFlutterSDKHelper(flutterSDKHelper)
+        BlazeExternalModulesBinder.shared.registerFlutterSDKHelper(flutterSDKHelper)
     }
 
     private func handleMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -116,7 +115,7 @@ class BlazeFlutterSDKModule {
         let cachingLevelString = call.safeGetArg("cachingLevel", String.self)
         let geoLocation = call.safeGetArg("geoLocation", String.self)
 
-        // Match React Native implementation - read appOverridesCTAHandling from init params
+        // Read appOverridesCTAHandling from init params
         if let appOverridesCTAHandlingFromInit = call.safeGetArg(
             "appOverridesCTAHandling", Bool.self)
         {
@@ -523,8 +522,9 @@ class BlazeFlutterSDKModule {
     // Player entry point delegate implementation that communicates with Flutter - always active
     lazy var playerEntryPointDelegate: BlazePlayerEntryPointDelegate = .init(
         onDataLoadStarted: { [weak self] params in
-            self?.onDataLoadStarted(playerType: params.playerType,
-                                    sourceId: params.sourceId)
+            self?.onDataLoadStarted(
+                playerType: params.playerType,
+                sourceId: params.sourceId)
         },
 
         onDataLoadComplete: { [weak self] params in
@@ -581,17 +581,12 @@ class BlazeFlutterSDKModule {
     // ======================================
 
     private func onErrorThrown(_ error: BlazeSDK.BlazeError) {
-        let params: [String: String] = [
-            "domain": "\(error.domain)",
-            "reason": error.failureReason ?? "unknown_error",
-            "message": error.errorMessage,
-        ]
-
-        asyncBridge?.sendEvent("Blaze.onErrorThrown", params: params)
+        let flutterError = BlazeFlutterError.fromBlazeError(error)
+        asyncBridge?.sendEvent("Blaze.onErrorThrown", params: flutterError)
     }
 
     private func onGlobalEventTriggered(_ eventData: BlazeSDK.BlazeAnalytics) {
-        // Use the native BlazeSDK's comprehensive analytics JSON (matches React Native format)
+        // Use the native BlazeSDK's comprehensive analytics JSON
         guard let eventJsonString = eventData.asJsonString else {
             return
         }

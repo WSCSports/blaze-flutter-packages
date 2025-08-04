@@ -6,20 +6,6 @@ part of 'blaze_global_delegate_data_classes.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BlazeErrorImpl _$$BlazeErrorImplFromJson(Map<String, dynamic> json) =>
-    _$BlazeErrorImpl(
-      domain: json['domain'] as String,
-      reason: json['reason'] as String,
-      message: json['message'] as String,
-    );
-
-Map<String, dynamic> _$$BlazeErrorImplToJson(_$BlazeErrorImpl instance) =>
-    <String, dynamic>{
-      'domain': instance.domain,
-      'reason': instance.reason,
-      'message': instance.message,
-    };
-
 _$BlazeOnEventTriggeredParamsImpl _$$BlazeOnEventTriggeredParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$BlazeOnEventTriggeredParamsImpl(

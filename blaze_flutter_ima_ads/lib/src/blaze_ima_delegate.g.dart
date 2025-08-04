@@ -77,26 +77,26 @@ const _$BlazeIMAOnAdEventEventTypeEnumMap = {
   BlazeIMAOnAdEventEventType.adRequested: 'adRequested',
 };
 
-_$BlazeIMAOnAdEventParamsDataImpl _$$BlazeIMAOnAdEventParamsDataImplFromJson(
+_$_OnAdEventParamsImpl _$$_OnAdEventParamsImplFromJson(
         Map<String, dynamic> json) =>
-    _$BlazeIMAOnAdEventParamsDataImpl(
+    _$_OnAdEventParamsImpl(
       eventType: json['eventType'] as String,
     );
 
-Map<String, dynamic> _$$BlazeIMAOnAdEventParamsDataImplToJson(
-        _$BlazeIMAOnAdEventParamsDataImpl instance) =>
+Map<String, dynamic> _$$_OnAdEventParamsImplToJson(
+        _$_OnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
     };
 
-_$BlazeIMAOnAdErrorParamsImpl _$$BlazeIMAOnAdErrorParamsImplFromJson(
+_$_OnAdErrorParamsImpl _$$_OnAdErrorParamsImplFromJson(
         Map<String, dynamic> json) =>
-    _$BlazeIMAOnAdErrorParamsImpl(
+    _$_OnAdErrorParamsImpl(
       errorMessage: json['errorMessage'] as String,
     );
 
-Map<String, dynamic> _$$BlazeIMAOnAdErrorParamsImplToJson(
-        _$BlazeIMAOnAdErrorParamsImpl instance) =>
+Map<String, dynamic> _$$_OnAdErrorParamsImplToJson(
+        _$_OnAdErrorParamsImpl instance) =>
     <String, dynamic>{
       'errorMessage': instance.errorMessage,
     };

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import '../shared/errors/errors.dart';
 import '../types/shared_types.dart';
 import '../shared/blaze_logger.dart';
 
@@ -25,7 +26,7 @@ class BlazeOnDataLoadCompleteParams with _$BlazeOnDataLoadCompleteParams {
     required BlazePlayerType playerType,
     String? sourceId,
     required int itemsCount,
-    String? error,
+    BlazeError? error,
   }) = _BlazeOnDataLoadCompleteParams;
 
   factory BlazeOnDataLoadCompleteParams.fromJson(Map<String, dynamic> json) =>

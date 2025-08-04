@@ -4,7 +4,6 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -89,49 +88,6 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
     );
   }
 
-  /// Creates the appropriate Android platform view based on dynamic height requirements
-  PlatformViewController _createAndroidPlatformView(
-    PlatformViewCreationParams params,
-    Map<String, dynamic> creationParams,
-    TextDirection textDirection,
-  ) {
-    void onPlatformViewCreated(int id) {
-      params.onPlatformViewCreated(id);
-      _onPlatformViewCreated(id);
-    }
-
-    void onFocus() => params.onFocusChanged(true);
-
-// Right now we are testing the Android's implementation with the SurfaceView rather than the expensive because it it
-//much better integrated into the Flutter app. But if any issues are found consider changing it back.
-
-    // if (widget._isEmbeddedInScrollView) {
-    //   // Dynamic height widgets need expensive composition for height update communication
-    //   return PlatformViewsService.initExpensiveAndroidView(
-    //     id: params.id,
-    //     viewType: widget._viewType,
-    //     layoutDirection: textDirection,
-    //     creationParams: creationParams,
-    //     creationParamsCodec: const StandardMessageCodec(),
-    //     onFocus: onFocus,
-    //   )
-    //     ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
-    //     ..create();
-    // } else {
-    // Fixed height widgets can use hybrid composition for better animation performance
-    return PlatformViewsService.initSurfaceAndroidView(
-      id: params.id,
-      viewType: widget._viewType,
-      layoutDirection: textDirection,
-      creationParams: creationParams,
-      creationParamsCodec: const StandardMessageCodec(),
-      onFocus: onFocus,
-    )
-      ..addOnPlatformViewCreatedListener(onPlatformViewCreated)
-      ..create();
-    // }
-  }
-
   Future<dynamic> _handleMethodCall(MethodCall call) async {
     switch (call.method) {
       case 'onDataLoadStarted':
@@ -210,7 +166,6 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
   }
 
   /// Converts per-item style overrides map to JSON format for native consumption
-  /// Following React Native's exact pattern where keys are JSON-serialized mapping objects
   Map<String, dynamic> _convertPerItemStyleOverridesToJson(
     Map<BlazeWidgetItemCustomMapping, BlazeWidgetItemStyleOverrides>
         perItemStyleOverrides,
@@ -263,21 +218,13 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
 
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return PlatformViewLink(
+        return AndroidView(
           viewType: widget._viewType,
-          surfaceFactory: (context, controller) {
-            return AndroidViewSurface(
-              controller: controller as AndroidViewController,
-              gestureRecognizers: _createGestureRecognizers(),
-              hitTestBehavior: PlatformViewHitTestBehavior.opaque,
-            );
-          },
-          onCreatePlatformView: (params) {
-            // Use hybrid composition for better animations when dynamic height is not needed
-            // Use expensive composition only when dynamic height updates are required
-            return _createAndroidPlatformView(
-                params, creationParams, textDirection);
-          },
+          layoutDirection: textDirection,
+          creationParams: creationParams,
+          creationParamsCodec: const StandardMessageCodec(),
+          gestureRecognizers: _createGestureRecognizers(),
+          onPlatformViewCreated: _onPlatformViewCreated,
         );
       case TargetPlatform.iOS:
         return UiKitView(
@@ -295,15 +242,33 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
   }
 
   Set<Factory<OneSequenceGestureRecognizer>> _createGestureRecognizers() {
+    final result = <Factory<OneSequenceGestureRecognizer>>{
+      // All widgets take care of taps on the native side.
+      Factory<TapGestureRecognizer>(() => TapGestureRecognizer()),
+      Factory<LongPressGestureRecognizer>(() => LongPressGestureRecognizer()),
+    };
+
     if (widget._isVerticalScroll) {
-      return const <Factory<OneSequenceGestureRecognizer>>{};
+      if (widget._isEmbeddedInScrollView) {
+        // If the grid is embeded in a scroll than native side has no scroll and we allow Flutter to handle it alone.
+      } else {
+        // If the grid is not embeded in a scroll than we allow native side to handle the vertical scroll alone.
+        result.add(
+          Factory<VerticalDragGestureRecognizer>(
+            () => VerticalDragGestureRecognizer(),
+          ),
+        );
+      }
     } else {
-      return <Factory<OneSequenceGestureRecognizer>>{
+      // This is a row - we only allow native to take over horizontal scroll.
+      result.add(
         Factory<HorizontalDragGestureRecognizer>(
           () => HorizontalDragGestureRecognizer(),
         ),
-      };
+      );
     }
+
+    return result;
   }
 
   @override

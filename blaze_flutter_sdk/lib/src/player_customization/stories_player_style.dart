@@ -5,7 +5,7 @@ import '../widgets/types/widget_layout_common.dart';
 part 'stories_player_style.freezed.dart';
 part 'stories_player_style.g.dart';
 
-/// Stories player style configuration - matches React Native BlazeStoryPlayerStyle exactly
+/// Stories player style configuration
 @freezed
 class BlazeStoryPlayerStyle with _$BlazeStoryPlayerStyle {
   const factory BlazeStoryPlayerStyle({

@@ -8,7 +8,7 @@ import 'blaze_logger.dart';
 part 'blaze_async_bridge.freezed.dart';
 part 'blaze_async_bridge.g.dart';
 
-/// Handler for Dart method calls - matches React Native pattern
+/// Handler for Dart method calls
 typedef BlazeDartMethodHandler = Future<dynamic> Function(
     BlazeDartMethodHandlerArguments args);
 
@@ -25,7 +25,7 @@ class BlazeDartMethodHandlerArguments {
   });
 }
 
-/// Interface for AsyncBridge - matches React Native interface
+/// Interface for AsyncBridge
 class BlazeAsyncBridge {
   static final _BlazeAsyncBridgeInternal _sdk =
       _BlazeAsyncBridgeInternal._getInstance();
