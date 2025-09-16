@@ -69,8 +69,9 @@ interface BlazeAsyncBridge {
     }
 }
 
-/// Private empty parameters data class for methods with no parameters.
-private object EmptyParams
+/// Empty parameters data class for methods with no parameters.
+@PublishedApi
+internal object EmptyParams
 
 /**
  * Call a Dart method with parameters and return the result as type T.
