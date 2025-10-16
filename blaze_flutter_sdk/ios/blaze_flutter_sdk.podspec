@@ -40,8 +40,4 @@ A new Flutter project.
     "Sources/**/*.{h,c,cc,cpp,m,mm,swift}"
   ]
 
-  s.resource_bundles = {
-    'blaze-flutter-sdk-bundle' => ['Sources/**/*.{xib,storyboard,plist}']
-  }
-
 end

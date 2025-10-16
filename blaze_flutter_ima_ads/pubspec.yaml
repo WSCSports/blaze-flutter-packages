@@ -1,6 +1,6 @@
 name: blaze_flutter_ima_ads
 description: "Flutter plugin for accessing BlazeIMA features."
-version: 0.1.0
+version: 0.1.1
 publish_to: "none"
 homepage: https://github.com/WSCSports/blaze-flutter-packages
 
@@ -17,7 +17,7 @@ dependencies:
   blaze_flutter_sdk:
     git:
       url: https://github.com/WSCSports/blaze-flutter-packages.git
-      ref: 0.1.0 # Tag version
+      ref: 0.1.1 # Tag version
       path: blaze_flutter_sdk # Path to the specific package within the repo
 
 dev_dependencies:
