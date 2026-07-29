@@ -67,6 +67,10 @@ _$BlazeWidgetLayoutImpl _$$BlazeWidgetLayoutImplFromJson(
           ? null
           : BlazeWidgetItemStyle.fromJson(
               json['widgetItemStyle'] as Map<String, dynamic>),
+      shimmering: json['shimmering'] == null
+          ? null
+          : BlazeWidgetShimmeringStyle.fromJson(
+              json['shimmering'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeWidgetLayoutImplToJson(
@@ -79,4 +83,5 @@ Map<String, dynamic> _$$BlazeWidgetLayoutImplToJson(
       'columns': instance.columns,
       'maxDisplayItemsCount': instance.maxDisplayItemsCount,
       'widgetItemStyle': instance.widgetItemStyle?.toJson(),
+      'shimmering': instance.shimmering?.toJson(),
     };

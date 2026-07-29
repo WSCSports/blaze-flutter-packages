@@ -124,6 +124,46 @@ class BlazeBasePlayerDelegateHandler {
     }
   }
 
+  static void handleTriggerCustomActionButton(
+    Map<String, dynamic> args,
+    void Function(BlazeOnTriggerCustomActionButtonParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnTriggerCustomActionButtonParams.fromJson(
+        args,
+      );
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onTriggerCustomActionButton',
+      );
+    }
+  }
+
+  static void handleReadStatusChanged(
+    Map<String, dynamic> args,
+    void Function(BlazeOnReadStatusChangedParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnReadStatusChangedParams.fromJson(
+        args,
+      );
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onReadStatusChanged',
+      );
+    }
+  }
+
   static void handlePlayerEventTriggered(
     Map<String, dynamic> args,
     void Function(BlazeOnPlayerEventTriggeredParams)? callback,

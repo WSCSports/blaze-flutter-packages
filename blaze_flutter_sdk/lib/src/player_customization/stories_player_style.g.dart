@@ -158,6 +158,10 @@ _$BlazeStoryPlayerButtonsStyleImpl _$$BlazeStoryPlayerButtonsStyleImplFromJson(
           ? null
           : BlazePlayerButtonStyle.fromJson(
               json['share'] as Map<String, dynamic>),
+      customActionButtons: (json['customActionButtons'] as List<dynamic>?)
+          ?.map((e) =>
+              BlazeCustomActionButton.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$BlazeStoryPlayerButtonsStyleImplToJson(
@@ -166,6 +170,8 @@ Map<String, dynamic> _$$BlazeStoryPlayerButtonsStyleImplToJson(
       'mute': instance.mute?.toJson(),
       'exit': instance.exit?.toJson(),
       'share': instance.share?.toJson(),
+      'customActionButtons':
+          instance.customActionButtons?.map((e) => e.toJson()).toList(),
     };
 
 _$BlazeStoryPlayerCtaStyleImpl _$$BlazeStoryPlayerCtaStyleImplFromJson(
@@ -176,6 +182,7 @@ _$BlazeStoryPlayerCtaStyleImpl _$$BlazeStoryPlayerCtaStyleImplFromJson(
       font: json['font'] == null
           ? null
           : BlazeFont.fromJson(json['font'] as Map<String, dynamic>),
+      isVisible: json['isVisible'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazeStoryPlayerCtaStyleImplToJson(
@@ -184,6 +191,7 @@ Map<String, dynamic> _$$BlazeStoryPlayerCtaStyleImplToJson(
       'cornerRadius': instance.cornerRadius,
       'textSize': instance.textSize,
       'font': instance.font?.toJson(),
+      'isVisible': instance.isVisible,
     };
 
 _$BlazeStoryPlayerTitleTextStyleImpl
@@ -195,6 +203,10 @@ _$BlazeStoryPlayerTitleTextStyleImpl
           textSize: (json['textSize'] as num?)?.toDouble(),
           textColor: json['textColor'] as String?,
           isVisible: json['isVisible'] as bool?,
+          image: json['image'] == null
+              ? null
+              : BlazeStoryPlayerTitleImageStyle.fromJson(
+                  json['image'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeStoryPlayerTitleTextStyleImplToJson(
@@ -204,6 +216,90 @@ Map<String, dynamic> _$$BlazeStoryPlayerTitleTextStyleImplToJson(
       'textSize': instance.textSize,
       'textColor': instance.textColor,
       'isVisible': instance.isVisible,
+      'image': instance.image?.toJson(),
+    };
+
+_$BlazeStoryPlayerTitleImageStyleImpl
+    _$$BlazeStoryPlayerTitleImageStyleImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerTitleImageStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          size: (json['size'] as num?)?.toDouble(),
+          source: json['source'] == null
+              ? null
+              : BlazeStoryPlayerTitleImageSource.fromJson(
+                  json['source'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerTitleImageStyleImplToJson(
+        _$BlazeStoryPlayerTitleImageStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'size': instance.size,
+      'source': instance.source?.toJson(),
+    };
+
+_$BlazeStoryPlayerTitleImageSourceStaticImpl
+    _$$BlazeStoryPlayerTitleImageSourceStaticImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerTitleImageSourceStaticImpl(
+          staticSource: BlazeStoryPlayerTitleImageStaticSource.fromJson(
+              json['staticSource'] as Map<String, dynamic>),
+          $type: json['type'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerTitleImageSourceStaticImplToJson(
+        _$BlazeStoryPlayerTitleImageSourceStaticImpl instance) =>
+    <String, dynamic>{
+      'staticSource': instance.staticSource.toJson(),
+      'type': instance.$type,
+    };
+
+_$BlazeStoryPlayerTitleImageSourceDynamicImpl
+    _$$BlazeStoryPlayerTitleImageSourceDynamicImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerTitleImageSourceDynamicImpl(
+          fallback: json['fallback'] == null
+              ? null
+              : BlazeStoryPlayerTitleImageStaticSource.fromJson(
+                  json['fallback'] as Map<String, dynamic>),
+          $type: json['type'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerTitleImageSourceDynamicImplToJson(
+        _$BlazeStoryPlayerTitleImageSourceDynamicImpl instance) =>
+    <String, dynamic>{
+      'fallback': instance.fallback?.toJson(),
+      'type': instance.$type,
+    };
+
+_$BlazeStoryPlayerTitleImageStaticSourceImageImpl
+    _$$BlazeStoryPlayerTitleImageStaticSourceImageImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerTitleImageStaticSourceImageImpl(
+          image: BlazeImage.fromJson(json['image'] as Map<String, dynamic>),
+          $type: json['type'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerTitleImageStaticSourceImageImplToJson(
+        _$BlazeStoryPlayerTitleImageStaticSourceImageImpl instance) =>
+    <String, dynamic>{
+      'image': instance.image.toJson(),
+      'type': instance.$type,
+    };
+
+_$BlazeStoryPlayerTitleImageStaticSourceUrlImpl
+    _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl(
+          url: json['url'] as String,
+          $type: json['type'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplToJson(
+        _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl instance) =>
+    <String, dynamic>{
+      'url': instance.url,
+      'type': instance.$type,
     };
 
 _$BlazeStoryPlayerLastUpdateTextStyleImpl

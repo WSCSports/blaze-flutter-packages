@@ -1580,6 +1580,656 @@ abstract class _BlazeOnTriggerPlayerBodyTextLinkParams
       get copyWith => throw _privateConstructorUsedError;
 }
 
+BlazeOnTriggerCustomActionButtonParams
+    _$BlazeOnTriggerCustomActionButtonParamsFromJson(
+        Map<String, dynamic> json) {
+  return _BlazeOnTriggerCustomActionButtonParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeOnTriggerCustomActionButtonParams {
+  BlazePlayerType get playerType => throw _privateConstructorUsedError;
+  String? get sourceId => throw _privateConstructorUsedError;
+  String get buttonId => throw _privateConstructorUsedError;
+  String get buttonName => throw _privateConstructorUsedError;
+  Map<String, dynamic>? get appMetadata => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerCustomActionButtonParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnTriggerCustomActionButtonParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerCustomActionButtonParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeOnTriggerCustomActionButtonParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeOnTriggerCustomActionButtonParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeOnTriggerCustomActionButtonParamsCopyWith<
+          BlazeOnTriggerCustomActionButtonParams>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeOnTriggerCustomActionButtonParamsCopyWith<$Res> {
+  factory $BlazeOnTriggerCustomActionButtonParamsCopyWith(
+          BlazeOnTriggerCustomActionButtonParams value,
+          $Res Function(BlazeOnTriggerCustomActionButtonParams) then) =
+      _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl<$Res,
+          BlazeOnTriggerCustomActionButtonParams>;
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String buttonId,
+      String buttonName,
+      Map<String, dynamic>? appMetadata});
+}
+
+/// @nodoc
+class _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl<$Res,
+        $Val extends BlazeOnTriggerCustomActionButtonParams>
+    implements $BlazeOnTriggerCustomActionButtonParamsCopyWith<$Res> {
+  _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeOnTriggerCustomActionButtonParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? buttonId = null,
+    Object? buttonName = null,
+    Object? appMetadata = freezed,
+  }) {
+    return _then(_value.copyWith(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      buttonId: null == buttonId
+          ? _value.buttonId
+          : buttonId // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
+      appMetadata: freezed == appMetadata
+          ? _value.appMetadata
+          : appMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<$Res>
+    implements $BlazeOnTriggerCustomActionButtonParamsCopyWith<$Res> {
+  factory _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith(
+          _$BlazeOnTriggerCustomActionButtonParamsImpl value,
+          $Res Function(_$BlazeOnTriggerCustomActionButtonParamsImpl) then) =
+      __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String buttonId,
+      String buttonName,
+      Map<String, dynamic>? appMetadata});
+}
+
+/// @nodoc
+class __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl<$Res>
+    extends _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl<$Res,
+        _$BlazeOnTriggerCustomActionButtonParamsImpl>
+    implements _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<$Res> {
+  __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl(
+      _$BlazeOnTriggerCustomActionButtonParamsImpl _value,
+      $Res Function(_$BlazeOnTriggerCustomActionButtonParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeOnTriggerCustomActionButtonParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? buttonId = null,
+    Object? buttonName = null,
+    Object? appMetadata = freezed,
+  }) {
+    return _then(_$BlazeOnTriggerCustomActionButtonParamsImpl(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      buttonId: null == buttonId
+          ? _value.buttonId
+          : buttonId // ignore: cast_nullable_to_non_nullable
+              as String,
+      buttonName: null == buttonName
+          ? _value.buttonName
+          : buttonName // ignore: cast_nullable_to_non_nullable
+              as String,
+      appMetadata: freezed == appMetadata
+          ? _value._appMetadata
+          : appMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeOnTriggerCustomActionButtonParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeOnTriggerCustomActionButtonParams {
+  const _$BlazeOnTriggerCustomActionButtonParamsImpl(
+      {required this.playerType,
+      this.sourceId,
+      required this.buttonId,
+      required this.buttonName,
+      final Map<String, dynamic>? appMetadata})
+      : _appMetadata = appMetadata;
+
+  factory _$BlazeOnTriggerCustomActionButtonParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeOnTriggerCustomActionButtonParamsImplFromJson(json);
+
+  @override
+  final BlazePlayerType playerType;
+  @override
+  final String? sourceId;
+  @override
+  final String buttonId;
+  @override
+  final String buttonName;
+  final Map<String, dynamic>? _appMetadata;
+  @override
+  Map<String, dynamic>? get appMetadata {
+    final value = _appMetadata;
+    if (value == null) return null;
+    if (_appMetadata is EqualUnmodifiableMapView) return _appMetadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeOnTriggerCustomActionButtonParams(playerType: $playerType, sourceId: $sourceId, buttonId: $buttonId, buttonName: $buttonName, appMetadata: $appMetadata)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'BlazeOnTriggerCustomActionButtonParams'))
+      ..add(DiagnosticsProperty('playerType', playerType))
+      ..add(DiagnosticsProperty('sourceId', sourceId))
+      ..add(DiagnosticsProperty('buttonId', buttonId))
+      ..add(DiagnosticsProperty('buttonName', buttonName))
+      ..add(DiagnosticsProperty('appMetadata', appMetadata));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeOnTriggerCustomActionButtonParamsImpl &&
+            (identical(other.playerType, playerType) ||
+                other.playerType == playerType) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.buttonId, buttonId) ||
+                other.buttonId == buttonId) &&
+            (identical(other.buttonName, buttonName) ||
+                other.buttonName == buttonName) &&
+            const DeepCollectionEquality()
+                .equals(other._appMetadata, _appMetadata));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, playerType, sourceId, buttonId,
+      buttonName, const DeepCollectionEquality().hash(_appMetadata));
+
+  /// Create a copy of BlazeOnTriggerCustomActionButtonParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<
+          _$BlazeOnTriggerCustomActionButtonParamsImpl>
+      get copyWith =>
+          __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl<
+              _$BlazeOnTriggerCustomActionButtonParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerCustomActionButtonParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnTriggerCustomActionButtonParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerCustomActionButtonParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeOnTriggerCustomActionButtonParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeOnTriggerCustomActionButtonParams
+    implements BlazeOnTriggerCustomActionButtonParams {
+  const factory _BlazeOnTriggerCustomActionButtonParams(
+          {required final BlazePlayerType playerType,
+          final String? sourceId,
+          required final String buttonId,
+          required final String buttonName,
+          final Map<String, dynamic>? appMetadata}) =
+      _$BlazeOnTriggerCustomActionButtonParamsImpl;
+
+  factory _BlazeOnTriggerCustomActionButtonParams.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeOnTriggerCustomActionButtonParamsImpl.fromJson;
+
+  @override
+  BlazePlayerType get playerType;
+  @override
+  String? get sourceId;
+  @override
+  String get buttonId;
+  @override
+  String get buttonName;
+  @override
+  Map<String, dynamic>? get appMetadata;
+
+  /// Create a copy of BlazeOnTriggerCustomActionButtonParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<
+          _$BlazeOnTriggerCustomActionButtonParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeOnReadStatusChangedParams _$BlazeOnReadStatusChangedParamsFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeOnReadStatusChangedParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeOnReadStatusChangedParams {
+  BlazePlayerType get playerType => throw _privateConstructorUsedError;
+  String? get sourceId => throw _privateConstructorUsedError;
+  String get dataSourceStringRepresentation =>
+      throw _privateConstructorUsedError;
+  bool get isEntireContentRead => throw _privateConstructorUsedError;
+  Map<String, bool> get itemReadStatus => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnReadStatusChangedParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnReadStatusChangedParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnReadStatusChangedParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeOnReadStatusChangedParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeOnReadStatusChangedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeOnReadStatusChangedParamsCopyWith<BlazeOnReadStatusChangedParams>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeOnReadStatusChangedParamsCopyWith<$Res> {
+  factory $BlazeOnReadStatusChangedParamsCopyWith(
+          BlazeOnReadStatusChangedParams value,
+          $Res Function(BlazeOnReadStatusChangedParams) then) =
+      _$BlazeOnReadStatusChangedParamsCopyWithImpl<$Res,
+          BlazeOnReadStatusChangedParams>;
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String dataSourceStringRepresentation,
+      bool isEntireContentRead,
+      Map<String, bool> itemReadStatus});
+}
+
+/// @nodoc
+class _$BlazeOnReadStatusChangedParamsCopyWithImpl<$Res,
+        $Val extends BlazeOnReadStatusChangedParams>
+    implements $BlazeOnReadStatusChangedParamsCopyWith<$Res> {
+  _$BlazeOnReadStatusChangedParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeOnReadStatusChangedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? dataSourceStringRepresentation = null,
+    Object? isEntireContentRead = null,
+    Object? itemReadStatus = null,
+  }) {
+    return _then(_value.copyWith(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dataSourceStringRepresentation: null == dataSourceStringRepresentation
+          ? _value.dataSourceStringRepresentation
+          : dataSourceStringRepresentation // ignore: cast_nullable_to_non_nullable
+              as String,
+      isEntireContentRead: null == isEntireContentRead
+          ? _value.isEntireContentRead
+          : isEntireContentRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      itemReadStatus: null == itemReadStatus
+          ? _value.itemReadStatus
+          : itemReadStatus // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeOnReadStatusChangedParamsImplCopyWith<$Res>
+    implements $BlazeOnReadStatusChangedParamsCopyWith<$Res> {
+  factory _$$BlazeOnReadStatusChangedParamsImplCopyWith(
+          _$BlazeOnReadStatusChangedParamsImpl value,
+          $Res Function(_$BlazeOnReadStatusChangedParamsImpl) then) =
+      __$$BlazeOnReadStatusChangedParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String dataSourceStringRepresentation,
+      bool isEntireContentRead,
+      Map<String, bool> itemReadStatus});
+}
+
+/// @nodoc
+class __$$BlazeOnReadStatusChangedParamsImplCopyWithImpl<$Res>
+    extends _$BlazeOnReadStatusChangedParamsCopyWithImpl<$Res,
+        _$BlazeOnReadStatusChangedParamsImpl>
+    implements _$$BlazeOnReadStatusChangedParamsImplCopyWith<$Res> {
+  __$$BlazeOnReadStatusChangedParamsImplCopyWithImpl(
+      _$BlazeOnReadStatusChangedParamsImpl _value,
+      $Res Function(_$BlazeOnReadStatusChangedParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeOnReadStatusChangedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? dataSourceStringRepresentation = null,
+    Object? isEntireContentRead = null,
+    Object? itemReadStatus = null,
+  }) {
+    return _then(_$BlazeOnReadStatusChangedParamsImpl(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      dataSourceStringRepresentation: null == dataSourceStringRepresentation
+          ? _value.dataSourceStringRepresentation
+          : dataSourceStringRepresentation // ignore: cast_nullable_to_non_nullable
+              as String,
+      isEntireContentRead: null == isEntireContentRead
+          ? _value.isEntireContentRead
+          : isEntireContentRead // ignore: cast_nullable_to_non_nullable
+              as bool,
+      itemReadStatus: null == itemReadStatus
+          ? _value._itemReadStatus
+          : itemReadStatus // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeOnReadStatusChangedParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeOnReadStatusChangedParams {
+  const _$BlazeOnReadStatusChangedParamsImpl(
+      {required this.playerType,
+      this.sourceId,
+      required this.dataSourceStringRepresentation,
+      required this.isEntireContentRead,
+      required final Map<String, bool> itemReadStatus})
+      : _itemReadStatus = itemReadStatus;
+
+  factory _$BlazeOnReadStatusChangedParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeOnReadStatusChangedParamsImplFromJson(json);
+
+  @override
+  final BlazePlayerType playerType;
+  @override
+  final String? sourceId;
+  @override
+  final String dataSourceStringRepresentation;
+  @override
+  final bool isEntireContentRead;
+  final Map<String, bool> _itemReadStatus;
+  @override
+  Map<String, bool> get itemReadStatus {
+    if (_itemReadStatus is EqualUnmodifiableMapView) return _itemReadStatus;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_itemReadStatus);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeOnReadStatusChangedParams(playerType: $playerType, sourceId: $sourceId, dataSourceStringRepresentation: $dataSourceStringRepresentation, isEntireContentRead: $isEntireContentRead, itemReadStatus: $itemReadStatus)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeOnReadStatusChangedParams'))
+      ..add(DiagnosticsProperty('playerType', playerType))
+      ..add(DiagnosticsProperty('sourceId', sourceId))
+      ..add(DiagnosticsProperty(
+          'dataSourceStringRepresentation', dataSourceStringRepresentation))
+      ..add(DiagnosticsProperty('isEntireContentRead', isEntireContentRead))
+      ..add(DiagnosticsProperty('itemReadStatus', itemReadStatus));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeOnReadStatusChangedParamsImpl &&
+            (identical(other.playerType, playerType) ||
+                other.playerType == playerType) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.dataSourceStringRepresentation,
+                    dataSourceStringRepresentation) ||
+                other.dataSourceStringRepresentation ==
+                    dataSourceStringRepresentation) &&
+            (identical(other.isEntireContentRead, isEntireContentRead) ||
+                other.isEntireContentRead == isEntireContentRead) &&
+            const DeepCollectionEquality()
+                .equals(other._itemReadStatus, _itemReadStatus));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      playerType,
+      sourceId,
+      dataSourceStringRepresentation,
+      isEntireContentRead,
+      const DeepCollectionEquality().hash(_itemReadStatus));
+
+  /// Create a copy of BlazeOnReadStatusChangedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeOnReadStatusChangedParamsImplCopyWith<
+          _$BlazeOnReadStatusChangedParamsImpl>
+      get copyWith => __$$BlazeOnReadStatusChangedParamsImplCopyWithImpl<
+          _$BlazeOnReadStatusChangedParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnReadStatusChangedParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnReadStatusChangedParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnReadStatusChangedParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeOnReadStatusChangedParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeOnReadStatusChangedParams
+    implements BlazeOnReadStatusChangedParams {
+  const factory _BlazeOnReadStatusChangedParams(
+          {required final BlazePlayerType playerType,
+          final String? sourceId,
+          required final String dataSourceStringRepresentation,
+          required final bool isEntireContentRead,
+          required final Map<String, bool> itemReadStatus}) =
+      _$BlazeOnReadStatusChangedParamsImpl;
+
+  factory _BlazeOnReadStatusChangedParams.fromJson(Map<String, dynamic> json) =
+      _$BlazeOnReadStatusChangedParamsImpl.fromJson;
+
+  @override
+  BlazePlayerType get playerType;
+  @override
+  String? get sourceId;
+  @override
+  String get dataSourceStringRepresentation;
+  @override
+  bool get isEntireContentRead;
+  @override
+  Map<String, bool> get itemReadStatus;
+
+  /// Create a copy of BlazeOnReadStatusChangedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeOnReadStatusChangedParamsImplCopyWith<
+          _$BlazeOnReadStatusChangedParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 BlazeOnPlayerEventTriggeredParams _$BlazeOnPlayerEventTriggeredParamsFromJson(
     Map<String, dynamic> json) {
   return _BlazeOnPlayerEventTriggeredParams.fromJson(json);

@@ -51,6 +51,10 @@ _$BlazeMomentsPlayerStyleImpl _$$BlazeMomentsPlayerStyleImplFromJson(
           json['bottomComponentsAlignment']),
       playerDisplayMode: $enumDecodeNullable(
           _$BlazePlayerDisplayModeEnumMap, json['playerDisplayMode']),
+      followEntity: json['followEntity'] == null
+          ? null
+          : BlazeMomentsPlayerFollowEntityStyle.fromJson(
+              json['followEntity'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
@@ -71,6 +75,7 @@ Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
               instance.bottomComponentsAlignment],
       'playerDisplayMode':
           _$BlazePlayerDisplayModeEnumMap[instance.playerDisplayMode],
+      'followEntity': instance.followEntity?.toJson(),
     };
 
 const _$BlazeMomentsPlayerBottomComponentsAlignmentEnumMap = {
@@ -173,6 +178,22 @@ _$BlazeMomentsPlayerButtonsStyleImpl
               ? null
               : BlazePlayerButtonStyle.fromJson(
                   json['play'] as Map<String, dynamic>),
+          seekForward: json['seekForward'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['seekForward'] as Map<String, dynamic>),
+          seekBackward: json['seekBackward'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['seekBackward'] as Map<String, dynamic>),
+          search: json['search'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['search'] as Map<String, dynamic>),
+          customActionButtons: (json['customActionButtons'] as List<dynamic>?)
+              ?.map((e) =>
+                  BlazeCustomActionButton.fromJson(e as Map<String, dynamic>))
+              .toList(),
         );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerButtonsStyleImplToJson(
@@ -183,6 +204,11 @@ Map<String, dynamic> _$$BlazeMomentsPlayerButtonsStyleImplToJson(
       'share': instance.share?.toJson(),
       'like': instance.like?.toJson(),
       'play': instance.play?.toJson(),
+      'seekForward': instance.seekForward?.toJson(),
+      'seekBackward': instance.seekBackward?.toJson(),
+      'search': instance.search?.toJson(),
+      'customActionButtons':
+          instance.customActionButtons?.map((e) => e.toJson()).toList(),
     };
 
 _$BlazeMomentsPlayerChipsStyleImpl _$$BlazeMomentsPlayerChipsStyleImplFromJson(
@@ -241,6 +267,7 @@ _$BlazeMomentsPlayerCtaStyleImpl _$$BlazeMomentsPlayerCtaStyleImplFromJson(
           ? null
           : BlazeMomentsPlayerCtaIconStyle.fromJson(
               json['icon'] as Map<String, dynamic>),
+      isVisible: json['isVisible'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerCtaStyleImplToJson(
@@ -256,6 +283,7 @@ Map<String, dynamic> _$$BlazeMomentsPlayerCtaStyleImplToJson(
       'horizontalAlignment': _$BlazeMomentsPlayerCTAHorizontalAlignmentEnumMap[
           instance.horizontalAlignment],
       'icon': instance.icon?.toJson(),
+      'isVisible': instance.isVisible,
     };
 
 const _$BlazeMomentsPlayerCTAPositioningEnumMap = {
@@ -438,3 +466,116 @@ Map<String, dynamic> _$$BlazeMomentsPlayerSeekBarStyleImplToJson(
       'horizontalSpacing': instance.horizontalSpacing,
       'bottomSpacing': instance.bottomSpacing,
     };
+
+_$BlazeMomentsPlayerFollowEntityStyleImpl
+    _$$BlazeMomentsPlayerFollowEntityStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeMomentsPlayerFollowEntityStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          followState: json['followState'] == null
+              ? null
+              : BlazeMomentsPlayerFollowEntityStateStyle.fromJson(
+                  json['followState'] as Map<String, dynamic>),
+          unfollowState: json['unfollowState'] == null
+              ? null
+              : BlazeMomentsPlayerFollowEntityStateStyle.fromJson(
+                  json['unfollowState'] as Map<String, dynamic>),
+          entityType: json['entityType'] == null
+              ? null
+              : BlazeFollowEntityType.fromJson(
+                  json['entityType'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityStyleImplToJson(
+        _$BlazeMomentsPlayerFollowEntityStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'followState': instance.followState?.toJson(),
+      'unfollowState': instance.unfollowState?.toJson(),
+      'entityType': instance.entityType?.toJson(),
+    };
+
+_$BlazeMomentsPlayerFollowEntityStateStyleImpl
+    _$$BlazeMomentsPlayerFollowEntityStateStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeMomentsPlayerFollowEntityStateStyleImpl(
+          avatar: json['avatar'] == null
+              ? null
+              : BlazeMomentsPlayerFollowEntityAvatarStyle.fromJson(
+                  json['avatar'] as Map<String, dynamic>),
+          chip: json['chip'] == null
+              ? null
+              : BlazeMomentsPlayerFollowEntityChipStyle.fromJson(
+                  json['chip'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityStateStyleImplToJson(
+        _$BlazeMomentsPlayerFollowEntityStateStyleImpl instance) =>
+    <String, dynamic>{
+      'avatar': instance.avatar?.toJson(),
+      'chip': instance.chip?.toJson(),
+    };
+
+_$BlazeMomentsPlayerFollowEntityAvatarStyleImpl
+    _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl(
+          borderWidth: (json['borderWidth'] as num?)?.toDouble(),
+          borderColor: json['borderColor'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplToJson(
+        _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl instance) =>
+    <String, dynamic>{
+      'borderWidth': instance.borderWidth,
+      'borderColor': instance.borderColor,
+    };
+
+_$BlazeMomentsPlayerFollowEntityChipStyleImpl
+    _$$BlazeMomentsPlayerFollowEntityChipStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeMomentsPlayerFollowEntityChipStyleImpl(
+          backgroundColor: json['backgroundColor'] as String?,
+          iconColor: json['iconColor'] as String?,
+          contentSource: $enumDecodeNullable(
+              _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap,
+              json['contentSource']),
+        );
+
+Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityChipStyleImplToJson(
+        _$BlazeMomentsPlayerFollowEntityChipStyleImpl instance) =>
+    <String, dynamic>{
+      'backgroundColor': instance.backgroundColor,
+      'iconColor': instance.iconColor,
+      'contentSource': _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap[
+          instance.contentSource],
+    };
+
+const _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap = {
+  BlazeMomentsPlayerFollowEntityChipContentSource.icon: 'Icon',
+  BlazeMomentsPlayerFollowEntityChipContentSource.text: 'Text',
+};
+
+_$BlazeFollowEntityTypeImpl _$$BlazeFollowEntityTypeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeFollowEntityTypeImpl(
+      type: $enumDecode(_$BlazeFollowEntityTypeValueEnumMap, json['type']),
+      fallbackType: json['fallbackType'] == null
+          ? null
+          : BlazeFollowEntityType.fromJson(
+              json['fallbackType'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$BlazeFollowEntityTypeImplToJson(
+        _$BlazeFollowEntityTypeImpl instance) =>
+    <String, dynamic>{
+      'type': _$BlazeFollowEntityTypeValueEnumMap[instance.type]!,
+      'fallbackType': instance.fallbackType?.toJson(),
+    };
+
+const _$BlazeFollowEntityTypeValueEnumMap = {
+  BlazeFollowEntityTypeValue.firstAvailable: 'FirstAvailable',
+  BlazeFollowEntityTypeValue.player: 'Player',
+  BlazeFollowEntityTypeValue.team: 'Team',
+  BlazeFollowEntityTypeValue.property: 'Property',
+};

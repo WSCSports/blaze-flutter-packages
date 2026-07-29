@@ -58,3 +58,17 @@ data class BlazeReactSeekBarStyle(
     val thumbSize: Int?,
     val isThumbVisible: Boolean?
 )
+
+@Keep
+data class BlazeReactCustomActionButtonParams(
+    val id: String?,
+    val name: String?,
+    val appMetadata: Map<String, Any>?,
+    val visibilityCondition: Map<String, Any?>?
+)
+
+@Keep
+data class BlazeReactCustomActionButton(
+    val customParams: BlazeReactCustomActionButtonParams?,
+    val style: BlazeReactPlayerButtonStyle?
+)

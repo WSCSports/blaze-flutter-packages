@@ -40,6 +40,12 @@ abstract class BlazeBasePlayerDelegate {
   final void Function(BlazeOnPlayerEventTriggeredParams params)?
       onPlayerEventTriggered;
 
+  /// Called when a custom action button is triggered in the player.
+  ///
+  /// [params] The trigger custom action button parameters.
+  final void Function(BlazeOnTriggerCustomActionButtonParams params)?
+      onTriggerCustomActionButton;
+
   /// Constructor with shared function parameters - matches iOS BlazePlayerSourceDelegate pattern
   const BlazeBasePlayerDelegate({
     this.onDataLoadStarted,
@@ -49,5 +55,6 @@ abstract class BlazeBasePlayerDelegate {
     this.onTriggerCTA,
     this.onTriggerPlayerBodyTextLink,
     this.onPlayerEventTriggered,
+    this.onTriggerCustomActionButton,
   });
 }

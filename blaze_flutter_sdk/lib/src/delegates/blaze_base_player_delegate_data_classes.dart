@@ -86,6 +86,38 @@ class BlazeOnTriggerPlayerBodyTextLinkParams
       _$BlazeOnTriggerPlayerBodyTextLinkParamsFromJson(json);
 }
 
+/// Shared trigger custom action button parameters - used by both Widget and EntryPoint delegates
+@freezed
+class BlazeOnTriggerCustomActionButtonParams
+    with _$BlazeOnTriggerCustomActionButtonParams {
+  const factory BlazeOnTriggerCustomActionButtonParams({
+    required BlazePlayerType playerType,
+    String? sourceId,
+    required String buttonId,
+    required String buttonName,
+    Map<String, dynamic>? appMetadata,
+  }) = _BlazeOnTriggerCustomActionButtonParams;
+
+  factory BlazeOnTriggerCustomActionButtonParams.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeOnTriggerCustomActionButtonParamsFromJson(json);
+}
+
+/// Read status changed parameters - used by the EntryPoint delegate only.
+@freezed
+class BlazeOnReadStatusChangedParams with _$BlazeOnReadStatusChangedParams {
+  const factory BlazeOnReadStatusChangedParams({
+    required BlazePlayerType playerType,
+    String? sourceId,
+    required String dataSourceStringRepresentation,
+    required bool isEntireContentRead,
+    required Map<String, bool> itemReadStatus,
+  }) = _BlazeOnReadStatusChangedParams;
+
+  factory BlazeOnReadStatusChangedParams.fromJson(Map<String, dynamic> json) =>
+      _$BlazeOnReadStatusChangedParamsFromJson(json);
+}
+
 /// Shared player event triggered parameters - used by both Widget and EntryPoint delegates
 @freezed
 class BlazeOnPlayerEventTriggeredParams

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../shared/blaze_async_bridge.dart';
 import '../shared/blaze_analytics_event.dart';
 import '../shared/blaze_logger.dart';
@@ -17,10 +19,23 @@ class BlazeGlobalDelegate {
   /// [params] The error data.
   final void Function(BlazeOnErrorThrownParams params)? onErrorThrown;
 
+  /// Called before playing HLS or MP4 content to allow playback modification
+  /// (e.g., URL tokenization).
+  ///
+  /// If not implemented, the original content will be used without
+  /// modification. If the handler throws, the SDK falls back to the original
+  /// URL.
+  ///
+  /// [request] Contains the original URL.
+  /// Returns the modified playback response, synchronously or asynchronously.
+  final FutureOr<BlazePlaybackModificationResponse> Function(
+      BlazePlaybackModificationRequest request)? playbackModificationHandler;
+
   /// Constructor with optional function parameters
   const BlazeGlobalDelegate({
     this.onEventTriggered,
     this.onErrorThrown,
+    this.playbackModificationHandler,
   });
 }
 
@@ -30,6 +45,41 @@ class BlazeGlobalDelegateHelper {
     // Register event listeners
     _onEventTriggered(delegate?.onEventTriggered);
     _onErrorThrown(delegate?.onErrorThrown);
+    _playbackModificationHandler(delegate?.playbackModificationHandler);
+  }
+
+  static void _playbackModificationHandler(
+    FutureOr<BlazePlaybackModificationResponse> Function(
+            BlazePlaybackModificationRequest request)?
+        callback,
+  ) {
+    const methodName = 'Blaze.GlobalDelegate.playbackModificationHandler';
+    if (callback != null) {
+      // Request/response callback (not fire-and-forget): the native side awaits
+      // the returned value through the async bridge before starting playback.
+      BlazeAsyncBridge.registerDartMethod(
+        methodName,
+        (args) async {
+          final request = BlazePlaybackModificationRequest.fromJson(args.params);
+          try {
+            final response = await callback(request);
+            return response.toJson();
+          } catch (e, stackTrace) {
+            BlazeLogger.blazeDebugPrintException(
+              e,
+              stackTrace,
+              context: 'playbackModificationHandler',
+            );
+            // Fall back to the original URL so playback still proceeds.
+            return BlazePlaybackModificationResponse(
+              modifiedURL: request.originalURL,
+            ).toJson();
+          }
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartMethod(methodName);
+    }
   }
 
   static void _onEventTriggered(

@@ -27,6 +27,14 @@ fun BlazeVideosPlayerStyle.mergedWith(
     merged.cta = this.cta.mergedWith(customization.cta, context)
     safeParseColor(customization.backgroundColor)?.let { merged.backgroundColor = it }
     merged.seekBar = this.seekBar.mergedWith(customization.seekBar, context)
+
+    // BlazeVideosPlayerCastButtonStyle doesn't implement IPlayerItemButtonStyle so we merge it manually
+    customization.buttons?.casting?.let { castCustom ->
+        castCustom.isVisible?.let { merged.cast.isVisible = it }
+        castCustom.width?.let { merged.cast.width = it.blazeDp }
+        castCustom.height?.let { merged.cast.height = it.blazeDp }
+    }
+
     return merged
 }
 
@@ -62,6 +70,11 @@ fun BlazeVideosPlayerButtonsStyle.mergedWith(
     merged.playPause = merged.playPause.mergeButtonThemes(customization.playPause, context)
     merged.previous = merged.previous.mergeButtonThemes(customization.previous, context)
     merged.next = merged.next.mergeButtonThemes(customization.next, context)
+    merged.captions = merged.captions.mergeButtonThemes(customization.captions, context)
+    merged.forceRotation = merged.forceRotation.mergeButtonThemes(customization.forceRotation, context)
+    merged.pip = merged.pip.mergeButtonThemes(customization.pictureInPicture, context)
+    merged.seekForward = merged.seekForward.mergeButtonThemes(customization.seekForward, context)
+    merged.seekBackward = merged.seekBackward.mergeButtonThemes(customization.seekBackward, context)
     return merged
 }
 
@@ -78,24 +91,8 @@ fun BlazeVideosPlayerCtaStyle.mergedWith(
     merged.width = customization.width?.blazeDp ?: this.width
     merged.height = customization.height?.blazeDp ?: this.height
     customization.icon?.let { this.icon = this.icon.mergeWith(it, context) }
-    merged.visibility = this.visibility.mergedWith(customization.ctaVisibility)
+    merged.isVisible = customization.isVisible ?: this.isVisible
     return merged
-}
-
-fun BlazeVideosPlayerCtaStyle.BlazeCTAVisibility.mergedWith(
-    customization: Map<String, Any>?
-): BlazeVideosPlayerCtaStyle.BlazeCTAVisibility {
-    customization ?: return this
-
-    val type = customization["type"] as? String ?: return this
-    when (type) {
-        "alwaysVisible" -> return BlazeVideosPlayerCtaStyle.BlazeCTAVisibility.AlwaysVisible
-        "visibleAfterOverlayHidden" -> {
-            val seconds = customization["duration"] as? Double ?: return this
-            return BlazeVideosPlayerCtaStyle.BlazeCTAVisibility.VisibleAfterOverlayHidden(seconds)
-        }
-        else -> return this
-    }
 }
 
 fun BlazeVideosPlayerCtaIconStyle?.mergeWith(

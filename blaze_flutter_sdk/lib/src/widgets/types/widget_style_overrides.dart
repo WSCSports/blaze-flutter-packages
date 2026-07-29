@@ -30,10 +30,10 @@ class BlazeWidgetItemCustomMapping with _$BlazeWidgetItemCustomMapping {
   /// Initializes a new instance of `BlazeWidgetItemCustomMapping` using a predefined key preset and a custom value string.
   ///
   /// - Parameters:
-  ///   - keyPreset: A `BlazeKeysPresets` enum value representing a predefined key.
+  ///   - keyPreset: A `BlazeExtraInfoKeyPreset` enum value representing a predefined key.
   ///   - value: A `String` representing the value associated with the predefined key.
   factory BlazeWidgetItemCustomMapping.fromPreset({
-    required BlazeKeysPresets keyPreset,
+    required BlazeExtraInfoKeyPreset keyPreset,
     required String value,
   }) =>
       BlazeWidgetItemCustomMapping(
@@ -47,7 +47,7 @@ class BlazeWidgetItemCustomMapping with _$BlazeWidgetItemCustomMapping {
 
 /// An enumeration defining preset keys for commonly used attributes in Blaze widget items.
 /// This facilitates easier and more consistent key management across different implementations of the widget.
-enum BlazeKeysPresets {
+enum BlazeExtraInfoKeyPreset {
   /// Represents a game identifier.
   gameId('gameId'),
 
@@ -69,7 +69,7 @@ enum BlazeKeysPresets {
   /// Represents live status.
   isCurrentlyLive('isCurrentlyLive');
 
-  const BlazeKeysPresets(this._rawValue);
+  const BlazeExtraInfoKeyPreset(this._rawValue);
   final String _rawValue;
 
   /// Gets the raw string value of the preset

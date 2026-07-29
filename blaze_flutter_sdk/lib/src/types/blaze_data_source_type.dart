@@ -26,6 +26,18 @@ class BlazeDataSourceType with _$BlazeDataSourceType {
     required BlazeRecommendationsType recommendationsType,
   }) = BlazeDataSourceTypeRecommendations;
 
+  /// Data source backed by a free-text search query.
+  const factory BlazeDataSourceType.search({
+    /// The text to search content for.
+    required String searchText,
+
+    /// Optional maximum number of items to return.
+    int? maxItems,
+
+    /// Optional label expression to scope the search to.
+    BlazeWidgetLabel? labels,
+  }) = BlazeDataSourceTypeSearch;
+
   factory BlazeDataSourceType.fromJson(Map<String, dynamic> json) =>
       _$BlazeDataSourceTypeFromJson(json);
 }
@@ -83,6 +95,10 @@ class BlazeRecommendationsType with _$BlazeRecommendationsType {
     /// [anyLabelFilter] is an array of strings, allowing you to filter the content received from a recommendation system.
     /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
     List<String>? anyLabelFilter,
+
+    /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
+    /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
+    List<String>? promotedLabels,
   }) = ForYou;
 
   /// Represents recommendations for content that is currently trending.

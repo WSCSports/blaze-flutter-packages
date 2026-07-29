@@ -43,3 +43,29 @@ Map<String, dynamic> _$$BlazeOnEventTriggeredInternalDataImplToJson(
     <String, dynamic>{
       'eventData': instance.eventData,
     };
+
+_$BlazePlaybackModificationRequestImpl
+    _$$BlazePlaybackModificationRequestImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazePlaybackModificationRequestImpl(
+          originalURL: json['originalURL'] as String,
+        );
+
+Map<String, dynamic> _$$BlazePlaybackModificationRequestImplToJson(
+        _$BlazePlaybackModificationRequestImpl instance) =>
+    <String, dynamic>{
+      'originalURL': instance.originalURL,
+    };
+
+_$BlazePlaybackModificationResponseImpl
+    _$$BlazePlaybackModificationResponseImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazePlaybackModificationResponseImpl(
+          modifiedURL: json['modifiedURL'] as String,
+        );
+
+Map<String, dynamic> _$$BlazePlaybackModificationResponseImplToJson(
+        _$BlazePlaybackModificationResponseImpl instance) =>
+    <String, dynamic>{
+      'modifiedURL': instance.modifiedURL,
+    };

@@ -6,6 +6,12 @@ import 'blaze_base_player_delegate_handler.dart';
 /// Player Entry Point Delegate class that extends the shared BlazeBasePlayerDelegate
 /// This is used for players displayed from entry points like handleUniversalLink, directPlaying, etc.
 class BlazePlayerEntryPointDelegate extends BlazeBasePlayerDelegate {
+  /// Called when the read status of the played content changes.
+  ///
+  /// [params] The read status changed parameters.
+  final void Function(BlazeOnReadStatusChangedParams params)?
+      onReadStatusChanged;
+
   /// Constructor with optional function parameters - matches iOS BlazePlayerEntryPointDelegate pattern exactly!
   const BlazePlayerEntryPointDelegate({
     // Shared delegate methods from BlazeBasePlayerDelegate
@@ -16,6 +22,9 @@ class BlazePlayerEntryPointDelegate extends BlazeBasePlayerDelegate {
     super.onTriggerCTA,
     super.onTriggerPlayerBodyTextLink,
     super.onPlayerEventTriggered,
+    super.onTriggerCustomActionButton,
+    // Entry-point-only delegate method
+    this.onReadStatusChanged,
   });
 }
 
@@ -30,6 +39,8 @@ class BlazePlayerEntryPointDelegateHelper {
     _onTriggerCTA(delegate?.onTriggerCTA);
     _onTriggerPlayerBodyTextLink(delegate?.onTriggerPlayerBodyTextLink);
     _onPlayerEventTriggered(delegate?.onPlayerEventTriggered);
+    _onTriggerCustomActionButton(delegate?.onTriggerCustomActionButton);
+    _onReadStatusChanged(delegate?.onReadStatusChanged);
   }
 
   static void _onDataLoadStarted(
@@ -143,6 +154,40 @@ class BlazePlayerEntryPointDelegateHelper {
         methodName,
         (args) async {
           BlazeBasePlayerDelegateHandler.handlePlayerEventTriggered(
+              args.params, callback);
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _onTriggerCustomActionButton(
+    void Function(BlazeOnTriggerCustomActionButtonParams params)? callback,
+  ) {
+    const methodName = 'Blaze.onTriggerCustomActionButton';
+    if (callback != null) {
+      BlazeAsyncBridge.registerDartEventHandler(
+        methodName,
+        (args) async {
+          BlazeBasePlayerDelegateHandler.handleTriggerCustomActionButton(
+              args.params, callback);
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _onReadStatusChanged(
+    void Function(BlazeOnReadStatusChangedParams params)? callback,
+  ) {
+    const methodName = 'Blaze.onReadStatusChanged';
+    if (callback != null) {
+      BlazeAsyncBridge.registerDartEventHandler(
+        methodName,
+        (args) async {
+          BlazeBasePlayerDelegateHandler.handleReadStatusChanged(
               args.params, callback);
         },
       );

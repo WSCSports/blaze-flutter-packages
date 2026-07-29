@@ -10,12 +10,18 @@ import 'package:flutter/widgets.dart';
 import '../types/blaze_data_source_type.dart';
 import '../types/shared_types.dart';
 import '../types/widget_presets.dart';
+import '../types/moments_widget_tabs_configuration.dart';
 import '../player_customization/stories_player_style.dart';
 import '../player_customization/moments_player_style.dart';
 import '../player_customization/videos_player_style.dart';
+import '../types/playback/videos_playback_configuration.dart';
+import '../types/playback/moments_playback_configuration.dart';
+import '../types/playback/stories_playback_configuration.dart';
 import '../delegates/blaze_widget_delegate.dart';
 import '../delegates/blaze_base_player_delegate_handler.dart';
 import '../delegates/blaze_widget_delegate_handler.dart';
+import '../delegates/blaze_player_container_tabs_delegate.dart';
+import '../delegates/blaze_player_container_tabs_delegate_handler.dart';
 import 'types/widget_layout.dart';
 import 'types/widget_style_overrides.dart';
 import 'blaze_widget_controller.dart';
@@ -25,33 +31,50 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
   final String _viewType;
   final bool _isVerticalScroll;
   final bool _isEmbeddedInScrollView;
-  final BlazeDataSourceType dataSource;
+
+  /// The data source that backs the widget. Optional for Moments widgets that
+  /// provide a [tabsConfiguration] instead (the widget's thumbnails are then
+  /// driven by the first tab's data source).
+  final BlazeDataSourceType? dataSource;
   final BlazeCachingLevel? cachingLevel;
   final BlazeWidgetLayoutPreset presetWidgetLayout;
   final BlazeWidgetLayout? blazeWidgetLayout;
   final bool? shouldOrderWidgetByReadStatus;
   final dynamic playerStyle; // Dynamic to support different player style types
+  final dynamic
+      playbackConfiguration; // Dynamic to support different playback configuration types
   final Map<BlazeWidgetItemCustomMapping, BlazeWidgetItemStyleOverrides>?
       perItemStyleOverrides;
   final BlazeWidgetDelegate? widgetDelegate;
   final bool? appOverridesCTAHandling;
   final BlazeWidgetController? controller;
 
+  /// Moments-only: when set, tapping a widget item opens a fullscreen tabs
+  /// player built from this configuration. Ignored by Stories/Videos widgets.
+  final BlazeMomentsWidgetTabsConfiguration? tabsConfiguration;
+
+  /// Moments-only: per-widget delegate for the fullscreen tabs player opened
+  /// through [tabsConfiguration]. Ignored by Stories/Videos widgets.
+  final BlazePlayerContainerTabsDelegate? momentsContainerTabsDelegate;
+
   const BlazeWidgetBase({
     super.key,
     required this.widgetId,
     required String viewType,
     required bool isVerticalScroll,
-    required this.dataSource,
+    this.dataSource,
     required this.presetWidgetLayout,
     this.cachingLevel,
     this.blazeWidgetLayout,
     this.shouldOrderWidgetByReadStatus,
     this.playerStyle,
+    this.playbackConfiguration,
     this.perItemStyleOverrides,
     this.widgetDelegate,
     this.appOverridesCTAHandling,
     this.controller,
+    this.tabsConfiguration,
+    this.momentsContainerTabsDelegate,
     bool isEmbeddedInScrollView = false,
   })  : _viewType = viewType,
         _isVerticalScroll = isVerticalScroll,
@@ -132,10 +155,72 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
           widget.widgetDelegate?.onPlayerEventTriggered,
         );
         break;
+      case 'onTriggerCustomActionButton':
+        BlazeBasePlayerDelegateHandler.handleTriggerCustomActionButton(
+          json.decode(call.arguments),
+          widget.widgetDelegate?.onTriggerCustomActionButton,
+        );
+        break;
       case 'onWidgetItemClicked':
         BlazeWidgetDelegateHandler.handleWidgetItemClicked(
           json.decode(call.arguments),
           widget.widgetDelegate?.onWidgetItemClicked,
+        );
+        break;
+      // Moments "widget to tabs" fullscreen player callbacks - forwarded to the
+      // per-widget momentsContainerTabsDelegate (Moments-only).
+      case 'onMomentsContainerTabsDataLoadStarted':
+        BlazeBasePlayerDelegateHandler.handleDataLoadStarted(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onDataLoadStarted,
+        );
+        break;
+      case 'onMomentsContainerTabsDataLoadComplete':
+        BlazeBasePlayerDelegateHandler.handleDataLoadComplete(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onDataLoadComplete,
+        );
+        break;
+      case 'onMomentsContainerTabsPlayerDidAppear':
+        BlazeBasePlayerDelegateHandler.handlePlayerDidAppear(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onPlayerDidAppear,
+        );
+        break;
+      case 'onMomentsContainerTabsPlayerDidDismiss':
+        BlazeBasePlayerDelegateHandler.handlePlayerDidDismiss(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onPlayerDidDismiss,
+        );
+        break;
+      case 'onMomentsContainerTabsTriggerCTA':
+        BlazeBasePlayerDelegateHandler.handleTriggerCTA(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTriggerCTA,
+        );
+        break;
+      case 'onMomentsContainerTabsTriggerPlayerBodyTextLink':
+        BlazeBasePlayerDelegateHandler.handleTriggerPlayerBodyTextLink(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTriggerPlayerBodyTextLink,
+        );
+        break;
+      case 'onMomentsContainerTabsPlayerEventTriggered':
+        BlazeBasePlayerDelegateHandler.handlePlayerEventTriggered(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onPlayerEventTriggered,
+        );
+        break;
+      case 'onMomentsContainerTabsTriggerCustomActionButton':
+        BlazeBasePlayerDelegateHandler.handleTriggerCustomActionButton(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTriggerCustomActionButton,
+        );
+        break;
+      case 'onMomentsContainerTabsTabSelected':
+        BlazePlayerContainerTabsDelegateHandler.handleTabSelected(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTabSelected,
         );
         break;
       case 'updateHeight':
@@ -179,19 +264,35 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
     return perItemStyleOverridesJson;
   }
 
+  /// The data source sent to the native side. Falls back to the first tab's
+  /// data source when only a tabs configuration is provided, so the native
+  /// "data source required" init gate is satisfied either way (the native SDK
+  /// derives the same data source for tabs-backed widgets).
+  BlazeDataSourceType? get _effectiveDataSource {
+    if (widget.dataSource != null) return widget.dataSource;
+
+    final tabs = widget.tabsConfiguration?.tabs;
+    return (tabs != null && tabs.isNotEmpty) ? tabs.first.dataSource : null;
+  }
+
   Widget _createPlatformView(BuildContext context) {
     // This is used in the platform side to register the view.
     // Pass parameters to the platform side.
     Map<String, dynamic> creationParams = <String, dynamic>{
       "widgetId": widget.widgetId,
       "isEmbeddedInScrollView": widget._isEmbeddedInScrollView,
-      "dataSource": widget.dataSource.toJson(),
+      "dataSource": _effectiveDataSource?.toJson(),
       "cachingLevel": widget.cachingLevel?.name,
       "presetWidgetLayout": widget.presetWidgetLayout.name,
       "blazeWidgetLayout": widget.blazeWidgetLayout?.toJson(),
       "shouldOrderWidgetByReadStatus": widget.shouldOrderWidgetByReadStatus,
       "appOverridesCTAHandling": widget.appOverridesCTAHandling
     };
+
+    // Moments-only: turn the widget into a fullscreen tabs player entry point.
+    if (widget.tabsConfiguration != null) {
+      creationParams["tabsConfiguration"] = widget.tabsConfiguration!.toJson();
+    }
 
     // Add player style to creation params if provided
     if (widget.playerStyle != null) {
@@ -204,6 +305,25 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
       } else if (widget.playerStyle is BlazeVideosPlayerStyle) {
         creationParams["playerStyle"] =
             (widget.playerStyle as BlazeVideosPlayerStyle).toJson();
+      }
+    }
+
+    // Add playback configuration to creation params if provided
+    if (widget.playbackConfiguration != null) {
+      if (widget.playbackConfiguration is BlazeVideosPlaybackConfiguration) {
+        creationParams["playbackConfiguration"] =
+            (widget.playbackConfiguration as BlazeVideosPlaybackConfiguration)
+                .toJson();
+      } else if (widget.playbackConfiguration
+          is BlazeMomentsPlaybackConfiguration) {
+        creationParams["playbackConfiguration"] =
+            (widget.playbackConfiguration as BlazeMomentsPlaybackConfiguration)
+                .toJson();
+      } else if (widget.playbackConfiguration
+          is BlazeStoriesPlaybackConfiguration) {
+        creationParams["playbackConfiguration"] =
+            (widget.playbackConfiguration as BlazeStoriesPlaybackConfiguration)
+                .toJson();
       }
     }
 

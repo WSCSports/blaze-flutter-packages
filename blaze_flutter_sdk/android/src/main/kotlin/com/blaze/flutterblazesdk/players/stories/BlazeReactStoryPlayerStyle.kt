@@ -2,11 +2,13 @@ package com.blaze.flutterblazesdk.players.stories
 
 import androidx.annotation.Keep
 import com.blaze.blazesdk.style.players.BlazeTextCase
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideCTAStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideInstructionStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideTextStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactPlayerButtonStyle
 import com.blaze.flutterblazesdk.utils.parsing.BlazeReactColor
+import com.blaze.flutterblazesdk.utils.parsing.BlazeReactImage
 import com.blaze.flutterblazesdk.utils.parsing.BlazeReactTitleFont
 import com.blaze.flutterblazesdk.utils.parsing.gson.BlazeEnumMapper
 import com.blaze.flutterblazesdk.widgets.customization.BlazeReactMargins
@@ -29,7 +31,29 @@ data class BlazeReactStoryPlayerTitleTextStyle(
         val font: BlazeReactTitleFont?,
         val textSize: Float?,
         val textColor: String?,
-        var isVisible: Boolean?
+        var isVisible: Boolean?,
+        val image: BlazeReactStoryPlayerTitleImageStyle?
+)
+
+@Keep
+data class BlazeReactStoryPlayerTitleImageStyle(
+        val isVisible: Boolean?,
+        val size: Float?,
+        val source: BlazeReactStoryPlayerTitleImageSource?
+)
+
+@Keep
+data class BlazeReactStoryPlayerTitleImageSource(
+        val type: String?,
+        val staticSource: BlazeReactStoryPlayerTitleImageStaticSource?,
+        val fallback: BlazeReactStoryPlayerTitleImageStaticSource?
+)
+
+@Keep
+data class BlazeReactStoryPlayerTitleImageStaticSource(
+        val type: String?,
+        val image: BlazeReactImage?,
+        val url: String?
 )
 
 @Keep
@@ -45,7 +69,8 @@ data class BlazeReactStoryPlayerLastUpdateTextStyle(
 data class BlazeReactStoryPlayerButtonsStyle(
         val mute: BlazeReactPlayerButtonStyle?,
         val exit: BlazeReactPlayerButtonStyle?,
-        val share: BlazeReactPlayerButtonStyle?
+        val share: BlazeReactPlayerButtonStyle?,
+        val customActionButtons: List<BlazeReactCustomActionButton>?
 )
 
 @Keep
@@ -68,6 +93,7 @@ data class BlazeReactStoryPlayerCtaStyle(
         val cornerRadius: Int?,
         val textSize: Float?,
         val font: BlazeReactTitleFont?,
+        val isVisible: Boolean?
 )
 
 @Keep

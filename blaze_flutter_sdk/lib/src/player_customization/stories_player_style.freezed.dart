@@ -1554,6 +1554,8 @@ mixin _$BlazeStoryPlayerButtonsStyle {
   BlazePlayerButtonStyle? get mute => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get exit => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get share => throw _privateConstructorUsedError;
+  List<BlazeCustomActionButton>? get customActionButtons =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1593,7 +1595,8 @@ abstract class $BlazeStoryPlayerButtonsStyleCopyWith<$Res> {
   $Res call(
       {BlazePlayerButtonStyle? mute,
       BlazePlayerButtonStyle? exit,
-      BlazePlayerButtonStyle? share});
+      BlazePlayerButtonStyle? share,
+      List<BlazeCustomActionButton>? customActionButtons});
 
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
@@ -1619,6 +1622,7 @@ class _$BlazeStoryPlayerButtonsStyleCopyWithImpl<$Res,
     Object? mute = freezed,
     Object? exit = freezed,
     Object? share = freezed,
+    Object? customActionButtons = freezed,
   }) {
     return _then(_value.copyWith(
       mute: freezed == mute
@@ -1633,6 +1637,10 @@ class _$BlazeStoryPlayerButtonsStyleCopyWithImpl<$Res,
           ? _value.share
           : share // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      customActionButtons: freezed == customActionButtons
+          ? _value.customActionButtons
+          : customActionButtons // ignore: cast_nullable_to_non_nullable
+              as List<BlazeCustomActionButton>?,
     ) as $Val);
   }
 
@@ -1691,7 +1699,8 @@ abstract class _$$BlazeStoryPlayerButtonsStyleImplCopyWith<$Res>
   $Res call(
       {BlazePlayerButtonStyle? mute,
       BlazePlayerButtonStyle? exit,
-      BlazePlayerButtonStyle? share});
+      BlazePlayerButtonStyle? share,
+      List<BlazeCustomActionButton>? customActionButtons});
 
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
@@ -1719,6 +1728,7 @@ class __$$BlazeStoryPlayerButtonsStyleImplCopyWithImpl<$Res>
     Object? mute = freezed,
     Object? exit = freezed,
     Object? share = freezed,
+    Object? customActionButtons = freezed,
   }) {
     return _then(_$BlazeStoryPlayerButtonsStyleImpl(
       mute: freezed == mute
@@ -1733,6 +1743,10 @@ class __$$BlazeStoryPlayerButtonsStyleImplCopyWithImpl<$Res>
           ? _value.share
           : share // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      customActionButtons: freezed == customActionButtons
+          ? _value._customActionButtons
+          : customActionButtons // ignore: cast_nullable_to_non_nullable
+              as List<BlazeCustomActionButton>?,
     ));
   }
 }
@@ -1741,7 +1755,12 @@ class __$$BlazeStoryPlayerButtonsStyleImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BlazeStoryPlayerButtonsStyleImpl
     implements _BlazeStoryPlayerButtonsStyle {
-  const _$BlazeStoryPlayerButtonsStyleImpl({this.mute, this.exit, this.share});
+  const _$BlazeStoryPlayerButtonsStyleImpl(
+      {this.mute,
+      this.exit,
+      this.share,
+      final List<BlazeCustomActionButton>? customActionButtons})
+      : _customActionButtons = customActionButtons;
 
   factory _$BlazeStoryPlayerButtonsStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -1753,10 +1772,20 @@ class _$BlazeStoryPlayerButtonsStyleImpl
   final BlazePlayerButtonStyle? exit;
   @override
   final BlazePlayerButtonStyle? share;
+  final List<BlazeCustomActionButton>? _customActionButtons;
+  @override
+  List<BlazeCustomActionButton>? get customActionButtons {
+    final value = _customActionButtons;
+    if (value == null) return null;
+    if (_customActionButtons is EqualUnmodifiableListView)
+      return _customActionButtons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'BlazeStoryPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share)';
+    return 'BlazeStoryPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, customActionButtons: $customActionButtons)';
   }
 
   @override
@@ -1766,12 +1795,15 @@ class _$BlazeStoryPlayerButtonsStyleImpl
             other is _$BlazeStoryPlayerButtonsStyleImpl &&
             (identical(other.mute, mute) || other.mute == mute) &&
             (identical(other.exit, exit) || other.exit == exit) &&
-            (identical(other.share, share) || other.share == share));
+            (identical(other.share, share) || other.share == share) &&
+            const DeepCollectionEquality()
+                .equals(other._customActionButtons, _customActionButtons));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, mute, exit, share);
+  int get hashCode => Object.hash(runtimeType, mute, exit, share,
+      const DeepCollectionEquality().hash(_customActionButtons));
 
   /// Create a copy of BlazeStoryPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1824,7 +1856,8 @@ abstract class _BlazeStoryPlayerButtonsStyle
   const factory _BlazeStoryPlayerButtonsStyle(
           {final BlazePlayerButtonStyle? mute,
           final BlazePlayerButtonStyle? exit,
-          final BlazePlayerButtonStyle? share}) =
+          final BlazePlayerButtonStyle? share,
+          final List<BlazeCustomActionButton>? customActionButtons}) =
       _$BlazeStoryPlayerButtonsStyleImpl;
 
   factory _BlazeStoryPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =
@@ -1836,6 +1869,8 @@ abstract class _BlazeStoryPlayerButtonsStyle
   BlazePlayerButtonStyle? get exit;
   @override
   BlazePlayerButtonStyle? get share;
+  @override
+  List<BlazeCustomActionButton>? get customActionButtons;
 
   /// Create a copy of BlazeStoryPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1856,6 +1891,7 @@ mixin _$BlazeStoryPlayerCtaStyle {
   double? get cornerRadius => throw _privateConstructorUsedError;
   double? get textSize => throw _privateConstructorUsedError;
   BlazeFont? get font => throw _privateConstructorUsedError;
+  bool? get isVisible => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1890,7 +1926,11 @@ abstract class $BlazeStoryPlayerCtaStyleCopyWith<$Res> {
           $Res Function(BlazeStoryPlayerCtaStyle) then) =
       _$BlazeStoryPlayerCtaStyleCopyWithImpl<$Res, BlazeStoryPlayerCtaStyle>;
   @useResult
-  $Res call({double? cornerRadius, double? textSize, BlazeFont? font});
+  $Res call(
+      {double? cornerRadius,
+      double? textSize,
+      BlazeFont? font,
+      bool? isVisible});
 
   $BlazeFontCopyWith<$Res>? get font;
 }
@@ -1914,6 +1954,7 @@ class _$BlazeStoryPlayerCtaStyleCopyWithImpl<$Res,
     Object? cornerRadius = freezed,
     Object? textSize = freezed,
     Object? font = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -1928,6 +1969,10 @@ class _$BlazeStoryPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.font
           : font // ignore: cast_nullable_to_non_nullable
               as BlazeFont?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -1955,7 +2000,11 @@ abstract class _$$BlazeStoryPlayerCtaStyleImplCopyWith<$Res>
       __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? cornerRadius, double? textSize, BlazeFont? font});
+  $Res call(
+      {double? cornerRadius,
+      double? textSize,
+      BlazeFont? font,
+      bool? isVisible});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
@@ -1979,6 +2028,7 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? cornerRadius = freezed,
     Object? textSize = freezed,
     Object? font = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_$BlazeStoryPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -1993,6 +2043,10 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.font
           : font // ignore: cast_nullable_to_non_nullable
               as BlazeFont?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -2001,7 +2055,7 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
   const _$BlazeStoryPlayerCtaStyleImpl(
-      {this.cornerRadius, this.textSize, this.font});
+      {this.cornerRadius, this.textSize, this.font, this.isVisible});
 
   factory _$BlazeStoryPlayerCtaStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeStoryPlayerCtaStyleImplFromJson(json);
@@ -2012,10 +2066,12 @@ class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
   final double? textSize;
   @override
   final BlazeFont? font;
+  @override
+  final bool? isVisible;
 
   @override
   String toString() {
-    return 'BlazeStoryPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font)';
+    return 'BlazeStoryPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, isVisible: $isVisible)';
   }
 
   @override
@@ -2027,12 +2083,15 @@ class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
                 other.cornerRadius == cornerRadius) &&
             (identical(other.textSize, textSize) ||
                 other.textSize == textSize) &&
-            (identical(other.font, font) || other.font == font));
+            (identical(other.font, font) || other.font == font) &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font);
+  int get hashCode =>
+      Object.hash(runtimeType, cornerRadius, textSize, font, isVisible);
 
   /// Create a copy of BlazeStoryPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2083,7 +2142,8 @@ abstract class _BlazeStoryPlayerCtaStyle implements BlazeStoryPlayerCtaStyle {
   const factory _BlazeStoryPlayerCtaStyle(
       {final double? cornerRadius,
       final double? textSize,
-      final BlazeFont? font}) = _$BlazeStoryPlayerCtaStyleImpl;
+      final BlazeFont? font,
+      final bool? isVisible}) = _$BlazeStoryPlayerCtaStyleImpl;
 
   factory _BlazeStoryPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeStoryPlayerCtaStyleImpl.fromJson;
@@ -2094,6 +2154,8 @@ abstract class _BlazeStoryPlayerCtaStyle implements BlazeStoryPlayerCtaStyle {
   double? get textSize;
   @override
   BlazeFont? get font;
+  @override
+  bool? get isVisible;
 
   /// Create a copy of BlazeStoryPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2114,6 +2176,10 @@ mixin _$BlazeStoryPlayerTitleTextStyle {
   double? get textSize => throw _privateConstructorUsedError;
   String? get textColor => throw _privateConstructorUsedError;
   bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// Optional title image displayed alongside the title text.
+  BlazeStoryPlayerTitleImageStyle? get image =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -2151,9 +2217,14 @@ abstract class $BlazeStoryPlayerTitleTextStyleCopyWith<$Res> {
           BlazeStoryPlayerTitleTextStyle>;
   @useResult
   $Res call(
-      {BlazeFont? font, double? textSize, String? textColor, bool? isVisible});
+      {BlazeFont? font,
+      double? textSize,
+      String? textColor,
+      bool? isVisible,
+      BlazeStoryPlayerTitleImageStyle? image});
 
   $BlazeFontCopyWith<$Res>? get font;
+  $BlazeStoryPlayerTitleImageStyleCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -2176,6 +2247,7 @@ class _$BlazeStoryPlayerTitleTextStyleCopyWithImpl<$Res,
     Object? textSize = freezed,
     Object? textColor = freezed,
     Object? isVisible = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       font: freezed == font
@@ -2194,6 +2266,10 @@ class _$BlazeStoryPlayerTitleTextStyleCopyWithImpl<$Res,
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageStyle?,
     ) as $Val);
   }
 
@@ -2210,6 +2286,21 @@ class _$BlazeStoryPlayerTitleTextStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(font: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeStoryPlayerTitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeStoryPlayerTitleImageStyleCopyWith<$Res>? get image {
+    if (_value.image == null) {
+      return null;
+    }
+
+    return $BlazeStoryPlayerTitleImageStyleCopyWith<$Res>(_value.image!,
+        (value) {
+      return _then(_value.copyWith(image: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -2222,10 +2313,16 @@ abstract class _$$BlazeStoryPlayerTitleTextStyleImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {BlazeFont? font, double? textSize, String? textColor, bool? isVisible});
+      {BlazeFont? font,
+      double? textSize,
+      String? textColor,
+      bool? isVisible,
+      BlazeStoryPlayerTitleImageStyle? image});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
+  @override
+  $BlazeStoryPlayerTitleImageStyleCopyWith<$Res>? get image;
 }
 
 /// @nodoc
@@ -2247,6 +2344,7 @@ class __$$BlazeStoryPlayerTitleTextStyleImplCopyWithImpl<$Res>
     Object? textSize = freezed,
     Object? textColor = freezed,
     Object? isVisible = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$BlazeStoryPlayerTitleTextStyleImpl(
       font: freezed == font
@@ -2265,6 +2363,10 @@ class __$$BlazeStoryPlayerTitleTextStyleImplCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageStyle?,
     ));
   }
 }
@@ -2274,7 +2376,7 @@ class __$$BlazeStoryPlayerTitleTextStyleImplCopyWithImpl<$Res>
 class _$BlazeStoryPlayerTitleTextStyleImpl
     implements _BlazeStoryPlayerTitleTextStyle {
   const _$BlazeStoryPlayerTitleTextStyleImpl(
-      {this.font, this.textSize, this.textColor, this.isVisible});
+      {this.font, this.textSize, this.textColor, this.isVisible, this.image});
 
   factory _$BlazeStoryPlayerTitleTextStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -2289,9 +2391,13 @@ class _$BlazeStoryPlayerTitleTextStyleImpl
   @override
   final bool? isVisible;
 
+  /// Optional title image displayed alongside the title text.
+  @override
+  final BlazeStoryPlayerTitleImageStyle? image;
+
   @override
   String toString() {
-    return 'BlazeStoryPlayerTitleTextStyle(font: $font, textSize: $textSize, textColor: $textColor, isVisible: $isVisible)';
+    return 'BlazeStoryPlayerTitleTextStyle(font: $font, textSize: $textSize, textColor: $textColor, isVisible: $isVisible, image: $image)';
   }
 
   @override
@@ -2305,13 +2411,14 @@ class _$BlazeStoryPlayerTitleTextStyleImpl
             (identical(other.textColor, textColor) ||
                 other.textColor == textColor) &&
             (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+                other.isVisible == isVisible) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, font, textSize, textColor, isVisible);
+      Object.hash(runtimeType, font, textSize, textColor, isVisible, image);
 
   /// Create a copy of BlazeStoryPlayerTitleTextStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2362,10 +2469,12 @@ class _$BlazeStoryPlayerTitleTextStyleImpl
 abstract class _BlazeStoryPlayerTitleTextStyle
     implements BlazeStoryPlayerTitleTextStyle {
   const factory _BlazeStoryPlayerTitleTextStyle(
-      {final BlazeFont? font,
-      final double? textSize,
-      final String? textColor,
-      final bool? isVisible}) = _$BlazeStoryPlayerTitleTextStyleImpl;
+          {final BlazeFont? font,
+          final double? textSize,
+          final String? textColor,
+          final bool? isVisible,
+          final BlazeStoryPlayerTitleImageStyle? image}) =
+      _$BlazeStoryPlayerTitleTextStyleImpl;
 
   factory _BlazeStoryPlayerTitleTextStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeStoryPlayerTitleTextStyleImpl.fromJson;
@@ -2379,12 +2488,1243 @@ abstract class _BlazeStoryPlayerTitleTextStyle
   @override
   bool? get isVisible;
 
+  /// Optional title image displayed alongside the title text.
+  @override
+  BlazeStoryPlayerTitleImageStyle? get image;
+
   /// Create a copy of BlazeStoryPlayerTitleTextStyle
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeStoryPlayerTitleTextStyleImplCopyWith<
           _$BlazeStoryPlayerTitleTextStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeStoryPlayerTitleImageStyle _$BlazeStoryPlayerTitleImageStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeStoryPlayerTitleImageStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeStoryPlayerTitleImageStyle {
+  bool? get isVisible => throw _privateConstructorUsedError;
+  double? get size => throw _privateConstructorUsedError;
+  BlazeStoryPlayerTitleImageSource? get source =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerTitleImageStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeStoryPlayerTitleImageStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerTitleImageStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeStoryPlayerTitleImageStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeStoryPlayerTitleImageStyleCopyWith<BlazeStoryPlayerTitleImageStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeStoryPlayerTitleImageStyleCopyWith<$Res> {
+  factory $BlazeStoryPlayerTitleImageStyleCopyWith(
+          BlazeStoryPlayerTitleImageStyle value,
+          $Res Function(BlazeStoryPlayerTitleImageStyle) then) =
+      _$BlazeStoryPlayerTitleImageStyleCopyWithImpl<$Res,
+          BlazeStoryPlayerTitleImageStyle>;
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? size,
+      BlazeStoryPlayerTitleImageSource? source});
+
+  $BlazeStoryPlayerTitleImageSourceCopyWith<$Res>? get source;
+}
+
+/// @nodoc
+class _$BlazeStoryPlayerTitleImageStyleCopyWithImpl<$Res,
+        $Val extends BlazeStoryPlayerTitleImageStyle>
+    implements $BlazeStoryPlayerTitleImageStyleCopyWith<$Res> {
+  _$BlazeStoryPlayerTitleImageStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? size = freezed,
+    Object? source = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageSource?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeStoryPlayerTitleImageSourceCopyWith<$Res>? get source {
+    if (_value.source == null) {
+      return null;
+    }
+
+    return $BlazeStoryPlayerTitleImageSourceCopyWith<$Res>(_value.source!,
+        (value) {
+      return _then(_value.copyWith(source: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerTitleImageStyleImplCopyWith<$Res>
+    implements $BlazeStoryPlayerTitleImageStyleCopyWith<$Res> {
+  factory _$$BlazeStoryPlayerTitleImageStyleImplCopyWith(
+          _$BlazeStoryPlayerTitleImageStyleImpl value,
+          $Res Function(_$BlazeStoryPlayerTitleImageStyleImpl) then) =
+      __$$BlazeStoryPlayerTitleImageStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? size,
+      BlazeStoryPlayerTitleImageSource? source});
+
+  @override
+  $BlazeStoryPlayerTitleImageSourceCopyWith<$Res>? get source;
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerTitleImageStyleImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerTitleImageStyleCopyWithImpl<$Res,
+        _$BlazeStoryPlayerTitleImageStyleImpl>
+    implements _$$BlazeStoryPlayerTitleImageStyleImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerTitleImageStyleImplCopyWithImpl(
+      _$BlazeStoryPlayerTitleImageStyleImpl _value,
+      $Res Function(_$BlazeStoryPlayerTitleImageStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? size = freezed,
+    Object? source = freezed,
+  }) {
+    return _then(_$BlazeStoryPlayerTitleImageStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      size: freezed == size
+          ? _value.size
+          : size // ignore: cast_nullable_to_non_nullable
+              as double?,
+      source: freezed == source
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageSource?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerTitleImageStyleImpl
+    implements _BlazeStoryPlayerTitleImageStyle {
+  const _$BlazeStoryPlayerTitleImageStyleImpl(
+      {this.isVisible, this.size, this.source});
+
+  factory _$BlazeStoryPlayerTitleImageStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerTitleImageStyleImplFromJson(json);
+
+  @override
+  final bool? isVisible;
+  @override
+  final double? size;
+  @override
+  final BlazeStoryPlayerTitleImageSource? source;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerTitleImageStyle(isVisible: $isVisible, size: $size, source: $source)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerTitleImageStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.source, source) || other.source == source));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isVisible, size, source);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerTitleImageStyleImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStyleImpl>
+      get copyWith => __$$BlazeStoryPlayerTitleImageStyleImplCopyWithImpl<
+          _$BlazeStoryPlayerTitleImageStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerTitleImageStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeStoryPlayerTitleImageStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerTitleImageStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerTitleImageStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeStoryPlayerTitleImageStyle
+    implements BlazeStoryPlayerTitleImageStyle {
+  const factory _BlazeStoryPlayerTitleImageStyle(
+          {final bool? isVisible,
+          final double? size,
+          final BlazeStoryPlayerTitleImageSource? source}) =
+      _$BlazeStoryPlayerTitleImageStyleImpl;
+
+  factory _BlazeStoryPlayerTitleImageStyle.fromJson(Map<String, dynamic> json) =
+      _$BlazeStoryPlayerTitleImageStyleImpl.fromJson;
+
+  @override
+  bool? get isVisible;
+  @override
+  double? get size;
+  @override
+  BlazeStoryPlayerTitleImageSource? get source;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerTitleImageStyleImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeStoryPlayerTitleImageSource _$BlazeStoryPlayerTitleImageSourceFromJson(
+    Map<String, dynamic> json) {
+  switch (json['type']) {
+    case 'static':
+      return BlazeStoryPlayerTitleImageSourceStatic.fromJson(json);
+    case 'dynamic':
+      return BlazeStoryPlayerTitleImageSourceDynamic.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(
+          json,
+          'type',
+          'BlazeStoryPlayerTitleImageSource',
+          'Invalid union type "${json['type']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$BlazeStoryPlayerTitleImageSource {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeStoryPlayerTitleImageStaticSource staticSource)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)
+        dynamicSource,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)
+        dynamicSource,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeStoryPlayerTitleImageSource to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeStoryPlayerTitleImageSourceCopyWith<$Res> {
+  factory $BlazeStoryPlayerTitleImageSourceCopyWith(
+          BlazeStoryPlayerTitleImageSource value,
+          $Res Function(BlazeStoryPlayerTitleImageSource) then) =
+      _$BlazeStoryPlayerTitleImageSourceCopyWithImpl<$Res,
+          BlazeStoryPlayerTitleImageSource>;
+}
+
+/// @nodoc
+class _$BlazeStoryPlayerTitleImageSourceCopyWithImpl<$Res,
+        $Val extends BlazeStoryPlayerTitleImageSource>
+    implements $BlazeStoryPlayerTitleImageSourceCopyWith<$Res> {
+  _$BlazeStoryPlayerTitleImageSourceCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWith<$Res> {
+  factory _$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWith(
+          _$BlazeStoryPlayerTitleImageSourceStaticImpl value,
+          $Res Function(_$BlazeStoryPlayerTitleImageSourceStaticImpl) then) =
+      __$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BlazeStoryPlayerTitleImageStaticSource staticSource});
+
+  $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res> get staticSource;
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerTitleImageSourceCopyWithImpl<$Res,
+        _$BlazeStoryPlayerTitleImageSourceStaticImpl>
+    implements _$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWithImpl(
+      _$BlazeStoryPlayerTitleImageSourceStaticImpl _value,
+      $Res Function(_$BlazeStoryPlayerTitleImageSourceStaticImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? staticSource = null,
+  }) {
+    return _then(_$BlazeStoryPlayerTitleImageSourceStaticImpl(
+      staticSource: null == staticSource
+          ? _value.staticSource
+          : staticSource // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageStaticSource,
+    ));
+  }
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res> get staticSource {
+    return $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res>(
+        _value.staticSource, (value) {
+      return _then(_value.copyWith(staticSource: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerTitleImageSourceStaticImpl
+    implements BlazeStoryPlayerTitleImageSourceStatic {
+  const _$BlazeStoryPlayerTitleImageSourceStaticImpl(
+      {required this.staticSource, final String? $type})
+      : $type = $type ?? 'static';
+
+  factory _$BlazeStoryPlayerTitleImageSourceStaticImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerTitleImageSourceStaticImplFromJson(json);
+
+  @override
+  final BlazeStoryPlayerTitleImageStaticSource staticSource;
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerTitleImageSource.staticSource(staticSource: $staticSource)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerTitleImageSourceStaticImpl &&
+            (identical(other.staticSource, staticSource) ||
+                other.staticSource == staticSource));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, staticSource);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWith<
+          _$BlazeStoryPlayerTitleImageSourceStaticImpl>
+      get copyWith =>
+          __$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWithImpl<
+              _$BlazeStoryPlayerTitleImageSourceStaticImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeStoryPlayerTitleImageStaticSource staticSource)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)
+        dynamicSource,
+  }) {
+    return staticSource(this.staticSource);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+  }) {
+    return staticSource?.call(this.staticSource);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+    required TResult orElse(),
+  }) {
+    if (staticSource != null) {
+      return staticSource(this.staticSource);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)
+        dynamicSource,
+  }) {
+    return staticSource(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+  }) {
+    return staticSource?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+    required TResult orElse(),
+  }) {
+    if (staticSource != null) {
+      return staticSource(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerTitleImageSourceStaticImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeStoryPlayerTitleImageSourceStatic
+    implements BlazeStoryPlayerTitleImageSource {
+  const factory BlazeStoryPlayerTitleImageSourceStatic(
+      {required final BlazeStoryPlayerTitleImageStaticSource
+          staticSource}) = _$BlazeStoryPlayerTitleImageSourceStaticImpl;
+
+  factory BlazeStoryPlayerTitleImageSourceStatic.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeStoryPlayerTitleImageSourceStaticImpl.fromJson;
+
+  BlazeStoryPlayerTitleImageStaticSource get staticSource;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerTitleImageSourceStaticImplCopyWith<
+          _$BlazeStoryPlayerTitleImageSourceStaticImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWith<$Res> {
+  factory _$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWith(
+          _$BlazeStoryPlayerTitleImageSourceDynamicImpl value,
+          $Res Function(_$BlazeStoryPlayerTitleImageSourceDynamicImpl) then) =
+      __$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BlazeStoryPlayerTitleImageStaticSource? fallback});
+
+  $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res>? get fallback;
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerTitleImageSourceCopyWithImpl<$Res,
+        _$BlazeStoryPlayerTitleImageSourceDynamicImpl>
+    implements _$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWithImpl(
+      _$BlazeStoryPlayerTitleImageSourceDynamicImpl _value,
+      $Res Function(_$BlazeStoryPlayerTitleImageSourceDynamicImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fallback = freezed,
+  }) {
+    return _then(_$BlazeStoryPlayerTitleImageSourceDynamicImpl(
+      fallback: freezed == fallback
+          ? _value.fallback
+          : fallback // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerTitleImageStaticSource?,
+    ));
+  }
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res>? get fallback {
+    if (_value.fallback == null) {
+      return null;
+    }
+
+    return $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res>(
+        _value.fallback!, (value) {
+      return _then(_value.copyWith(fallback: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerTitleImageSourceDynamicImpl
+    implements BlazeStoryPlayerTitleImageSourceDynamic {
+  const _$BlazeStoryPlayerTitleImageSourceDynamicImpl(
+      {this.fallback, final String? $type})
+      : $type = $type ?? 'dynamic';
+
+  factory _$BlazeStoryPlayerTitleImageSourceDynamicImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerTitleImageSourceDynamicImplFromJson(json);
+
+  @override
+  final BlazeStoryPlayerTitleImageStaticSource? fallback;
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerTitleImageSource.dynamicSource(fallback: $fallback)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerTitleImageSourceDynamicImpl &&
+            (identical(other.fallback, fallback) ||
+                other.fallback == fallback));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, fallback);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWith<
+          _$BlazeStoryPlayerTitleImageSourceDynamicImpl>
+      get copyWith =>
+          __$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWithImpl<
+              _$BlazeStoryPlayerTitleImageSourceDynamicImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeStoryPlayerTitleImageStaticSource staticSource)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)
+        dynamicSource,
+  }) {
+    return dynamicSource(fallback);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+  }) {
+    return dynamicSource?.call(fallback);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource staticSource)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSource? fallback)?
+        dynamicSource,
+    required TResult orElse(),
+  }) {
+    if (dynamicSource != null) {
+      return dynamicSource(fallback);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)
+        staticSource,
+    required TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)
+        dynamicSource,
+  }) {
+    return dynamicSource(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult? Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+  }) {
+    return dynamicSource?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageSourceStatic value)?
+        staticSource,
+    TResult Function(BlazeStoryPlayerTitleImageSourceDynamic value)?
+        dynamicSource,
+    required TResult orElse(),
+  }) {
+    if (dynamicSource != null) {
+      return dynamicSource(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerTitleImageSourceDynamicImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeStoryPlayerTitleImageSourceDynamic
+    implements BlazeStoryPlayerTitleImageSource {
+  const factory BlazeStoryPlayerTitleImageSourceDynamic(
+          {final BlazeStoryPlayerTitleImageStaticSource? fallback}) =
+      _$BlazeStoryPlayerTitleImageSourceDynamicImpl;
+
+  factory BlazeStoryPlayerTitleImageSourceDynamic.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeStoryPlayerTitleImageSourceDynamicImpl.fromJson;
+
+  BlazeStoryPlayerTitleImageStaticSource? get fallback;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerTitleImageSourceDynamicImplCopyWith<
+          _$BlazeStoryPlayerTitleImageSourceDynamicImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeStoryPlayerTitleImageStaticSource
+    _$BlazeStoryPlayerTitleImageStaticSourceFromJson(
+        Map<String, dynamic> json) {
+  switch (json['type']) {
+    case 'image':
+      return BlazeStoryPlayerTitleImageStaticSourceImage.fromJson(json);
+    case 'url':
+      return BlazeStoryPlayerTitleImageStaticSourceUrl.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(
+          json,
+          'type',
+          'BlazeStoryPlayerTitleImageStaticSource',
+          'Invalid union type "${json['type']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$BlazeStoryPlayerTitleImageStaticSource {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BlazeImage image) image,
+    required TResult Function(String url) url,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeImage image)? image,
+    TResult? Function(String url)? url,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeImage image)? image,
+    TResult Function(String url)? url,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)
+        image,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)
+        url,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeStoryPlayerTitleImageStaticSource to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res> {
+  factory $BlazeStoryPlayerTitleImageStaticSourceCopyWith(
+          BlazeStoryPlayerTitleImageStaticSource value,
+          $Res Function(BlazeStoryPlayerTitleImageStaticSource) then) =
+      _$BlazeStoryPlayerTitleImageStaticSourceCopyWithImpl<$Res,
+          BlazeStoryPlayerTitleImageStaticSource>;
+}
+
+/// @nodoc
+class _$BlazeStoryPlayerTitleImageStaticSourceCopyWithImpl<$Res,
+        $Val extends BlazeStoryPlayerTitleImageStaticSource>
+    implements $BlazeStoryPlayerTitleImageStaticSourceCopyWith<$Res> {
+  _$BlazeStoryPlayerTitleImageStaticSourceCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWith<
+    $Res> {
+  factory _$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWith(
+          _$BlazeStoryPlayerTitleImageStaticSourceImageImpl value,
+          $Res Function(_$BlazeStoryPlayerTitleImageStaticSourceImageImpl)
+              then) =
+      __$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BlazeImage image});
+
+  $BlazeImageCopyWith<$Res> get image;
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerTitleImageStaticSourceCopyWithImpl<$Res,
+        _$BlazeStoryPlayerTitleImageStaticSourceImageImpl>
+    implements
+        _$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWithImpl(
+      _$BlazeStoryPlayerTitleImageStaticSourceImageImpl _value,
+      $Res Function(_$BlazeStoryPlayerTitleImageStaticSourceImageImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? image = null,
+  }) {
+    return _then(_$BlazeStoryPlayerTitleImageStaticSourceImageImpl(
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as BlazeImage,
+    ));
+  }
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeImageCopyWith<$Res> get image {
+    return $BlazeImageCopyWith<$Res>(_value.image, (value) {
+      return _then(_value.copyWith(image: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerTitleImageStaticSourceImageImpl
+    implements BlazeStoryPlayerTitleImageStaticSourceImage {
+  const _$BlazeStoryPlayerTitleImageStaticSourceImageImpl(
+      {required this.image, final String? $type})
+      : $type = $type ?? 'image';
+
+  factory _$BlazeStoryPlayerTitleImageStaticSourceImageImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerTitleImageStaticSourceImageImplFromJson(json);
+
+  @override
+  final BlazeImage image;
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerTitleImageStaticSource.image(image: $image)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerTitleImageStaticSourceImageImpl &&
+            (identical(other.image, image) || other.image == image));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, image);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStaticSourceImageImpl>
+      get copyWith =>
+          __$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWithImpl<
+                  _$BlazeStoryPlayerTitleImageStaticSourceImageImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BlazeImage image) image,
+    required TResult Function(String url) url,
+  }) {
+    return image(this.image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeImage image)? image,
+    TResult? Function(String url)? url,
+  }) {
+    return image?.call(this.image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeImage image)? image,
+    TResult Function(String url)? url,
+    required TResult orElse(),
+  }) {
+    if (image != null) {
+      return image(this.image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)
+        image,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)
+        url,
+  }) {
+    return image(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+  }) {
+    return image?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+    required TResult orElse(),
+  }) {
+    if (image != null) {
+      return image(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerTitleImageStaticSourceImageImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeStoryPlayerTitleImageStaticSourceImage
+    implements BlazeStoryPlayerTitleImageStaticSource {
+  const factory BlazeStoryPlayerTitleImageStaticSourceImage(
+          {required final BlazeImage image}) =
+      _$BlazeStoryPlayerTitleImageStaticSourceImageImpl;
+
+  factory BlazeStoryPlayerTitleImageStaticSourceImage.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeStoryPlayerTitleImageStaticSourceImageImpl.fromJson;
+
+  BlazeImage get image;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerTitleImageStaticSourceImageImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStaticSourceImageImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWith<$Res> {
+  factory _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWith(
+          _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl value,
+          $Res Function(_$BlazeStoryPlayerTitleImageStaticSourceUrlImpl) then) =
+      __$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String url});
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerTitleImageStaticSourceCopyWithImpl<$Res,
+        _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl>
+    implements _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWithImpl(
+      _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl _value,
+      $Res Function(_$BlazeStoryPlayerTitleImageStaticSourceUrlImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? url = null,
+  }) {
+    return _then(_$BlazeStoryPlayerTitleImageStaticSourceUrlImpl(
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl
+    implements BlazeStoryPlayerTitleImageStaticSourceUrl {
+  const _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl(
+      {required this.url, final String? $type})
+      : $type = $type ?? 'url';
+
+  factory _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplFromJson(json);
+
+  @override
+  final String url;
+
+  @JsonKey(name: 'type')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerTitleImageStaticSource.url(url: $url)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, url);
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl>
+      get copyWith =>
+          __$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWithImpl<
+                  _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(BlazeImage image) image,
+    required TResult Function(String url) url,
+  }) {
+    return url(this.url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(BlazeImage image)? image,
+    TResult? Function(String url)? url,
+  }) {
+    return url?.call(this.url);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BlazeImage image)? image,
+    TResult Function(String url)? url,
+    required TResult orElse(),
+  }) {
+    if (url != null) {
+      return url(this.url);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)
+        image,
+    required TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)
+        url,
+  }) {
+    return url(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult? Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+  }) {
+    return url?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceImage value)? image,
+    TResult Function(BlazeStoryPlayerTitleImageStaticSourceUrl value)? url,
+    required TResult orElse(),
+  }) {
+    if (url != null) {
+      return url(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeStoryPlayerTitleImageStaticSourceUrl
+    implements BlazeStoryPlayerTitleImageStaticSource {
+  const factory BlazeStoryPlayerTitleImageStaticSourceUrl(
+          {required final String url}) =
+      _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl;
+
+  factory BlazeStoryPlayerTitleImageStaticSourceUrl.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl.fromJson;
+
+  String get url;
+
+  /// Create a copy of BlazeStoryPlayerTitleImageStaticSource
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerTitleImageStaticSourceUrlImplCopyWith<
+          _$BlazeStoryPlayerTitleImageStaticSourceUrlImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

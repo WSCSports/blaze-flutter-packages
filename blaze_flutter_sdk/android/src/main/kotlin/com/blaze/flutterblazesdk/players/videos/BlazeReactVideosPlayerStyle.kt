@@ -49,7 +49,13 @@ data class BlazeReactVideosPlayerButtonsStyle(
         val like: BlazeReactPlayerButtonStyle?,
         val playPause: BlazeReactPlayerButtonStyle?,
         var previous: BlazeReactPlayerButtonStyle?,
-        var next: BlazeReactPlayerButtonStyle?
+        var next: BlazeReactPlayerButtonStyle?,
+        val captions: BlazeReactPlayerButtonStyle?,
+        val forceRotation: BlazeReactPlayerButtonStyle?,
+        val casting: BlazeReactPlayerButtonStyle?,
+        val pictureInPicture: BlazeReactPlayerButtonStyle?,
+        val seekForward: BlazeReactPlayerButtonStyle?,
+        val seekBackward: BlazeReactPlayerButtonStyle?
 )
 
 @Keep
@@ -60,7 +66,7 @@ data class BlazeReactVideosPlayerCtaStyle(
         val width: Int?,
         val height: Int?,
         val icon: BlazeReactVideosPlayerCtaIconStyle?,
-        val ctaVisibility: Map<String, Any>?
+        val isVisible: Boolean?
 )
 
 @Keep

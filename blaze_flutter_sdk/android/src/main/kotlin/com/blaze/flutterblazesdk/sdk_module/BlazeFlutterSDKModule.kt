@@ -1,17 +1,31 @@
 package com.blaze.flutterblazesdk.sdk_module
 
 import android.app.Application
+import android.util.Log
 import com.blaze.blazesdk.analytics.models.BlazeAnalyticsEvent
+import com.blaze.blazesdk.delegates.BlazeCastingDelegate
+import com.blaze.blazesdk.delegates.BlazeCastingState
+import com.blaze.blazesdk.delegates.BlazePipDelegate
+import com.blaze.blazesdk.delegates.BlazePipState
+import com.blaze.blazesdk.delegates.BlazeFollowEntitiesDelegate
 import com.blaze.blazesdk.delegates.BlazePlayerEntryPointDelegate
 import com.blaze.blazesdk.delegates.BlazeSDKDelegate
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
+import com.blaze.blazesdk.delegates.models.BlazeFollowEntityClickedParams
+import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationRequest
+import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationResponse
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
 import com.blaze.blazesdk.external_modules.BlazeExternalModulesBinder
+import com.blaze.blazesdk.follow.models.BlazeFollowEntity
+import com.blaze.blazesdk.features.moments.models.configuration.BlazeMomentsLoopBehavior
+import com.blaze.blazesdk.features.search.models.BlazeSearchScreenParams
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.BlazeSDK
 import com.blaze.blazesdk.shared.models.BlazeEntryPointTriggerSource
+import com.blaze.blazesdk.shared.models.BlazePlayerSoundState
 import com.blaze.blazesdk.shared.results.BlazeResult
+import com.blaze.blazesdk.style.shared.models.BlazePlayerCustomActionButtonParams
 import com.blaze.flutterblazesdk.delegates.BlazeSharedDelegateHandler
 import com.blaze.flutterblazesdk.parsers.asCachingLevel
 import com.blaze.flutterblazesdk.parsers.toBlazeDataSourceType
@@ -19,9 +33,13 @@ import com.blaze.flutterblazesdk.players.extractMomentsPlayerStyle
 import com.blaze.flutterblazesdk.players.extractStoriesPlayerStyle
 import com.blaze.flutterblazesdk.players.extractVideosPlayerStyle
 import com.blaze.flutterblazesdk.shared.BlazeAsyncBridge
+import com.blaze.flutterblazesdk.shared.callDartMethod
 import com.blaze.flutterblazesdk.shared.sendEvent
 import com.blaze.flutterblazesdk.utils.BlazeFlutterError
 import com.blaze.flutterblazesdk.utils.BlazeFlutterSDKHelper
+import com.blaze.flutterblazesdk.utils.extractMomentsPlaybackConfiguration
+import com.blaze.flutterblazesdk.utils.extractStoriesPlaybackConfiguration
+import com.blaze.flutterblazesdk.utils.extractVideosPlaybackConfiguration
 import com.blaze.flutterblazesdk.utils.handleBlazeResult
 import com.blaze.flutterblazesdk.utils.handleError
 import com.blaze.flutterblazesdk.utils.safeGetArgument
@@ -30,6 +48,10 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 
 object BlazeFlutterSDKModule {
+
+        private const val TAG = "BlazeFlutterSDKModule"
+        private const val PLAYBACK_MODIFICATION_METHOD_NAME =
+                "Blaze.GlobalDelegate.playbackModificationHandler"
 
         private lateinit var methodChannel: MethodChannel
         private lateinit var application: Application
@@ -59,14 +81,39 @@ object BlazeFlutterSDKModule {
                         "playStory" -> playStory(call, result)
                         "prepareStories" -> prepareStories(call, result)
                         "playStories" -> playStories(call, result)
+                        "setDefaultStoriesPlaybackConfiguration" ->
+                                setDefaultStoriesPlaybackConfiguration(call, result)
+                        "getDefaultStoriesPlaybackConfiguration" ->
+                                getDefaultStoriesPlaybackConfiguration(call, result)
                         "playMoment" -> playMoment(call, result)
                         "prepareMoments" -> prepareMoments(call, result)
                         "playMoments" -> playMoments(call, result)
+                        "appendMomentsToPlayer" -> appendMomentsToPlayer(call, result)
+                        "setDefaultMomentsPlaybackConfiguration" ->
+                                setDefaultMomentsPlaybackConfiguration(call, result)
+                        "getDefaultMomentsPlaybackConfiguration" ->
+                                getDefaultMomentsPlaybackConfiguration(call, result)
                         "playVideo" -> playVideo(call, result)
                         "prepareVideos" -> prepareVideos(call, result)
                         "playVideos" -> playVideos(call, result)
+                        "setDefaultVideosPlaybackConfiguration" ->
+                                setDefaultVideosPlaybackConfiguration(call, result)
+                        "getDefaultVideosPlaybackConfiguration" ->
+                                getDefaultVideosPlaybackConfiguration(call, result)
                         "dismissPlayer" -> dismissPlayer(call, result)
                         "setDoNotTrack" -> setDoNotTrack(call, result)
+                        "setDisableAnalytics" -> setDisableAnalytics(call, result)
+                        "setPreferredLanguage" -> setPreferredLanguage(call, result)
+                        "setPlayerSoundState" -> setPlayerSoundState(call, result)
+                        "isMuted" -> isMuted(call, result)
+                        "showSearchScreen" -> showSearchScreen(call, result)
+                        "setFollowedEntities" -> setFollowedEntities(call, result)
+                        "insertFollowedEntities" -> insertFollowedEntities(call, result)
+                        "removeFollowedEntities" -> removeFollowedEntities(call, result)
+                        "getFollowedEntities" -> getFollowedEntities(call, result)
+                        "stopActiveCastingSession" -> stopActiveCastingSession(call, result)
+                        "stopActivePiPSession" -> stopActivePiPSession(call, result)
+                        "isPiPActive" -> isPiPActive(call, result)
                         "canHandleUniversalLink" -> canHandleUniversalLink(call, result)
                         "updateGeoRestriction" -> updateGeoRestriction(call, result)
                         "canHandlePushNotification" -> canHandlePushNotification(call, result)
@@ -91,6 +138,12 @@ object BlazeFlutterSDKModule {
 
                         override fun onEventTriggered(eventData: BlazeAnalyticsEvent) {
                                 this@BlazeFlutterSDKModule.onEventTriggered(eventData)
+                        }
+
+                        override suspend fun playbackModificationHandler(
+                                request: BlazePlaybackModificationRequest
+                        ): BlazePlaybackModificationResponse {
+                                return this@BlazeFlutterSDKModule.playbackModificationHandler(request)
                         }
                 }
         }
@@ -170,6 +223,79 @@ object BlazeFlutterSDKModule {
                                         event
                                 )
                         }
+
+                        override fun onTriggerCustomActionButton(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                customParams: BlazePlayerCustomActionButtonParams
+                        ) {
+                                this@BlazeFlutterSDKModule.onTriggerCustomActionButton(
+                                        playerType,
+                                        sourceId,
+                                        customParams
+                                )
+                        }
+
+                        override fun onReadStatusChanged(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                dataSourceStringRepresentation: String,
+                                isEntireContentRead: Boolean,
+                                itemReadStatus: Map<String, Boolean>
+                        ) {
+                                this@BlazeFlutterSDKModule.onReadStatusChanged(
+                                        playerType,
+                                        sourceId,
+                                        dataSourceStringRepresentation,
+                                        isEntireContentRead,
+                                        itemReadStatus
+                                )
+                        }
+                }
+        }
+
+        // Follow entities delegate implementation that communicates with Flutter - always active
+        private val followEntitiesDelegate: BlazeFollowEntitiesDelegate by lazy {
+                object : BlazeFollowEntitiesDelegate {
+                        override fun onFollowEntityClicked(
+                                followEntityParams: BlazeFollowEntityClickedParams
+                        ) {
+                                this@BlazeFlutterSDKModule.onFollowEntityClicked(followEntityParams)
+                        }
+                }
+        }
+
+        // Casting delegate implementation that communicates with Flutter - always active
+        private val castingDelegate: BlazeCastingDelegate by lazy {
+                object : BlazeCastingDelegate {
+                        override fun onCastingStateChanged(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                newState: BlazeCastingState
+                        ) {
+                                this@BlazeFlutterSDKModule.onCastingStateChanged(
+                                        playerType = playerType,
+                                        sourceId = sourceId,
+                                        newState = newState
+                                )
+                        }
+                }
+        }
+
+        // Pip delegate implementation that communicates with Flutter - always active
+        private val pipDelegate: BlazePipDelegate by lazy {
+                object : BlazePipDelegate {
+                        override fun onPipStateChanged(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                newState: BlazePipState
+                        ) {
+                                this@BlazeFlutterSDKModule.onPiPStateChanged(
+                                        playerType = playerType,
+                                        sourceId = sourceId,
+                                        newState = newState
+                                )
+                        }
                 }
         }
 
@@ -219,6 +345,10 @@ object BlazeFlutterSDKModule {
                         playerEntryPointDelegate = playerEntryPointDelegate
                 )
 
+                BlazeSDK.followEntitiesManager.delegate = followEntitiesDelegate
+                BlazeSDK.castingManager.delegate = castingDelegate
+                BlazeSDK.pipManager.delegate = pipDelegate
+
                 // Set default player styles if provided
                 val defaultStoryPlayerStyleMap =
                         call.safeGetArgument<Map<String, Any>>("defaultStoryPlayerStyle")
@@ -263,12 +393,17 @@ object BlazeFlutterSDKModule {
                 val playerStyle = playerStyleMap.extractStoriesPlayerStyle(application)
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val playbackConfiguration =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractStoriesPlaybackConfiguration()
+                                ?: BlazeSDK.getDefaultStoriesPlaybackConfiguration()
 
                 BlazeSDK.playStory(
                         storyId = storyId,
                         pageId = pageId,
                         storyPlayerStyle = playerStyle,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        playbackConfiguration = playbackConfiguration
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -293,19 +428,53 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
                 val playerStyleMap = call.safeGetArgument<Map<String, Any>>("playerStyle")
                 val playerStyle = playerStyleMap.extractStoriesPlayerStyle(application)
                 val shouldOrderContentByReadStatus =
                         call.safeGetArgument<Boolean>("shouldOrderContentByReadStatus") ?: true
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val playbackConfiguration =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractStoriesPlaybackConfiguration()
+                                ?: BlazeSDK.getDefaultStoriesPlaybackConfiguration()
 
                 BlazeSDK.playStories(
                         dataSource = dataSource,
+                        entryContentId = entryContentId,
                         storyPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        playbackConfiguration = playbackConfiguration
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
+        }
+
+        private fun setDefaultStoriesPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val playbackConfig =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractStoriesPlaybackConfiguration()
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setDefaultStoriesPlaybackConfiguration",
+                                                errMessage = "Invalid stories playback configuration"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.setDefaultStoriesPlaybackConfiguration(playbackConfig)
+                result.success(null)
+        }
+
+        private fun getDefaultStoriesPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val config = BlazeSDK.getDefaultStoriesPlaybackConfiguration()
+                result.success(mapOf("bufferingSpinnerDelayMs" to config.bufferingSpinnerDelayMs))
         }
 
         private fun playMoment(call: MethodCall, result: MethodChannel.Result) {
@@ -352,6 +521,7 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
                 val playerStyleMap = call.safeGetArgument<Map<String, Any>>("playerStyle")
                 val playerStyle = playerStyleMap.extractMomentsPlayerStyle(application)
                 val shouldOrderContentByReadStatus =
@@ -361,10 +531,94 @@ object BlazeFlutterSDKModule {
 
                 BlazeSDK.playMoments(
                         dataSource = dataSource,
+                        entryContentId = entryContentId,
                         momentsPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
+        }
+
+        private fun appendMomentsToPlayer(call: MethodCall, result: MethodChannel.Result) {
+                val sourceId =
+                        call.safeGetArgument<String>("sourceId")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "appendMomentsToPlayer",
+                                                errMessage = "Missing sourceId in appendMomentsToPlayer options"
+                                        )
+                                        return
+                                }
+
+                val dataSourceMap =
+                        call.safeGetArgument<Map<String, Any>>("dataSource")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "appendMomentsToPlayer",
+                                                errMessage = "dataSource is invalid"
+                                        )
+                                        return
+                                }
+
+                val dataSource =
+                        dataSourceMap.toBlazeDataSourceType()
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "appendMomentsToPlayer",
+                                                errMessage = "Failed to extract dataSource"
+                                        )
+                                        return
+                                }
+
+                val shouldOrderContentByReadStatus =
+                        call.safeGetArgument<Boolean>("shouldOrderContentByReadStatus") ?: false
+
+                BlazeSDK.appendMomentsToPlayer(
+                        sourceId = sourceId,
+                        dataSourceType = dataSource,
+                        shouldOrderContentByReadStatus = shouldOrderContentByReadStatus
+                ) { blazeResult -> result.handleBlazeResult(blazeResult) }
+        }
+
+        private fun setDefaultMomentsPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val playbackConfig =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractMomentsPlaybackConfiguration()
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setDefaultMomentsPlaybackConfiguration",
+                                                errMessage = "Invalid moments playback configuration"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.setDefaultMomentsPlaybackConfiguration(playbackConfig)
+                result.success(null)
+        }
+
+        private fun getDefaultMomentsPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val config = BlazeSDK.getDefaultMomentsPlaybackConfiguration()
+                val loopBehaviorMap =
+                        when (val loopBehavior = config.loopBehavior) {
+                                is BlazeMomentsLoopBehavior.InfiniteLoop ->
+                                        mapOf("type" to "infiniteLoop")
+                                is BlazeMomentsLoopBehavior.LoopAndAdvance ->
+                                        mapOf(
+                                                "type" to "loopAndAdvance",
+                                                "numberOfPlays" to loopBehavior.numberOfPlays
+                                        )
+                        }
+                result.success(
+                        mapOf(
+                                "loopBehavior" to loopBehaviorMap,
+                                "bufferingSpinnerDelayMs" to config.bufferingSpinnerDelayMs
+                        )
+                )
         }
 
         private fun playVideo(call: MethodCall, result: MethodChannel.Result) {
@@ -382,11 +636,16 @@ object BlazeFlutterSDKModule {
                 val playerStyle = playerStyleMap.extractVideosPlayerStyle(application)
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val playbackConfiguration =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractVideosPlaybackConfiguration()
+                                ?: BlazeSDK.getDefaultVideosPlaybackConfiguration()
 
                 BlazeSDK.playVideo(
                         videoId = videoId,
                         videosPlayerStyle = playerStyle,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        playbackConfiguration = playbackConfiguration
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -411,19 +670,64 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
                 val playerStyleMap = call.safeGetArgument<Map<String, Any>>("playerStyle")
                 val playerStyle = playerStyleMap.extractVideosPlayerStyle(application)
                 val shouldOrderContentByReadStatus =
                         call.safeGetArgument<Boolean>("shouldOrderContentByReadStatus") ?: true
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val playbackConfiguration =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractVideosPlaybackConfiguration()
+                                ?: BlazeSDK.getDefaultVideosPlaybackConfiguration()
 
                 BlazeSDK.playVideos(
                         dataSource = dataSource,
+                        entryContentId = entryContentId,
                         videosPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        playbackConfiguration = playbackConfiguration
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
+        }
+
+        private fun setDefaultVideosPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val playbackConfig =
+                        call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
+                                .extractVideosPlaybackConfiguration()
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setDefaultVideosPlaybackConfiguration",
+                                                errMessage = "Invalid playback configuration"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.setDefaultVideosPlaybackConfiguration(playbackConfig)
+                result.success(null)
+        }
+
+        private fun getDefaultVideosPlaybackConfiguration(
+                call: MethodCall,
+                result: MethodChannel.Result
+        ) {
+                val config = BlazeSDK.getDefaultVideosPlaybackConfiguration()
+                val configMap =
+                        mapOf(
+                                "multiAspectRatio" to config.multiAspectRatio,
+                                "shouldOpenInLandscape" to config.shouldOpenOnLandscape,
+                                "pipConfiguration" to
+                                        mapOf(
+                                                "enterPipOnAppBackground" to
+                                                        config.pip.enterPipOnAppBackground
+                                        ),
+                                "bufferingSpinnerDelayMs" to config.bufferingSpinnerDelayMs
+                        )
+                result.success(configMap)
         }
 
         private fun setExternalUserId(call: MethodCall, result: MethodChannel.Result) {
@@ -471,7 +775,11 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
-                BlazeSDK.prepareStories(dataSource) { blazeResult ->
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
+                BlazeSDK.prepareStories(
+                        dataSource = dataSource,
+                        entryContentId = entryContentId
+                ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
         }
@@ -497,7 +805,11 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
-                BlazeSDK.prepareMoments(dataSource) { blazeResult ->
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
+                BlazeSDK.prepareMoments(
+                        dataSource = dataSource,
+                        entryContentId = entryContentId
+                ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
         }
@@ -523,7 +835,11 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
-                BlazeSDK.prepareVideos(dataSource) { blazeResult ->
+                val entryContentId = call.safeGetArgument<String>("entryContentId")
+                BlazeSDK.prepareVideos(
+                        dataSource = dataSource,
+                        entryContentId = entryContentId
+                ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
         }
@@ -546,6 +862,113 @@ object BlazeFlutterSDKModule {
 
                 BlazeSDK.setDoNotTrack(doNotTrackUser)
                 result.success(null)
+        }
+
+        private fun setDisableAnalytics(call: MethodCall, result: MethodChannel.Result) {
+                val disableAnalytics =
+                        call.safeGetArgument<Boolean>("disableAnalytics")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setDisableAnalytics",
+                                                errMessage = "disableAnalytics is invalid"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.disableAnalytics = disableAnalytics
+                result.success(null)
+        }
+
+        private fun setPreferredLanguage(call: MethodCall, result: MethodChannel.Result) {
+                val language = call.safeGetArgument<String>("language")
+
+                BlazeSDK.setPreferredLanguage(language)
+                result.success(null)
+        }
+
+        private fun setPlayerSoundState(call: MethodCall, result: MethodChannel.Result) {
+                val state = call.safeGetArgument<String>("state")
+                val nativeState =
+                        when (state?.lowercase()) {
+                                "mute" -> BlazePlayerSoundState.MUTE
+                                "unmute" -> BlazePlayerSoundState.UNMUTE
+                                else -> {
+                                        result.handleError(
+                                                errCode = "setPlayerSoundState",
+                                                errMessage =
+                                                        "Invalid BlazePlayerSoundState '$state'. Expected 'mute' or 'unmute'."
+                                        )
+                                        return
+                                }
+                        }
+
+                BlazeSDK.setPlayerSoundState(nativeState)
+                result.success(null)
+        }
+
+        private fun isMuted(call: MethodCall, result: MethodChannel.Result) {
+                result.success(BlazeSDK.isMuted)
+        }
+
+        private fun showSearchScreen(call: MethodCall, result: MethodChannel.Result) {
+                val dataSource =
+                        call.safeGetArgument<Map<String, Any>>("suggestionsDataSource")
+                                ?.toBlazeDataSourceType()
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "showSearchScreen",
+                                                errMessage = "suggestionsDataSource is required on Android"
+                                        )
+                                        return
+                                }
+
+                val searchParams = BlazeSearchScreenParams(suggestionsDataSource = dataSource)
+                BlazeSDK.screens.showSearchScreen(searchParams = searchParams) { blazeResult ->
+                        result.handleBlazeResult(blazeResult)
+                }
+        }
+
+        private fun MethodCall.followEntitiesFromArgument(): Set<BlazeFollowEntity> {
+                val entityIds = safeGetArgument<List<String>>("entityIds") ?: emptyList()
+                return entityIds.map { BlazeFollowEntity(it) }.toSet()
+        }
+
+        private fun setFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.followEntitiesManager.setFollowedEntities(call.followEntitiesFromArgument())
+                result.success(null)
+        }
+
+        private fun insertFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.followEntitiesManager.insertFollowedEntities(
+                        call.followEntitiesFromArgument()
+                )
+                result.success(null)
+        }
+
+        private fun removeFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.followEntitiesManager.removeFollowedEntities(
+                        call.followEntitiesFromArgument()
+                )
+                result.success(null)
+        }
+
+        private fun getFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
+                val ids = BlazeSDK.followEntitiesManager.getFollowedEntities().map { it.entityId }
+                result.success(ids)
+        }
+
+        private fun stopActiveCastingSession(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.castingManager.stopActiveCastingSession()
+                result.success(null)
+        }
+
+        private fun stopActivePiPSession(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.pipManager.stopActivePiPSession()
+                result.success(null)
+        }
+
+        private fun isPiPActive(call: MethodCall, result: MethodChannel.Result) {
+                result.success(BlazeSDK.pipManager.isActive)
         }
 
         private fun canHandleUniversalLink(call: MethodCall, result: MethodChannel.Result) {
@@ -628,6 +1051,25 @@ object BlazeFlutterSDKModule {
                         "Blaze.onEventTriggered",
                         mapOf("eventData" to eventData.asJsonString)
                 )
+        }
+
+        // Request/response global delegate call: ask Dart for a modified URL
+        // before playback and fall back to the original URL on any failure.
+        private suspend fun playbackModificationHandler(
+                request: BlazePlaybackModificationRequest
+        ): BlazePlaybackModificationResponse {
+                val fallbackResponse = request.response()
+                val bridge = asyncBridge ?: return fallbackResponse
+
+                return try {
+                        bridge.callDartMethod(
+                                name = PLAYBACK_MODIFICATION_METHOD_NAME,
+                                params = request,
+                        )
+                } catch (e: Exception) {
+                        Log.d(TAG, "Error playbackModificationHandler: ${e.message}")
+                        fallbackResponse
+                }
         }
 
         private fun onDataLoadStarted(playerType: BlazePlayerType, sourceId: String?) {
@@ -734,6 +1176,92 @@ object BlazeFlutterSDKModule {
                 ) { params ->
                         asyncBridge?.sendEvent(
                                 name = "Blaze.onPlayerEventTriggered",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onTriggerCustomActionButton(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                customParams: BlazePlayerCustomActionButtonParams
+        ) {
+                sharedDelegateHandler.onTriggerCustomActionButton(
+                        playerType = playerType,
+                        sourceId = sourceId,
+                        customParams = customParams
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onTriggerCustomActionButton",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onReadStatusChanged(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                dataSourceStringRepresentation: String,
+                isEntireContentRead: Boolean,
+                itemReadStatus: Map<String, Boolean>
+        ) {
+                sharedDelegateHandler.onReadStatusChanged(
+                        playerType = playerType,
+                        sourceId = sourceId,
+                        dataSourceStringRepresentation = dataSourceStringRepresentation,
+                        isEntireContentRead = isEntireContentRead,
+                        itemReadStatus = itemReadStatus
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onReadStatusChanged",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onFollowEntityClicked(followEntityParams: BlazeFollowEntityClickedParams) {
+                sharedDelegateHandler.onFollowEntityClicked(
+                        playerType = followEntityParams.playerType,
+                        sourceId = followEntityParams.sourceId,
+                        newFollowingState = followEntityParams.newFollowingState,
+                        followEntityId = followEntityParams.followEntity.entityId
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onFollowEntityClicked",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onCastingStateChanged(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                newState: BlazeCastingState
+        ) {
+                sharedDelegateHandler.onCastingStateChanged(
+                        playerType = playerType,
+                        sourceId = sourceId,
+                        newState = newState
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onCastingStateChanged",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onPiPStateChanged(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                newState: BlazePipState
+        ) {
+                sharedDelegateHandler.onPiPStateChanged(
+                        playerType = playerType,
+                        sourceId = sourceId,
+                        newState = newState
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onPiPStateChanged",
                                 params = params
                         )
                 }

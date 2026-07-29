@@ -38,6 +38,9 @@ class BlazeWidgetLayout with _$BlazeWidgetLayout {
     int? columns,
     int? maxDisplayItemsCount,
     BlazeWidgetItemStyle? widgetItemStyle,
+
+    /// The shimmering (loading placeholder) style for the widget.
+    BlazeWidgetShimmeringStyle? shimmering,
   }) = _BlazeWidgetLayout;
 
   factory BlazeWidgetLayout.fromJson(Map<String, dynamic> json) =>

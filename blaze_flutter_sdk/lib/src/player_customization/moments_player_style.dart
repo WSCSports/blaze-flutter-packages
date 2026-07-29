@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../types/shared_types.dart';
+import '../types/custom_action_button.dart';
 import '../widgets/types/widget_layout_common.dart';
 
 part 'moments_player_style.freezed.dart';
@@ -21,6 +22,7 @@ class BlazeMomentsPlayerStyle with _$BlazeMomentsPlayerStyle {
     BlazeMomentsPlayerSeekBarStyle? seekBar,
     BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
     BlazePlayerDisplayMode? playerDisplayMode,
+    BlazeMomentsPlayerFollowEntityStyle? followEntity,
   }) = _BlazeMomentsPlayerStyle;
 
   factory BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -68,6 +70,10 @@ class BlazeMomentsPlayerButtonsStyle with _$BlazeMomentsPlayerButtonsStyle {
     BlazePlayerButtonStyle? share,
     BlazePlayerButtonStyle? like,
     BlazePlayerButtonStyle? play,
+    BlazePlayerButtonStyle? seekForward,
+    BlazePlayerButtonStyle? seekBackward,
+    BlazePlayerButtonStyle? search,
+    List<BlazeCustomActionButton>? customActionButtons,
   }) = _BlazeMomentsPlayerButtonsStyle;
 
   factory BlazeMomentsPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =>
@@ -112,6 +118,7 @@ class BlazeMomentsPlayerCtaStyle with _$BlazeMomentsPlayerCtaStyle {
     BlazeMomentsPlayerCTAPositioning? layoutPositioning,
     BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
     BlazeMomentsPlayerCtaIconStyle? icon,
+    bool? isVisible,
   }) = _BlazeMomentsPlayerCtaStyle;
 
   factory BlazeMomentsPlayerCtaStyle.fromJson(Map<String, dynamic> json) =>
@@ -211,6 +218,77 @@ class BlazeMomentsPlayerSeekBarStyle with _$BlazeMomentsPlayerSeekBarStyle {
       _$BlazeMomentsPlayerSeekBarStyleFromJson(json);
 }
 
+/// Moments player follow entity style configuration
+@freezed
+class BlazeMomentsPlayerFollowEntityStyle
+    with _$BlazeMomentsPlayerFollowEntityStyle {
+  const factory BlazeMomentsPlayerFollowEntityStyle({
+    bool? isVisible,
+    BlazeMomentsPlayerFollowEntityStateStyle? followState,
+    BlazeMomentsPlayerFollowEntityStateStyle? unfollowState,
+    BlazeFollowEntityType? entityType,
+  }) = _BlazeMomentsPlayerFollowEntityStyle;
+
+  factory BlazeMomentsPlayerFollowEntityStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeMomentsPlayerFollowEntityStyleFromJson(json);
+}
+
+/// Moments player follow entity per-state (follow/unfollow) style configuration
+@freezed
+class BlazeMomentsPlayerFollowEntityStateStyle
+    with _$BlazeMomentsPlayerFollowEntityStateStyle {
+  const factory BlazeMomentsPlayerFollowEntityStateStyle({
+    BlazeMomentsPlayerFollowEntityAvatarStyle? avatar,
+    BlazeMomentsPlayerFollowEntityChipStyle? chip,
+  }) = _BlazeMomentsPlayerFollowEntityStateStyle;
+
+  factory BlazeMomentsPlayerFollowEntityStateStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeMomentsPlayerFollowEntityStateStyleFromJson(json);
+}
+
+/// Moments player follow entity avatar style configuration
+@freezed
+class BlazeMomentsPlayerFollowEntityAvatarStyle
+    with _$BlazeMomentsPlayerFollowEntityAvatarStyle {
+  const factory BlazeMomentsPlayerFollowEntityAvatarStyle({
+    double? borderWidth,
+    String? borderColor,
+  }) = _BlazeMomentsPlayerFollowEntityAvatarStyle;
+
+  factory BlazeMomentsPlayerFollowEntityAvatarStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeMomentsPlayerFollowEntityAvatarStyleFromJson(json);
+}
+
+/// Moments player follow entity chip style configuration
+@freezed
+class BlazeMomentsPlayerFollowEntityChipStyle
+    with _$BlazeMomentsPlayerFollowEntityChipStyle {
+  const factory BlazeMomentsPlayerFollowEntityChipStyle({
+    String? backgroundColor,
+    String? iconColor,
+    BlazeMomentsPlayerFollowEntityChipContentSource? contentSource,
+  }) = _BlazeMomentsPlayerFollowEntityChipStyle;
+
+  factory BlazeMomentsPlayerFollowEntityChipStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeMomentsPlayerFollowEntityChipStyleFromJson(json);
+}
+
+/// Follow entity type descriptor with an optional recursive fallback.
+@freezed
+class BlazeFollowEntityType with _$BlazeFollowEntityType {
+  const factory BlazeFollowEntityType({
+    required BlazeFollowEntityTypeValue type,
+    BlazeFollowEntityType? fallbackType,
+  }) = _BlazeFollowEntityType;
+
+  factory BlazeFollowEntityType.fromJson(Map<String, dynamic> json) =>
+      _$BlazeFollowEntityTypeFromJson(json);
+}
+
 /// Moments player footer gradient positioning enumeration
 enum BlazeMomentsPlayerFooterGradientPositioning {
   @JsonValue('BottomToPlayer')
@@ -279,4 +357,24 @@ enum BlazePlayerDisplayMode {
   fixedRatio9x16,
   @JsonValue('ResizeAspectFillCenterCrop')
   resizeAspectFillCenterCrop,
+}
+
+/// Moments player follow entity chip content source enumeration
+enum BlazeMomentsPlayerFollowEntityChipContentSource {
+  @JsonValue('Icon')
+  icon,
+  @JsonValue('Text')
+  text,
+}
+
+/// Follow entity type value enumeration
+enum BlazeFollowEntityTypeValue {
+  @JsonValue('FirstAvailable')
+  firstAvailable,
+  @JsonValue('Player')
+  player,
+  @JsonValue('Team')
+  team,
+  @JsonValue('Property')
+  property,
 }

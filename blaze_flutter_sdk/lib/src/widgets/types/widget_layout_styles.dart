@@ -4,6 +4,22 @@ import 'widget_layout_common.dart';
 part 'widget_layout_styles.freezed.dart';
 part 'widget_layout_styles.g.dart';
 
+/// Shimmering (loading placeholder) style for a widget.
+@freezed
+class BlazeWidgetShimmeringStyle with _$BlazeWidgetShimmeringStyle {
+  const factory BlazeWidgetShimmeringStyle({
+    /// Base color of the shimmer, as a hex string (`#RRGGBB` or `#AARRGGBB`).
+    String? baseColor,
+
+    /// Highlight color of the shimmer, as a hex string (`#RRGGBB` or
+    /// `#AARRGGBB`).
+    String? highlightColor,
+  }) = _BlazeWidgetShimmeringStyle;
+
+  factory BlazeWidgetShimmeringStyle.fromJson(Map<String, dynamic> json) =>
+      _$BlazeWidgetShimmeringStyleFromJson(json);
+}
+
 /// Widget item image gradient overlay style
 @freezed
 class BlazeWidgetGradient with _$BlazeWidgetGradient {

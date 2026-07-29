@@ -22,6 +22,8 @@ BlazeDataSourceType _$BlazeDataSourceTypeFromJson(Map<String, dynamic> json) {
       return BlazeDataSourceTypeIds.fromJson(json);
     case 'recommendations':
       return BlazeDataSourceTypeRecommendations.fromJson(json);
+    case 'search':
+      return BlazeDataSourceTypeSearch.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'BlazeDataSourceType',
@@ -46,6 +48,9 @@ mixin _$BlazeDataSourceType {
         ids,
     required TResult Function(BlazeRecommendationsType recommendationsType)
         recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +68,9 @@ mixin _$BlazeDataSourceType {
         ids,
     TResult? Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +88,9 @@ mixin _$BlazeDataSourceType {
         ids,
     TResult Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +100,7 @@ mixin _$BlazeDataSourceType {
     required TResult Function(BlazeDataSourceTypeIds value) ids,
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -97,6 +109,7 @@ mixin _$BlazeDataSourceType {
     TResult? Function(BlazeDataSourceTypeIds value)? ids,
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -104,6 +117,7 @@ mixin _$BlazeDataSourceType {
     TResult Function(BlazeDataSourceTypeLabels value)? labels,
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -328,6 +342,9 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         ids,
     required TResult Function(BlazeRecommendationsType recommendationsType)
         recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
   }) {
     return labels(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -349,6 +366,9 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         ids,
     TResult? Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
   }) {
     return labels?.call(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -370,6 +390,9 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         ids,
     TResult Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -386,6 +409,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     required TResult Function(BlazeDataSourceTypeIds value) ids,
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
   }) {
     return labels(this);
   }
@@ -397,6 +421,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult? Function(BlazeDataSourceTypeIds value)? ids,
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
   }) {
     return labels?.call(this);
   }
@@ -407,6 +432,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult Function(BlazeDataSourceTypeLabels value)? labels,
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -576,6 +602,9 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         ids,
     required TResult Function(BlazeRecommendationsType recommendationsType)
         recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
   }) {
     return ids(this.ids, orderType, advancedOrderType);
   }
@@ -596,6 +625,9 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         ids,
     TResult? Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
   }) {
     return ids?.call(this.ids, orderType, advancedOrderType);
   }
@@ -616,6 +648,9 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         ids,
     TResult Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -631,6 +666,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     required TResult Function(BlazeDataSourceTypeIds value) ids,
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
   }) {
     return ids(this);
   }
@@ -642,6 +678,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult? Function(BlazeDataSourceTypeIds value)? ids,
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
   }) {
     return ids?.call(this);
   }
@@ -652,6 +689,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult Function(BlazeDataSourceTypeLabels value)? labels,
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -800,6 +838,9 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         ids,
     required TResult Function(BlazeRecommendationsType recommendationsType)
         recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
   }) {
     return recommendations(recommendationsType);
   }
@@ -820,6 +861,9 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         ids,
     TResult? Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
   }) {
     return recommendations?.call(recommendationsType);
   }
@@ -840,6 +884,9 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         ids,
     TResult Function(BlazeRecommendationsType recommendationsType)?
         recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -855,6 +902,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     required TResult Function(BlazeDataSourceTypeIds value) ids,
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
   }) {
     return recommendations(this);
   }
@@ -866,6 +914,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult? Function(BlazeDataSourceTypeIds value)? ids,
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
   }) {
     return recommendations?.call(this);
   }
@@ -876,6 +925,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult Function(BlazeDataSourceTypeLabels value)? labels,
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -909,6 +959,271 @@ abstract class BlazeDataSourceTypeRecommendations
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeDataSourceTypeRecommendationsImplCopyWith<
           _$BlazeDataSourceTypeRecommendationsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeDataSourceTypeSearchImplCopyWith<$Res> {
+  factory _$$BlazeDataSourceTypeSearchImplCopyWith(
+          _$BlazeDataSourceTypeSearchImpl value,
+          $Res Function(_$BlazeDataSourceTypeSearchImpl) then) =
+      __$$BlazeDataSourceTypeSearchImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String searchText, int? maxItems, BlazeWidgetLabel? labels});
+
+  $BlazeWidgetLabelCopyWith<$Res>? get labels;
+}
+
+/// @nodoc
+class __$$BlazeDataSourceTypeSearchImplCopyWithImpl<$Res>
+    extends _$BlazeDataSourceTypeCopyWithImpl<$Res,
+        _$BlazeDataSourceTypeSearchImpl>
+    implements _$$BlazeDataSourceTypeSearchImplCopyWith<$Res> {
+  __$$BlazeDataSourceTypeSearchImplCopyWithImpl(
+      _$BlazeDataSourceTypeSearchImpl _value,
+      $Res Function(_$BlazeDataSourceTypeSearchImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchText = null,
+    Object? maxItems = freezed,
+    Object? labels = freezed,
+  }) {
+    return _then(_$BlazeDataSourceTypeSearchImpl(
+      searchText: null == searchText
+          ? _value.searchText
+          : searchText // ignore: cast_nullable_to_non_nullable
+              as String,
+      maxItems: freezed == maxItems
+          ? _value.maxItems
+          : maxItems // ignore: cast_nullable_to_non_nullable
+              as int?,
+      labels: freezed == labels
+          ? _value.labels
+          : labels // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetLabel?,
+    ));
+  }
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeWidgetLabelCopyWith<$Res>? get labels {
+    if (_value.labels == null) {
+      return null;
+    }
+
+    return $BlazeWidgetLabelCopyWith<$Res>(_value.labels!, (value) {
+      return _then(_value.copyWith(labels: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
+  const _$BlazeDataSourceTypeSearchImpl(
+      {required this.searchText,
+      this.maxItems,
+      this.labels,
+      final String? $type})
+      : $type = $type ?? 'search';
+
+  factory _$BlazeDataSourceTypeSearchImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BlazeDataSourceTypeSearchImplFromJson(json);
+
+  /// The text to search content for.
+  @override
+  final String searchText;
+
+  /// Optional maximum number of items to return.
+  @override
+  final int? maxItems;
+
+  /// Optional label expression to scope the search to.
+  @override
+  final BlazeWidgetLabel? labels;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeDataSourceType.search(searchText: $searchText, maxItems: $maxItems, labels: $labels)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeDataSourceTypeSearchImpl &&
+            (identical(other.searchText, searchText) ||
+                other.searchText == searchText) &&
+            (identical(other.maxItems, maxItems) ||
+                other.maxItems == maxItems) &&
+            (identical(other.labels, labels) || other.labels == labels));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, searchText, maxItems, labels);
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeDataSourceTypeSearchImplCopyWith<_$BlazeDataSourceTypeSearchImpl>
+      get copyWith => __$$BlazeDataSourceTypeSearchImplCopyWithImpl<
+          _$BlazeDataSourceTypeSearchImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)
+        labels,
+    required TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)
+        ids,
+    required TResult Function(BlazeRecommendationsType recommendationsType)
+        recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
+  }) {
+    return search(searchText, maxItems, this.labels);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult? Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult? Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+  }) {
+    return search?.call(searchText, maxItems, this.labels);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(searchText, maxItems, this.labels);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeDataSourceTypeLabels value) labels,
+    required TResult Function(BlazeDataSourceTypeIds value) ids,
+    required TResult Function(BlazeDataSourceTypeRecommendations value)
+        recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
+  }) {
+    return search(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult? Function(BlazeDataSourceTypeIds value)? ids,
+    TResult? Function(BlazeDataSourceTypeRecommendations value)?
+        recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
+  }) {
+    return search?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult Function(BlazeDataSourceTypeIds value)? ids,
+    TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
+    required TResult orElse(),
+  }) {
+    if (search != null) {
+      return search(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeDataSourceTypeSearchImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeDataSourceTypeSearch implements BlazeDataSourceType {
+  const factory BlazeDataSourceTypeSearch(
+      {required final String searchText,
+      final int? maxItems,
+      final BlazeWidgetLabel? labels}) = _$BlazeDataSourceTypeSearchImpl;
+
+  factory BlazeDataSourceTypeSearch.fromJson(Map<String, dynamic> json) =
+      _$BlazeDataSourceTypeSearchImpl.fromJson;
+
+  /// The text to search content for.
+  String get searchText;
+
+  /// Optional maximum number of items to return.
+  int? get maxItems;
+
+  /// Optional label expression to scope the search to.
+  BlazeWidgetLabel? get labels;
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeDataSourceTypeSearchImplCopyWith<_$BlazeDataSourceTypeSearchImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1454,19 +1769,25 @@ mixin _$BlazeRecommendationsType {
   List<String>? get anyLabelFilter => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String>? anyLabelFilter) forYou,
+    required TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)
+        forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String>? anyLabelFilter)? forYou,
+    TResult? Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String>? anyLabelFilter)? forYou,
+    TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),
   }) =>
@@ -1545,7 +1866,7 @@ abstract class _$$ForYouImplCopyWith<$Res>
       __$$ForYouImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String>? anyLabelFilter});
+  $Res call({List<String>? anyLabelFilter, List<String>? promotedLabels});
 }
 
 /// @nodoc
@@ -1562,11 +1883,16 @@ class __$$ForYouImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? anyLabelFilter = freezed,
+    Object? promotedLabels = freezed,
   }) {
     return _then(_$ForYouImpl(
       anyLabelFilter: freezed == anyLabelFilter
           ? _value._anyLabelFilter
           : anyLabelFilter // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      promotedLabels: freezed == promotedLabels
+          ? _value._promotedLabels
+          : promotedLabels // ignore: cast_nullable_to_non_nullable
               as List<String>?,
     ));
   }
@@ -1575,8 +1901,12 @@ class __$$ForYouImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ForYouImpl implements ForYou {
-  const _$ForYouImpl({final List<String>? anyLabelFilter, final String? $type})
+  const _$ForYouImpl(
+      {final List<String>? anyLabelFilter,
+      final List<String>? promotedLabels,
+      final String? $type})
       : _anyLabelFilter = anyLabelFilter,
+        _promotedLabels = promotedLabels,
         $type = $type ?? 'ForYou';
 
   factory _$ForYouImpl.fromJson(Map<String, dynamic> json) =>
@@ -1597,12 +1927,27 @@ class _$ForYouImpl implements ForYou {
     return EqualUnmodifiableListView(value);
   }
 
+  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
+  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
+  final List<String>? _promotedLabels;
+
+  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
+  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
+  @override
+  List<String>? get promotedLabels {
+    final value = _promotedLabels;
+    if (value == null) return null;
+    if (_promotedLabels is EqualUnmodifiableListView) return _promotedLabels;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'BlazeRecommendationsType.forYou(anyLabelFilter: $anyLabelFilter)';
+    return 'BlazeRecommendationsType.forYou(anyLabelFilter: $anyLabelFilter, promotedLabels: $promotedLabels)';
   }
 
   @override
@@ -1611,13 +1956,17 @@ class _$ForYouImpl implements ForYou {
         (other.runtimeType == runtimeType &&
             other is _$ForYouImpl &&
             const DeepCollectionEquality()
-                .equals(other._anyLabelFilter, _anyLabelFilter));
+                .equals(other._anyLabelFilter, _anyLabelFilter) &&
+            const DeepCollectionEquality()
+                .equals(other._promotedLabels, _promotedLabels));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_anyLabelFilter));
+      runtimeType,
+      const DeepCollectionEquality().hash(_anyLabelFilter),
+      const DeepCollectionEquality().hash(_promotedLabels));
 
   /// Create a copy of BlazeRecommendationsType
   /// with the given fields replaced by the non-null parameter values.
@@ -1630,30 +1979,36 @@ class _$ForYouImpl implements ForYou {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String>? anyLabelFilter) forYou,
+    required TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)
+        forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) {
-    return forYou(anyLabelFilter);
+    return forYou(anyLabelFilter, promotedLabels);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String>? anyLabelFilter)? forYou,
+    TResult? Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) {
-    return forYou?.call(anyLabelFilter);
+    return forYou?.call(anyLabelFilter, promotedLabels);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String>? anyLabelFilter)? forYou,
+    TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),
   }) {
     if (forYou != null) {
-      return forYou(anyLabelFilter);
+      return forYou(anyLabelFilter, promotedLabels);
     }
     return orElse();
   }
@@ -1698,7 +2053,9 @@ class _$ForYouImpl implements ForYou {
 }
 
 abstract class ForYou implements BlazeRecommendationsType {
-  const factory ForYou({final List<String>? anyLabelFilter}) = _$ForYouImpl;
+  const factory ForYou(
+      {final List<String>? anyLabelFilter,
+      final List<String>? promotedLabels}) = _$ForYouImpl;
 
   factory ForYou.fromJson(Map<String, dynamic> json) = _$ForYouImpl.fromJson;
 
@@ -1706,6 +2063,10 @@ abstract class ForYou implements BlazeRecommendationsType {
   /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
   @override
   List<String>? get anyLabelFilter;
+
+  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
+  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
+  List<String>? get promotedLabels;
 
   /// Create a copy of BlazeRecommendationsType
   /// with the given fields replaced by the non-null parameter values.
@@ -1809,7 +2170,9 @@ class _$TrendingImpl implements Trending {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<String>? anyLabelFilter) forYou,
+    required TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)
+        forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) {
     return trending(anyLabelFilter);
@@ -1818,7 +2181,9 @@ class _$TrendingImpl implements Trending {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<String>? anyLabelFilter)? forYou,
+    TResult? Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) {
     return trending?.call(anyLabelFilter);
@@ -1827,7 +2192,9 @@ class _$TrendingImpl implements Trending {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<String>? anyLabelFilter)? forYou,
+    TResult Function(
+            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+        forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),
   }) {

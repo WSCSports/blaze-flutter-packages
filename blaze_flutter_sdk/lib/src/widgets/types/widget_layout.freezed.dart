@@ -523,6 +523,10 @@ mixin _$BlazeWidgetLayout {
   BlazeWidgetItemStyle? get widgetItemStyle =>
       throw _privateConstructorUsedError;
 
+  /// The shimmering (loading placeholder) style for the widget.
+  BlazeWidgetShimmeringStyle? get shimmering =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeWidgetLayout value) $default,
@@ -563,10 +567,12 @@ abstract class $BlazeWidgetLayoutCopyWith<$Res> {
       BlazeMargins? margins,
       int? columns,
       int? maxDisplayItemsCount,
-      BlazeWidgetItemStyle? widgetItemStyle});
+      BlazeWidgetItemStyle? widgetItemStyle,
+      BlazeWidgetShimmeringStyle? shimmering});
 
   $BlazeMarginsCopyWith<$Res>? get margins;
   $BlazeWidgetItemStyleCopyWith<$Res>? get widgetItemStyle;
+  $BlazeWidgetShimmeringStyleCopyWith<$Res>? get shimmering;
 }
 
 /// @nodoc
@@ -591,6 +597,7 @@ class _$BlazeWidgetLayoutCopyWithImpl<$Res, $Val extends BlazeWidgetLayout>
     Object? columns = freezed,
     Object? maxDisplayItemsCount = freezed,
     Object? widgetItemStyle = freezed,
+    Object? shimmering = freezed,
   }) {
     return _then(_value.copyWith(
       horizontalItemsSpacing: freezed == horizontalItemsSpacing
@@ -621,6 +628,10 @@ class _$BlazeWidgetLayoutCopyWithImpl<$Res, $Val extends BlazeWidgetLayout>
           ? _value.widgetItemStyle
           : widgetItemStyle // ignore: cast_nullable_to_non_nullable
               as BlazeWidgetItemStyle?,
+      shimmering: freezed == shimmering
+          ? _value.shimmering
+          : shimmering // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetShimmeringStyle?,
     ) as $Val);
   }
 
@@ -652,6 +663,21 @@ class _$BlazeWidgetLayoutCopyWithImpl<$Res, $Val extends BlazeWidgetLayout>
       return _then(_value.copyWith(widgetItemStyle: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeWidgetLayout
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeWidgetShimmeringStyleCopyWith<$Res>? get shimmering {
+    if (_value.shimmering == null) {
+      return null;
+    }
+
+    return $BlazeWidgetShimmeringStyleCopyWith<$Res>(_value.shimmering!,
+        (value) {
+      return _then(_value.copyWith(shimmering: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -669,12 +695,15 @@ abstract class _$$BlazeWidgetLayoutImplCopyWith<$Res>
       BlazeMargins? margins,
       int? columns,
       int? maxDisplayItemsCount,
-      BlazeWidgetItemStyle? widgetItemStyle});
+      BlazeWidgetItemStyle? widgetItemStyle,
+      BlazeWidgetShimmeringStyle? shimmering});
 
   @override
   $BlazeMarginsCopyWith<$Res>? get margins;
   @override
   $BlazeWidgetItemStyleCopyWith<$Res>? get widgetItemStyle;
+  @override
+  $BlazeWidgetShimmeringStyleCopyWith<$Res>? get shimmering;
 }
 
 /// @nodoc
@@ -697,6 +726,7 @@ class __$$BlazeWidgetLayoutImplCopyWithImpl<$Res>
     Object? columns = freezed,
     Object? maxDisplayItemsCount = freezed,
     Object? widgetItemStyle = freezed,
+    Object? shimmering = freezed,
   }) {
     return _then(_$BlazeWidgetLayoutImpl(
       horizontalItemsSpacing: freezed == horizontalItemsSpacing
@@ -727,6 +757,10 @@ class __$$BlazeWidgetLayoutImplCopyWithImpl<$Res>
           ? _value.widgetItemStyle
           : widgetItemStyle // ignore: cast_nullable_to_non_nullable
               as BlazeWidgetItemStyle?,
+      shimmering: freezed == shimmering
+          ? _value.shimmering
+          : shimmering // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetShimmeringStyle?,
     ));
   }
 }
@@ -741,7 +775,8 @@ class _$BlazeWidgetLayoutImpl implements _BlazeWidgetLayout {
       this.margins,
       this.columns,
       this.maxDisplayItemsCount,
-      this.widgetItemStyle});
+      this.widgetItemStyle,
+      this.shimmering});
 
   factory _$BlazeWidgetLayoutImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeWidgetLayoutImplFromJson(json);
@@ -761,9 +796,13 @@ class _$BlazeWidgetLayoutImpl implements _BlazeWidgetLayout {
   @override
   final BlazeWidgetItemStyle? widgetItemStyle;
 
+  /// The shimmering (loading placeholder) style for the widget.
+  @override
+  final BlazeWidgetShimmeringStyle? shimmering;
+
   @override
   String toString() {
-    return 'BlazeWidgetLayout(horizontalItemsSpacing: $horizontalItemsSpacing, verticalItemsSpacing: $verticalItemsSpacing, itemRatio: $itemRatio, margins: $margins, columns: $columns, maxDisplayItemsCount: $maxDisplayItemsCount, widgetItemStyle: $widgetItemStyle)';
+    return 'BlazeWidgetLayout(horizontalItemsSpacing: $horizontalItemsSpacing, verticalItemsSpacing: $verticalItemsSpacing, itemRatio: $itemRatio, margins: $margins, columns: $columns, maxDisplayItemsCount: $maxDisplayItemsCount, widgetItemStyle: $widgetItemStyle, shimmering: $shimmering)';
   }
 
   @override
@@ -782,7 +821,9 @@ class _$BlazeWidgetLayoutImpl implements _BlazeWidgetLayout {
             (identical(other.maxDisplayItemsCount, maxDisplayItemsCount) ||
                 other.maxDisplayItemsCount == maxDisplayItemsCount) &&
             (identical(other.widgetItemStyle, widgetItemStyle) ||
-                other.widgetItemStyle == widgetItemStyle));
+                other.widgetItemStyle == widgetItemStyle) &&
+            (identical(other.shimmering, shimmering) ||
+                other.shimmering == shimmering));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -795,7 +836,8 @@ class _$BlazeWidgetLayoutImpl implements _BlazeWidgetLayout {
       margins,
       columns,
       maxDisplayItemsCount,
-      widgetItemStyle);
+      widgetItemStyle,
+      shimmering);
 
   /// Create a copy of BlazeWidgetLayout
   /// with the given fields replaced by the non-null parameter values.
@@ -850,7 +892,8 @@ abstract class _BlazeWidgetLayout implements BlazeWidgetLayout {
       final BlazeMargins? margins,
       final int? columns,
       final int? maxDisplayItemsCount,
-      final BlazeWidgetItemStyle? widgetItemStyle}) = _$BlazeWidgetLayoutImpl;
+      final BlazeWidgetItemStyle? widgetItemStyle,
+      final BlazeWidgetShimmeringStyle? shimmering}) = _$BlazeWidgetLayoutImpl;
 
   factory _BlazeWidgetLayout.fromJson(Map<String, dynamic> json) =
       _$BlazeWidgetLayoutImpl.fromJson;
@@ -869,6 +912,10 @@ abstract class _BlazeWidgetLayout implements BlazeWidgetLayout {
   int? get maxDisplayItemsCount;
   @override
   BlazeWidgetItemStyle? get widgetItemStyle;
+
+  /// The shimmering (loading placeholder) style for the widget.
+  @override
+  BlazeWidgetShimmeringStyle? get shimmering;
 
   /// Create a copy of BlazeWidgetLayout
   /// with the given fields replaced by the non-null parameter values.

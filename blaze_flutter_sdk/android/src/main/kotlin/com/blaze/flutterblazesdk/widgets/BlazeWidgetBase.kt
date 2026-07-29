@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.core.view.doOnLayout
 import com.blaze.blazesdk.data_source.BlazeDataSourceType
+import com.blaze.blazesdk.delegates.BlazePlayerContainerTabsDelegate
 import com.blaze.blazesdk.delegates.BlazeWidgetDelegate
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
@@ -14,6 +15,7 @@ import com.blaze.blazesdk.extentions.blazeDeepCopy
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
 import com.blaze.blazesdk.shared.results.BlazeResult
+import com.blaze.blazesdk.style.shared.models.BlazePlayerCustomActionButtonParams
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemCustomMapping
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStyleOverrides
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
@@ -68,6 +70,12 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         creationParams?.get("playerStyle") as? Map<String, Any>
     }
 
+    // Parse the playback configuration from creation params (raw map for merging with
+    // player-specific implementations)
+    val playbackConfigurationMap: Map<String, Any>? by lazy {
+        creationParams?.get("playbackConfiguration") as? Map<String, Any>
+    }
+
     // Parse the shouldOrderWidgetByReadStatus from creation params
     val shouldOrderWidgetByReadStatus: Boolean by lazy {
         creationParams?.get("shouldOrderWidgetByReadStatus") as? Boolean ?: true
@@ -81,6 +89,12 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
     // Parse the appOverridesCTAHandling from creation params
     val appOverridesCTAHandling: Boolean by lazy {
         creationParams?.get("appOverridesCTAHandling") as? Boolean ?: false
+    }
+
+    // Moments-only: raw "widget to tabs" configuration from creation params. Ignored by
+    // Stories/Videos widgets (Dart never sends it for them).
+    val tabsConfigurationMap: Map<String, Any>? by lazy {
+        creationParams?.get("tabsConfiguration") as? Map<String, Any>
     }
 
     private var methodChannel: MethodChannel? =
@@ -298,6 +312,23 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 }
             }
 
+            override fun onTriggerCustomActionButton(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                customParams: BlazePlayerCustomActionButtonParams
+            ) {
+                sharedDelegateHandler.onTriggerCustomActionButton(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    customParams = customParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onTriggerCustomActionButton",
+                        params = params
+                    )
+                }
+            }
+
             override fun onItemClicked(
                 sourceId: String?,
                 itemId: String,
@@ -314,6 +345,164 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                     )
                 }
             }
+        }
+    }
+
+    /**
+     * Per-widget delegate for the Moments "widget to tabs" fullscreen player. Passed to the native
+     * tabs configuration by the Moments row/grid views. Every callback is forwarded on this
+     * widget's own method channel (with `onMomentsContainerTabs*` method names), so each widget
+     * reports to its own Dart `momentsContainerTabsDelegate` — mirroring the per-instance
+     * [delegate].
+     */
+    val containerTabsDelegate: BlazePlayerContainerTabsDelegate by lazy {
+        object : BlazePlayerContainerTabsDelegate {
+
+            override fun onDataLoadStarted(playerType: BlazePlayerType, sourceId: String?) {
+                sharedDelegateHandler.onDataLoadStarted(
+                    playerType = playerType,
+                    sourceId = sourceId
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsDataLoadStarted",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onDataLoadComplete(
+                    playerType: BlazePlayerType,
+                    sourceId: String?,
+                    itemsCount: Int,
+                    result: BlazeResult<Unit>
+            ) {
+                sharedDelegateHandler.onDataLoadComplete(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    itemsCount = itemsCount,
+                    result = result
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsDataLoadComplete",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onPlayerDidAppear(playerType: BlazePlayerType, sourceId: String?) {
+                sharedDelegateHandler.onPlayerDidAppear(
+                    playerType = playerType,
+                    sourceId = sourceId
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsPlayerDidAppear",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onPlayerDidDismiss(playerType: BlazePlayerType, sourceId: String?) {
+                sharedDelegateHandler.onPlayerDidDismiss(
+                    playerType = playerType,
+                    sourceId = sourceId
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsPlayerDidDismiss",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTriggerCTA(
+                    playerType: BlazePlayerType,
+                    sourceId: String?,
+                    actionType: BlazeCTAActionType,
+                    actionParam: String
+            ): Boolean {
+                return sharedDelegateHandler.onTriggerCTA(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    actionType = actionType,
+                    actionParam = actionParam,
+                    appOverridesCTAHandling = appOverridesCTAHandling
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTriggerCTA",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTriggerPlayerBodyTextLink(
+                    playerType: BlazePlayerType,
+                    sourceId: String?,
+                    actionParam: String
+            ): BlazeLinkActionHandleType {
+                return sharedDelegateHandler.onTriggerPlayerBodyTextLink(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    actionParam = actionParam
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTriggerPlayerBodyTextLink",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onPlayerEventTriggered(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                event: BlazePlayerEvent
+            ) {
+                sharedDelegateHandler.onPlayerEventTriggered(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    event = event
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsPlayerEventTriggered",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTriggerCustomActionButton(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                customParams: BlazePlayerCustomActionButtonParams
+            ) {
+                sharedDelegateHandler.onTriggerCustomActionButton(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    customParams = customParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTriggerCustomActionButton",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTabSelected(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                tabIndex: Int
+            ) {
+                sharedDelegateHandler.onTabSelected(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    tabIndex = tabIndex
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTabSelected",
+                        params = params
+                    )
+                }
+            }
+
+            // `onSearchButtonClicked` (sync return) and `onShareClicked` (not bridged anywhere) are
+            // intentionally left at their native defaults.
         }
     }
 

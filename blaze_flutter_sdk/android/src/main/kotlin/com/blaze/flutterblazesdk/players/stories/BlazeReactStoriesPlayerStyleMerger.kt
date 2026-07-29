@@ -6,20 +6,25 @@ import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerButtonsStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerChipStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerChipsStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerCtaStyle
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerCustomActionButton
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerFirstTimeSlideInstructionsStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerFirstTimeSlideStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerHeaderGradientStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerLastUpdateTextStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerProgressBarStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerTitleImageStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerTitleTextStyle
 import com.blaze.blazesdk.style.shared.models.blazeDp
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.mergeButtonThemes
 import com.blaze.flutterblazesdk.players.shared.mergedWith
+import com.blaze.flutterblazesdk.players.shared.toNativeParams
 import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
 import com.blaze.flutterblazesdk.utils.parsing.toColorResId
 import com.blaze.flutterblazesdk.utils.parsing.toFontResId
+import com.blaze.flutterblazesdk.utils.parsing.toImageResId
 
 fun BlazeStoryPlayerStyle.mergedWith(
     customization: BlazeReactStoryPlayerStyle?,
@@ -85,8 +90,53 @@ fun BlazeStoryPlayerTitleTextStyle.mergedWith(
     merged.textSize = customization.textSize ?: merged.textSize
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
     merged.isVisible = customization.isVisible ?: this.isVisible
+    merged.image = merged.image.mergedWith(customization.image, context)
 
     return merged
+}
+
+fun BlazeStoryPlayerTitleImageStyle.mergedWith(
+    customization: BlazeReactStoryPlayerTitleImageStyle?,
+    context: Context
+): BlazeStoryPlayerTitleImageStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.isVisible = customization.isVisible ?: this.isVisible
+    merged.size = customization.size?.toInt()?.blazeDp ?: this.size
+
+    customization.source?.let { reactSource ->
+        when (reactSource.type) {
+            "static" -> {
+                reactSource.staticSource?.toNativeStaticSource(context)?.let {
+                    merged.source = it
+                }
+            }
+            "dynamic" -> {
+                merged.source = BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Dynamic(
+                    fallback = reactSource.fallback?.toNativeStaticSource(context)
+                )
+            }
+        }
+    }
+
+    return merged
+}
+
+private fun BlazeReactStoryPlayerTitleImageStaticSource.toNativeStaticSource(
+    context: Context
+): BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Static? {
+    return when (type) {
+        "image" -> {
+            val resId = image?.toImageResId(context) ?: return null
+            BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Static.ResId(resId)
+        }
+        "url" -> {
+            url ?: return null
+            BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Static.Url(url)
+        }
+        else -> null
+    }
 }
 
 fun BlazeStoryPlayerLastUpdateTextStyle.mergedWith(
@@ -122,7 +172,25 @@ fun BlazeStoryPlayerButtonsStyle.mergedWith(
     merged.exit = merged.exit.mergeButtonThemes(customization.exit, context)
     merged.share = merged.share.mergeButtonThemes(customization.share, context)
 
+    mergeCustomActionButtons(customization.customActionButtons, context)?.let {
+        merged.setTopStackCustomActionButtons(it)
+    }
+
     return merged
+}
+
+private fun mergeCustomActionButtons(
+    reactButtons: List<BlazeReactCustomActionButton>?,
+    context: Context
+): List<BlazeStoryPlayerCustomActionButton>? {
+    reactButtons ?: return null
+    val nativeButtons = reactButtons.mapNotNull { reactButton ->
+        val params = reactButton.customParams?.toNativeParams() ?: return@mapNotNull null
+        val button = BlazeStoryPlayerCustomActionButton(customParams = params)
+        button.style = button.style.mergeButtonThemes(reactButton.style, context)
+        button
+    }
+    return nativeButtons.ifEmpty { return null }
 }
 
 fun BlazeStoryPlayerCtaStyle.mergedWith(
@@ -135,6 +203,7 @@ fun BlazeStoryPlayerCtaStyle.mergedWith(
     merged.cornerRadius = customization.cornerRadius?.blazeDp ?: this.cornerRadius
     merged.textSize = customization.textSize ?: this.textSize
     merged.fontResId = customization.font?.toFontResId(context)
+    merged.isVisible = customization.isVisible ?: this.isVisible
 
     return merged
 }

@@ -14,6 +14,241 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+BlazeWidgetShimmeringStyle _$BlazeWidgetShimmeringStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeWidgetShimmeringStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeWidgetShimmeringStyle {
+  /// Base color of the shimmer, as a hex string (`#RRGGBB` or `#AARRGGBB`).
+  String? get baseColor => throw _privateConstructorUsedError;
+
+  /// Highlight color of the shimmer, as a hex string (`#RRGGBB` or
+  /// `#AARRGGBB`).
+  String? get highlightColor => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetShimmeringStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetShimmeringStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetShimmeringStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeWidgetShimmeringStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeWidgetShimmeringStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeWidgetShimmeringStyleCopyWith<BlazeWidgetShimmeringStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeWidgetShimmeringStyleCopyWith<$Res> {
+  factory $BlazeWidgetShimmeringStyleCopyWith(BlazeWidgetShimmeringStyle value,
+          $Res Function(BlazeWidgetShimmeringStyle) then) =
+      _$BlazeWidgetShimmeringStyleCopyWithImpl<$Res,
+          BlazeWidgetShimmeringStyle>;
+  @useResult
+  $Res call({String? baseColor, String? highlightColor});
+}
+
+/// @nodoc
+class _$BlazeWidgetShimmeringStyleCopyWithImpl<$Res,
+        $Val extends BlazeWidgetShimmeringStyle>
+    implements $BlazeWidgetShimmeringStyleCopyWith<$Res> {
+  _$BlazeWidgetShimmeringStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeWidgetShimmeringStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? baseColor = freezed,
+    Object? highlightColor = freezed,
+  }) {
+    return _then(_value.copyWith(
+      baseColor: freezed == baseColor
+          ? _value.baseColor
+          : baseColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      highlightColor: freezed == highlightColor
+          ? _value.highlightColor
+          : highlightColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeWidgetShimmeringStyleImplCopyWith<$Res>
+    implements $BlazeWidgetShimmeringStyleCopyWith<$Res> {
+  factory _$$BlazeWidgetShimmeringStyleImplCopyWith(
+          _$BlazeWidgetShimmeringStyleImpl value,
+          $Res Function(_$BlazeWidgetShimmeringStyleImpl) then) =
+      __$$BlazeWidgetShimmeringStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? baseColor, String? highlightColor});
+}
+
+/// @nodoc
+class __$$BlazeWidgetShimmeringStyleImplCopyWithImpl<$Res>
+    extends _$BlazeWidgetShimmeringStyleCopyWithImpl<$Res,
+        _$BlazeWidgetShimmeringStyleImpl>
+    implements _$$BlazeWidgetShimmeringStyleImplCopyWith<$Res> {
+  __$$BlazeWidgetShimmeringStyleImplCopyWithImpl(
+      _$BlazeWidgetShimmeringStyleImpl _value,
+      $Res Function(_$BlazeWidgetShimmeringStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeWidgetShimmeringStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? baseColor = freezed,
+    Object? highlightColor = freezed,
+  }) {
+    return _then(_$BlazeWidgetShimmeringStyleImpl(
+      baseColor: freezed == baseColor
+          ? _value.baseColor
+          : baseColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      highlightColor: freezed == highlightColor
+          ? _value.highlightColor
+          : highlightColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeWidgetShimmeringStyleImpl implements _BlazeWidgetShimmeringStyle {
+  const _$BlazeWidgetShimmeringStyleImpl({this.baseColor, this.highlightColor});
+
+  factory _$BlazeWidgetShimmeringStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeWidgetShimmeringStyleImplFromJson(json);
+
+  /// Base color of the shimmer, as a hex string (`#RRGGBB` or `#AARRGGBB`).
+  @override
+  final String? baseColor;
+
+  /// Highlight color of the shimmer, as a hex string (`#RRGGBB` or
+  /// `#AARRGGBB`).
+  @override
+  final String? highlightColor;
+
+  @override
+  String toString() {
+    return 'BlazeWidgetShimmeringStyle(baseColor: $baseColor, highlightColor: $highlightColor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeWidgetShimmeringStyleImpl &&
+            (identical(other.baseColor, baseColor) ||
+                other.baseColor == baseColor) &&
+            (identical(other.highlightColor, highlightColor) ||
+                other.highlightColor == highlightColor));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, baseColor, highlightColor);
+
+  /// Create a copy of BlazeWidgetShimmeringStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeWidgetShimmeringStyleImplCopyWith<_$BlazeWidgetShimmeringStyleImpl>
+      get copyWith => __$$BlazeWidgetShimmeringStyleImplCopyWithImpl<
+          _$BlazeWidgetShimmeringStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetShimmeringStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetShimmeringStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetShimmeringStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeWidgetShimmeringStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeWidgetShimmeringStyle
+    implements BlazeWidgetShimmeringStyle {
+  const factory _BlazeWidgetShimmeringStyle(
+      {final String? baseColor,
+      final String? highlightColor}) = _$BlazeWidgetShimmeringStyleImpl;
+
+  factory _BlazeWidgetShimmeringStyle.fromJson(Map<String, dynamic> json) =
+      _$BlazeWidgetShimmeringStyleImpl.fromJson;
+
+  /// Base color of the shimmer, as a hex string (`#RRGGBB` or `#AARRGGBB`).
+  @override
+  String? get baseColor;
+
+  /// Highlight color of the shimmer, as a hex string (`#RRGGBB` or
+  /// `#AARRGGBB`).
+  @override
+  String? get highlightColor;
+
+  /// Create a copy of BlazeWidgetShimmeringStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeWidgetShimmeringStyleImplCopyWith<_$BlazeWidgetShimmeringStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 BlazeWidgetGradient _$BlazeWidgetGradientFromJson(Map<String, dynamic> json) {
   return _BlazeWidgetGradient.fromJson(json);
 }

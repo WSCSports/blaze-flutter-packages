@@ -730,6 +730,15 @@ mixin _$BlazeVideosPlayerButtonsStyle {
   BlazePlayerButtonStyle? get playPause => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get previous => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get next => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get captions => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get forceRotation =>
+      throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get casting => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get pictureInPicture =>
+      throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get seekForward => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get seekBackward =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -773,7 +782,13 @@ abstract class $BlazeVideosPlayerButtonsStyleCopyWith<$Res> {
       BlazePlayerButtonStyle? like,
       BlazePlayerButtonStyle? playPause,
       BlazePlayerButtonStyle? previous,
-      BlazePlayerButtonStyle? next});
+      BlazePlayerButtonStyle? next,
+      BlazePlayerButtonStyle? captions,
+      BlazePlayerButtonStyle? forceRotation,
+      BlazePlayerButtonStyle? casting,
+      BlazePlayerButtonStyle? pictureInPicture,
+      BlazePlayerButtonStyle? seekForward,
+      BlazePlayerButtonStyle? seekBackward});
 
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
@@ -782,6 +797,12 @@ abstract class $BlazeVideosPlayerButtonsStyleCopyWith<$Res> {
   $BlazePlayerButtonStyleCopyWith<$Res>? get playPause;
   $BlazePlayerButtonStyleCopyWith<$Res>? get previous;
   $BlazePlayerButtonStyleCopyWith<$Res>? get next;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get forceRotation;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get casting;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get pictureInPicture;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward;
 }
 
 /// @nodoc
@@ -807,6 +828,12 @@ class _$BlazeVideosPlayerButtonsStyleCopyWithImpl<$Res,
     Object? playPause = freezed,
     Object? previous = freezed,
     Object? next = freezed,
+    Object? captions = freezed,
+    Object? forceRotation = freezed,
+    Object? casting = freezed,
+    Object? pictureInPicture = freezed,
+    Object? seekForward = freezed,
+    Object? seekBackward = freezed,
   }) {
     return _then(_value.copyWith(
       mute: freezed == mute
@@ -836,6 +863,30 @@ class _$BlazeVideosPlayerButtonsStyleCopyWithImpl<$Res,
       next: freezed == next
           ? _value.next
           : next // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      forceRotation: freezed == forceRotation
+          ? _value.forceRotation
+          : forceRotation // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      casting: freezed == casting
+          ? _value.casting
+          : casting // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      pictureInPicture: freezed == pictureInPicture
+          ? _value.pictureInPicture
+          : pictureInPicture // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekForward: freezed == seekForward
+          ? _value.seekForward
+          : seekForward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekBackward: freezed == seekBackward
+          ? _value.seekBackward
+          : seekBackward // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
     ) as $Val);
   }
@@ -937,6 +988,92 @@ class _$BlazeVideosPlayerButtonsStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(next: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get forceRotation {
+    if (_value.forceRotation == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.forceRotation!,
+        (value) {
+      return _then(_value.copyWith(forceRotation: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get casting {
+    if (_value.casting == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.casting!, (value) {
+      return _then(_value.copyWith(casting: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get pictureInPicture {
+    if (_value.pictureInPicture == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.pictureInPicture!,
+        (value) {
+      return _then(_value.copyWith(pictureInPicture: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward {
+    if (_value.seekForward == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.seekForward!, (value) {
+      return _then(_value.copyWith(seekForward: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeVideosPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward {
+    if (_value.seekBackward == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.seekBackward!, (value) {
+      return _then(_value.copyWith(seekBackward: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -955,7 +1092,13 @@ abstract class _$$BlazeVideosPlayerButtonsStyleImplCopyWith<$Res>
       BlazePlayerButtonStyle? like,
       BlazePlayerButtonStyle? playPause,
       BlazePlayerButtonStyle? previous,
-      BlazePlayerButtonStyle? next});
+      BlazePlayerButtonStyle? next,
+      BlazePlayerButtonStyle? captions,
+      BlazePlayerButtonStyle? forceRotation,
+      BlazePlayerButtonStyle? casting,
+      BlazePlayerButtonStyle? pictureInPicture,
+      BlazePlayerButtonStyle? seekForward,
+      BlazePlayerButtonStyle? seekBackward});
 
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
@@ -971,6 +1114,18 @@ abstract class _$$BlazeVideosPlayerButtonsStyleImplCopyWith<$Res>
   $BlazePlayerButtonStyleCopyWith<$Res>? get previous;
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get next;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get forceRotation;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get casting;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get pictureInPicture;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward;
 }
 
 /// @nodoc
@@ -995,6 +1150,12 @@ class __$$BlazeVideosPlayerButtonsStyleImplCopyWithImpl<$Res>
     Object? playPause = freezed,
     Object? previous = freezed,
     Object? next = freezed,
+    Object? captions = freezed,
+    Object? forceRotation = freezed,
+    Object? casting = freezed,
+    Object? pictureInPicture = freezed,
+    Object? seekForward = freezed,
+    Object? seekBackward = freezed,
   }) {
     return _then(_$BlazeVideosPlayerButtonsStyleImpl(
       mute: freezed == mute
@@ -1025,6 +1186,30 @@ class __$$BlazeVideosPlayerButtonsStyleImplCopyWithImpl<$Res>
           ? _value.next
           : next // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      forceRotation: freezed == forceRotation
+          ? _value.forceRotation
+          : forceRotation // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      casting: freezed == casting
+          ? _value.casting
+          : casting // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      pictureInPicture: freezed == pictureInPicture
+          ? _value.pictureInPicture
+          : pictureInPicture // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekForward: freezed == seekForward
+          ? _value.seekForward
+          : seekForward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekBackward: freezed == seekBackward
+          ? _value.seekBackward
+          : seekBackward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
     ));
   }
 }
@@ -1040,7 +1225,13 @@ class _$BlazeVideosPlayerButtonsStyleImpl
       this.like,
       this.playPause,
       this.previous,
-      this.next});
+      this.next,
+      this.captions,
+      this.forceRotation,
+      this.casting,
+      this.pictureInPicture,
+      this.seekForward,
+      this.seekBackward});
 
   factory _$BlazeVideosPlayerButtonsStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -1060,10 +1251,22 @@ class _$BlazeVideosPlayerButtonsStyleImpl
   final BlazePlayerButtonStyle? previous;
   @override
   final BlazePlayerButtonStyle? next;
+  @override
+  final BlazePlayerButtonStyle? captions;
+  @override
+  final BlazePlayerButtonStyle? forceRotation;
+  @override
+  final BlazePlayerButtonStyle? casting;
+  @override
+  final BlazePlayerButtonStyle? pictureInPicture;
+  @override
+  final BlazePlayerButtonStyle? seekForward;
+  @override
+  final BlazePlayerButtonStyle? seekBackward;
 
   @override
   String toString() {
-    return 'BlazeVideosPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, playPause: $playPause, previous: $previous, next: $next)';
+    return 'BlazeVideosPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, playPause: $playPause, previous: $previous, next: $next, captions: $captions, forceRotation: $forceRotation, casting: $casting, pictureInPicture: $pictureInPicture, seekForward: $seekForward, seekBackward: $seekBackward)';
   }
 
   @override
@@ -1079,13 +1282,37 @@ class _$BlazeVideosPlayerButtonsStyleImpl
                 other.playPause == playPause) &&
             (identical(other.previous, previous) ||
                 other.previous == previous) &&
-            (identical(other.next, next) || other.next == next));
+            (identical(other.next, next) || other.next == next) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions) &&
+            (identical(other.forceRotation, forceRotation) ||
+                other.forceRotation == forceRotation) &&
+            (identical(other.casting, casting) || other.casting == casting) &&
+            (identical(other.pictureInPicture, pictureInPicture) ||
+                other.pictureInPicture == pictureInPicture) &&
+            (identical(other.seekForward, seekForward) ||
+                other.seekForward == seekForward) &&
+            (identical(other.seekBackward, seekBackward) ||
+                other.seekBackward == seekBackward));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, mute, exit, share, like, playPause, previous, next);
+      runtimeType,
+      mute,
+      exit,
+      share,
+      like,
+      playPause,
+      previous,
+      next,
+      captions,
+      forceRotation,
+      casting,
+      pictureInPicture,
+      seekForward,
+      seekBackward);
 
   /// Create a copy of BlazeVideosPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1142,7 +1369,13 @@ abstract class _BlazeVideosPlayerButtonsStyle
           final BlazePlayerButtonStyle? like,
           final BlazePlayerButtonStyle? playPause,
           final BlazePlayerButtonStyle? previous,
-          final BlazePlayerButtonStyle? next}) =
+          final BlazePlayerButtonStyle? next,
+          final BlazePlayerButtonStyle? captions,
+          final BlazePlayerButtonStyle? forceRotation,
+          final BlazePlayerButtonStyle? casting,
+          final BlazePlayerButtonStyle? pictureInPicture,
+          final BlazePlayerButtonStyle? seekForward,
+          final BlazePlayerButtonStyle? seekBackward}) =
       _$BlazeVideosPlayerButtonsStyleImpl;
 
   factory _BlazeVideosPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =
@@ -1162,6 +1395,18 @@ abstract class _BlazeVideosPlayerButtonsStyle
   BlazePlayerButtonStyle? get previous;
   @override
   BlazePlayerButtonStyle? get next;
+  @override
+  BlazePlayerButtonStyle? get captions;
+  @override
+  BlazePlayerButtonStyle? get forceRotation;
+  @override
+  BlazePlayerButtonStyle? get casting;
+  @override
+  BlazePlayerButtonStyle? get pictureInPicture;
+  @override
+  BlazePlayerButtonStyle? get seekForward;
+  @override
+  BlazePlayerButtonStyle? get seekBackward;
 
   /// Create a copy of BlazeVideosPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1185,8 +1430,7 @@ mixin _$BlazeVideosPlayerCtaStyle {
   double? get width => throw _privateConstructorUsedError;
   double? get height => throw _privateConstructorUsedError;
   BlazeVideosPlayerCtaIconStyle? get icon => throw _privateConstructorUsedError;
-  BlazeVideosPlayerCtaVisibility? get ctaVisibility =>
-      throw _privateConstructorUsedError;
+  bool? get isVisible => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1228,11 +1472,10 @@ abstract class $BlazeVideosPlayerCtaStyleCopyWith<$Res> {
       double? width,
       double? height,
       BlazeVideosPlayerCtaIconStyle? icon,
-      BlazeVideosPlayerCtaVisibility? ctaVisibility});
+      bool? isVisible});
 
   $BlazeFontCopyWith<$Res>? get font;
   $BlazeVideosPlayerCtaIconStyleCopyWith<$Res>? get icon;
-  $BlazeVideosPlayerCtaVisibilityCopyWith<$Res>? get ctaVisibility;
 }
 
 /// @nodoc
@@ -1257,7 +1500,7 @@ class _$BlazeVideosPlayerCtaStyleCopyWithImpl<$Res,
     Object? width = freezed,
     Object? height = freezed,
     Object? icon = freezed,
-    Object? ctaVisibility = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -1284,10 +1527,10 @@ class _$BlazeVideosPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as BlazeVideosPlayerCtaIconStyle?,
-      ctaVisibility: freezed == ctaVisibility
-          ? _value.ctaVisibility
-          : ctaVisibility // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCtaVisibility?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -1318,21 +1561,6 @@ class _$BlazeVideosPlayerCtaStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(icon: value) as $Val);
     });
   }
-
-  /// Create a copy of BlazeVideosPlayerCtaStyle
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $BlazeVideosPlayerCtaVisibilityCopyWith<$Res>? get ctaVisibility {
-    if (_value.ctaVisibility == null) {
-      return null;
-    }
-
-    return $BlazeVideosPlayerCtaVisibilityCopyWith<$Res>(_value.ctaVisibility!,
-        (value) {
-      return _then(_value.copyWith(ctaVisibility: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
@@ -1351,14 +1579,12 @@ abstract class _$$BlazeVideosPlayerCtaStyleImplCopyWith<$Res>
       double? width,
       double? height,
       BlazeVideosPlayerCtaIconStyle? icon,
-      BlazeVideosPlayerCtaVisibility? ctaVisibility});
+      bool? isVisible});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
   @override
   $BlazeVideosPlayerCtaIconStyleCopyWith<$Res>? get icon;
-  @override
-  $BlazeVideosPlayerCtaVisibilityCopyWith<$Res>? get ctaVisibility;
 }
 
 /// @nodoc
@@ -1382,7 +1608,7 @@ class __$$BlazeVideosPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? width = freezed,
     Object? height = freezed,
     Object? icon = freezed,
-    Object? ctaVisibility = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_$BlazeVideosPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -1409,10 +1635,10 @@ class __$$BlazeVideosPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as BlazeVideosPlayerCtaIconStyle?,
-      ctaVisibility: freezed == ctaVisibility
-          ? _value.ctaVisibility
-          : ctaVisibility // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCtaVisibility?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1427,7 +1653,7 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
       this.width,
       this.height,
       this.icon,
-      this.ctaVisibility});
+      this.isVisible});
 
   factory _$BlazeVideosPlayerCtaStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeVideosPlayerCtaStyleImplFromJson(json);
@@ -1445,11 +1671,11 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
   @override
   final BlazeVideosPlayerCtaIconStyle? icon;
   @override
-  final BlazeVideosPlayerCtaVisibility? ctaVisibility;
+  final bool? isVisible;
 
   @override
   String toString() {
-    return 'BlazeVideosPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, icon: $icon, ctaVisibility: $ctaVisibility)';
+    return 'BlazeVideosPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, icon: $icon, isVisible: $isVisible)';
   }
 
   @override
@@ -1465,14 +1691,14 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
             (identical(other.width, width) || other.width == width) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.icon, icon) || other.icon == icon) &&
-            (identical(other.ctaVisibility, ctaVisibility) ||
-                other.ctaVisibility == ctaVisibility));
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font,
-      width, height, icon, ctaVisibility);
+      width, height, icon, isVisible);
 
   /// Create a copy of BlazeVideosPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1521,14 +1747,13 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
 
 abstract class _BlazeVideosPlayerCtaStyle implements BlazeVideosPlayerCtaStyle {
   const factory _BlazeVideosPlayerCtaStyle(
-          {final double? cornerRadius,
-          final double? textSize,
-          final BlazeFont? font,
-          final double? width,
-          final double? height,
-          final BlazeVideosPlayerCtaIconStyle? icon,
-          final BlazeVideosPlayerCtaVisibility? ctaVisibility}) =
-      _$BlazeVideosPlayerCtaStyleImpl;
+      {final double? cornerRadius,
+      final double? textSize,
+      final BlazeFont? font,
+      final double? width,
+      final double? height,
+      final BlazeVideosPlayerCtaIconStyle? icon,
+      final bool? isVisible}) = _$BlazeVideosPlayerCtaStyleImpl;
 
   factory _BlazeVideosPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeVideosPlayerCtaStyleImpl.fromJson;
@@ -1546,240 +1771,13 @@ abstract class _BlazeVideosPlayerCtaStyle implements BlazeVideosPlayerCtaStyle {
   @override
   BlazeVideosPlayerCtaIconStyle? get icon;
   @override
-  BlazeVideosPlayerCtaVisibility? get ctaVisibility;
+  bool? get isVisible;
 
   /// Create a copy of BlazeVideosPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeVideosPlayerCtaStyleImplCopyWith<_$BlazeVideosPlayerCtaStyleImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-BlazeVideosPlayerCtaVisibility _$BlazeVideosPlayerCtaVisibilityFromJson(
-    Map<String, dynamic> json) {
-  return _BlazeVideosPlayerCtaVisibility.fromJson(json);
-}
-
-/// @nodoc
-mixin _$BlazeVideosPlayerCtaVisibility {
-  BlazeVideosPlayerCtaVisibilityType? get type =>
-      throw _privateConstructorUsedError;
-  double? get duration => throw _privateConstructorUsedError;
-
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_BlazeVideosPlayerCtaVisibility value) $default,
-  ) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeVideosPlayerCtaVisibility value)? $default,
-  ) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeVideosPlayerCtaVisibility value)? $default, {
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  /// Serializes this BlazeVideosPlayerCtaVisibility to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of BlazeVideosPlayerCtaVisibility
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $BlazeVideosPlayerCtaVisibilityCopyWith<BlazeVideosPlayerCtaVisibility>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $BlazeVideosPlayerCtaVisibilityCopyWith<$Res> {
-  factory $BlazeVideosPlayerCtaVisibilityCopyWith(
-          BlazeVideosPlayerCtaVisibility value,
-          $Res Function(BlazeVideosPlayerCtaVisibility) then) =
-      _$BlazeVideosPlayerCtaVisibilityCopyWithImpl<$Res,
-          BlazeVideosPlayerCtaVisibility>;
-  @useResult
-  $Res call({BlazeVideosPlayerCtaVisibilityType? type, double? duration});
-}
-
-/// @nodoc
-class _$BlazeVideosPlayerCtaVisibilityCopyWithImpl<$Res,
-        $Val extends BlazeVideosPlayerCtaVisibility>
-    implements $BlazeVideosPlayerCtaVisibilityCopyWith<$Res> {
-  _$BlazeVideosPlayerCtaVisibilityCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of BlazeVideosPlayerCtaVisibility
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = freezed,
-    Object? duration = freezed,
-  }) {
-    return _then(_value.copyWith(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCtaVisibilityType?,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$BlazeVideosPlayerCtaVisibilityImplCopyWith<$Res>
-    implements $BlazeVideosPlayerCtaVisibilityCopyWith<$Res> {
-  factory _$$BlazeVideosPlayerCtaVisibilityImplCopyWith(
-          _$BlazeVideosPlayerCtaVisibilityImpl value,
-          $Res Function(_$BlazeVideosPlayerCtaVisibilityImpl) then) =
-      __$$BlazeVideosPlayerCtaVisibilityImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({BlazeVideosPlayerCtaVisibilityType? type, double? duration});
-}
-
-/// @nodoc
-class __$$BlazeVideosPlayerCtaVisibilityImplCopyWithImpl<$Res>
-    extends _$BlazeVideosPlayerCtaVisibilityCopyWithImpl<$Res,
-        _$BlazeVideosPlayerCtaVisibilityImpl>
-    implements _$$BlazeVideosPlayerCtaVisibilityImplCopyWith<$Res> {
-  __$$BlazeVideosPlayerCtaVisibilityImplCopyWithImpl(
-      _$BlazeVideosPlayerCtaVisibilityImpl _value,
-      $Res Function(_$BlazeVideosPlayerCtaVisibilityImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of BlazeVideosPlayerCtaVisibility
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? type = freezed,
-    Object? duration = freezed,
-  }) {
-    return _then(_$BlazeVideosPlayerCtaVisibilityImpl(
-      type: freezed == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCtaVisibilityType?,
-      duration: freezed == duration
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as double?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$BlazeVideosPlayerCtaVisibilityImpl
-    implements _BlazeVideosPlayerCtaVisibility {
-  const _$BlazeVideosPlayerCtaVisibilityImpl({this.type, this.duration});
-
-  factory _$BlazeVideosPlayerCtaVisibilityImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$BlazeVideosPlayerCtaVisibilityImplFromJson(json);
-
-  @override
-  final BlazeVideosPlayerCtaVisibilityType? type;
-  @override
-  final double? duration;
-
-  @override
-  String toString() {
-    return 'BlazeVideosPlayerCtaVisibility(type: $type, duration: $duration)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$BlazeVideosPlayerCtaVisibilityImpl &&
-            (identical(other.type, type) || other.type == type) &&
-            (identical(other.duration, duration) ||
-                other.duration == duration));
-  }
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, type, duration);
-
-  /// Create a copy of BlazeVideosPlayerCtaVisibility
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BlazeVideosPlayerCtaVisibilityImplCopyWith<
-          _$BlazeVideosPlayerCtaVisibilityImpl>
-      get copyWith => __$$BlazeVideosPlayerCtaVisibilityImplCopyWithImpl<
-          _$BlazeVideosPlayerCtaVisibilityImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>(
-    TResult Function(_BlazeVideosPlayerCtaVisibility value) $default,
-  ) {
-    return $default(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_BlazeVideosPlayerCtaVisibility value)? $default,
-  ) {
-    return $default?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>(
-    TResult Function(_BlazeVideosPlayerCtaVisibility value)? $default, {
-    required TResult orElse(),
-  }) {
-    if ($default != null) {
-      return $default(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$BlazeVideosPlayerCtaVisibilityImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _BlazeVideosPlayerCtaVisibility
-    implements BlazeVideosPlayerCtaVisibility {
-  const factory _BlazeVideosPlayerCtaVisibility(
-      {final BlazeVideosPlayerCtaVisibilityType? type,
-      final double? duration}) = _$BlazeVideosPlayerCtaVisibilityImpl;
-
-  factory _BlazeVideosPlayerCtaVisibility.fromJson(Map<String, dynamic> json) =
-      _$BlazeVideosPlayerCtaVisibilityImpl.fromJson;
-
-  @override
-  BlazeVideosPlayerCtaVisibilityType? get type;
-  @override
-  double? get duration;
-
-  /// Create a copy of BlazeVideosPlayerCtaVisibility
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$BlazeVideosPlayerCtaVisibilityImplCopyWith<
-          _$BlazeVideosPlayerCtaVisibilityImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

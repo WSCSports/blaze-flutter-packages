@@ -91,6 +91,26 @@ Map<String, dynamic> _$$BlazeDataSourceTypeRecommendationsImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$BlazeDataSourceTypeSearchImpl _$$BlazeDataSourceTypeSearchImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeDataSourceTypeSearchImpl(
+      searchText: json['searchText'] as String,
+      maxItems: (json['maxItems'] as num?)?.toInt(),
+      labels: json['labels'] == null
+          ? null
+          : BlazeWidgetLabel.fromJson(json['labels'] as Map<String, dynamic>),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeDataSourceTypeSearchImplToJson(
+        _$BlazeDataSourceTypeSearchImpl instance) =>
+    <String, dynamic>{
+      'searchText': instance.searchText,
+      'maxItems': instance.maxItems,
+      'labels': instance.labels?.toJson(),
+      'runtimeType': instance.$type,
+    };
+
 _$BlazeDataSourcePersonalizedTypeIdsImpl
     _$$BlazeDataSourcePersonalizedTypeIdsImplFromJson(
             Map<String, dynamic> json) =>
@@ -141,12 +161,16 @@ _$ForYouImpl _$$ForYouImplFromJson(Map<String, dynamic> json) => _$ForYouImpl(
       anyLabelFilter: (json['anyLabelFilter'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      promotedLabels: (json['promotedLabels'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       $type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$ForYouImplToJson(_$ForYouImpl instance) =>
     <String, dynamic>{
       'anyLabelFilter': instance.anyLabelFilter,
+      'promotedLabels': instance.promotedLabels,
       'type': instance.$type,
     };
 

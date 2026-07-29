@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../types/shared_types.dart';
+import '../types/custom_action_button.dart';
 import '../widgets/types/widget_layout_common.dart';
 
 part 'stories_player_style.freezed.dart';
@@ -78,6 +79,7 @@ class BlazeStoryPlayerButtonsStyle with _$BlazeStoryPlayerButtonsStyle {
     BlazePlayerButtonStyle? mute,
     BlazePlayerButtonStyle? exit,
     BlazePlayerButtonStyle? share,
+    List<BlazeCustomActionButton>? customActionButtons,
   }) = _BlazeStoryPlayerButtonsStyle;
 
   factory BlazeStoryPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =>
@@ -91,6 +93,7 @@ class BlazeStoryPlayerCtaStyle with _$BlazeStoryPlayerCtaStyle {
     double? cornerRadius,
     double? textSize,
     BlazeFont? font,
+    bool? isVisible,
   }) = _BlazeStoryPlayerCtaStyle;
 
   factory BlazeStoryPlayerCtaStyle.fromJson(Map<String, dynamic> json) =>
@@ -113,10 +116,71 @@ class BlazeStoryPlayerTitleTextStyle with _$BlazeStoryPlayerTitleTextStyle {
     double? textSize,
     String? textColor,
     bool? isVisible,
+
+    /// Optional title image displayed alongside the title text.
+    BlazeStoryPlayerTitleImageStyle? image,
   }) = _BlazeStoryPlayerTitleTextStyle;
 
   factory BlazeStoryPlayerTitleTextStyle.fromJson(Map<String, dynamic> json) =>
       _$BlazeStoryPlayerTitleTextStyleFromJson(json);
+}
+
+/// Story player title image style configuration
+@freezed
+class BlazeStoryPlayerTitleImageStyle with _$BlazeStoryPlayerTitleImageStyle {
+  const factory BlazeStoryPlayerTitleImageStyle({
+    bool? isVisible,
+    double? size,
+    BlazeStoryPlayerTitleImageSource? source,
+  }) = _BlazeStoryPlayerTitleImageStyle;
+
+  factory BlazeStoryPlayerTitleImageStyle.fromJson(Map<String, dynamic> json) =>
+      _$BlazeStoryPlayerTitleImageStyleFromJson(json);
+}
+
+/// Source of a story player title image.
+///
+/// Mirrors RN's `BlazeStoryPlayerTitleImageSource` union. The JSON `type`
+/// discriminator carries `'static'` / `'dynamic'`; the constructor names differ
+/// because `static` / `dynamic` are Dart reserved words (hence the
+/// [FreezedUnionValue] overrides).
+@Freezed(unionKey: 'type', unionValueCase: FreezedUnionCase.none)
+class BlazeStoryPlayerTitleImageSource
+    with _$BlazeStoryPlayerTitleImageSource {
+  /// A fixed image source.
+  @FreezedUnionValue('static')
+  const factory BlazeStoryPlayerTitleImageSource.staticSource({
+    required BlazeStoryPlayerTitleImageStaticSource staticSource,
+  }) = BlazeStoryPlayerTitleImageSourceStatic;
+
+  /// A dynamic (server-driven) image source with an optional static fallback.
+  @FreezedUnionValue('dynamic')
+  const factory BlazeStoryPlayerTitleImageSource.dynamicSource({
+    BlazeStoryPlayerTitleImageStaticSource? fallback,
+  }) = BlazeStoryPlayerTitleImageSourceDynamic;
+
+  factory BlazeStoryPlayerTitleImageSource.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeStoryPlayerTitleImageSourceFromJson(json);
+}
+
+/// A concrete static image source for a story player title image.
+@Freezed(unionKey: 'type', unionValueCase: FreezedUnionCase.none)
+class BlazeStoryPlayerTitleImageStaticSource
+    with _$BlazeStoryPlayerTitleImageStaticSource {
+  /// A bundled/named image.
+  const factory BlazeStoryPlayerTitleImageStaticSource.image({
+    required BlazeImage image,
+  }) = BlazeStoryPlayerTitleImageStaticSourceImage;
+
+  /// A remote image referenced by URL.
+  const factory BlazeStoryPlayerTitleImageStaticSource.url({
+    required String url,
+  }) = BlazeStoryPlayerTitleImageStaticSourceUrl;
+
+  factory BlazeStoryPlayerTitleImageStaticSource.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeStoryPlayerTitleImageStaticSourceFromJson(json);
 }
 
 /// Story player last update text style configuration

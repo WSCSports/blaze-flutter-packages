@@ -40,3 +40,32 @@ class BlazeOnEventTriggeredInternalData
           Map<String, dynamic> json) =>
       _$BlazeOnEventTriggeredInternalDataFromJson(json);
 }
+
+/// Request passed to [BlazeGlobalDelegate.playbackModificationHandler] before
+/// playing HLS or MP4 content.
+@freezed
+class BlazePlaybackModificationRequest with _$BlazePlaybackModificationRequest {
+  const factory BlazePlaybackModificationRequest({
+    /// The original content URL the SDK is about to play.
+    required String originalURL,
+  }) = _BlazePlaybackModificationRequest;
+
+  factory BlazePlaybackModificationRequest.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazePlaybackModificationRequestFromJson(json);
+}
+
+/// Response returned from [BlazeGlobalDelegate.playbackModificationHandler]
+/// describing the URL that should actually be played.
+@freezed
+class BlazePlaybackModificationResponse
+    with _$BlazePlaybackModificationResponse {
+  const factory BlazePlaybackModificationResponse({
+    /// The URL to play instead of the original one.
+    required String modifiedURL,
+  }) = _BlazePlaybackModificationResponse;
+
+  factory BlazePlaybackModificationResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazePlaybackModificationResponseFromJson(json);
+}

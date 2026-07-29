@@ -4,6 +4,14 @@ import '../widgets/types/widget_layout_common.dart';
 part 'shared_types.freezed.dart';
 part 'shared_types.g.dart';
 
+/// A primitive value used in metadata and visibility conditions across the
+/// SDK (e.g. custom action buttons).
+///
+/// Must be a [String], [num], or [bool]. Modeled as [Object] to mirror the
+/// React Native `BlazePrimitive = string | number | boolean` union while
+/// keeping the value serializable as a raw JSON primitive.
+typedef BlazePrimitive = Object;
+
 /// Defines the caching level for Blaze widgets and content.
 ///
 /// This enum controls how aggressively content is cached to improve performance
@@ -13,6 +21,17 @@ enum BlazeCachingLevel {
   defaultLevel,
   high,
   extreme,
+}
+
+/// The sound state of the player (muted / unmuted).
+///
+/// The native default is muted, and the state is not persisted across app
+/// launches.
+enum BlazePlayerSoundState {
+  @JsonValue('mute')
+  mute,
+  @JsonValue('unmute')
+  unmute,
 }
 
 /// Color configuration for first time appearance and other UI elements

@@ -690,3 +690,449 @@ abstract class _BlazeOnEventTriggeredInternalData
           _$BlazeOnEventTriggeredInternalDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+BlazePlaybackModificationRequest _$BlazePlaybackModificationRequestFromJson(
+    Map<String, dynamic> json) {
+  return _BlazePlaybackModificationRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazePlaybackModificationRequest {
+  /// The original content URL the SDK is about to play.
+  String get originalURL => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationRequest value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlaybackModificationRequest value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationRequest value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazePlaybackModificationRequest to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazePlaybackModificationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazePlaybackModificationRequestCopyWith<BlazePlaybackModificationRequest>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazePlaybackModificationRequestCopyWith<$Res> {
+  factory $BlazePlaybackModificationRequestCopyWith(
+          BlazePlaybackModificationRequest value,
+          $Res Function(BlazePlaybackModificationRequest) then) =
+      _$BlazePlaybackModificationRequestCopyWithImpl<$Res,
+          BlazePlaybackModificationRequest>;
+  @useResult
+  $Res call({String originalURL});
+}
+
+/// @nodoc
+class _$BlazePlaybackModificationRequestCopyWithImpl<$Res,
+        $Val extends BlazePlaybackModificationRequest>
+    implements $BlazePlaybackModificationRequestCopyWith<$Res> {
+  _$BlazePlaybackModificationRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazePlaybackModificationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? originalURL = null,
+  }) {
+    return _then(_value.copyWith(
+      originalURL: null == originalURL
+          ? _value.originalURL
+          : originalURL // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazePlaybackModificationRequestImplCopyWith<$Res>
+    implements $BlazePlaybackModificationRequestCopyWith<$Res> {
+  factory _$$BlazePlaybackModificationRequestImplCopyWith(
+          _$BlazePlaybackModificationRequestImpl value,
+          $Res Function(_$BlazePlaybackModificationRequestImpl) then) =
+      __$$BlazePlaybackModificationRequestImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String originalURL});
+}
+
+/// @nodoc
+class __$$BlazePlaybackModificationRequestImplCopyWithImpl<$Res>
+    extends _$BlazePlaybackModificationRequestCopyWithImpl<$Res,
+        _$BlazePlaybackModificationRequestImpl>
+    implements _$$BlazePlaybackModificationRequestImplCopyWith<$Res> {
+  __$$BlazePlaybackModificationRequestImplCopyWithImpl(
+      _$BlazePlaybackModificationRequestImpl _value,
+      $Res Function(_$BlazePlaybackModificationRequestImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazePlaybackModificationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? originalURL = null,
+  }) {
+    return _then(_$BlazePlaybackModificationRequestImpl(
+      originalURL: null == originalURL
+          ? _value.originalURL
+          : originalURL // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazePlaybackModificationRequestImpl
+    with DiagnosticableTreeMixin
+    implements _BlazePlaybackModificationRequest {
+  const _$BlazePlaybackModificationRequestImpl({required this.originalURL});
+
+  factory _$BlazePlaybackModificationRequestImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazePlaybackModificationRequestImplFromJson(json);
+
+  /// The original content URL the SDK is about to play.
+  @override
+  final String originalURL;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazePlaybackModificationRequest(originalURL: $originalURL)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazePlaybackModificationRequest'))
+      ..add(DiagnosticsProperty('originalURL', originalURL));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazePlaybackModificationRequestImpl &&
+            (identical(other.originalURL, originalURL) ||
+                other.originalURL == originalURL));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, originalURL);
+
+  /// Create a copy of BlazePlaybackModificationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazePlaybackModificationRequestImplCopyWith<
+          _$BlazePlaybackModificationRequestImpl>
+      get copyWith => __$$BlazePlaybackModificationRequestImplCopyWithImpl<
+          _$BlazePlaybackModificationRequestImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationRequest value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlaybackModificationRequest value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationRequest value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazePlaybackModificationRequestImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazePlaybackModificationRequest
+    implements BlazePlaybackModificationRequest {
+  const factory _BlazePlaybackModificationRequest(
+          {required final String originalURL}) =
+      _$BlazePlaybackModificationRequestImpl;
+
+  factory _BlazePlaybackModificationRequest.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazePlaybackModificationRequestImpl.fromJson;
+
+  /// The original content URL the SDK is about to play.
+  @override
+  String get originalURL;
+
+  /// Create a copy of BlazePlaybackModificationRequest
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazePlaybackModificationRequestImplCopyWith<
+          _$BlazePlaybackModificationRequestImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazePlaybackModificationResponse _$BlazePlaybackModificationResponseFromJson(
+    Map<String, dynamic> json) {
+  return _BlazePlaybackModificationResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazePlaybackModificationResponse {
+  /// The URL to play instead of the original one.
+  String get modifiedURL => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationResponse value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlaybackModificationResponse value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationResponse value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazePlaybackModificationResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazePlaybackModificationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazePlaybackModificationResponseCopyWith<BlazePlaybackModificationResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazePlaybackModificationResponseCopyWith<$Res> {
+  factory $BlazePlaybackModificationResponseCopyWith(
+          BlazePlaybackModificationResponse value,
+          $Res Function(BlazePlaybackModificationResponse) then) =
+      _$BlazePlaybackModificationResponseCopyWithImpl<$Res,
+          BlazePlaybackModificationResponse>;
+  @useResult
+  $Res call({String modifiedURL});
+}
+
+/// @nodoc
+class _$BlazePlaybackModificationResponseCopyWithImpl<$Res,
+        $Val extends BlazePlaybackModificationResponse>
+    implements $BlazePlaybackModificationResponseCopyWith<$Res> {
+  _$BlazePlaybackModificationResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazePlaybackModificationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modifiedURL = null,
+  }) {
+    return _then(_value.copyWith(
+      modifiedURL: null == modifiedURL
+          ? _value.modifiedURL
+          : modifiedURL // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazePlaybackModificationResponseImplCopyWith<$Res>
+    implements $BlazePlaybackModificationResponseCopyWith<$Res> {
+  factory _$$BlazePlaybackModificationResponseImplCopyWith(
+          _$BlazePlaybackModificationResponseImpl value,
+          $Res Function(_$BlazePlaybackModificationResponseImpl) then) =
+      __$$BlazePlaybackModificationResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String modifiedURL});
+}
+
+/// @nodoc
+class __$$BlazePlaybackModificationResponseImplCopyWithImpl<$Res>
+    extends _$BlazePlaybackModificationResponseCopyWithImpl<$Res,
+        _$BlazePlaybackModificationResponseImpl>
+    implements _$$BlazePlaybackModificationResponseImplCopyWith<$Res> {
+  __$$BlazePlaybackModificationResponseImplCopyWithImpl(
+      _$BlazePlaybackModificationResponseImpl _value,
+      $Res Function(_$BlazePlaybackModificationResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazePlaybackModificationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? modifiedURL = null,
+  }) {
+    return _then(_$BlazePlaybackModificationResponseImpl(
+      modifiedURL: null == modifiedURL
+          ? _value.modifiedURL
+          : modifiedURL // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazePlaybackModificationResponseImpl
+    with DiagnosticableTreeMixin
+    implements _BlazePlaybackModificationResponse {
+  const _$BlazePlaybackModificationResponseImpl({required this.modifiedURL});
+
+  factory _$BlazePlaybackModificationResponseImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazePlaybackModificationResponseImplFromJson(json);
+
+  /// The URL to play instead of the original one.
+  @override
+  final String modifiedURL;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazePlaybackModificationResponse(modifiedURL: $modifiedURL)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazePlaybackModificationResponse'))
+      ..add(DiagnosticsProperty('modifiedURL', modifiedURL));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazePlaybackModificationResponseImpl &&
+            (identical(other.modifiedURL, modifiedURL) ||
+                other.modifiedURL == modifiedURL));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, modifiedURL);
+
+  /// Create a copy of BlazePlaybackModificationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazePlaybackModificationResponseImplCopyWith<
+          _$BlazePlaybackModificationResponseImpl>
+      get copyWith => __$$BlazePlaybackModificationResponseImplCopyWithImpl<
+          _$BlazePlaybackModificationResponseImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationResponse value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlaybackModificationResponse value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlaybackModificationResponse value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazePlaybackModificationResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazePlaybackModificationResponse
+    implements BlazePlaybackModificationResponse {
+  const factory _BlazePlaybackModificationResponse(
+          {required final String modifiedURL}) =
+      _$BlazePlaybackModificationResponseImpl;
+
+  factory _BlazePlaybackModificationResponse.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazePlaybackModificationResponseImpl.fromJson;
+
+  /// The URL to play instead of the original one.
+  @override
+  String get modifiedURL;
+
+  /// Create a copy of BlazePlaybackModificationResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazePlaybackModificationResponseImplCopyWith<
+          _$BlazePlaybackModificationResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

@@ -11,11 +11,25 @@ import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
 /** Extension functions to parse BlazeDataSourceType from Flutter's Map representation */
 fun Map<String, Any?>.toBlazeDataSourceType(): BlazeDataSourceType? {
     return when {
+        // Search carries an optional "labels" key too, so it must be matched first.
+        containsKey("searchText") -> parseSearchDataSource()
         containsKey("labels") -> parseLabelsDataSource()
         containsKey("ids") -> parseIdsDataSource()
         containsKey("recommendationsType") -> parseRecommendationsDataSource()
         else -> null
     }
+}
+
+private fun Map<String, Any?>.parseSearchDataSource(): BlazeDataSourceType.Search? {
+    val searchText = get("searchText") as? String ?: return null
+    val maxItems = (get("maxItems") as? Number)?.toInt()
+    val blazeWidgetLabel = (get("labels") as? Map<String, Any?>)?.toBlazeWidgetLabel()
+
+    return BlazeDataSourceType.Search(
+        searchText = searchText,
+        maxItems = maxItems,
+        blazeWidgetLabel = blazeWidgetLabel
+    )
 }
 
 private fun Map<String, Any?>.parseLabelsDataSource(): BlazeDataSourceType.Labels? {
@@ -51,10 +65,16 @@ private fun Map<String, Any?>.parseRecommendationsDataSource():
     val anyLabelFilter =
         (recommendationsMap["anyLabelFilter"] as? List<*>)?.filterIsInstance<String>()
             ?: emptyList()
+    val promotedLabels =
+        (recommendationsMap["promotedLabels"] as? List<*>)?.filterIsInstance<String>()
+            ?: emptyList()
 
     val recommendationsType =
         when (type) {
-            "ForYou" -> BlazeRecommendationsType.ForYou(anyLabelFilter = anyLabelFilter)
+            "ForYou" -> BlazeRecommendationsType.ForYou(
+                anyLabelFilter = anyLabelFilter,
+                promotedLabels = promotedLabels
+            )
             "Trending" -> BlazeRecommendationsType.Trending(anyLabelFilter = anyLabelFilter)
             else -> return null
         }

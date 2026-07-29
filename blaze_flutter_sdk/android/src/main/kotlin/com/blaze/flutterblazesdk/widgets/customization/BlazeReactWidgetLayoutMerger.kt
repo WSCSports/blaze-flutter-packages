@@ -18,6 +18,7 @@ import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemTextStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemTitleStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
+import com.blaze.blazesdk.style.widgets.BlazeWidgetShimmeringStyle
 import com.blaze.flutterblazesdk.utils.parsing.gravityMergedWith
 import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
@@ -43,6 +44,20 @@ fun BlazeWidgetLayout.mergedWith(
         merged.widgetItemStyle =
                 this.widgetItemStyle.mergedWith(customization.widgetItemStyle, context)
         merged.margins = this.margins.mergedWith(customization.margins)
+        merged.shimmering = this.shimmering.mergedWith(customization.shimmering)
+        return merged
+}
+
+fun BlazeWidgetShimmeringStyle.mergedWith(
+        customization: BlazeReactWidgetShimmeringStyle?
+): BlazeWidgetShimmeringStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.baseColor = safeParseColor(customization.baseColor) ?: merged.baseColor
+        merged.highlightColor = safeParseColor(customization.highlightColor) ?: merged.highlightColor
+
         return merged
 }
 

@@ -114,6 +114,48 @@ Map<String, dynamic> _$$BlazeOnTriggerPlayerBodyTextLinkParamsImplToJson(
       'actionParam': instance.actionParam,
     };
 
+_$BlazeOnTriggerCustomActionButtonParamsImpl
+    _$$BlazeOnTriggerCustomActionButtonParamsImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeOnTriggerCustomActionButtonParamsImpl(
+          playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
+          sourceId: json['sourceId'] as String?,
+          buttonId: json['buttonId'] as String,
+          buttonName: json['buttonName'] as String,
+          appMetadata: json['appMetadata'] as Map<String, dynamic>?,
+        );
+
+Map<String, dynamic> _$$BlazeOnTriggerCustomActionButtonParamsImplToJson(
+        _$BlazeOnTriggerCustomActionButtonParamsImpl instance) =>
+    <String, dynamic>{
+      'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
+      'sourceId': instance.sourceId,
+      'buttonId': instance.buttonId,
+      'buttonName': instance.buttonName,
+      'appMetadata': instance.appMetadata,
+    };
+
+_$BlazeOnReadStatusChangedParamsImpl
+    _$$BlazeOnReadStatusChangedParamsImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeOnReadStatusChangedParamsImpl(
+          playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
+          sourceId: json['sourceId'] as String?,
+          dataSourceStringRepresentation:
+              json['dataSourceStringRepresentation'] as String,
+          isEntireContentRead: json['isEntireContentRead'] as bool,
+          itemReadStatus: Map<String, bool>.from(json['itemReadStatus'] as Map),
+        );
+
+Map<String, dynamic> _$$BlazeOnReadStatusChangedParamsImplToJson(
+        _$BlazeOnReadStatusChangedParamsImpl instance) =>
+    <String, dynamic>{
+      'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
+      'sourceId': instance.sourceId,
+      'dataSourceStringRepresentation': instance.dataSourceStringRepresentation,
+      'isEntireContentRead': instance.isEntireContentRead,
+      'itemReadStatus': instance.itemReadStatus,
+    };
+
 _$BlazeOnPlayerEventTriggeredParamsImpl
     _$$BlazeOnPlayerEventTriggeredParamsImplFromJson(
             Map<String, dynamic> json) =>

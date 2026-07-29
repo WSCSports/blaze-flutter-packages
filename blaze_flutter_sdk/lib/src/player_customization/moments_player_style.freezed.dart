@@ -42,6 +42,8 @@ mixin _$BlazeMomentsPlayerStyle {
       throw _privateConstructorUsedError;
   BlazePlayerDisplayMode? get playerDisplayMode =>
       throw _privateConstructorUsedError;
+  BlazeMomentsPlayerFollowEntityStyle? get followEntity =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -88,7 +90,8 @@ abstract class $BlazeMomentsPlayerStyleCopyWith<$Res> {
       BlazeMomentsPlayerFirstTimeSlideStyle? firstTimeSlide,
       BlazeMomentsPlayerSeekBarStyle? seekBar,
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
-      BlazePlayerDisplayMode? playerDisplayMode});
+      BlazePlayerDisplayMode? playerDisplayMode,
+      BlazeMomentsPlayerFollowEntityStyle? followEntity});
 
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
   $BlazeMomentsPlayerBodyTextStyleCopyWith<$Res>? get bodyText;
@@ -99,6 +102,7 @@ abstract class $BlazeMomentsPlayerStyleCopyWith<$Res> {
   $BlazeMomentsPlayerFooterGradientStyleCopyWith<$Res>? get footerGradient;
   $BlazeMomentsPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   $BlazeMomentsPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
+  $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>? get followEntity;
 }
 
 /// @nodoc
@@ -129,6 +133,7 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
     Object? seekBar = freezed,
     Object? bottomComponentsAlignment = freezed,
     Object? playerDisplayMode = freezed,
+    Object? followEntity = freezed,
   }) {
     return _then(_value.copyWith(
       headingText: freezed == headingText
@@ -179,6 +184,10 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
           ? _value.playerDisplayMode
           : playerDisplayMode // ignore: cast_nullable_to_non_nullable
               as BlazePlayerDisplayMode?,
+      followEntity: freezed == followEntity
+          ? _value.followEntity
+          : followEntity // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStyle?,
     ) as $Val);
   }
 
@@ -314,6 +323,21 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(seekBar: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeMomentsPlayerStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>? get followEntity {
+    if (_value.followEntity == null) {
+      return null;
+    }
+
+    return $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>(
+        _value.followEntity!, (value) {
+      return _then(_value.copyWith(followEntity: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -337,7 +361,8 @@ abstract class _$$BlazeMomentsPlayerStyleImplCopyWith<$Res>
       BlazeMomentsPlayerFirstTimeSlideStyle? firstTimeSlide,
       BlazeMomentsPlayerSeekBarStyle? seekBar,
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
-      BlazePlayerDisplayMode? playerDisplayMode});
+      BlazePlayerDisplayMode? playerDisplayMode,
+      BlazeMomentsPlayerFollowEntityStyle? followEntity});
 
   @override
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
@@ -357,6 +382,8 @@ abstract class _$$BlazeMomentsPlayerStyleImplCopyWith<$Res>
   $BlazeMomentsPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   @override
   $BlazeMomentsPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
+  @override
+  $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>? get followEntity;
 }
 
 /// @nodoc
@@ -386,6 +413,7 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
     Object? seekBar = freezed,
     Object? bottomComponentsAlignment = freezed,
     Object? playerDisplayMode = freezed,
+    Object? followEntity = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerStyleImpl(
       headingText: freezed == headingText
@@ -436,6 +464,10 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
           ? _value.playerDisplayMode
           : playerDisplayMode // ignore: cast_nullable_to_non_nullable
               as BlazePlayerDisplayMode?,
+      followEntity: freezed == followEntity
+          ? _value.followEntity
+          : followEntity // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStyle?,
     ));
   }
 }
@@ -455,7 +487,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       this.firstTimeSlide,
       this.seekBar,
       this.bottomComponentsAlignment,
-      this.playerDisplayMode});
+      this.playerDisplayMode,
+      this.followEntity});
 
   factory _$BlazeMomentsPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeMomentsPlayerStyleImplFromJson(json);
@@ -484,10 +517,12 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
   final BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment;
   @override
   final BlazePlayerDisplayMode? playerDisplayMode;
+  @override
+  final BlazeMomentsPlayerFollowEntityStyle? followEntity;
 
   @override
   String toString() {
-    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode)';
+    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode, followEntity: $followEntity)';
   }
 
   @override
@@ -515,7 +550,9 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
                     bottomComponentsAlignment) ||
                 other.bottomComponentsAlignment == bottomComponentsAlignment) &&
             (identical(other.playerDisplayMode, playerDisplayMode) ||
-                other.playerDisplayMode == playerDisplayMode));
+                other.playerDisplayMode == playerDisplayMode) &&
+            (identical(other.followEntity, followEntity) ||
+                other.followEntity == followEntity));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -533,7 +570,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       firstTimeSlide,
       seekBar,
       bottomComponentsAlignment,
-      playerDisplayMode);
+      playerDisplayMode,
+      followEntity);
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -594,7 +632,8 @@ abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
           final BlazeMomentsPlayerSeekBarStyle? seekBar,
           final BlazeMomentsPlayerBottomComponentsAlignment?
               bottomComponentsAlignment,
-          final BlazePlayerDisplayMode? playerDisplayMode}) =
+          final BlazePlayerDisplayMode? playerDisplayMode,
+          final BlazeMomentsPlayerFollowEntityStyle? followEntity}) =
       _$BlazeMomentsPlayerStyleImpl;
 
   factory _BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =
@@ -624,6 +663,8 @@ abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
   BlazeMomentsPlayerBottomComponentsAlignment? get bottomComponentsAlignment;
   @override
   BlazePlayerDisplayMode? get playerDisplayMode;
+  @override
+  BlazeMomentsPlayerFollowEntityStyle? get followEntity;
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1279,6 +1320,12 @@ mixin _$BlazeMomentsPlayerButtonsStyle {
   BlazePlayerButtonStyle? get share => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get like => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get play => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get seekForward => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get seekBackward =>
+      throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get search => throw _privateConstructorUsedError;
+  List<BlazeCustomActionButton>? get customActionButtons =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1320,13 +1367,20 @@ abstract class $BlazeMomentsPlayerButtonsStyleCopyWith<$Res> {
       BlazePlayerButtonStyle? exit,
       BlazePlayerButtonStyle? share,
       BlazePlayerButtonStyle? like,
-      BlazePlayerButtonStyle? play});
+      BlazePlayerButtonStyle? play,
+      BlazePlayerButtonStyle? seekForward,
+      BlazePlayerButtonStyle? seekBackward,
+      BlazePlayerButtonStyle? search,
+      List<BlazeCustomActionButton>? customActionButtons});
 
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
   $BlazePlayerButtonStyleCopyWith<$Res>? get share;
   $BlazePlayerButtonStyleCopyWith<$Res>? get like;
   $BlazePlayerButtonStyleCopyWith<$Res>? get play;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get search;
 }
 
 /// @nodoc
@@ -1350,6 +1404,10 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
     Object? share = freezed,
     Object? like = freezed,
     Object? play = freezed,
+    Object? seekForward = freezed,
+    Object? seekBackward = freezed,
+    Object? search = freezed,
+    Object? customActionButtons = freezed,
   }) {
     return _then(_value.copyWith(
       mute: freezed == mute
@@ -1372,6 +1430,22 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
           ? _value.play
           : play // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      seekForward: freezed == seekForward
+          ? _value.seekForward
+          : seekForward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekBackward: freezed == seekBackward
+          ? _value.seekBackward
+          : seekBackward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      search: freezed == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      customActionButtons: freezed == customActionButtons
+          ? _value.customActionButtons
+          : customActionButtons // ignore: cast_nullable_to_non_nullable
+              as List<BlazeCustomActionButton>?,
     ) as $Val);
   }
 
@@ -1444,6 +1518,48 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(play: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeMomentsPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward {
+    if (_value.seekForward == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.seekForward!, (value) {
+      return _then(_value.copyWith(seekForward: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward {
+    if (_value.seekBackward == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.seekBackward!, (value) {
+      return _then(_value.copyWith(seekBackward: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get search {
+    if (_value.search == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.search!, (value) {
+      return _then(_value.copyWith(search: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1460,7 +1576,11 @@ abstract class _$$BlazeMomentsPlayerButtonsStyleImplCopyWith<$Res>
       BlazePlayerButtonStyle? exit,
       BlazePlayerButtonStyle? share,
       BlazePlayerButtonStyle? like,
-      BlazePlayerButtonStyle? play});
+      BlazePlayerButtonStyle? play,
+      BlazePlayerButtonStyle? seekForward,
+      BlazePlayerButtonStyle? seekBackward,
+      BlazePlayerButtonStyle? search,
+      List<BlazeCustomActionButton>? customActionButtons});
 
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
@@ -1472,6 +1592,12 @@ abstract class _$$BlazeMomentsPlayerButtonsStyleImplCopyWith<$Res>
   $BlazePlayerButtonStyleCopyWith<$Res>? get like;
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get play;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get search;
 }
 
 /// @nodoc
@@ -1494,6 +1620,10 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
     Object? share = freezed,
     Object? like = freezed,
     Object? play = freezed,
+    Object? seekForward = freezed,
+    Object? seekBackward = freezed,
+    Object? search = freezed,
+    Object? customActionButtons = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerButtonsStyleImpl(
       mute: freezed == mute
@@ -1516,6 +1646,22 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
           ? _value.play
           : play // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      seekForward: freezed == seekForward
+          ? _value.seekForward
+          : seekForward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      seekBackward: freezed == seekBackward
+          ? _value.seekBackward
+          : seekBackward // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      search: freezed == search
+          ? _value.search
+          : search // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      customActionButtons: freezed == customActionButtons
+          ? _value._customActionButtons
+          : customActionButtons // ignore: cast_nullable_to_non_nullable
+              as List<BlazeCustomActionButton>?,
     ));
   }
 }
@@ -1525,7 +1671,16 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
 class _$BlazeMomentsPlayerButtonsStyleImpl
     implements _BlazeMomentsPlayerButtonsStyle {
   const _$BlazeMomentsPlayerButtonsStyleImpl(
-      {this.mute, this.exit, this.share, this.like, this.play});
+      {this.mute,
+      this.exit,
+      this.share,
+      this.like,
+      this.play,
+      this.seekForward,
+      this.seekBackward,
+      this.search,
+      final List<BlazeCustomActionButton>? customActionButtons})
+      : _customActionButtons = customActionButtons;
 
   factory _$BlazeMomentsPlayerButtonsStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -1541,10 +1696,26 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
   final BlazePlayerButtonStyle? like;
   @override
   final BlazePlayerButtonStyle? play;
+  @override
+  final BlazePlayerButtonStyle? seekForward;
+  @override
+  final BlazePlayerButtonStyle? seekBackward;
+  @override
+  final BlazePlayerButtonStyle? search;
+  final List<BlazeCustomActionButton>? _customActionButtons;
+  @override
+  List<BlazeCustomActionButton>? get customActionButtons {
+    final value = _customActionButtons;
+    if (value == null) return null;
+    if (_customActionButtons is EqualUnmodifiableListView)
+      return _customActionButtons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'BlazeMomentsPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, play: $play)';
+    return 'BlazeMomentsPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, play: $play, seekForward: $seekForward, seekBackward: $seekBackward, search: $search, customActionButtons: $customActionButtons)';
   }
 
   @override
@@ -1556,12 +1727,29 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
             (identical(other.exit, exit) || other.exit == exit) &&
             (identical(other.share, share) || other.share == share) &&
             (identical(other.like, like) || other.like == like) &&
-            (identical(other.play, play) || other.play == play));
+            (identical(other.play, play) || other.play == play) &&
+            (identical(other.seekForward, seekForward) ||
+                other.seekForward == seekForward) &&
+            (identical(other.seekBackward, seekBackward) ||
+                other.seekBackward == seekBackward) &&
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality()
+                .equals(other._customActionButtons, _customActionButtons));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, mute, exit, share, like, play);
+  int get hashCode => Object.hash(
+      runtimeType,
+      mute,
+      exit,
+      share,
+      like,
+      play,
+      seekForward,
+      seekBackward,
+      search,
+      const DeepCollectionEquality().hash(_customActionButtons));
 
   /// Create a copy of BlazeMomentsPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1616,7 +1804,11 @@ abstract class _BlazeMomentsPlayerButtonsStyle
           final BlazePlayerButtonStyle? exit,
           final BlazePlayerButtonStyle? share,
           final BlazePlayerButtonStyle? like,
-          final BlazePlayerButtonStyle? play}) =
+          final BlazePlayerButtonStyle? play,
+          final BlazePlayerButtonStyle? seekForward,
+          final BlazePlayerButtonStyle? seekBackward,
+          final BlazePlayerButtonStyle? search,
+          final List<BlazeCustomActionButton>? customActionButtons}) =
       _$BlazeMomentsPlayerButtonsStyleImpl;
 
   factory _BlazeMomentsPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =
@@ -1632,6 +1824,14 @@ abstract class _BlazeMomentsPlayerButtonsStyle
   BlazePlayerButtonStyle? get like;
   @override
   BlazePlayerButtonStyle? get play;
+  @override
+  BlazePlayerButtonStyle? get seekForward;
+  @override
+  BlazePlayerButtonStyle? get seekBackward;
+  @override
+  BlazePlayerButtonStyle? get search;
+  @override
+  List<BlazeCustomActionButton>? get customActionButtons;
 
   /// Create a copy of BlazeMomentsPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2201,6 +2401,7 @@ mixin _$BlazeMomentsPlayerCtaStyle {
       throw _privateConstructorUsedError;
   BlazeMomentsPlayerCtaIconStyle? get icon =>
       throw _privateConstructorUsedError;
+  bool? get isVisible => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -2244,7 +2445,8 @@ abstract class $BlazeMomentsPlayerCtaStyleCopyWith<$Res> {
       double? height,
       BlazeMomentsPlayerCTAPositioning? layoutPositioning,
       BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
-      BlazeMomentsPlayerCtaIconStyle? icon});
+      BlazeMomentsPlayerCtaIconStyle? icon,
+      bool? isVisible});
 
   $BlazeFontCopyWith<$Res>? get font;
   $BlazeMomentsPlayerCtaIconStyleCopyWith<$Res>? get icon;
@@ -2274,6 +2476,7 @@ class _$BlazeMomentsPlayerCtaStyleCopyWithImpl<$Res,
     Object? layoutPositioning = freezed,
     Object? horizontalAlignment = freezed,
     Object? icon = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -2308,6 +2511,10 @@ class _$BlazeMomentsPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerCtaIconStyle?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -2357,7 +2564,8 @@ abstract class _$$BlazeMomentsPlayerCtaStyleImplCopyWith<$Res>
       double? height,
       BlazeMomentsPlayerCTAPositioning? layoutPositioning,
       BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
-      BlazeMomentsPlayerCtaIconStyle? icon});
+      BlazeMomentsPlayerCtaIconStyle? icon,
+      bool? isVisible});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
@@ -2388,6 +2596,7 @@ class __$$BlazeMomentsPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? layoutPositioning = freezed,
     Object? horizontalAlignment = freezed,
     Object? icon = freezed,
+    Object? isVisible = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -2422,6 +2631,10 @@ class __$$BlazeMomentsPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerCtaIconStyle?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -2437,7 +2650,8 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
       this.height,
       this.layoutPositioning,
       this.horizontalAlignment,
-      this.icon});
+      this.icon,
+      this.isVisible});
 
   factory _$BlazeMomentsPlayerCtaStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -2459,10 +2673,12 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
   final BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment;
   @override
   final BlazeMomentsPlayerCtaIconStyle? icon;
+  @override
+  final bool? isVisible;
 
   @override
   String toString() {
-    return 'BlazeMomentsPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, layoutPositioning: $layoutPositioning, horizontalAlignment: $horizontalAlignment, icon: $icon)';
+    return 'BlazeMomentsPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, layoutPositioning: $layoutPositioning, horizontalAlignment: $horizontalAlignment, icon: $icon, isVisible: $isVisible)';
   }
 
   @override
@@ -2481,13 +2697,15 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
                 other.layoutPositioning == layoutPositioning) &&
             (identical(other.horizontalAlignment, horizontalAlignment) ||
                 other.horizontalAlignment == horizontalAlignment) &&
-            (identical(other.icon, icon) || other.icon == icon));
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font,
-      width, height, layoutPositioning, horizontalAlignment, icon);
+      width, height, layoutPositioning, horizontalAlignment, icon, isVisible);
 
   /// Create a copy of BlazeMomentsPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2537,15 +2755,15 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
 abstract class _BlazeMomentsPlayerCtaStyle
     implements BlazeMomentsPlayerCtaStyle {
   const factory _BlazeMomentsPlayerCtaStyle(
-          {final double? cornerRadius,
-          final double? textSize,
-          final BlazeFont? font,
-          final double? width,
-          final double? height,
-          final BlazeMomentsPlayerCTAPositioning? layoutPositioning,
-          final BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
-          final BlazeMomentsPlayerCtaIconStyle? icon}) =
-      _$BlazeMomentsPlayerCtaStyleImpl;
+      {final double? cornerRadius,
+      final double? textSize,
+      final BlazeFont? font,
+      final double? width,
+      final double? height,
+      final BlazeMomentsPlayerCTAPositioning? layoutPositioning,
+      final BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
+      final BlazeMomentsPlayerCtaIconStyle? icon,
+      final bool? isVisible}) = _$BlazeMomentsPlayerCtaStyleImpl;
 
   factory _BlazeMomentsPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeMomentsPlayerCtaStyleImpl.fromJson;
@@ -2566,6 +2784,8 @@ abstract class _BlazeMomentsPlayerCtaStyle
   BlazeMomentsPlayerCTAHorizontalAlignment? get horizontalAlignment;
   @override
   BlazeMomentsPlayerCtaIconStyle? get icon;
+  @override
+  bool? get isVisible;
 
   /// Create a copy of BlazeMomentsPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -4488,5 +4708,1357 @@ abstract class _BlazeMomentsPlayerSeekBarStyle
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeMomentsPlayerSeekBarStyleImplCopyWith<
           _$BlazeMomentsPlayerSeekBarStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeMomentsPlayerFollowEntityStyle
+    _$BlazeMomentsPlayerFollowEntityStyleFromJson(Map<String, dynamic> json) {
+  return _BlazeMomentsPlayerFollowEntityStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeMomentsPlayerFollowEntityStyle {
+  bool? get isVisible => throw _privateConstructorUsedError;
+  BlazeMomentsPlayerFollowEntityStateStyle? get followState =>
+      throw _privateConstructorUsedError;
+  BlazeMomentsPlayerFollowEntityStateStyle? get unfollowState =>
+      throw _privateConstructorUsedError;
+  BlazeFollowEntityType? get entityType => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeMomentsPlayerFollowEntityStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeMomentsPlayerFollowEntityStyleCopyWith<
+          BlazeMomentsPlayerFollowEntityStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res> {
+  factory $BlazeMomentsPlayerFollowEntityStyleCopyWith(
+          BlazeMomentsPlayerFollowEntityStyle value,
+          $Res Function(BlazeMomentsPlayerFollowEntityStyle) then) =
+      _$BlazeMomentsPlayerFollowEntityStyleCopyWithImpl<$Res,
+          BlazeMomentsPlayerFollowEntityStyle>;
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      BlazeMomentsPlayerFollowEntityStateStyle? followState,
+      BlazeMomentsPlayerFollowEntityStateStyle? unfollowState,
+      BlazeFollowEntityType? entityType});
+
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get followState;
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get unfollowState;
+  $BlazeFollowEntityTypeCopyWith<$Res>? get entityType;
+}
+
+/// @nodoc
+class _$BlazeMomentsPlayerFollowEntityStyleCopyWithImpl<$Res,
+        $Val extends BlazeMomentsPlayerFollowEntityStyle>
+    implements $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res> {
+  _$BlazeMomentsPlayerFollowEntityStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? followState = freezed,
+    Object? unfollowState = freezed,
+    Object? entityType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      followState: freezed == followState
+          ? _value.followState
+          : followState // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStateStyle?,
+      unfollowState: freezed == unfollowState
+          ? _value.unfollowState
+          : unfollowState // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStateStyle?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityType?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get followState {
+    if (_value.followState == null) {
+      return null;
+    }
+
+    return $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>(
+        _value.followState!, (value) {
+      return _then(_value.copyWith(followState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get unfollowState {
+    if (_value.unfollowState == null) {
+      return null;
+    }
+
+    return $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>(
+        _value.unfollowState!, (value) {
+      return _then(_value.copyWith(unfollowState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeFollowEntityTypeCopyWith<$Res>? get entityType {
+    if (_value.entityType == null) {
+      return null;
+    }
+
+    return $BlazeFollowEntityTypeCopyWith<$Res>(_value.entityType!, (value) {
+      return _then(_value.copyWith(entityType: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeMomentsPlayerFollowEntityStyleImplCopyWith<$Res>
+    implements $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res> {
+  factory _$$BlazeMomentsPlayerFollowEntityStyleImplCopyWith(
+          _$BlazeMomentsPlayerFollowEntityStyleImpl value,
+          $Res Function(_$BlazeMomentsPlayerFollowEntityStyleImpl) then) =
+      __$$BlazeMomentsPlayerFollowEntityStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      BlazeMomentsPlayerFollowEntityStateStyle? followState,
+      BlazeMomentsPlayerFollowEntityStateStyle? unfollowState,
+      BlazeFollowEntityType? entityType});
+
+  @override
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get followState;
+  @override
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res>? get unfollowState;
+  @override
+  $BlazeFollowEntityTypeCopyWith<$Res>? get entityType;
+}
+
+/// @nodoc
+class __$$BlazeMomentsPlayerFollowEntityStyleImplCopyWithImpl<$Res>
+    extends _$BlazeMomentsPlayerFollowEntityStyleCopyWithImpl<$Res,
+        _$BlazeMomentsPlayerFollowEntityStyleImpl>
+    implements _$$BlazeMomentsPlayerFollowEntityStyleImplCopyWith<$Res> {
+  __$$BlazeMomentsPlayerFollowEntityStyleImplCopyWithImpl(
+      _$BlazeMomentsPlayerFollowEntityStyleImpl _value,
+      $Res Function(_$BlazeMomentsPlayerFollowEntityStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? followState = freezed,
+    Object? unfollowState = freezed,
+    Object? entityType = freezed,
+  }) {
+    return _then(_$BlazeMomentsPlayerFollowEntityStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      followState: freezed == followState
+          ? _value.followState
+          : followState // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStateStyle?,
+      unfollowState: freezed == unfollowState
+          ? _value.unfollowState
+          : unfollowState // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityStateStyle?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityType?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeMomentsPlayerFollowEntityStyleImpl
+    implements _BlazeMomentsPlayerFollowEntityStyle {
+  const _$BlazeMomentsPlayerFollowEntityStyleImpl(
+      {this.isVisible, this.followState, this.unfollowState, this.entityType});
+
+  factory _$BlazeMomentsPlayerFollowEntityStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeMomentsPlayerFollowEntityStyleImplFromJson(json);
+
+  @override
+  final bool? isVisible;
+  @override
+  final BlazeMomentsPlayerFollowEntityStateStyle? followState;
+  @override
+  final BlazeMomentsPlayerFollowEntityStateStyle? unfollowState;
+  @override
+  final BlazeFollowEntityType? entityType;
+
+  @override
+  String toString() {
+    return 'BlazeMomentsPlayerFollowEntityStyle(isVisible: $isVisible, followState: $followState, unfollowState: $unfollowState, entityType: $entityType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeMomentsPlayerFollowEntityStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.followState, followState) ||
+                other.followState == followState) &&
+            (identical(other.unfollowState, unfollowState) ||
+                other.unfollowState == unfollowState) &&
+            (identical(other.entityType, entityType) ||
+                other.entityType == entityType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, isVisible, followState, unfollowState, entityType);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeMomentsPlayerFollowEntityStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityStyleImpl>
+      get copyWith => __$$BlazeMomentsPlayerFollowEntityStyleImplCopyWithImpl<
+          _$BlazeMomentsPlayerFollowEntityStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeMomentsPlayerFollowEntityStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeMomentsPlayerFollowEntityStyle
+    implements BlazeMomentsPlayerFollowEntityStyle {
+  const factory _BlazeMomentsPlayerFollowEntityStyle(
+          {final bool? isVisible,
+          final BlazeMomentsPlayerFollowEntityStateStyle? followState,
+          final BlazeMomentsPlayerFollowEntityStateStyle? unfollowState,
+          final BlazeFollowEntityType? entityType}) =
+      _$BlazeMomentsPlayerFollowEntityStyleImpl;
+
+  factory _BlazeMomentsPlayerFollowEntityStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeMomentsPlayerFollowEntityStyleImpl.fromJson;
+
+  @override
+  bool? get isVisible;
+  @override
+  BlazeMomentsPlayerFollowEntityStateStyle? get followState;
+  @override
+  BlazeMomentsPlayerFollowEntityStateStyle? get unfollowState;
+  @override
+  BlazeFollowEntityType? get entityType;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeMomentsPlayerFollowEntityStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeMomentsPlayerFollowEntityStateStyle
+    _$BlazeMomentsPlayerFollowEntityStateStyleFromJson(
+        Map<String, dynamic> json) {
+  return _BlazeMomentsPlayerFollowEntityStateStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeMomentsPlayerFollowEntityStateStyle {
+  BlazeMomentsPlayerFollowEntityAvatarStyle? get avatar =>
+      throw _privateConstructorUsedError;
+  BlazeMomentsPlayerFollowEntityChipStyle? get chip =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStateStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityStateStyle value)?
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStateStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeMomentsPlayerFollowEntityStateStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<
+          BlazeMomentsPlayerFollowEntityStateStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res> {
+  factory $BlazeMomentsPlayerFollowEntityStateStyleCopyWith(
+          BlazeMomentsPlayerFollowEntityStateStyle value,
+          $Res Function(BlazeMomentsPlayerFollowEntityStateStyle) then) =
+      _$BlazeMomentsPlayerFollowEntityStateStyleCopyWithImpl<$Res,
+          BlazeMomentsPlayerFollowEntityStateStyle>;
+  @useResult
+  $Res call(
+      {BlazeMomentsPlayerFollowEntityAvatarStyle? avatar,
+      BlazeMomentsPlayerFollowEntityChipStyle? chip});
+
+  $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res>? get avatar;
+  $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res>? get chip;
+}
+
+/// @nodoc
+class _$BlazeMomentsPlayerFollowEntityStateStyleCopyWithImpl<$Res,
+        $Val extends BlazeMomentsPlayerFollowEntityStateStyle>
+    implements $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res> {
+  _$BlazeMomentsPlayerFollowEntityStateStyleCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? avatar = freezed,
+    Object? chip = freezed,
+  }) {
+    return _then(_value.copyWith(
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityAvatarStyle?,
+      chip: freezed == chip
+          ? _value.chip
+          : chip // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityChipStyle?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res>? get avatar {
+    if (_value.avatar == null) {
+      return null;
+    }
+
+    return $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res>(
+        _value.avatar!, (value) {
+      return _then(_value.copyWith(avatar: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res>? get chip {
+    if (_value.chip == null) {
+      return null;
+    }
+
+    return $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res>(_value.chip!,
+        (value) {
+      return _then(_value.copyWith(chip: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWith<$Res>
+    implements $BlazeMomentsPlayerFollowEntityStateStyleCopyWith<$Res> {
+  factory _$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWith(
+          _$BlazeMomentsPlayerFollowEntityStateStyleImpl value,
+          $Res Function(_$BlazeMomentsPlayerFollowEntityStateStyleImpl) then) =
+      __$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazeMomentsPlayerFollowEntityAvatarStyle? avatar,
+      BlazeMomentsPlayerFollowEntityChipStyle? chip});
+
+  @override
+  $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res>? get avatar;
+  @override
+  $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res>? get chip;
+}
+
+/// @nodoc
+class __$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWithImpl<$Res>
+    extends _$BlazeMomentsPlayerFollowEntityStateStyleCopyWithImpl<$Res,
+        _$BlazeMomentsPlayerFollowEntityStateStyleImpl>
+    implements _$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWith<$Res> {
+  __$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWithImpl(
+      _$BlazeMomentsPlayerFollowEntityStateStyleImpl _value,
+      $Res Function(_$BlazeMomentsPlayerFollowEntityStateStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? avatar = freezed,
+    Object? chip = freezed,
+  }) {
+    return _then(_$BlazeMomentsPlayerFollowEntityStateStyleImpl(
+      avatar: freezed == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityAvatarStyle?,
+      chip: freezed == chip
+          ? _value.chip
+          : chip // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityChipStyle?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeMomentsPlayerFollowEntityStateStyleImpl
+    implements _BlazeMomentsPlayerFollowEntityStateStyle {
+  const _$BlazeMomentsPlayerFollowEntityStateStyleImpl(
+      {this.avatar, this.chip});
+
+  factory _$BlazeMomentsPlayerFollowEntityStateStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeMomentsPlayerFollowEntityStateStyleImplFromJson(json);
+
+  @override
+  final BlazeMomentsPlayerFollowEntityAvatarStyle? avatar;
+  @override
+  final BlazeMomentsPlayerFollowEntityChipStyle? chip;
+
+  @override
+  String toString() {
+    return 'BlazeMomentsPlayerFollowEntityStateStyle(avatar: $avatar, chip: $chip)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeMomentsPlayerFollowEntityStateStyleImpl &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.chip, chip) || other.chip == chip));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, avatar, chip);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityStateStyleImpl>
+      get copyWith =>
+          __$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWithImpl<
+              _$BlazeMomentsPlayerFollowEntityStateStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStateStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityStateStyle value)?
+        $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityStateStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeMomentsPlayerFollowEntityStateStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeMomentsPlayerFollowEntityStateStyle
+    implements BlazeMomentsPlayerFollowEntityStateStyle {
+  const factory _BlazeMomentsPlayerFollowEntityStateStyle(
+          {final BlazeMomentsPlayerFollowEntityAvatarStyle? avatar,
+          final BlazeMomentsPlayerFollowEntityChipStyle? chip}) =
+      _$BlazeMomentsPlayerFollowEntityStateStyleImpl;
+
+  factory _BlazeMomentsPlayerFollowEntityStateStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeMomentsPlayerFollowEntityStateStyleImpl.fromJson;
+
+  @override
+  BlazeMomentsPlayerFollowEntityAvatarStyle? get avatar;
+  @override
+  BlazeMomentsPlayerFollowEntityChipStyle? get chip;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityStateStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeMomentsPlayerFollowEntityStateStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityStateStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeMomentsPlayerFollowEntityAvatarStyle
+    _$BlazeMomentsPlayerFollowEntityAvatarStyleFromJson(
+        Map<String, dynamic> json) {
+  return _BlazeMomentsPlayerFollowEntityAvatarStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeMomentsPlayerFollowEntityAvatarStyle {
+  double? get borderWidth => throw _privateConstructorUsedError;
+  String? get borderColor => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value)?
+        $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeMomentsPlayerFollowEntityAvatarStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityAvatarStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<
+          BlazeMomentsPlayerFollowEntityAvatarStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res> {
+  factory $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith(
+          BlazeMomentsPlayerFollowEntityAvatarStyle value,
+          $Res Function(BlazeMomentsPlayerFollowEntityAvatarStyle) then) =
+      _$BlazeMomentsPlayerFollowEntityAvatarStyleCopyWithImpl<$Res,
+          BlazeMomentsPlayerFollowEntityAvatarStyle>;
+  @useResult
+  $Res call({double? borderWidth, String? borderColor});
+}
+
+/// @nodoc
+class _$BlazeMomentsPlayerFollowEntityAvatarStyleCopyWithImpl<$Res,
+        $Val extends BlazeMomentsPlayerFollowEntityAvatarStyle>
+    implements $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res> {
+  _$BlazeMomentsPlayerFollowEntityAvatarStyleCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityAvatarStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? borderWidth = freezed,
+    Object? borderColor = freezed,
+  }) {
+    return _then(_value.copyWith(
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWith<$Res>
+    implements $BlazeMomentsPlayerFollowEntityAvatarStyleCopyWith<$Res> {
+  factory _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWith(
+          _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl value,
+          $Res Function(_$BlazeMomentsPlayerFollowEntityAvatarStyleImpl) then) =
+      __$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({double? borderWidth, String? borderColor});
+}
+
+/// @nodoc
+class __$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWithImpl<$Res>
+    extends _$BlazeMomentsPlayerFollowEntityAvatarStyleCopyWithImpl<$Res,
+        _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl>
+    implements _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWith<$Res> {
+  __$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWithImpl(
+      _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl _value,
+      $Res Function(_$BlazeMomentsPlayerFollowEntityAvatarStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityAvatarStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? borderWidth = freezed,
+    Object? borderColor = freezed,
+  }) {
+    return _then(_$BlazeMomentsPlayerFollowEntityAvatarStyleImpl(
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl
+    implements _BlazeMomentsPlayerFollowEntityAvatarStyle {
+  const _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl(
+      {this.borderWidth, this.borderColor});
+
+  factory _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplFromJson(json);
+
+  @override
+  final double? borderWidth;
+  @override
+  final String? borderColor;
+
+  @override
+  String toString() {
+    return 'BlazeMomentsPlayerFollowEntityAvatarStyle(borderWidth: $borderWidth, borderColor: $borderColor)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl &&
+            (identical(other.borderWidth, borderWidth) ||
+                other.borderWidth == borderWidth) &&
+            (identical(other.borderColor, borderColor) ||
+                other.borderColor == borderColor));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, borderWidth, borderColor);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityAvatarStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl>
+      get copyWith =>
+          __$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWithImpl<
+                  _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value)?
+        $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityAvatarStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeMomentsPlayerFollowEntityAvatarStyle
+    implements BlazeMomentsPlayerFollowEntityAvatarStyle {
+  const factory _BlazeMomentsPlayerFollowEntityAvatarStyle(
+          {final double? borderWidth, final String? borderColor}) =
+      _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl;
+
+  factory _BlazeMomentsPlayerFollowEntityAvatarStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl.fromJson;
+
+  @override
+  double? get borderWidth;
+  @override
+  String? get borderColor;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityAvatarStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeMomentsPlayerFollowEntityAvatarStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityAvatarStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeMomentsPlayerFollowEntityChipStyle
+    _$BlazeMomentsPlayerFollowEntityChipStyleFromJson(
+        Map<String, dynamic> json) {
+  return _BlazeMomentsPlayerFollowEntityChipStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeMomentsPlayerFollowEntityChipStyle {
+  String? get backgroundColor => throw _privateConstructorUsedError;
+  String? get iconColor => throw _privateConstructorUsedError;
+  BlazeMomentsPlayerFollowEntityChipContentSource? get contentSource =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityChipStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityChipStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityChipStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeMomentsPlayerFollowEntityChipStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<
+          BlazeMomentsPlayerFollowEntityChipStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res> {
+  factory $BlazeMomentsPlayerFollowEntityChipStyleCopyWith(
+          BlazeMomentsPlayerFollowEntityChipStyle value,
+          $Res Function(BlazeMomentsPlayerFollowEntityChipStyle) then) =
+      _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl<$Res,
+          BlazeMomentsPlayerFollowEntityChipStyle>;
+  @useResult
+  $Res call(
+      {String? backgroundColor,
+      String? iconColor,
+      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource});
+}
+
+/// @nodoc
+class _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl<$Res,
+        $Val extends BlazeMomentsPlayerFollowEntityChipStyle>
+    implements $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res> {
+  _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl(
+      this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? backgroundColor = freezed,
+    Object? iconColor = freezed,
+    Object? contentSource = freezed,
+  }) {
+    return _then(_value.copyWith(
+      backgroundColor: freezed == backgroundColor
+          ? _value.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconColor: freezed == iconColor
+          ? _value.iconColor
+          : iconColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentSource: freezed == contentSource
+          ? _value.contentSource
+          : contentSource // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityChipContentSource?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith<$Res>
+    implements $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res> {
+  factory _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith(
+          _$BlazeMomentsPlayerFollowEntityChipStyleImpl value,
+          $Res Function(_$BlazeMomentsPlayerFollowEntityChipStyleImpl) then) =
+      __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? backgroundColor,
+      String? iconColor,
+      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource});
+}
+
+/// @nodoc
+class __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<$Res>
+    extends _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl<$Res,
+        _$BlazeMomentsPlayerFollowEntityChipStyleImpl>
+    implements _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith<$Res> {
+  __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl(
+      _$BlazeMomentsPlayerFollowEntityChipStyleImpl _value,
+      $Res Function(_$BlazeMomentsPlayerFollowEntityChipStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? backgroundColor = freezed,
+    Object? iconColor = freezed,
+    Object? contentSource = freezed,
+  }) {
+    return _then(_$BlazeMomentsPlayerFollowEntityChipStyleImpl(
+      backgroundColor: freezed == backgroundColor
+          ? _value.backgroundColor
+          : backgroundColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconColor: freezed == iconColor
+          ? _value.iconColor
+          : iconColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentSource: freezed == contentSource
+          ? _value.contentSource
+          : contentSource // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityChipContentSource?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeMomentsPlayerFollowEntityChipStyleImpl
+    implements _BlazeMomentsPlayerFollowEntityChipStyle {
+  const _$BlazeMomentsPlayerFollowEntityChipStyleImpl(
+      {this.backgroundColor, this.iconColor, this.contentSource});
+
+  factory _$BlazeMomentsPlayerFollowEntityChipStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeMomentsPlayerFollowEntityChipStyleImplFromJson(json);
+
+  @override
+  final String? backgroundColor;
+  @override
+  final String? iconColor;
+  @override
+  final BlazeMomentsPlayerFollowEntityChipContentSource? contentSource;
+
+  @override
+  String toString() {
+    return 'BlazeMomentsPlayerFollowEntityChipStyle(backgroundColor: $backgroundColor, iconColor: $iconColor, contentSource: $contentSource)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeMomentsPlayerFollowEntityChipStyleImpl &&
+            (identical(other.backgroundColor, backgroundColor) ||
+                other.backgroundColor == backgroundColor) &&
+            (identical(other.iconColor, iconColor) ||
+                other.iconColor == iconColor) &&
+            (identical(other.contentSource, contentSource) ||
+                other.contentSource == contentSource));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, backgroundColor, iconColor, contentSource);
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityChipStyleImpl>
+      get copyWith =>
+          __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<
+              _$BlazeMomentsPlayerFollowEntityChipStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityChipStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeMomentsPlayerFollowEntityChipStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeMomentsPlayerFollowEntityChipStyle value)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeMomentsPlayerFollowEntityChipStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeMomentsPlayerFollowEntityChipStyle
+    implements BlazeMomentsPlayerFollowEntityChipStyle {
+  const factory _BlazeMomentsPlayerFollowEntityChipStyle(
+      {final String? backgroundColor,
+      final String? iconColor,
+      final BlazeMomentsPlayerFollowEntityChipContentSource?
+          contentSource}) = _$BlazeMomentsPlayerFollowEntityChipStyleImpl;
+
+  factory _BlazeMomentsPlayerFollowEntityChipStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeMomentsPlayerFollowEntityChipStyleImpl.fromJson;
+
+  @override
+  String? get backgroundColor;
+  @override
+  String? get iconColor;
+  @override
+  BlazeMomentsPlayerFollowEntityChipContentSource? get contentSource;
+
+  /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith<
+          _$BlazeMomentsPlayerFollowEntityChipStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeFollowEntityType _$BlazeFollowEntityTypeFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeFollowEntityType.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeFollowEntityType {
+  BlazeFollowEntityTypeValue get type => throw _privateConstructorUsedError;
+  BlazeFollowEntityType? get fallbackType => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeFollowEntityType value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeFollowEntityType value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeFollowEntityType value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeFollowEntityType to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeFollowEntityTypeCopyWith<BlazeFollowEntityType> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeFollowEntityTypeCopyWith<$Res> {
+  factory $BlazeFollowEntityTypeCopyWith(BlazeFollowEntityType value,
+          $Res Function(BlazeFollowEntityType) then) =
+      _$BlazeFollowEntityTypeCopyWithImpl<$Res, BlazeFollowEntityType>;
+  @useResult
+  $Res call(
+      {BlazeFollowEntityTypeValue type, BlazeFollowEntityType? fallbackType});
+
+  $BlazeFollowEntityTypeCopyWith<$Res>? get fallbackType;
+}
+
+/// @nodoc
+class _$BlazeFollowEntityTypeCopyWithImpl<$Res,
+        $Val extends BlazeFollowEntityType>
+    implements $BlazeFollowEntityTypeCopyWith<$Res> {
+  _$BlazeFollowEntityTypeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? fallbackType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityTypeValue,
+      fallbackType: freezed == fallbackType
+          ? _value.fallbackType
+          : fallbackType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityType?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeFollowEntityTypeCopyWith<$Res>? get fallbackType {
+    if (_value.fallbackType == null) {
+      return null;
+    }
+
+    return $BlazeFollowEntityTypeCopyWith<$Res>(_value.fallbackType!, (value) {
+      return _then(_value.copyWith(fallbackType: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeFollowEntityTypeImplCopyWith<$Res>
+    implements $BlazeFollowEntityTypeCopyWith<$Res> {
+  factory _$$BlazeFollowEntityTypeImplCopyWith(
+          _$BlazeFollowEntityTypeImpl value,
+          $Res Function(_$BlazeFollowEntityTypeImpl) then) =
+      __$$BlazeFollowEntityTypeImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazeFollowEntityTypeValue type, BlazeFollowEntityType? fallbackType});
+
+  @override
+  $BlazeFollowEntityTypeCopyWith<$Res>? get fallbackType;
+}
+
+/// @nodoc
+class __$$BlazeFollowEntityTypeImplCopyWithImpl<$Res>
+    extends _$BlazeFollowEntityTypeCopyWithImpl<$Res,
+        _$BlazeFollowEntityTypeImpl>
+    implements _$$BlazeFollowEntityTypeImplCopyWith<$Res> {
+  __$$BlazeFollowEntityTypeImplCopyWithImpl(_$BlazeFollowEntityTypeImpl _value,
+      $Res Function(_$BlazeFollowEntityTypeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? type = null,
+    Object? fallbackType = freezed,
+  }) {
+    return _then(_$BlazeFollowEntityTypeImpl(
+      type: null == type
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityTypeValue,
+      fallbackType: freezed == fallbackType
+          ? _value.fallbackType
+          : fallbackType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowEntityType?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeFollowEntityTypeImpl implements _BlazeFollowEntityType {
+  const _$BlazeFollowEntityTypeImpl({required this.type, this.fallbackType});
+
+  factory _$BlazeFollowEntityTypeImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BlazeFollowEntityTypeImplFromJson(json);
+
+  @override
+  final BlazeFollowEntityTypeValue type;
+  @override
+  final BlazeFollowEntityType? fallbackType;
+
+  @override
+  String toString() {
+    return 'BlazeFollowEntityType(type: $type, fallbackType: $fallbackType)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeFollowEntityTypeImpl &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.fallbackType, fallbackType) ||
+                other.fallbackType == fallbackType));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, type, fallbackType);
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeFollowEntityTypeImplCopyWith<_$BlazeFollowEntityTypeImpl>
+      get copyWith => __$$BlazeFollowEntityTypeImplCopyWithImpl<
+          _$BlazeFollowEntityTypeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeFollowEntityType value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeFollowEntityType value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeFollowEntityType value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeFollowEntityTypeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeFollowEntityType implements BlazeFollowEntityType {
+  const factory _BlazeFollowEntityType(
+      {required final BlazeFollowEntityTypeValue type,
+      final BlazeFollowEntityType? fallbackType}) = _$BlazeFollowEntityTypeImpl;
+
+  factory _BlazeFollowEntityType.fromJson(Map<String, dynamic> json) =
+      _$BlazeFollowEntityTypeImpl.fromJson;
+
+  @override
+  BlazeFollowEntityTypeValue get type;
+  @override
+  BlazeFollowEntityType? get fallbackType;
+
+  /// Create a copy of BlazeFollowEntityType
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeFollowEntityTypeImplCopyWith<_$BlazeFollowEntityTypeImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

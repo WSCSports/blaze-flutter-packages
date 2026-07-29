@@ -4,6 +4,7 @@ import android.content.Context
 import com.blaze.blazesdk.features.stories.widgets.grid.BlazeStoriesWidgetGridView
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.flutterblazesdk.players.extractStoriesPlayerStyle
+import com.blaze.flutterblazesdk.utils.extractStoriesPlaybackConfiguration
 import com.blaze.flutterblazesdk.widgets.BlazeWidgetBase
 import io.flutter.plugin.common.BinaryMessenger
 
@@ -37,11 +38,14 @@ class NativeStoryGridView(
                         )
 
                 val playerStyle = playerStyleMap.extractStoriesPlayerStyle(widgetView.context)
+                val playbackConfiguration =
+                        playbackConfigurationMap.extractStoriesPlaybackConfiguration()
                 val perItemStyleOverrides = getPerItemStyleOverridesForInit(widgetLayout)
 
                 widgetView.initWidget(
                         widgetLayout = widgetLayout,
                         playerStyle = playerStyle,
+                        playbackConfiguration = playbackConfiguration,
                         dataSource = dataSource,
                         cachingLevel = cachingLevel,
                         widgetId = widgetId,

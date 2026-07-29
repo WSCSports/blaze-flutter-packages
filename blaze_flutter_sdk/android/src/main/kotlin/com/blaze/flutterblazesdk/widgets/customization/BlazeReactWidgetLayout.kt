@@ -282,5 +282,12 @@ data class BlazeReactWidgetLayout(
     val columns: Int?,
     val maxDisplayItemsCount: Int?,
     val widgetItemStyle: BlazeReactWidgetItemStyle?,
-    val margins: BlazeReactMargins?
+    val margins: BlazeReactMargins?,
+    val shimmering: BlazeReactWidgetShimmeringStyle?
+)
+
+@Keep
+data class BlazeReactWidgetShimmeringStyle(
+    val baseColor: String?,
+    val highlightColor: String?
 )

@@ -1,11 +1,14 @@
 package com.blaze.flutterblazesdk.delegates
 
 import androidx.annotation.Keep
+import com.blaze.blazesdk.delegates.BlazeCastingState
+import com.blaze.blazesdk.delegates.BlazePipState
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.results.BlazeResult
+import com.blaze.blazesdk.style.shared.models.BlazePlayerCustomActionButtonParams
 import com.blaze.flutterblazesdk.sdk_module.toFlutterValue
 import com.blaze.flutterblazesdk.utils.BlazeFlutterError
 import com.blaze.flutterblazesdk.utils.BlazePlayerEventData
@@ -161,6 +164,153 @@ class BlazeSharedDelegateHandler {
             playerType = playerType.toFlutterValue(),
             sourceId = sourceId,
             eventData = eventData
+        )
+
+        completion(params)
+    }
+
+    fun onTriggerCustomActionButton(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        customParams: BlazePlayerCustomActionButtonParams,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val buttonId: String,
+            val buttonName: String,
+            val appMetadata: Map<String, Any>?
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            buttonId = customParams.id,
+            buttonName = customParams.name,
+            appMetadata = customParams.appMetadata?.takeIf { it.isNotEmpty() }
+        )
+
+        completion(params)
+    }
+
+    fun onReadStatusChanged(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        dataSourceStringRepresentation: String,
+        isEntireContentRead: Boolean,
+        itemReadStatus: Map<String, Boolean>,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val dataSourceStringRepresentation: String,
+            val isEntireContentRead: Boolean,
+            val itemReadStatus: Map<String, Boolean>
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            dataSourceStringRepresentation = dataSourceStringRepresentation,
+            isEntireContentRead = isEntireContentRead,
+            itemReadStatus = itemReadStatus
+        )
+
+        completion(params)
+    }
+
+    fun onFollowEntityClicked(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        newFollowingState: Boolean,
+        followEntityId: String,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val newFollowingState: Boolean,
+            val followEntityId: String
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            newFollowingState = newFollowingState,
+            followEntityId = followEntityId
+        )
+
+        completion(params)
+    }
+
+    fun onCastingStateChanged(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        newState: BlazeCastingState,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val state: String
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            state = newState.name.lowercase()
+        )
+
+        completion(params)
+    }
+
+    fun onPiPStateChanged(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        newState: BlazePipState,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val state: String
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            state = newState.name.lowercase()
+        )
+
+        completion(params)
+    }
+
+    // Container-Tabs-Specific Methods
+
+    fun onTabSelected(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        tabIndex: Int,
+        completion: (Any) -> Unit
+    ) {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val tabIndex: Int
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            tabIndex = tabIndex
         )
 
         completion(params)

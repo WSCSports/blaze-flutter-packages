@@ -28,17 +28,17 @@ A new Flutter project.
   s.source           = { :path => '.' }
   
   s.dependency 'Flutter'
-  s.platform = :ios, '13.0'
+  s.platform = :ios, '15.0'
   s.static_framework = true
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }
   s.swift_version = '5.0'
 
-  s.dependency 'BlazeGAM', '1.11.4'
+  s.dependency 'BlazeGAM', '1.19.0'
   s.dependency 'blaze_flutter_sdk'
 
   s.source_files = [
-    "Sources/**/*.{h,c,cc,cpp,m,mm,swift}"
+    "blaze_flutter_gam_ads/Sources/**/*.{h,c,cc,cpp,m,mm,swift}"
   ]
 end

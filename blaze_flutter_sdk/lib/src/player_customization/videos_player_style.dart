@@ -49,6 +49,12 @@ class BlazeVideosPlayerButtonsStyle with _$BlazeVideosPlayerButtonsStyle {
     BlazePlayerButtonStyle? playPause,
     BlazePlayerButtonStyle? previous,
     BlazePlayerButtonStyle? next,
+    BlazePlayerButtonStyle? captions,
+    BlazePlayerButtonStyle? forceRotation,
+    BlazePlayerButtonStyle? casting,
+    BlazePlayerButtonStyle? pictureInPicture,
+    BlazePlayerButtonStyle? seekForward,
+    BlazePlayerButtonStyle? seekBackward,
   }) = _BlazeVideosPlayerButtonsStyle;
 
   factory BlazeVideosPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =>
@@ -65,23 +71,11 @@ class BlazeVideosPlayerCtaStyle with _$BlazeVideosPlayerCtaStyle {
     double? width,
     double? height,
     BlazeVideosPlayerCtaIconStyle? icon,
-    BlazeVideosPlayerCtaVisibility? ctaVisibility,
+    bool? isVisible,
   }) = _BlazeVideosPlayerCtaStyle;
 
   factory BlazeVideosPlayerCtaStyle.fromJson(Map<String, dynamic> json) =>
       _$BlazeVideosPlayerCtaStyleFromJson(json);
-}
-
-/// Videos player CTA visibility configuration
-@freezed
-class BlazeVideosPlayerCtaVisibility with _$BlazeVideosPlayerCtaVisibility {
-  const factory BlazeVideosPlayerCtaVisibility({
-    BlazeVideosPlayerCtaVisibilityType? type,
-    double? duration,
-  }) = _BlazeVideosPlayerCtaVisibility;
-
-  factory BlazeVideosPlayerCtaVisibility.fromJson(Map<String, dynamic> json) =>
-      _$BlazeVideosPlayerCtaVisibilityFromJson(json);
 }
 
 /// Videos player CTA icon style configuration
@@ -122,12 +116,4 @@ enum BlazeVideosPlayerHeadingTextContentSource {
 enum BlazeVideosPlayerCTAIconPositioning {
   @JsonValue('Start')
   start,
-}
-
-/// Videos player CTA visibility type enumeration
-enum BlazeVideosPlayerCtaVisibilityType {
-  @JsonValue('visibleAfterOverlayHidden')
-  visibleAfterOverlayHidden,
-  @JsonValue('alwaysVisible')
-  alwaysVisible,
 }

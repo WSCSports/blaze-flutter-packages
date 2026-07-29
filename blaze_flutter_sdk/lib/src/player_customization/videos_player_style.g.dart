@@ -101,6 +101,30 @@ _$BlazeVideosPlayerButtonsStyleImpl
               ? null
               : BlazePlayerButtonStyle.fromJson(
                   json['next'] as Map<String, dynamic>),
+          captions: json['captions'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['captions'] as Map<String, dynamic>),
+          forceRotation: json['forceRotation'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['forceRotation'] as Map<String, dynamic>),
+          casting: json['casting'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['casting'] as Map<String, dynamic>),
+          pictureInPicture: json['pictureInPicture'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['pictureInPicture'] as Map<String, dynamic>),
+          seekForward: json['seekForward'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['seekForward'] as Map<String, dynamic>),
+          seekBackward: json['seekBackward'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['seekBackward'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeVideosPlayerButtonsStyleImplToJson(
@@ -113,6 +137,12 @@ Map<String, dynamic> _$$BlazeVideosPlayerButtonsStyleImplToJson(
       'playPause': instance.playPause?.toJson(),
       'previous': instance.previous?.toJson(),
       'next': instance.next?.toJson(),
+      'captions': instance.captions?.toJson(),
+      'forceRotation': instance.forceRotation?.toJson(),
+      'casting': instance.casting?.toJson(),
+      'pictureInPicture': instance.pictureInPicture?.toJson(),
+      'seekForward': instance.seekForward?.toJson(),
+      'seekBackward': instance.seekBackward?.toJson(),
     };
 
 _$BlazeVideosPlayerCtaStyleImpl _$$BlazeVideosPlayerCtaStyleImplFromJson(
@@ -129,10 +159,7 @@ _$BlazeVideosPlayerCtaStyleImpl _$$BlazeVideosPlayerCtaStyleImplFromJson(
           ? null
           : BlazeVideosPlayerCtaIconStyle.fromJson(
               json['icon'] as Map<String, dynamic>),
-      ctaVisibility: json['ctaVisibility'] == null
-          ? null
-          : BlazeVideosPlayerCtaVisibility.fromJson(
-              json['ctaVisibility'] as Map<String, dynamic>),
+      isVisible: json['isVisible'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazeVideosPlayerCtaStyleImplToJson(
@@ -144,29 +171,8 @@ Map<String, dynamic> _$$BlazeVideosPlayerCtaStyleImplToJson(
       'width': instance.width,
       'height': instance.height,
       'icon': instance.icon?.toJson(),
-      'ctaVisibility': instance.ctaVisibility?.toJson(),
+      'isVisible': instance.isVisible,
     };
-
-_$BlazeVideosPlayerCtaVisibilityImpl
-    _$$BlazeVideosPlayerCtaVisibilityImplFromJson(Map<String, dynamic> json) =>
-        _$BlazeVideosPlayerCtaVisibilityImpl(
-          type: $enumDecodeNullable(
-              _$BlazeVideosPlayerCtaVisibilityTypeEnumMap, json['type']),
-          duration: (json['duration'] as num?)?.toDouble(),
-        );
-
-Map<String, dynamic> _$$BlazeVideosPlayerCtaVisibilityImplToJson(
-        _$BlazeVideosPlayerCtaVisibilityImpl instance) =>
-    <String, dynamic>{
-      'type': _$BlazeVideosPlayerCtaVisibilityTypeEnumMap[instance.type],
-      'duration': instance.duration,
-    };
-
-const _$BlazeVideosPlayerCtaVisibilityTypeEnumMap = {
-  BlazeVideosPlayerCtaVisibilityType.visibleAfterOverlayHidden:
-      'visibleAfterOverlayHidden',
-  BlazeVideosPlayerCtaVisibilityType.alwaysVisible: 'alwaysVisible',
-};
 
 _$BlazeVideosPlayerCtaIconStyleImpl
     _$$BlazeVideosPlayerCtaIconStyleImplFromJson(Map<String, dynamic> json) =>

@@ -14,9 +14,17 @@ import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerHeaderGradient
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerHeadingTextStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerSeekBarStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerCustomActionButton
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityStateStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityAvatarStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityChipStyle
+import com.blaze.blazesdk.follow.models.BlazeFollowEntityType
 import com.blaze.blazesdk.style.shared.models.blazeDp
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.mergeButtonThemes
 import com.blaze.flutterblazesdk.players.shared.mergedWith
+import com.blaze.flutterblazesdk.players.shared.toNativeParams
 import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
 import com.blaze.flutterblazesdk.utils.parsing.toColorResId
@@ -45,7 +53,68 @@ fun BlazeMomentsPlayerStyle.mergedWith(
         merged.bottomComponentsAlignment = it.mapToBlazeEnumClass()
     }
     customization.playerDisplayMode?.let { merged.playerDisplayMode = it.mapToBlazeEnumClass() }
+    merged.followEntity = this.followEntity.mergedWith(customization.followEntity)
     return merged
+}
+
+fun BlazeMomentsPlayerFollowEntityStyle.mergedWith(
+    customization: BlazeReactMomentsPlayerFollowEntityStyle?,
+): BlazeMomentsPlayerFollowEntityStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.isVisible = customization.isVisible ?: this.isVisible
+    merged.followState = this.followState.mergedWith(customization.followState)
+    merged.unfollowState = this.unfollowState.mergedWith(customization.unfollowState)
+    merged.entityType = mergeEntityType(customization.entityType) ?: this.entityType
+    return merged
+}
+
+fun BlazeMomentsPlayerFollowEntityStateStyle.mergedWith(
+    customization: BlazeReactMomentsPlayerFollowEntityStateStyle?,
+): BlazeMomentsPlayerFollowEntityStateStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.avatar = this.avatar.mergedWith(customization.avatar)
+    merged.chip = this.chip.mergedWith(customization.chip)
+    return merged
+}
+
+fun BlazeMomentsPlayerFollowEntityAvatarStyle.mergedWith(
+    customization: BlazeReactMomentsPlayerFollowEntityAvatarStyle?,
+): BlazeMomentsPlayerFollowEntityAvatarStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.borderWidth = customization.borderWidth?.toInt()?.blazeDp ?: this.borderWidth
+    merged.borderColor = safeParseColor(customization.borderColor) ?: this.borderColor
+    return merged
+}
+
+fun BlazeMomentsPlayerFollowEntityChipStyle.mergedWith(
+    customization: BlazeReactMomentsPlayerFollowEntityChipStyle?,
+): BlazeMomentsPlayerFollowEntityChipStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.backgroundColor = safeParseColor(customization.backgroundColor) ?: this.backgroundColor
+    merged.iconColor = safeParseColor(customization.iconColor) ?: this.iconColor
+    customization.contentSource?.let { merged.contentSource = it.mapToBlazeEnumClass() }
+    return merged
+}
+
+private fun mergeEntityType(react: BlazeReactFollowEntityType?): BlazeFollowEntityType? {
+    react ?: return null
+    val fallback = react.fallbackType?.let { mergeEntityType(it) }
+
+    return when (react.type) {
+        "FirstAvailable" -> BlazeFollowEntityType.FirstAvailable
+        "Player" -> BlazeFollowEntityType.Player(fallbackType = fallback)
+        "Team" -> BlazeFollowEntityType.Team(fallbackType = fallback)
+        "Property" -> BlazeFollowEntityType.Property(fallbackType = fallback)
+        else -> null
+    }
 }
 
 fun BlazeMomentsPlayerFirstTimeSlideStyle.mergedWith(
@@ -113,7 +182,29 @@ fun BlazeMomentsPlayerButtonsStyle.mergedWith(
     merged.share = merged.share.mergeButtonThemes(customization.share, context)
     merged.like = merged.like.mergeButtonThemes(customization.like, context)
     merged.play = merged.play.mergeButtonThemes(customization.play, context)
+    merged.seekForward = merged.seekForward.mergeButtonThemes(customization.seekForward, context)
+    merged.seekBackward = merged.seekBackward.mergeButtonThemes(customization.seekBackward, context)
+    merged.search = merged.search.mergeButtonThemes(customization.search, context)
+
+    mergeCustomActionButtons(customization.customActionButtons, context)?.let {
+        merged.setBottomStackCustomActionButtons(it)
+    }
+
     return merged
+}
+
+private fun mergeCustomActionButtons(
+    reactButtons: List<BlazeReactCustomActionButton>?,
+    context: Context
+): List<BlazeMomentsPlayerCustomActionButton>? {
+    reactButtons ?: return null
+    val nativeButtons = reactButtons.mapNotNull { reactButton ->
+        val params = reactButton.customParams?.toNativeParams() ?: return@mapNotNull null
+        val button = BlazeMomentsPlayerCustomActionButton(customParams = params)
+        button.style = button.style.mergeButtonThemes(reactButton.style, context)
+        button
+    }
+    return nativeButtons.ifEmpty { return null }
 }
 
 fun BlazeMomentsPlayerCtaStyle.mergedWith(
@@ -131,6 +222,7 @@ fun BlazeMomentsPlayerCtaStyle.mergedWith(
     customization.layoutPositioning?.let { merged.layoutPositioning = it.mapToBlazeEnumClass() }
     customization.horizontalAlignment?.let { merged.horizontalAlignment = it.mapToBlazeEnumClass() }
     customization.icon?.let { this.icon = this.icon.mergeWith(it, context) }
+    merged.isVisible = customization.isVisible ?: this.isVisible
     return merged
 }
 

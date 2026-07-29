@@ -6,6 +6,20 @@ part of 'widget_layout_styles.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$BlazeWidgetShimmeringStyleImpl _$$BlazeWidgetShimmeringStyleImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeWidgetShimmeringStyleImpl(
+      baseColor: json['baseColor'] as String?,
+      highlightColor: json['highlightColor'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeWidgetShimmeringStyleImplToJson(
+        _$BlazeWidgetShimmeringStyleImpl instance) =>
+    <String, dynamic>{
+      'baseColor': instance.baseColor,
+      'highlightColor': instance.highlightColor,
+    };
+
 _$BlazeWidgetGradientImpl _$$BlazeWidgetGradientImplFromJson(
         Map<String, dynamic> json) =>
     _$BlazeWidgetGradientImpl(

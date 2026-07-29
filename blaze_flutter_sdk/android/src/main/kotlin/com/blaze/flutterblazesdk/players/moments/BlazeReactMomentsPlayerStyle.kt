@@ -6,8 +6,10 @@ import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerBodyTextStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerCtaIconStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerCtaStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFooterGradientStyle
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityChipStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerHeadingTextStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideCTAStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideInstructionStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideTextStyle
@@ -32,7 +34,55 @@ data class BlazeReactMomentsPlayerStyle(
     val firstTimeSlide: BlazeReactMomentsPlayerFirstTimeSlideStyle?,
     val seekBar: BlazeReactMomentsPlayerSeekBarStyle?,
     val bottomComponentsAlignment: BlazeReactBottomComponentsAlignment?,
-    var playerDisplayMode: BlazeReactPlayerDisplayMode?
+    var playerDisplayMode: BlazeReactPlayerDisplayMode?,
+    val followEntity: BlazeReactMomentsPlayerFollowEntityStyle?
+)
+
+@Keep
+data class BlazeReactMomentsPlayerFollowEntityStyle(
+    val isVisible: Boolean?,
+    val followState: BlazeReactMomentsPlayerFollowEntityStateStyle?,
+    val unfollowState: BlazeReactMomentsPlayerFollowEntityStateStyle?,
+    val entityType: BlazeReactFollowEntityType?
+)
+
+@Keep
+data class BlazeReactMomentsPlayerFollowEntityStateStyle(
+    val avatar: BlazeReactMomentsPlayerFollowEntityAvatarStyle?,
+    val chip: BlazeReactMomentsPlayerFollowEntityChipStyle?
+)
+
+@Keep
+data class BlazeReactMomentsPlayerFollowEntityAvatarStyle(
+    val borderWidth: Float?,
+    val borderColor: String?
+)
+
+@Keep
+data class BlazeReactMomentsPlayerFollowEntityChipStyle(
+    val backgroundColor: String?,
+    val iconColor: String?,
+    val contentSource: ChipContentSource?
+) {
+    @Keep
+    enum class ChipContentSource(
+        override val rawValue: String
+    ) : BlazeEnumMapper<BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityChipContentSource> {
+        ICON("Icon") {
+            override fun mapToBlazeEnumClass() =
+                BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityChipContentSource.ICON
+        },
+        TEXT("Text") {
+            override fun mapToBlazeEnumClass() =
+                BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityChipContentSource.TEXT
+        }
+    }
+}
+
+@Keep
+data class BlazeReactFollowEntityType(
+    val type: String?,
+    val fallbackType: BlazeReactFollowEntityType?
 )
 
 @Keep
@@ -89,7 +139,11 @@ data class BlazeReactMomentsPlayerButtonsStyle(
     val exit: BlazeReactPlayerButtonStyle?,
     val share: BlazeReactPlayerButtonStyle?,
     val like: BlazeReactPlayerButtonStyle?,
-    val play: BlazeReactPlayerButtonStyle?
+    val play: BlazeReactPlayerButtonStyle?,
+    val seekForward: BlazeReactPlayerButtonStyle?,
+    val seekBackward: BlazeReactPlayerButtonStyle?,
+    val search: BlazeReactPlayerButtonStyle?,
+    val customActionButtons: List<BlazeReactCustomActionButton>?
 )
 
 @Keep data class BlazeReactMomentsPlayerChipsStyle(val ad: BlazeReactMomentsPlayerChipStyle?)
@@ -112,7 +166,8 @@ data class BlazeReactMomentsPlayerCtaStyle(
     val height: Int?,
     val icon: BlazeReactMomentsPlayerCtaIconStyle?,
     val layoutPositioning: CTAPositioning?,
-    val horizontalAlignment: CTAHorizontalAlignment?
+    val horizontalAlignment: CTAHorizontalAlignment?,
+    val isVisible: Boolean?
 ) {
     @Keep
     enum class CTAPositioning(override val rawValue: String) :

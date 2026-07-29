@@ -1,11 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
 import '../player_customization/stories_player_style.dart';
 import '../player_customization/moments_player_style.dart';
 import '../player_customization/videos_player_style.dart';
 import '../types/blaze_data_source_type.dart';
 import '../types/shared_types.dart';
+import '../types/playback/videos_playback_configuration.dart';
+import '../types/playback/moments_playback_configuration.dart';
+import '../types/playback/stories_playback_configuration.dart';
+import '../types/search_screen_options.dart';
 import '../delegates/blaze_global_delegate.dart';
 import '../delegates/blaze_player_entry_point_delegate.dart';
+import '../delegates/blaze_follow_entities_delegate.dart';
+import '../delegates/blaze_casting_delegate.dart';
+import '../delegates/blaze_pip_delegate.dart';
 import '../shared/errors/errors.dart';
 
 class BlazeSDK {
@@ -45,31 +54,53 @@ class BlazeSDK {
     String? pageId,
     BlazeStoryPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeStoriesPlaybackConfiguration? playbackConfiguration,
   }) =>
       _sdk.playStory(
         storyId: storyId,
         pageId: pageId,
         playerStyle: playerStyle,
         triggerSource: triggerSource,
+        playbackConfiguration: playbackConfiguration,
       );
 
   static Future<void> prepareStories({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) =>
-      _sdk.prepareStories(dataSource: dataSource);
+      _sdk.prepareStories(
+        dataSource: dataSource,
+        entryContentId: entryContentId,
+      );
 
   static Future<void> playStories({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeStoryPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeStoriesPlaybackConfiguration? playbackConfiguration,
   }) =>
       _sdk.playStories(
         dataSource: dataSource,
+        entryContentId: entryContentId,
         playerStyle: playerStyle,
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
+        playbackConfiguration: playbackConfiguration,
       );
+
+  /// Sets the default stories playback configuration applied to stories players
+  /// that don't specify their own configuration.
+  static Future<void> setDefaultStoriesPlaybackConfiguration(
+    BlazeStoriesPlaybackConfiguration configuration,
+  ) =>
+      _sdk.setDefaultStoriesPlaybackConfiguration(configuration);
+
+  /// Returns the current default stories playback configuration.
+  static Future<BlazeStoriesPlaybackConfiguration>
+      getDefaultStoriesPlaybackConfiguration() =>
+          _sdk.getDefaultStoriesPlaybackConfiguration();
 
   // Moments API
   static Future<void> playMoment({
@@ -85,51 +116,108 @@ class BlazeSDK {
 
   static Future<void> prepareMoments({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) =>
-      _sdk.prepareMoments(dataSource: dataSource);
+      _sdk.prepareMoments(
+        dataSource: dataSource,
+        entryContentId: entryContentId,
+      );
 
   static Future<void> playMoments({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeMomentsPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
   }) =>
       _sdk.playMoments(
         dataSource: dataSource,
+        entryContentId: entryContentId,
         playerStyle: playerStyle,
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
       );
+
+  /// Appends moments to the currently presented moments player.
+  ///
+  /// [sourceId] - The source id of the moments player to append content to.
+  /// [dataSource] - The data source describing the moments to append.
+  /// [shouldOrderContentByReadStatus] - Whether the appended content should be
+  /// ordered by read status.
+  static Future<void> appendMomentsToPlayer({
+    required String sourceId,
+    required BlazeDataSourceType dataSource,
+    bool? shouldOrderContentByReadStatus,
+  }) =>
+      _sdk.appendMomentsToPlayer(
+        sourceId: sourceId,
+        dataSource: dataSource,
+        shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
+      );
+
+  /// Sets the default moments playback configuration applied to moments players
+  /// that don't specify their own configuration.
+  static Future<void> setDefaultMomentsPlaybackConfiguration(
+    BlazeMomentsPlaybackConfiguration configuration,
+  ) =>
+      _sdk.setDefaultMomentsPlaybackConfiguration(configuration);
+
+  /// Returns the current default moments playback configuration.
+  static Future<BlazeMomentsPlaybackConfiguration>
+      getDefaultMomentsPlaybackConfiguration() =>
+          _sdk.getDefaultMomentsPlaybackConfiguration();
 
   // Videos API
   static Future<void> playVideo({
     required String videoId,
     BlazeVideosPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeVideosPlaybackConfiguration? playbackConfiguration,
   }) =>
       _sdk.playVideo(
         videoId: videoId,
         playerStyle: playerStyle,
         triggerSource: triggerSource,
+        playbackConfiguration: playbackConfiguration,
       );
 
   static Future<void> prepareVideos({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) =>
-      _sdk.prepareVideos(dataSource: dataSource);
+      _sdk.prepareVideos(
+        dataSource: dataSource,
+        entryContentId: entryContentId,
+      );
 
   static Future<void> playVideos({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeVideosPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeVideosPlaybackConfiguration? playbackConfiguration,
   }) =>
       _sdk.playVideos(
         dataSource: dataSource,
+        entryContentId: entryContentId,
         playerStyle: playerStyle,
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
+        playbackConfiguration: playbackConfiguration,
       );
+
+  /// Sets the default videos playback configuration applied to videos players
+  /// that don't specify their own configuration.
+  static Future<void> setDefaultVideosPlaybackConfiguration(
+    BlazeVideosPlaybackConfiguration configuration,
+  ) =>
+      _sdk.setDefaultVideosPlaybackConfiguration(configuration);
+
+  /// Returns the current default videos playback configuration.
+  static Future<BlazeVideosPlaybackConfiguration>
+      getDefaultVideosPlaybackConfiguration() =>
+          _sdk.getDefaultVideosPlaybackConfiguration();
 
   // NEW: Missing core methods
   static Future<void> dismissPlayer() => _sdk.dismissPlayer();
@@ -138,6 +226,68 @@ class BlazeSDK {
 
   static Future<void> setDoNotTrack(bool doNotTrackUser) =>
       _sdk.setDoNotTrack(doNotTrackUser);
+
+  static Future<void> setDisableAnalytics(bool disableAnalytics) =>
+      _sdk.setDisableAnalytics(disableAnalytics);
+
+  static Future<void> setPreferredLanguage(String? language) =>
+      _sdk.setPreferredLanguage(language);
+
+  /// Sets the players' sound state (mute / unmute).
+  ///
+  /// The native default is muted and the state is not persisted across app
+  /// launches, so call this on each launch to keep players unmuted.
+  static Future<void> setPlayerSoundState(BlazePlayerSoundState state) =>
+      _sdk.setPlayerSoundState(state);
+
+  /// Returns whether the players' sound is currently muted.
+  static Future<bool> isMuted() => _sdk.isMuted();
+
+  /// Presents the standalone search screen.
+  ///
+  /// [options] - Optional search screen options (e.g. a suggestions data
+  /// source). Note: on Android a `suggestionsDataSource` is required; on iOS it
+  /// is optional.
+  static Future<void> showSearchScreen({BlazeSearchScreenOptions? options}) =>
+      _sdk.showSearchScreen(options: options);
+
+  // ======================================
+  // FOLLOW ENTITIES
+  // ======================================
+
+  /// Replaces the set of followed entities with [entityIds].
+  static Future<void> setFollowedEntities(List<String> entityIds) =>
+      _sdk.setFollowedEntities(entityIds);
+
+  /// Inserts [entityIds] into the set of followed entities.
+  static Future<void> insertFollowedEntities(List<String> entityIds) =>
+      _sdk.insertFollowedEntities(entityIds);
+
+  /// Removes [entityIds] from the set of followed entities.
+  static Future<void> removeFollowedEntities(List<String> entityIds) =>
+      _sdk.removeFollowedEntities(entityIds);
+
+  /// Returns the ids of the currently followed entities.
+  static Future<List<String>> getFollowedEntities() =>
+      _sdk.getFollowedEntities();
+
+  // ======================================
+  // CASTING
+  // ======================================
+
+  /// Stops the currently active casting session, if any.
+  static Future<void> stopActiveCastingSession() =>
+      _sdk.stopActiveCastingSession();
+
+  // ======================================
+  // PICTURE IN PICTURE
+  // ======================================
+
+  /// Stops the currently active picture-in-picture session, if any.
+  static Future<void> stopActivePiPSession() => _sdk.stopActivePiPSession();
+
+  /// Returns whether a picture-in-picture session is currently active.
+  static Future<bool> isPiPActive() => _sdk.isPiPActive();
 
   static Future<bool> canHandleUniversalLink(String link) =>
       _sdk.canHandleUniversalLink(link);
@@ -174,6 +324,25 @@ class BlazeSDK {
   static void setPlayerEntryPointDelegate(
           BlazePlayerEntryPointDelegate? delegate) =>
       _sdk.setPlayerEntryPointDelegate(delegate);
+
+  /// Set the follow entities delegate for receiving follow-entity events
+  ///
+  /// [delegate] The follow entities delegate to register, or null to unregister
+  static void setFollowEntitiesDelegate(
+          BlazeFollowEntitiesDelegate? delegate) =>
+      _sdk.setFollowEntitiesDelegate(delegate);
+
+  /// Set the casting delegate for receiving casting-state-change events
+  ///
+  /// [delegate] The casting delegate to register, or null to unregister
+  static void setCastingDelegate(BlazeCastingDelegate? delegate) =>
+      _sdk.setCastingDelegate(delegate);
+
+  /// Set the pip delegate for receiving picture-in-picture-state-change events
+  ///
+  /// [delegate] The pip delegate to register, or null to unregister
+  static void setPipDelegate(BlazePipDelegate? delegate) =>
+      _sdk.setPipDelegate(delegate);
 }
 
 class _BlazeSDKInternal {
@@ -245,6 +414,7 @@ class _BlazeSDKInternal {
     String? pageId,
     BlazeStoryPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeStoriesPlaybackConfiguration? playbackConfiguration,
   }) async {
     Map<String, dynamic> params = {
       'storyId': storyId,
@@ -259,6 +429,9 @@ class _BlazeSDKInternal {
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
     }
+    if (playbackConfiguration != null) {
+      params['playbackConfiguration'] = playbackConfiguration.toJson();
+    }
 
     try {
       await _channel.invokeMethod('playStory', params);
@@ -270,10 +443,15 @@ class _BlazeSDKInternal {
   // Prepare stories
   Future<void> prepareStories({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
+
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
 
     try {
       await _channel.invokeMethod('prepareStories', params);
@@ -285,14 +463,19 @@ class _BlazeSDKInternal {
   // Play stories
   Future<void> playStories({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeStoryPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeStoriesPlaybackConfiguration? playbackConfiguration,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
 
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
     if (playerStyle != null) {
       params['playerStyle'] = playerStyle.toJson();
     }
@@ -302,11 +485,44 @@ class _BlazeSDKInternal {
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
     }
+    if (playbackConfiguration != null) {
+      params['playbackConfiguration'] = playbackConfiguration.toJson();
+    }
 
     try {
       await _channel.invokeMethod('playStories', params);
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Set the default stories playback configuration
+  Future<void> setDefaultStoriesPlaybackConfiguration(
+    BlazeStoriesPlaybackConfiguration configuration,
+  ) async {
+    try {
+      await _channel.invokeMethod(
+        'setDefaultStoriesPlaybackConfiguration',
+        {'playbackConfiguration': configuration.toJson()},
+      );
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Get the default stories playback configuration
+  Future<BlazeStoriesPlaybackConfiguration>
+      getDefaultStoriesPlaybackConfiguration() async {
+    try {
+      final result =
+          await _channel.invokeMethod('getDefaultStoriesPlaybackConfiguration');
+      // Method channel returns Map<Object?, Object?>; normalize to
+      // Map<String, dynamic> (including nested maps) for freezed's fromJson.
+      final jsonMap = json.decode(json.encode(result)) as Map<String, dynamic>;
+      return BlazeStoriesPlaybackConfiguration.fromJson(jsonMap);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
     }
   }
 
@@ -337,10 +553,15 @@ class _BlazeSDKInternal {
   // Prepare moments
   Future<void> prepareMoments({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
+
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
 
     try {
       await _channel.invokeMethod('prepareMoments', params);
@@ -352,6 +573,7 @@ class _BlazeSDKInternal {
   // Play moments
   Future<void> playMoments({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeMomentsPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
@@ -360,6 +582,9 @@ class _BlazeSDKInternal {
       'dataSource': dataSource.toJson(),
     };
 
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
     if (playerStyle != null) {
       params['playerStyle'] = playerStyle.toJson();
     }
@@ -377,11 +602,64 @@ class _BlazeSDKInternal {
     }
   }
 
+  // Append moments to the currently presented moments player
+  Future<void> appendMomentsToPlayer({
+    required String sourceId,
+    required BlazeDataSourceType dataSource,
+    bool? shouldOrderContentByReadStatus,
+  }) async {
+    Map<String, dynamic> params = {
+      'sourceId': sourceId,
+      'dataSource': dataSource.toJson(),
+    };
+
+    if (shouldOrderContentByReadStatus != null) {
+      params['shouldOrderContentByReadStatus'] = shouldOrderContentByReadStatus;
+    }
+
+    try {
+      await _channel.invokeMethod('appendMomentsToPlayer', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Set the default moments playback configuration
+  Future<void> setDefaultMomentsPlaybackConfiguration(
+    BlazeMomentsPlaybackConfiguration configuration,
+  ) async {
+    try {
+      await _channel.invokeMethod(
+        'setDefaultMomentsPlaybackConfiguration',
+        {'playbackConfiguration': configuration.toJson()},
+      );
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Get the default moments playback configuration
+  Future<BlazeMomentsPlaybackConfiguration>
+      getDefaultMomentsPlaybackConfiguration() async {
+    try {
+      final result =
+          await _channel.invokeMethod('getDefaultMomentsPlaybackConfiguration');
+      // Method channel returns Map<Object?, Object?>; normalize to
+      // Map<String, dynamic> (including nested maps) for freezed's fromJson.
+      final jsonMap = json.decode(json.encode(result)) as Map<String, dynamic>;
+      return BlazeMomentsPlaybackConfiguration.fromJson(jsonMap);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
   // Play a video
   Future<void> playVideo({
     required String videoId,
     BlazeVideosPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeVideosPlaybackConfiguration? playbackConfiguration,
   }) async {
     Map<String, dynamic> params = {
       'videoId': videoId,
@@ -392,6 +670,9 @@ class _BlazeSDKInternal {
     }
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
+    }
+    if (playbackConfiguration != null) {
+      params['playbackConfiguration'] = playbackConfiguration.toJson();
     }
 
     try {
@@ -404,10 +685,15 @@ class _BlazeSDKInternal {
   // Prepare videos
   Future<void> prepareVideos({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
+
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
 
     try {
       await _channel.invokeMethod('prepareVideos', params);
@@ -419,14 +705,19 @@ class _BlazeSDKInternal {
   // Play videos
   Future<void> playVideos({
     required BlazeDataSourceType dataSource,
+    String? entryContentId,
     BlazeVideosPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    BlazeVideosPlaybackConfiguration? playbackConfiguration,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
 
+    if (entryContentId != null) {
+      params['entryContentId'] = entryContentId;
+    }
     if (playerStyle != null) {
       params['playerStyle'] = playerStyle.toJson();
     }
@@ -436,11 +727,44 @@ class _BlazeSDKInternal {
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
     }
+    if (playbackConfiguration != null) {
+      params['playbackConfiguration'] = playbackConfiguration.toJson();
+    }
 
     try {
       await _channel.invokeMethod('playVideos', params);
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Set the default videos playback configuration
+  Future<void> setDefaultVideosPlaybackConfiguration(
+    BlazeVideosPlaybackConfiguration configuration,
+  ) async {
+    try {
+      await _channel.invokeMethod(
+        'setDefaultVideosPlaybackConfiguration',
+        {'playbackConfiguration': configuration.toJson()},
+      );
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Get the default videos playback configuration
+  Future<BlazeVideosPlaybackConfiguration>
+      getDefaultVideosPlaybackConfiguration() async {
+    try {
+      final result =
+          await _channel.invokeMethod('getDefaultVideosPlaybackConfiguration');
+      // Method channel returns Map<Object?, Object?>; normalize to
+      // Map<String, dynamic> (including nested maps) for freezed's fromJson.
+      final jsonMap = json.decode(json.encode(result)) as Map<String, dynamic>;
+      return BlazeVideosPlaybackConfiguration.fromJson(jsonMap);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
     }
   }
 
@@ -457,6 +781,129 @@ class _BlazeSDKInternal {
   Future<void> setDoNotTrack(bool doNotTrackUser) {
     return _channel
         .invokeMethod('setDoNotTrack', {'doNotTrackUser': doNotTrackUser});
+  }
+
+  Future<void> setDisableAnalytics(bool disableAnalytics) async {
+    try {
+      await _channel.invokeMethod(
+          'setDisableAnalytics', {'disableAnalytics': disableAnalytics});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> setPreferredLanguage(String? language) async {
+    try {
+      await _channel
+          .invokeMethod('setPreferredLanguage', {'language': language});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> setPlayerSoundState(BlazePlayerSoundState state) async {
+    try {
+      await _channel
+          .invokeMethod('setPlayerSoundState', {'state': state.name});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<bool> isMuted() async {
+    try {
+      final result = await _channel.invokeMethod('isMuted');
+      return result as bool;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
+  // Show the standalone search screen
+  Future<void> showSearchScreen({BlazeSearchScreenOptions? options}) async {
+    Map<String, dynamic> params = {};
+
+    final suggestionsDataSource = options?.suggestionsDataSource;
+    if (suggestionsDataSource != null) {
+      params['suggestionsDataSource'] = suggestionsDataSource.toJson();
+    }
+
+    try {
+      await _channel.invokeMethod('showSearchScreen', params);
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Replace the set of followed entities
+  Future<void> setFollowedEntities(List<String> entityIds) async {
+    try {
+      await _channel
+          .invokeMethod('setFollowedEntities', {'entityIds': entityIds});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Insert entities into the set of followed entities
+  Future<void> insertFollowedEntities(List<String> entityIds) async {
+    try {
+      await _channel
+          .invokeMethod('insertFollowedEntities', {'entityIds': entityIds});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Remove entities from the set of followed entities
+  Future<void> removeFollowedEntities(List<String> entityIds) async {
+    try {
+      await _channel
+          .invokeMethod('removeFollowedEntities', {'entityIds': entityIds});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Stop the currently active casting session
+  Future<void> stopActiveCastingSession() async {
+    try {
+      await _channel.invokeMethod('stopActiveCastingSession');
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Stop the currently active picture-in-picture session
+  Future<void> stopActivePiPSession() async {
+    try {
+      await _channel.invokeMethod('stopActivePiPSession');
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Returns whether a picture-in-picture session is currently active
+  Future<bool> isPiPActive() async {
+    try {
+      final result = await _channel.invokeMethod('isPiPActive');
+      return result as bool;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
+  // Get the ids of the currently followed entities
+  Future<List<String>> getFollowedEntities() async {
+    try {
+      final result = await _channel.invokeMethod('getFollowedEntities');
+      return (result as List).map((e) => e as String).toList();
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
   }
 
   Future<bool> canHandleUniversalLink(String link) async {
@@ -520,5 +967,20 @@ class _BlazeSDKInternal {
   /// Set the player entry point delegate for receiving player lifecycle events
   void setPlayerEntryPointDelegate(BlazePlayerEntryPointDelegate? delegate) {
     BlazePlayerEntryPointDelegateHelper.registerDelegate(delegate);
+  }
+
+  /// Set the follow entities delegate for receiving follow-entity events
+  void setFollowEntitiesDelegate(BlazeFollowEntitiesDelegate? delegate) {
+    BlazeFollowEntitiesDelegateHelper.registerDelegate(delegate);
+  }
+
+  /// Set the casting delegate for receiving casting-state-change events
+  void setCastingDelegate(BlazeCastingDelegate? delegate) {
+    BlazeCastingDelegateHelper.registerDelegate(delegate);
+  }
+
+  /// Set the pip delegate for receiving picture-in-picture-state-change events
+  void setPipDelegate(BlazePipDelegate? delegate) {
+    BlazePipDelegateHelper.registerDelegate(delegate);
   }
 }

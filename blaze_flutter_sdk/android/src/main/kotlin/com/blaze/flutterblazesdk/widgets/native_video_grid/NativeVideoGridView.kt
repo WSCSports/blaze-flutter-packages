@@ -4,6 +4,7 @@ import android.content.Context
 import com.blaze.blazesdk.features.videos.widgets.grid.BlazeVideosWidgetGridView
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.flutterblazesdk.players.extractVideosPlayerStyle
+import com.blaze.flutterblazesdk.utils.extractVideosPlaybackConfiguration
 import com.blaze.flutterblazesdk.widgets.BlazeWidgetBase
 import io.flutter.plugin.common.BinaryMessenger
 
@@ -37,6 +38,7 @@ class NativeVideoGridView(
             )
 
         val playerStyle = playerStyleMap.extractVideosPlayerStyle(widgetView.context)
+        val playbackConfiguration = playbackConfigurationMap.extractVideosPlaybackConfiguration()
         val perItemStyleOverrides = getPerItemStyleOverridesForInit(widgetLayout)
 
         widgetView.initWidget(
@@ -47,6 +49,7 @@ class NativeVideoGridView(
             widgetId = widgetId,
             shouldOrderWidgetByReadStatus = shouldOrderWidgetByReadStatus,
             widgetDelegate = delegate,
+            playbackConfiguration = playbackConfiguration,
             perItemStyleOverrides = perItemStyleOverrides
         )
     }
