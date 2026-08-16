@@ -5,6 +5,7 @@ export 'src/sdk_module/blaze_sdk_module.dart';
 
 // Types exports
 export 'src/types/blaze_data_source_type.dart';
+export 'src/types/blaze_videos_filter_params.dart';
 export 'src/types/shared_types.dart';
 export 'src/types/widget_presets.dart';
 export 'src/types/blaze_widget_label.dart';
@@ -19,6 +20,7 @@ export 'src/types/playback/stories_playback_configuration.dart';
 export 'src/player_customization/stories_player_style.dart';
 export 'src/player_customization/moments_player_style.dart';
 export 'src/player_customization/videos_player_style.dart';
+export 'src/player_customization/captions_style.dart';
 
 // Widget exports
 export 'src/widgets/blaze_widget_controller.dart';

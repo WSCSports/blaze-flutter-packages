@@ -1,12 +1,15 @@
 package com.blaze.flutterblazesdk.parsers
 
 import com.blaze.blazesdk.data_source.BlazeAdvancedOrderType
+import com.blaze.blazesdk.data_source.BlazeCompositeDataSourceConfig
+import com.blaze.blazesdk.data_source.BlazeCompositeDataSourceEntry
 import com.blaze.blazesdk.data_source.BlazeDataSourcePersonalizedType
 import com.blaze.blazesdk.data_source.BlazeDataSourceType
 import com.blaze.blazesdk.data_source.BlazeOrderType
 import com.blaze.blazesdk.data_source.BlazeRecommendationsType
 import com.blaze.blazesdk.data_source.BlazeWidgetLabel
 import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
+import com.blaze.blazesdk.shared.models.BlazeLayoutDirection
 
 /** Extension functions to parse BlazeDataSourceType from Flutter's Map representation */
 fun Map<String, Any?>.toBlazeDataSourceType(): BlazeDataSourceType? {
@@ -16,6 +19,7 @@ fun Map<String, Any?>.toBlazeDataSourceType(): BlazeDataSourceType? {
         containsKey("labels") -> parseLabelsDataSource()
         containsKey("ids") -> parseIdsDataSource()
         containsKey("recommendationsType") -> parseRecommendationsDataSource()
+        containsKey("dataSources") -> parseCompositeDataSource()
         else -> null
     }
 }
@@ -65,21 +69,47 @@ private fun Map<String, Any?>.parseRecommendationsDataSource():
     val anyLabelFilter =
         (recommendationsMap["anyLabelFilter"] as? List<*>)?.filterIsInstance<String>()
             ?: emptyList()
-    val promotedLabels =
-        (recommendationsMap["promotedLabels"] as? List<*>)?.filterIsInstance<String>()
+    val coldStartLabels =
+        (recommendationsMap["coldStartLabels"] as? List<*>)?.filterIsInstance<String>()
             ?: emptyList()
 
     val recommendationsType =
         when (type) {
             "ForYou" -> BlazeRecommendationsType.ForYou(
                 anyLabelFilter = anyLabelFilter,
-                promotedLabels = promotedLabels
+                coldStartLabels = coldStartLabels
             )
             "Trending" -> BlazeRecommendationsType.Trending(anyLabelFilter = anyLabelFilter)
             else -> return null
         }
 
     return BlazeDataSourceType.Recommendations(type = recommendationsType)
+}
+
+/**
+ * Parses a [BlazeDataSourceType.Composite] from the "dataSources" key. Nested entries are
+ * validated natively (non-empty, no nested composite) - any structural violation surfaces as a
+ * [com.blaze.blazesdk.shared.results.BlazeResult.Error] through the normal completion callback,
+ * so an empty/malformed list is intentionally passed through rather than pre-validated here.
+ */
+private fun Map<String, Any?>.parseCompositeDataSource(): BlazeDataSourceType.Composite? {
+    val dataSourcesList = get("dataSources") as? List<*> ?: return null
+    val entries = dataSourcesList.map { entry ->
+        (entry as? Map<String, Any?>)?.toBlazeCompositeDataSourceEntry() ?: return null
+    }
+
+    return BlazeDataSourceType.Composite(dataSources = entries)
+}
+
+private fun Map<String, Any?>.toBlazeCompositeDataSourceEntry(): BlazeCompositeDataSourceEntry? {
+    val dataSourceMap = get("dataSource") as? Map<String, Any?> ?: return null
+    val dataSource = dataSourceMap.toBlazeDataSourceType() ?: return null
+    val isMandatory = (get("config") as? Map<String, Any?>)?.get("isMandatory") as? Boolean ?: false
+
+    return BlazeCompositeDataSourceEntry(
+        dataSource = dataSource,
+        config = BlazeCompositeDataSourceConfig(isMandatory = isMandatory)
+    )
 }
 
 private fun Map<String, Any?>.parseLabelsPriority(): List<BlazeWidgetLabel>? {
@@ -102,6 +132,8 @@ private fun String.toBlazeOrderType(): BlazeOrderType? {
         "zToA" -> BlazeOrderType.Z_TO_A
         "recentlyCreatedFirst" -> BlazeOrderType.RECENTLY_CREATED_FIRST
         "recentlyCreatedLast" -> BlazeOrderType.RECENTLY_CREATED_LAST
+        "startTimeDesc" -> BlazeOrderType.START_TIME_DESC
+        "startTimeAsc" -> BlazeOrderType.START_TIME_ASC
         "random" -> BlazeOrderType.RANDOM
         else -> null
     }
@@ -142,8 +174,8 @@ private fun Map<String, Any?>.parsePersonalizedTypeLabels():
     val labelsFilter =
         (get("labelsFilter") as? Map<String, Any?>)?.toBlazeWidgetLabel() ?: return null
 
-    val labelsPriorityList = get("labelsPriority") as? List<*> ?: return null
-    val labelsPriority = labelsPriorityList.toBlazeWidgetLabelArray()
+    val labelsPriority =
+        (get("labelsPriority") as? List<*>)?.toBlazeWidgetLabelArray() ?: emptyList()
 
     return BlazeDataSourcePersonalizedType.Labels(
         labelsFilter = labelsFilter,
@@ -172,5 +204,18 @@ fun String?.asCachingLevel(): BlazeCachingLevel {
         "high" -> BlazeCachingLevel.HIGH
         "extreme" -> BlazeCachingLevel.EXTREME
         else -> BlazeCachingLevel.DEFAULT
+    }
+}
+
+/**
+ * Extension function to convert a Flutter enum name to [BlazeLayoutDirection].
+ * Returns null when absent or unrecognized, which leaves the native default
+ * (follow the system layout direction) in place.
+ */
+fun String?.asBlazeLayoutDirection(): BlazeLayoutDirection? {
+    return when (this) {
+        "ltr" -> BlazeLayoutDirection.LTR
+        "rtl" -> BlazeLayoutDirection.RTL
+        else -> null
     }
 }

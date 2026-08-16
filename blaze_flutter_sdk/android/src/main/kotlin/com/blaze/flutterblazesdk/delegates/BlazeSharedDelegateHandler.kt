@@ -6,6 +6,7 @@ import com.blaze.blazesdk.delegates.BlazePipState
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.results.BlazeResult
 import com.blaze.blazesdk.style.shared.models.BlazePlayerCustomActionButtonParams
@@ -181,7 +182,8 @@ class BlazeSharedDelegateHandler {
             val sourceId: String?,
             val buttonId: String,
             val buttonName: String,
-            val appMetadata: Map<String, Any>?
+            val appMetadata: Map<String, Any>?,
+            val sdkMetadata: Map<String, Any>?
         )
 
         val params = Params(
@@ -189,10 +191,64 @@ class BlazeSharedDelegateHandler {
             sourceId = sourceId,
             buttonId = customParams.id,
             buttonName = customParams.name,
-            appMetadata = customParams.appMetadata?.takeIf { it.isNotEmpty() }
+            appMetadata = customParams.appMetadata?.takeIf { it.isNotEmpty() },
+            sdkMetadata = customParams.sdkMetadata.takeIf { it.isNotEmpty() }
         )
 
         completion(params)
+    }
+
+    // Observer-only: always returns null so the SDK falls back to its own
+    // sdkGeneratedLink. Overriding the shared link would need a synchronous
+    // return value from Dart, which the async bridge (a ~2s round-trip) can't
+    // provide — same constraint as onTriggerCTA/onTriggerPlayerBodyTextLink.
+    fun onShareClicked(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        shareParams: BlazeShareParams,
+        completion: (Any) -> Unit
+    ): String? {
+        @Keep
+        data class ContentTypeParams(
+            val runtimeType: String,
+            val pageId: String? = null
+        )
+
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val id: String,
+            val contentType: ContentTypeParams,
+            val title: String?,
+            val description: String?,
+            val sdkGeneratedLink: String,
+            val extraInfo: Map<String, String>
+        )
+
+        val contentType =
+            when (val contentType = shareParams.contentType) {
+                is BlazeShareParams.BlazeShareContentType.Story ->
+                    ContentTypeParams(runtimeType = "story", pageId = contentType.pageId)
+                is BlazeShareParams.BlazeShareContentType.Moment ->
+                    ContentTypeParams(runtimeType = "moment")
+                is BlazeShareParams.BlazeShareContentType.Video ->
+                    ContentTypeParams(runtimeType = "video")
+            }
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            id = shareParams.id,
+            contentType = contentType,
+            title = shareParams.title,
+            description = shareParams.description,
+            sdkGeneratedLink = shareParams.sdkGeneratedLink,
+            extraInfo = shareParams.extraInfo
+        )
+
+        completion(params)
+        return null
     }
 
     fun onReadStatusChanged(

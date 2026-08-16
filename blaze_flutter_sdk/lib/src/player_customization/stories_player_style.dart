@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../types/shared_types.dart';
 import '../types/custom_action_button.dart';
 import '../widgets/types/widget_layout_common.dart';
+import 'captions_style.dart';
 
 part 'stories_player_style.freezed.dart';
 part 'stories_player_style.g.dart';
@@ -19,6 +20,10 @@ class BlazeStoryPlayerStyle with _$BlazeStoryPlayerStyle {
     BlazeStoryPlayerHeaderGradientStyle? headerGradient,
     BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
     BlazeStoryPlayerProgressBarStyle? progressBar,
+
+    /// Styles the rendered captions text. To style the CC toggle button
+    /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
+    BlazeCaptionsStyle? captions,
   }) = _BlazeStoryPlayerStyle;
 
   factory BlazeStoryPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -79,6 +84,7 @@ class BlazeStoryPlayerButtonsStyle with _$BlazeStoryPlayerButtonsStyle {
     BlazePlayerButtonStyle? mute,
     BlazePlayerButtonStyle? exit,
     BlazePlayerButtonStyle? share,
+    BlazePlayerButtonStyle? captions,
     List<BlazeCustomActionButton>? customActionButtons,
   }) = _BlazeStoryPlayerButtonsStyle;
 
@@ -94,6 +100,17 @@ class BlazeStoryPlayerCtaStyle with _$BlazeStoryPlayerCtaStyle {
     double? textSize,
     BlazeFont? font,
     bool? isVisible,
+
+    /// Fallback border color for the CTA button.
+    ///
+    /// A border color supplied by the backend/CMS for the CTA takes precedence
+    /// when present and parseable; this value is used otherwise. Omit to keep
+    /// the preset value (no border).
+    String? borderColor,
+
+    /// Fallback border width for the CTA button. See [borderColor] for
+    /// precedence rules.
+    double? borderWidth,
   }) = _BlazeStoryPlayerCtaStyle;
 
   factory BlazeStoryPlayerCtaStyle.fromJson(Map<String, dynamic> json) =>

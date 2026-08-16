@@ -5,6 +5,7 @@ import com.blaze.blazesdk.features.videos.widgets.row.BlazeVideosWidgetRowView
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.flutterblazesdk.players.extractVideosPlayerStyle
 import com.blaze.flutterblazesdk.utils.extractVideosPlaybackConfiguration
+import com.blaze.flutterblazesdk.utils.extractVideosFilterParams
 import com.blaze.flutterblazesdk.widgets.BlazeWidgetBase
 import io.flutter.plugin.common.BinaryMessenger
 
@@ -38,6 +39,7 @@ class NativeVideoRowView(
 
         val playerStyle = playerStyleMap.extractVideosPlayerStyle(widgetView.context)
         val playbackConfiguration = playbackConfigurationMap.extractVideosPlaybackConfiguration()
+        val videosFilterParams = videosFilterParamsMap.extractVideosFilterParams()
         val perItemStyleOverrides = getPerItemStyleOverridesForInit(widgetLayout)
 
         widgetView.initWidget(
@@ -46,9 +48,11 @@ class NativeVideoRowView(
             dataSource = dataSource,
             cachingLevel = cachingLevel,
             widgetId = widgetId,
+            widgetRemoteIdentifier = widgetRemoteIdentifier,
             shouldOrderWidgetByReadStatus = shouldOrderWidgetByReadStatus,
             widgetDelegate = delegate,
             playbackConfiguration = playbackConfiguration,
+            videosFilterParams = videosFilterParams,
             perItemStyleOverrides = perItemStyleOverrides
         )
     }

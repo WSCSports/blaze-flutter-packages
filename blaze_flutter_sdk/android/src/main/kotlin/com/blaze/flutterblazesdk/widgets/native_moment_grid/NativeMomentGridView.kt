@@ -2,6 +2,7 @@ package com.blaze.flutterblazesdk.widgets.native_moment_grid
 
 import android.content.Context
 import com.blaze.blazesdk.features.moments.widgets.grid.BlazeMomentsWidgetGridView
+import com.blaze.blazesdk.features.moments.widgets.tabs.BlazeMomentsWidgetTabsController
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.flutterblazesdk.players.extractMomentsPlayerStyle
 import com.blaze.flutterblazesdk.utils.extractMomentsPlaybackConfiguration
@@ -41,12 +42,18 @@ class NativeMomentGridView(
                 val playbackConfiguration = playbackConfigurationMap.extractMomentsPlaybackConfiguration()
                 val perItemStyleOverrides = getPerItemStyleOverridesForInit(widgetLayout)
 
+                // Retained on tabsController (BlazeWidgetBase) so the reload commands have a live
+                // handle to the fullscreen tabs session once it appears.
+                val ownTabsController = BlazeMomentsWidgetTabsController()
                 val tabsConfiguration = tabsConfigurationMap.extractMomentsWidgetTabsConfiguration(
                         containerTabsDelegate = containerTabsDelegate,
                         context = widgetView.context,
+                        controller = ownTabsController,
                 )
 
                 if (tabsConfiguration != null) {
+                        tabsController = ownTabsController
+
                         // Tabs flow: the player style comes from the tabs configuration and the
                         // data source is derived natively from the first tab, so neither is passed
                         // here.
@@ -69,6 +76,7 @@ class NativeMomentGridView(
                                 dataSource = dataSource,
                                 cachingLevel = cachingLevel,
                                 widgetId = widgetId,
+                                widgetRemoteIdentifier = widgetRemoteIdentifier,
                                 shouldOrderWidgetByReadStatus = shouldOrderWidgetByReadStatus,
                                 widgetDelegate = delegate,
                                 playbackConfiguration = playbackConfiguration,

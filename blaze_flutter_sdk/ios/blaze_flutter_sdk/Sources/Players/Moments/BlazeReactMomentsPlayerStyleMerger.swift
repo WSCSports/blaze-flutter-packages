@@ -29,6 +29,7 @@ extension BlazeMomentsPlayerStyle {
         merged.playerDisplayMode = merged.playerDisplayMode.mergedWith(
             customization.playerDisplayMode)
         merged.followEntity = merged.followEntity.mergedWith(customization.followEntity)
+        merged.captions = merged.captions.mergedWith(customization.captions)
         return merged
     }
 }
@@ -221,6 +222,8 @@ extension BlazeMomentsPlayerCtaStyle {
             customization.horizontalAlignment)
         merged.icon = UIImage.imageWith(customization.icon?.iconImage)
         merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
+        merged.borderWidth = customization.borderWidth ?? merged.borderWidth
         return merged
     }
 }
@@ -293,6 +296,7 @@ extension BlazeMomentsPlayerButtonsStyle {
         merged.mute = merged.mute.mergedWith(customization.mute)
         merged.play = merged.play.mergedWith(customization.play)
         merged.share = merged.share.mergedWith(customization.share)
+        merged.captions = merged.captions.mergedWith(customization.captions)
         merged.seekForward = merged.seekForward.mergedWith(customization.seekForward)
         merged.seekBackward = merged.seekBackward.mergedWith(customization.seekBackward)
         merged.search = merged.search.mergedWith(customization.search)
@@ -303,6 +307,10 @@ extension BlazeMomentsPlayerButtonsStyle {
                 merged.setBottomStackCustomActionButtons(nativeButtons)
             }
         }
+
+        merged.shouldPreserveLikesCountBelowThreshold =
+            customization.shouldPreserveLikesCountBelowThreshold
+            ?? merged.shouldPreserveLikesCountBelowThreshold
 
         return merged
     }

@@ -144,6 +144,26 @@ class BlazeBasePlayerDelegateHandler {
     }
   }
 
+  static void handleShareClicked(
+    Map<String, dynamic> args,
+    void Function(BlazeOnShareClickedParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnShareClickedParams.fromJson(
+        args,
+      );
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onShareClicked',
+      );
+    }
+  }
+
   static void handleReadStatusChanged(
     Map<String, dynamic> args,
     void Function(BlazeOnReadStatusChangedParams)? callback,

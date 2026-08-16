@@ -23,11 +23,34 @@ class BlazeGAMBannerAdsDelegateOnAdEventParams
     with _$BlazeGAMBannerAdsDelegateOnAdEventParams {
   const factory BlazeGAMBannerAdsDelegateOnAdEventParams({
     required BlazeBannerAdEventType eventType,
+
+    /// Contextual metadata about the content surrounding the banner, as
+    /// delivered by the native SDK alongside the event. `null` when the native
+    /// SDK attached no extra info to this event.
+    BlazeContentExtraInfo? extraInfo,
   }) = _BlazeGAMBannerAdsDelegateOnAdEventParams;
 
   factory BlazeGAMBannerAdsDelegateOnAdEventParams.fromJson(
           Map<String, dynamic> json) =>
       _$BlazeGAMBannerAdsDelegateOnAdEventParamsFromJson(json);
+}
+
+@freezed
+class BlazeGAMBannerAdsDelegateOnAdErrorParams
+    with _$BlazeGAMBannerAdsDelegateOnAdErrorParams {
+  const factory BlazeGAMBannerAdsDelegateOnAdErrorParams({
+    /// The error message associated with the error.
+    required String errorMessage,
+
+    /// Contextual metadata about the content surrounding the failed banner, as
+    /// delivered by the native SDK alongside the error. `null` when the native
+    /// SDK attached no extra info to this error.
+    BlazeContentExtraInfo? extraInfo,
+  }) = _BlazeGAMBannerAdsDelegateOnAdErrorParams;
+
+  factory BlazeGAMBannerAdsDelegateOnAdErrorParams.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeGAMBannerAdsDelegateOnAdErrorParamsFromJson(json);
 }
 
 /// GAM Custom Native Ads Delegate
@@ -40,8 +63,10 @@ class BlazeGAMBannerAdsDelegate {
 
   /// Called when an error occurs during ad loading or playback.
   ///
-  /// [errorMessage] The error message associated with the error.
-  final void Function(String errorMessage)? onGAMBannerAdsAdError;
+  /// [params] The error message and the data associated with the ad involved in
+  /// the error.
+  final void Function(BlazeGAMBannerAdsDelegateOnAdErrorParams params)?
+      onGAMBannerAdsAdError;
 
   const BlazeGAMBannerAdsDelegate({
     this.onGAMBannerAdsAdEvent,
@@ -52,19 +77,10 @@ class BlazeGAMBannerAdsDelegate {
 //---------------- Internal ----------------//
 
 @freezed
-class _OnAdErrorParams with _$OnAdErrorParams {
-  const factory _OnAdErrorParams({
-    required String errorMessage,
-  }) = __OnAdErrorParams;
-
-  factory _OnAdErrorParams.fromJson(Map<String, dynamic> json) =>
-      _$OnAdErrorParamsFromJson(json);
-}
-
-@freezed
 class _OnAdEventParams with _$OnAdEventParams {
   const factory _OnAdEventParams({
     required String eventType,
+    required BlazeContentExtraInfo? extraInfo,
   }) = __OnAdEventParams;
 
   factory _OnAdEventParams.fromJson(Map<String, dynamic> json) =>
@@ -94,8 +110,10 @@ class BlazeBannerAdsDelegateHelper {
             final eventType = $enumDecode(
                 _$BlazeBannerAdEventTypeEnumMap, eventData.eventType);
 
-            final eventParams =
-                BlazeGAMBannerAdsDelegateOnAdEventParams(eventType: eventType);
+            final eventParams = BlazeGAMBannerAdsDelegateOnAdEventParams(
+              eventType: eventType,
+              extraInfo: eventData.extraInfo,
+            );
             callback(eventParams);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(
@@ -112,7 +130,7 @@ class BlazeBannerAdsDelegateHelper {
   }
 
   static void _onGAMBannerAdsAdError(
-    void Function(String errorMessage)? callback,
+    void Function(BlazeGAMBannerAdsDelegateOnAdErrorParams params)? callback,
   ) {
     const methodName = 'BlazeGAM.onGAMBannerAdsAdError';
     if (callback != null) {
@@ -121,8 +139,9 @@ class BlazeBannerAdsDelegateHelper {
         (args) async {
           try {
             // Parse using freezed object
-            final errorData = _OnAdErrorParams.fromJson(args.params);
-            callback(errorData.errorMessage);
+            final errorData =
+                BlazeGAMBannerAdsDelegateOnAdErrorParams.fromJson(args.params);
+            callback(errorData);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(
               e,

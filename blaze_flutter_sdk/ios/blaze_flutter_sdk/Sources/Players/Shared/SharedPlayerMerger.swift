@@ -32,6 +32,32 @@ extension BlazeFirstTimeSlideTextStyle {
     }
 }
 
+extension BlazeCaptionsStyle {
+    // Styles the rendered captions text (font, size, on-screen position). Each positioning axis
+    // is applied independently - a customization supplying only xPosition leaves yPosition
+    // untouched. `textSize` is Android-only: on iOS the caption size is baked into `font` itself,
+    // so it's intentionally dropped here (matches RN's BlazeReactCaptionsStyle merge).
+    func mergedWith(_ customization: BlazeReactCaptionsStyle?) -> Self {
+        guard let customization else { return self }
+
+        var merged = self
+        merged.font = merged.font?.fontWith(customization.font, textSize: nil)
+
+        if let xPosition = customization.positioning?.xPosition,
+            let parsed = BlazeCaptionsXPosition.from(dictionary: xPosition.anyHashableDict)
+        {
+            merged.positioning.xPosition = parsed
+        }
+        if let yPosition = customization.positioning?.yPosition,
+            let parsed = BlazeCaptionsYPosition.from(dictionary: yPosition.anyHashableDict)
+        {
+            merged.positioning.yPosition = parsed
+        }
+
+        return merged
+    }
+}
+
 extension BlazeFirstTimeSlideCTAStyle {
     func mergedWith(_ customization: BlazeReactFirstTimeSlideCTAStyle?) -> Self {
         guard let customization else { return self }

@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../types/blaze_data_source_type.dart';
+import '../types/blaze_videos_filter_params.dart';
 import '../types/shared_types.dart';
 import '../types/widget_presets.dart';
 import '../types/moments_widget_tabs_configuration.dart';
@@ -27,6 +28,12 @@ import 'types/widget_style_overrides.dart';
 import 'blaze_widget_controller.dart';
 
 class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
+  /// A unique identifier for this widget instance, used internally to route
+  /// platform-channel calls to the correct native widget instance.
+  ///
+  /// Must be unique across every Blaze widget simultaneously mounted in the
+  /// widget tree — two widgets sharing a `widgetId` collide on the same
+  /// platform channel and calls between them will not route as expected.
   final String widgetId;
   final String _viewType;
   final bool _isVerticalScroll;
@@ -43,6 +50,26 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
   final dynamic playerStyle; // Dynamic to support different player style types
   final dynamic
       playbackConfiguration; // Dynamic to support different playback configuration types
+
+  /// Videos-only: filters which content types / stream statuses the widget shows.
+  /// Ignored by Stories/Moments widgets. Applies only at widget creation - the
+  /// native SDK has no runtime-update hook for it (unlike [dataSource]).
+  final BlazeVideosFilterParams? videosFilterParams;
+
+  /// An identifier for remote-managed widget configuration. When set and
+  /// successfully resolved, the SDK fetches this widget's layout, data source,
+  /// and per-item style overrides from a remote/CMS config instead of the
+  /// values supplied locally; while remote-managed, this widget's own
+  /// [dataSource], [blazeWidgetLayout], and [BlazeWidgetController]
+  /// style-override calls become no-ops (logged, not applied). Falls back to
+  /// the locally-supplied [dataSource] if the remote fetch fails.
+  ///
+  /// Applies only at widget creation - unlike [dataSource], there is no
+  /// runtime-update hook for it. Ignored on a Moments widget built with the
+  /// `.tabs()` constructor - the tabs-backed initializer is not
+  /// remote-manageable natively.
+  final String? widgetRemoteIdentifier;
+
   final Map<BlazeWidgetItemCustomMapping, BlazeWidgetItemStyleOverrides>?
       perItemStyleOverrides;
   final BlazeWidgetDelegate? widgetDelegate;
@@ -69,6 +96,8 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
     this.shouldOrderWidgetByReadStatus,
     this.playerStyle,
     this.playbackConfiguration,
+    this.videosFilterParams,
+    this.widgetRemoteIdentifier,
     this.perItemStyleOverrides,
     this.widgetDelegate,
     this.appOverridesCTAHandling,
@@ -109,6 +138,16 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
       updateWidgetsUi: _updateWidgetsUi,
       updateOverrideStyles: _updateOverrideStyles,
     );
+
+    final controller = widget.controller;
+    if (controller is BlazeMomentsWidgetController) {
+      controller.attachMomentsTabs(
+        reloadAllTabs: _reloadAllTabs,
+        reloadNonActiveTabs: _reloadNonActiveTabs,
+        reloadTab: _reloadTab,
+        reloadTabByContainerId: _reloadTabByContainerId,
+      );
+    }
   }
 
   Future<dynamic> _handleMethodCall(MethodCall call) async {
@@ -167,6 +206,12 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
           widget.widgetDelegate?.onWidgetItemClicked,
         );
         break;
+      case 'onShareClicked':
+        BlazeBasePlayerDelegateHandler.handleShareClicked(
+          json.decode(call.arguments),
+          widget.widgetDelegate?.onShareClicked,
+        );
+        break;
       // Moments "widget to tabs" fullscreen player callbacks - forwarded to the
       // per-widget momentsContainerTabsDelegate (Moments-only).
       case 'onMomentsContainerTabsDataLoadStarted':
@@ -221,6 +266,12 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
         BlazePlayerContainerTabsDelegateHandler.handleTabSelected(
           json.decode(call.arguments),
           widget.momentsContainerTabsDelegate?.onTabSelected,
+        );
+        break;
+      case 'onMomentsContainerTabsShareClicked':
+        BlazeBasePlayerDelegateHandler.handleShareClicked(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onShareClicked,
         );
         break;
       case 'updateHeight':
@@ -325,6 +376,16 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
             (widget.playbackConfiguration as BlazeStoriesPlaybackConfiguration)
                 .toJson();
       }
+    }
+
+    // Add videos filter params to creation params if provided (Videos widgets only)
+    if (widget.videosFilterParams != null) {
+      creationParams["videosFilterParams"] =
+          widget.videosFilterParams!.toJson();
+    }
+
+    if (widget.widgetRemoteIdentifier != null) {
+      creationParams["widgetRemoteIdentifier"] = widget.widgetRemoteIdentifier;
     }
 
     // Add per-item style overrides to creation params if provided
@@ -439,6 +500,31 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
           _convertPerItemStyleOverridesToJson(perItemStyleOverrides),
       'shouldUpdateUi': shouldUpdateUi,
     });
+  }
+
+  /// Reloads content for every tab in the fullscreen Moments tabs player.
+  /// Moments `.tabs()` widgets only - a no-op otherwise.
+  void _reloadAllTabs() {
+    _channel.invokeMethod('reloadAllTabs');
+  }
+
+  /// Reloads content for every tab except the currently active one. Moments
+  /// `.tabs()` widgets only - a no-op otherwise.
+  void _reloadNonActiveTabs() {
+    _channel.invokeMethod('reloadNonActiveTabs');
+  }
+
+  /// Reloads a single tab by its position. iOS only - a documented no-op on
+  /// Android; see [BlazeWidgetController.reloadTab].
+  void _reloadTab({required int at}) {
+    _channel.invokeMethod('reloadTab', {'at': at});
+  }
+
+  /// Reloads a single tab by its `containerId`. iOS only - a documented
+  /// no-op on Android; see [BlazeWidgetController.reloadTabByContainerId].
+  void _reloadTabByContainerId({required String containerId}) {
+    _channel
+        .invokeMethod('reloadTabByContainerId', {'containerId': containerId});
   }
 
   @override

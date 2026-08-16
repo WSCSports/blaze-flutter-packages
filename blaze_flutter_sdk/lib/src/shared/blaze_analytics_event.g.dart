@@ -327,6 +327,7 @@ _$VideoPropsImpl _$$VideoPropsImplFromJson(Map<String, dynamic> json) =>
           ? null
           : AnalyticsVideosCtaConfig.fromJson(
               json['cta_config'] as Map<String, dynamic>),
+      cc_state: json['cc_state'] as String?,
     );
 
 Map<String, dynamic> _$$VideoPropsImplToJson(_$VideoPropsImpl instance) =>
@@ -351,6 +352,7 @@ Map<String, dynamic> _$$VideoPropsImplToJson(_$VideoPropsImpl instance) =>
           _$BlazeAnalyticsOrientationEnumMap[instance.device_orientation],
       'content_extra_info': instance.content_extra_info,
       'cta_config': instance.cta_config?.toJson(),
+      'cc_state': instance.cc_state,
     };
 
 const _$VideoSeekTypeEnumMap = {

@@ -5,6 +5,7 @@ import '../player_customization/stories_player_style.dart';
 import '../player_customization/moments_player_style.dart';
 import '../player_customization/videos_player_style.dart';
 import '../types/blaze_data_source_type.dart';
+import '../types/blaze_videos_filter_params.dart';
 import '../types/shared_types.dart';
 import '../types/playback/videos_playback_configuration.dart';
 import '../types/playback/moments_playback_configuration.dart';
@@ -33,6 +34,7 @@ class BlazeSDK {
     BlazeVideosPlayerStyle? defaultVideosPlayerStyle,
     BlazeGlobalDelegate? globalDelegate,
     BlazePlayerEntryPointDelegate? playerEntryPointDelegate,
+    BlazeLayoutDirection? forceLayoutDirection,
   }) =>
       _sdk.initSDK(
         apiKey: apiKey,
@@ -46,6 +48,7 @@ class BlazeSDK {
         defaultVideosPlayerStyle: defaultVideosPlayerStyle,
         globalDelegate: globalDelegate,
         playerEntryPointDelegate: playerEntryPointDelegate,
+        forceLayoutDirection: forceLayoutDirection,
       );
 
   // Stories API
@@ -55,6 +58,8 @@ class BlazeSDK {
     BlazeStoryPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeStoriesPlaybackConfiguration? playbackConfiguration,
+    String? eventId,
+    String? sourceId,
   }) =>
       _sdk.playStory(
         storyId: storyId,
@@ -62,15 +67,19 @@ class BlazeSDK {
         playerStyle: playerStyle,
         triggerSource: triggerSource,
         playbackConfiguration: playbackConfiguration,
+        eventId: eventId,
+        sourceId: sourceId,
       );
 
   static Future<void> prepareStories({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    String? sourceId,
   }) =>
       _sdk.prepareStories(
         dataSource: dataSource,
         entryContentId: entryContentId,
+        sourceId: sourceId,
       );
 
   static Future<void> playStories({
@@ -80,6 +89,7 @@ class BlazeSDK {
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeStoriesPlaybackConfiguration? playbackConfiguration,
+    String? sourceId,
   }) =>
       _sdk.playStories(
         dataSource: dataSource,
@@ -88,6 +98,7 @@ class BlazeSDK {
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
         playbackConfiguration: playbackConfiguration,
+        sourceId: sourceId,
       );
 
   /// Sets the default stories playback configuration applied to stories players
@@ -107,20 +118,24 @@ class BlazeSDK {
     required String momentId,
     BlazeMomentsPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    String? sourceId,
   }) =>
       _sdk.playMoment(
         momentId: momentId,
         playerStyle: playerStyle,
         triggerSource: triggerSource,
+        sourceId: sourceId,
       );
 
   static Future<void> prepareMoments({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    String? sourceId,
   }) =>
       _sdk.prepareMoments(
         dataSource: dataSource,
         entryContentId: entryContentId,
+        sourceId: sourceId,
       );
 
   static Future<void> playMoments({
@@ -129,6 +144,7 @@ class BlazeSDK {
     BlazeMomentsPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    String? sourceId,
   }) =>
       _sdk.playMoments(
         dataSource: dataSource,
@@ -136,6 +152,7 @@ class BlazeSDK {
         playerStyle: playerStyle,
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
+        sourceId: sourceId,
       );
 
   /// Appends moments to the currently presented moments player.
@@ -173,21 +190,27 @@ class BlazeSDK {
     BlazeVideosPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeVideosPlaybackConfiguration? playbackConfiguration,
+    String? sourceId,
   }) =>
       _sdk.playVideo(
         videoId: videoId,
         playerStyle: playerStyle,
         triggerSource: triggerSource,
         playbackConfiguration: playbackConfiguration,
+        sourceId: sourceId,
       );
 
   static Future<void> prepareVideos({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    BlazeVideosFilterParams? videosFilterParams,
+    String? sourceId,
   }) =>
       _sdk.prepareVideos(
         dataSource: dataSource,
         entryContentId: entryContentId,
+        videosFilterParams: videosFilterParams,
+        sourceId: sourceId,
       );
 
   static Future<void> playVideos({
@@ -197,6 +220,8 @@ class BlazeSDK {
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeVideosPlaybackConfiguration? playbackConfiguration,
+    BlazeVideosFilterParams? videosFilterParams,
+    String? sourceId,
   }) =>
       _sdk.playVideos(
         dataSource: dataSource,
@@ -205,6 +230,8 @@ class BlazeSDK {
         shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
         triggerSource: triggerSource,
         playbackConfiguration: playbackConfiguration,
+        videosFilterParams: videosFilterParams,
+        sourceId: sourceId,
       );
 
   /// Sets the default videos playback configuration applied to videos players
@@ -222,6 +249,12 @@ class BlazeSDK {
   // NEW: Missing core methods
   static Future<void> dismissPlayer() => _sdk.dismissPlayer();
 
+  /// Pauses the currently presented player, if any.
+  static Future<void> pauseCurrentPlayer() => _sdk.pauseCurrentPlayer();
+
+  /// Resumes the currently presented player, if any.
+  static Future<void> resumeCurrentPlayer() => _sdk.resumeCurrentPlayer();
+
   static Future<bool> isInitialized() => _sdk.isInitialized();
 
   static Future<void> setDoNotTrack(bool doNotTrackUser) =>
@@ -229,6 +262,24 @@ class BlazeSDK {
 
   static Future<void> setDisableAnalytics(bool disableAnalytics) =>
       _sdk.setDisableAnalytics(disableAnalytics);
+
+  /// Enables or disables the periodic user-activity sync.
+  ///
+  /// User activity backs read/liked state and personalized recommendations.
+  /// Disabling stops the sync tasks; re-enabling restarts them.
+  static Future<void> setDisableUserActivity(bool disableUserActivity) =>
+      _sdk.setDisableUserActivity(disableUserActivity);
+
+  /// Clears locally cached user-activity data (liked/viewed content and
+  /// interaction answers) and refreshes widgets so the reset is reflected.
+  static Future<void> clearLocalUserActivity() => _sdk.clearLocalUserActivity();
+
+  /// A key-value store the hosting app can populate for the SDK to read.
+  ///
+  /// Values set here are surfaced to SDK features that consume host-app
+  /// context, such as in-player interactions.
+  static const BlazeHostingAppContext hostingAppContext =
+      BlazeHostingAppContext._();
 
   static Future<void> setPreferredLanguage(String? language) =>
       _sdk.setPreferredLanguage(language);
@@ -289,8 +340,8 @@ class BlazeSDK {
   /// Returns whether a picture-in-picture session is currently active.
   static Future<bool> isPiPActive() => _sdk.isPiPActive();
 
-  static Future<bool> canHandleUniversalLink(String link) =>
-      _sdk.canHandleUniversalLink(link);
+  static Future<bool> canHandleUniversalLink({required String link}) =>
+      _sdk.canHandleUniversalLink(link: link);
 
   static Future<void> updateGeoRestriction(String? geoLocation) =>
       _sdk.updateGeoRestriction(geoLocation);
@@ -298,15 +349,31 @@ class BlazeSDK {
   static Future<bool> canHandlePushNotification(Map<String, dynamic> payload) =>
       _sdk.canHandlePushNotification(payload);
 
-  static Future<void> handleNotificationPayload(Map<String, dynamic> payload) =>
-      _sdk.handleNotificationPayload(payload);
+  /// Handles a Blaze push-notification payload.
+  ///
+  /// [sourceId] - Optional entry point identifier for delegate context. It is
+  /// surfaced in the `sourceId` field of delegate callbacks triggered by the
+  /// playback this notification starts.
+  static Future<void> handleNotificationPayload({
+    required Map<String, dynamic> payload,
+    String? sourceId,
+  }) =>
+      _sdk.handleNotificationPayload(payload: payload, sourceId: sourceId);
 
   // Utility methods
   static Future<void> setExternalUserId(String? externalUserId) =>
       _sdk.setExternalUserId(externalUserId);
 
-  static Future<void> handleUniversalLink(String link) =>
-      _sdk.handleUniversalLink(link);
+  /// Handles a Blaze universal link.
+  ///
+  /// [sourceId] - Optional entry point identifier for delegate context. It is
+  /// surfaced in the `sourceId` field of delegate callbacks triggered by the
+  /// playback this link starts.
+  static Future<void> handleUniversalLink({
+    required String link,
+    String? sourceId,
+  }) =>
+      _sdk.handleUniversalLink(link: link, sourceId: sourceId);
 
   // ======================================
   // DELEGATE METHODS
@@ -345,6 +412,50 @@ class BlazeSDK {
       _sdk.setPipDelegate(delegate);
 }
 
+/// A key-value store the hosting app populates for the SDK to consume.
+///
+/// Reached via [BlazeSDK.hostingAppContext]. Values must be JSON-encodable
+/// primitives, lists, or maps, since they cross the platform channel.
+class BlazeHostingAppContext {
+  const BlazeHostingAppContext._();
+
+  _BlazeSDKInternal get _sdk => _BlazeSDKInternal._instance;
+
+  /// Returns the value stored for [key], or `null` if the key is not set.
+  Future<Object?> getValue(String key) => _sdk.hostingAppContextGetValue(key);
+
+  /// Returns the full context map.
+  Future<Map<String, dynamic>> getContext() =>
+      _sdk.hostingAppContextGetContext();
+
+  /// Stores [value] under [key]. Passing a `null` value clears the key.
+  ///
+  /// Prefer this over [setContext] for incremental updates: each call is a
+  /// single atomic operation natively, so it cannot clobber concurrent writes
+  /// to other keys.
+  Future<void> setValue(String key, Object? value) =>
+      _sdk.hostingAppContextSetValue(key, value);
+
+  /// Replaces the entire context with [context].
+  ///
+  /// **This clears every existing key first**, including values written by
+  /// in-player interactions (which can push values back through the SDK's
+  /// JavaScript bridge). Those writes are not reported to Dart, so this call
+  /// can discard state this app never observed.
+  ///
+  /// Use [setValue] / [deleteValue] for incremental updates. Reserve
+  /// [setContext] for deliberately resetting the whole store, and avoid the
+  /// read-modify-write pattern (`getContext` → mutate → `setContext`) — the two
+  /// round-trips are not atomic, so a concurrent interaction write landing
+  /// between them will be lost.
+  Future<void> setContext(Map<String, dynamic> context) =>
+      _sdk.hostingAppContextSetContext(context);
+
+  /// Removes the value stored for [key].
+  Future<void> deleteValue(String key) =>
+      _sdk.hostingAppContextDeleteValue(key);
+}
+
 class _BlazeSDKInternal {
   // Private instance variable to hold the singleton instance.
   static final _BlazeSDKInternal _instance = _BlazeSDKInternal._();
@@ -367,6 +478,7 @@ class _BlazeSDKInternal {
     BlazeVideosPlayerStyle? defaultVideosPlayerStyle,
     BlazeGlobalDelegate? globalDelegate,
     BlazePlayerEntryPointDelegate? playerEntryPointDelegate,
+    BlazeLayoutDirection? forceLayoutDirection,
   }) async {
     Map<String, dynamic> params = {
       'apiKey': apiKey,
@@ -396,6 +508,9 @@ class _BlazeSDKInternal {
     if (defaultVideosPlayerStyle != null) {
       params['defaultVideosPlayerStyle'] = defaultVideosPlayerStyle.toJson();
     }
+    if (forceLayoutDirection != null) {
+      params['forceLayoutDirection'] = forceLayoutDirection.name;
+    }
 
     // Register delegates if provided during init
     setGlobalDelegate(globalDelegate);
@@ -415,6 +530,8 @@ class _BlazeSDKInternal {
     BlazeStoryPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeStoriesPlaybackConfiguration? playbackConfiguration,
+    String? eventId,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'storyId': storyId,
@@ -432,6 +549,12 @@ class _BlazeSDKInternal {
     if (playbackConfiguration != null) {
       params['playbackConfiguration'] = playbackConfiguration.toJson();
     }
+    if (eventId != null) {
+      params['eventId'] = eventId;
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
+    }
 
     try {
       await _channel.invokeMethod('playStory', params);
@@ -444,6 +567,7 @@ class _BlazeSDKInternal {
   Future<void> prepareStories({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -451,6 +575,9 @@ class _BlazeSDKInternal {
 
     if (entryContentId != null) {
       params['entryContentId'] = entryContentId;
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -468,6 +595,7 @@ class _BlazeSDKInternal {
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeStoriesPlaybackConfiguration? playbackConfiguration,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -487,6 +615,9 @@ class _BlazeSDKInternal {
     }
     if (playbackConfiguration != null) {
       params['playbackConfiguration'] = playbackConfiguration.toJson();
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -531,6 +662,7 @@ class _BlazeSDKInternal {
     required String momentId,
     BlazeMomentsPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'momentId': momentId,
@@ -541,6 +673,9 @@ class _BlazeSDKInternal {
     }
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -554,6 +689,7 @@ class _BlazeSDKInternal {
   Future<void> prepareMoments({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -561,6 +697,9 @@ class _BlazeSDKInternal {
 
     if (entryContentId != null) {
       params['entryContentId'] = entryContentId;
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -577,6 +716,7 @@ class _BlazeSDKInternal {
     BlazeMomentsPlayerStyle? playerStyle,
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -593,6 +733,9 @@ class _BlazeSDKInternal {
     }
     if (triggerSource != null) {
       params['triggerSource'] = triggerSource.name;
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -660,6 +803,7 @@ class _BlazeSDKInternal {
     BlazeVideosPlayerStyle? playerStyle,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeVideosPlaybackConfiguration? playbackConfiguration,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'videoId': videoId,
@@ -674,6 +818,9 @@ class _BlazeSDKInternal {
     if (playbackConfiguration != null) {
       params['playbackConfiguration'] = playbackConfiguration.toJson();
     }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
+    }
 
     try {
       await _channel.invokeMethod('playVideo', params);
@@ -686,6 +833,8 @@ class _BlazeSDKInternal {
   Future<void> prepareVideos({
     required BlazeDataSourceType dataSource,
     String? entryContentId,
+    BlazeVideosFilterParams? videosFilterParams,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -693,6 +842,12 @@ class _BlazeSDKInternal {
 
     if (entryContentId != null) {
       params['entryContentId'] = entryContentId;
+    }
+    if (videosFilterParams != null) {
+      params['videosFilterParams'] = videosFilterParams.toJson();
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -710,6 +865,8 @@ class _BlazeSDKInternal {
     bool? shouldOrderContentByReadStatus,
     BlazeEntryPointTriggerSource? triggerSource,
     BlazeVideosPlaybackConfiguration? playbackConfiguration,
+    BlazeVideosFilterParams? videosFilterParams,
+    String? sourceId,
   }) async {
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
@@ -729,6 +886,12 @@ class _BlazeSDKInternal {
     }
     if (playbackConfiguration != null) {
       params['playbackConfiguration'] = playbackConfiguration.toJson();
+    }
+    if (videosFilterParams != null) {
+      params['videosFilterParams'] = videosFilterParams.toJson();
+    }
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
     }
 
     try {
@@ -792,6 +955,88 @@ class _BlazeSDKInternal {
     }
   }
 
+  Future<void> pauseCurrentPlayer() async {
+    try {
+      await _channel.invokeMethod('pauseCurrentPlayer');
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> resumeCurrentPlayer() async {
+    try {
+      await _channel.invokeMethod('resumeCurrentPlayer');
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> setDisableUserActivity(bool disableUserActivity) async {
+    try {
+      await _channel.invokeMethod('setDisableUserActivity',
+          {'disableUserActivity': disableUserActivity});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> clearLocalUserActivity() async {
+    try {
+      await _channel.invokeMethod('clearLocalUserActivity');
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Hosting app context store
+  Future<Object?> hostingAppContextGetValue(String key) async {
+    try {
+      return await _channel
+          .invokeMethod('hostingAppContextGetValue', {'key': key});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> hostingAppContextGetContext() async {
+    try {
+      final result = await _channel.invokeMethod('hostingAppContextGetContext');
+      // Method channel returns Map<Object?, Object?>; normalize to
+      // Map<String, dynamic> (including nested maps).
+      return json.decode(json.encode(result)) as Map<String, dynamic>;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
+  Future<void> hostingAppContextSetValue(String key, Object? value) async {
+    try {
+      await _channel.invokeMethod(
+          'hostingAppContextSetValue', {'key': key, 'value': value});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> hostingAppContextSetContext(Map<String, dynamic> context) async {
+    try {
+      await _channel
+          .invokeMethod('hostingAppContextSetContext', {'context': context});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  Future<void> hostingAppContextDeleteValue(String key) async {
+    try {
+      await _channel.invokeMethod('hostingAppContextDeleteValue', {'key': key});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
   Future<void> setPreferredLanguage(String? language) async {
     try {
       await _channel
@@ -803,8 +1048,7 @@ class _BlazeSDKInternal {
 
   Future<void> setPlayerSoundState(BlazePlayerSoundState state) async {
     try {
-      await _channel
-          .invokeMethod('setPlayerSoundState', {'state': state.name});
+      await _channel.invokeMethod('setPlayerSoundState', {'state': state.name});
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }
@@ -906,7 +1150,7 @@ class _BlazeSDKInternal {
     }
   }
 
-  Future<bool> canHandleUniversalLink(String link) async {
+  Future<bool> canHandleUniversalLink({required String link}) async {
     final result =
         await _channel.invokeMethod('canHandleUniversalLink', {'link': link});
     return result as bool;
@@ -927,10 +1171,18 @@ class _BlazeSDKInternal {
     return result as bool;
   }
 
-  Future<void> handleNotificationPayload(Map<String, dynamic> payload) async {
+  Future<void> handleNotificationPayload({
+    required Map<String, dynamic> payload,
+    String? sourceId,
+  }) async {
+    Map<String, dynamic> params = {'payload': payload};
+
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
+    }
+
     try {
-      return await _channel
-          .invokeMethod('handleNotificationPayload', {'payload': payload});
+      return await _channel.invokeMethod('handleNotificationPayload', params);
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }
@@ -947,9 +1199,16 @@ class _BlazeSDKInternal {
   }
 
   // Handles universal link.
-  Future<void> handleUniversalLink(String link) async {
+  Future<void> handleUniversalLink(
+      {required String link, String? sourceId}) async {
+    Map<String, dynamic> params = {'link': link};
+
+    if (sourceId != null) {
+      params['sourceId'] = sourceId;
+    }
+
     try {
-      await _channel.invokeMethod('handleUniversalLink', {'link': link});
+      await _channel.invokeMethod('handleUniversalLink', params);
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }

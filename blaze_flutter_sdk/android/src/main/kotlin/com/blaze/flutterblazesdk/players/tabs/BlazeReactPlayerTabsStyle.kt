@@ -16,6 +16,15 @@ data class BlazeReactPlayerTabsStyle(
     val icon: BlazeReactPlayerTabItemIconStyle?,
     val selectedTabState: BlazeReactPlayerTabItemStyle?,
     val unselectedTabState: BlazeReactPlayerTabItemStyle?,
+    val activeTabIndicator: BlazeReactPlayerActiveTabIndicatorStyle?,
+    val isTabTitleVisibleWhenSingleTab: Boolean?,
+    val isTabVisibleWhenEmpty: Boolean?,
+)
+
+@Keep
+data class BlazeReactPlayerActiveTabIndicatorStyle(
+    val isVisible: Boolean?,
+    val height: Float?,
 )
 
 @Keep

@@ -42,6 +42,10 @@ _$BlazeStoryPlayerStyleImpl _$$BlazeStoryPlayerStyleImplFromJson(
           ? null
           : BlazeStoryPlayerProgressBarStyle.fromJson(
               json['progressBar'] as Map<String, dynamic>),
+      captions: json['captions'] == null
+          ? null
+          : BlazeCaptionsStyle.fromJson(
+              json['captions'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeStoryPlayerStyleImplToJson(
@@ -56,6 +60,7 @@ Map<String, dynamic> _$$BlazeStoryPlayerStyleImplToJson(
       'headerGradient': instance.headerGradient?.toJson(),
       'firstTimeSlide': instance.firstTimeSlide?.toJson(),
       'progressBar': instance.progressBar?.toJson(),
+      'captions': instance.captions?.toJson(),
     };
 
 _$BlazeStoryPlayerFirstTimeSlideStyleImpl
@@ -158,6 +163,10 @@ _$BlazeStoryPlayerButtonsStyleImpl _$$BlazeStoryPlayerButtonsStyleImplFromJson(
           ? null
           : BlazePlayerButtonStyle.fromJson(
               json['share'] as Map<String, dynamic>),
+      captions: json['captions'] == null
+          ? null
+          : BlazePlayerButtonStyle.fromJson(
+              json['captions'] as Map<String, dynamic>),
       customActionButtons: (json['customActionButtons'] as List<dynamic>?)
           ?.map((e) =>
               BlazeCustomActionButton.fromJson(e as Map<String, dynamic>))
@@ -170,6 +179,7 @@ Map<String, dynamic> _$$BlazeStoryPlayerButtonsStyleImplToJson(
       'mute': instance.mute?.toJson(),
       'exit': instance.exit?.toJson(),
       'share': instance.share?.toJson(),
+      'captions': instance.captions?.toJson(),
       'customActionButtons':
           instance.customActionButtons?.map((e) => e.toJson()).toList(),
     };
@@ -183,6 +193,8 @@ _$BlazeStoryPlayerCtaStyleImpl _$$BlazeStoryPlayerCtaStyleImplFromJson(
           ? null
           : BlazeFont.fromJson(json['font'] as Map<String, dynamic>),
       isVisible: json['isVisible'] as bool?,
+      borderColor: json['borderColor'] as String?,
+      borderWidth: (json['borderWidth'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$BlazeStoryPlayerCtaStyleImplToJson(
@@ -192,6 +204,8 @@ Map<String, dynamic> _$$BlazeStoryPlayerCtaStyleImplToJson(
       'textSize': instance.textSize,
       'font': instance.font?.toJson(),
       'isVisible': instance.isVisible,
+      'borderColor': instance.borderColor,
+      'borderWidth': instance.borderWidth,
     };
 
 _$BlazeStoryPlayerTitleTextStyleImpl

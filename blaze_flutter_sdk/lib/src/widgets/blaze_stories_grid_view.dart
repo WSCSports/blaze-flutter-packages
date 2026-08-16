@@ -14,6 +14,7 @@ class BlazeStoriesGridView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeStoryPlayerStyle? super.playerStyle,
     BlazeStoriesPlaybackConfiguration? super.playbackConfiguration,
+    super.widgetRemoteIdentifier,
     super.isEmbeddedInScrollView = false,
     super.perItemStyleOverrides,
     super.widgetDelegate,

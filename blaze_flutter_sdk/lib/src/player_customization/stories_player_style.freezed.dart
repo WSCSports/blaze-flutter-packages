@@ -37,6 +37,10 @@ mixin _$BlazeStoryPlayerStyle {
   BlazeStoryPlayerProgressBarStyle? get progressBar =>
       throw _privateConstructorUsedError;
 
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
+  BlazeCaptionsStyle? get captions => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeStoryPlayerStyle value) $default,
@@ -79,7 +83,8 @@ abstract class $BlazeStoryPlayerStyleCopyWith<$Res> {
       BlazeStoryPlayerChipsStyle? chips,
       BlazeStoryPlayerHeaderGradientStyle? headerGradient,
       BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
-      BlazeStoryPlayerProgressBarStyle? progressBar});
+      BlazeStoryPlayerProgressBarStyle? progressBar,
+      BlazeCaptionsStyle? captions});
 
   $BlazeStoryPlayerTitleTextStyleCopyWith<$Res>? get title;
   $BlazeStoryPlayerLastUpdateTextStyleCopyWith<$Res>? get lastUpdate;
@@ -89,6 +94,7 @@ abstract class $BlazeStoryPlayerStyleCopyWith<$Res> {
   $BlazeStoryPlayerHeaderGradientStyleCopyWith<$Res>? get headerGradient;
   $BlazeStoryPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   $BlazeStoryPlayerProgressBarStyleCopyWith<$Res>? get progressBar;
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -116,6 +122,7 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
     Object? headerGradient = freezed,
     Object? firstTimeSlide = freezed,
     Object? progressBar = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -154,6 +161,10 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
           ? _value.progressBar
           : progressBar // ignore: cast_nullable_to_non_nullable
               as BlazeStoryPlayerProgressBarStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ) as $Val);
   }
 
@@ -274,6 +285,20 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(progressBar: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeStoryPlayerStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazeCaptionsStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -294,7 +319,8 @@ abstract class _$$BlazeStoryPlayerStyleImplCopyWith<$Res>
       BlazeStoryPlayerChipsStyle? chips,
       BlazeStoryPlayerHeaderGradientStyle? headerGradient,
       BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
-      BlazeStoryPlayerProgressBarStyle? progressBar});
+      BlazeStoryPlayerProgressBarStyle? progressBar,
+      BlazeCaptionsStyle? captions});
 
   @override
   $BlazeStoryPlayerTitleTextStyleCopyWith<$Res>? get title;
@@ -312,6 +338,8 @@ abstract class _$$BlazeStoryPlayerStyleImplCopyWith<$Res>
   $BlazeStoryPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   @override
   $BlazeStoryPlayerProgressBarStyleCopyWith<$Res>? get progressBar;
+  @override
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -337,6 +365,7 @@ class __$$BlazeStoryPlayerStyleImplCopyWithImpl<$Res>
     Object? headerGradient = freezed,
     Object? firstTimeSlide = freezed,
     Object? progressBar = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_$BlazeStoryPlayerStyleImpl(
       title: freezed == title
@@ -375,6 +404,10 @@ class __$$BlazeStoryPlayerStyleImplCopyWithImpl<$Res>
           ? _value.progressBar
           : progressBar // ignore: cast_nullable_to_non_nullable
               as BlazeStoryPlayerProgressBarStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ));
   }
 }
@@ -391,7 +424,8 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
       this.chips,
       this.headerGradient,
       this.firstTimeSlide,
-      this.progressBar});
+      this.progressBar,
+      this.captions});
 
   factory _$BlazeStoryPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeStoryPlayerStyleImplFromJson(json);
@@ -415,9 +449,14 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
   @override
   final BlazeStoryPlayerProgressBarStyle? progressBar;
 
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
+  @override
+  final BlazeCaptionsStyle? captions;
+
   @override
   String toString() {
-    return 'BlazeStoryPlayerStyle(title: $title, lastUpdate: $lastUpdate, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, chips: $chips, headerGradient: $headerGradient, firstTimeSlide: $firstTimeSlide, progressBar: $progressBar)';
+    return 'BlazeStoryPlayerStyle(title: $title, lastUpdate: $lastUpdate, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, chips: $chips, headerGradient: $headerGradient, firstTimeSlide: $firstTimeSlide, progressBar: $progressBar, captions: $captions)';
   }
 
   @override
@@ -438,13 +477,25 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
             (identical(other.firstTimeSlide, firstTimeSlide) ||
                 other.firstTimeSlide == firstTimeSlide) &&
             (identical(other.progressBar, progressBar) ||
-                other.progressBar == progressBar));
+                other.progressBar == progressBar) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, title, lastUpdate, buttons,
-      backgroundColor, cta, chips, headerGradient, firstTimeSlide, progressBar);
+  int get hashCode => Object.hash(
+      runtimeType,
+      title,
+      lastUpdate,
+      buttons,
+      backgroundColor,
+      cta,
+      chips,
+      headerGradient,
+      firstTimeSlide,
+      progressBar,
+      captions);
 
   /// Create a copy of BlazeStoryPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -493,16 +544,16 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
 
 abstract class _BlazeStoryPlayerStyle implements BlazeStoryPlayerStyle {
   const factory _BlazeStoryPlayerStyle(
-          {final BlazeStoryPlayerTitleTextStyle? title,
-          final BlazeStoryPlayerLastUpdateTextStyle? lastUpdate,
-          final BlazeStoryPlayerButtonsStyle? buttons,
-          final String? backgroundColor,
-          final BlazeStoryPlayerCtaStyle? cta,
-          final BlazeStoryPlayerChipsStyle? chips,
-          final BlazeStoryPlayerHeaderGradientStyle? headerGradient,
-          final BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
-          final BlazeStoryPlayerProgressBarStyle? progressBar}) =
-      _$BlazeStoryPlayerStyleImpl;
+      {final BlazeStoryPlayerTitleTextStyle? title,
+      final BlazeStoryPlayerLastUpdateTextStyle? lastUpdate,
+      final BlazeStoryPlayerButtonsStyle? buttons,
+      final String? backgroundColor,
+      final BlazeStoryPlayerCtaStyle? cta,
+      final BlazeStoryPlayerChipsStyle? chips,
+      final BlazeStoryPlayerHeaderGradientStyle? headerGradient,
+      final BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
+      final BlazeStoryPlayerProgressBarStyle? progressBar,
+      final BlazeCaptionsStyle? captions}) = _$BlazeStoryPlayerStyleImpl;
 
   factory _BlazeStoryPlayerStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeStoryPlayerStyleImpl.fromJson;
@@ -525,6 +576,11 @@ abstract class _BlazeStoryPlayerStyle implements BlazeStoryPlayerStyle {
   BlazeStoryPlayerFirstTimeSlideStyle? get firstTimeSlide;
   @override
   BlazeStoryPlayerProgressBarStyle? get progressBar;
+
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
+  @override
+  BlazeCaptionsStyle? get captions;
 
   /// Create a copy of BlazeStoryPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1554,6 +1610,7 @@ mixin _$BlazeStoryPlayerButtonsStyle {
   BlazePlayerButtonStyle? get mute => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get exit => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get share => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get captions => throw _privateConstructorUsedError;
   List<BlazeCustomActionButton>? get customActionButtons =>
       throw _privateConstructorUsedError;
 
@@ -1596,11 +1653,13 @@ abstract class $BlazeStoryPlayerButtonsStyleCopyWith<$Res> {
       {BlazePlayerButtonStyle? mute,
       BlazePlayerButtonStyle? exit,
       BlazePlayerButtonStyle? share,
+      BlazePlayerButtonStyle? captions,
       List<BlazeCustomActionButton>? customActionButtons});
 
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
   $BlazePlayerButtonStyleCopyWith<$Res>? get share;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -1622,6 +1681,7 @@ class _$BlazeStoryPlayerButtonsStyleCopyWithImpl<$Res,
     Object? mute = freezed,
     Object? exit = freezed,
     Object? share = freezed,
+    Object? captions = freezed,
     Object? customActionButtons = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1636,6 +1696,10 @@ class _$BlazeStoryPlayerButtonsStyleCopyWithImpl<$Res,
       share: freezed == share
           ? _value.share
           : share // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
       customActionButtons: freezed == customActionButtons
           ? _value.customActionButtons
@@ -1685,6 +1749,20 @@ class _$BlazeStoryPlayerButtonsStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(share: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeStoryPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1700,6 +1778,7 @@ abstract class _$$BlazeStoryPlayerButtonsStyleImplCopyWith<$Res>
       {BlazePlayerButtonStyle? mute,
       BlazePlayerButtonStyle? exit,
       BlazePlayerButtonStyle? share,
+      BlazePlayerButtonStyle? captions,
       List<BlazeCustomActionButton>? customActionButtons});
 
   @override
@@ -1708,6 +1787,8 @@ abstract class _$$BlazeStoryPlayerButtonsStyleImplCopyWith<$Res>
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get share;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -1728,6 +1809,7 @@ class __$$BlazeStoryPlayerButtonsStyleImplCopyWithImpl<$Res>
     Object? mute = freezed,
     Object? exit = freezed,
     Object? share = freezed,
+    Object? captions = freezed,
     Object? customActionButtons = freezed,
   }) {
     return _then(_$BlazeStoryPlayerButtonsStyleImpl(
@@ -1742,6 +1824,10 @@ class __$$BlazeStoryPlayerButtonsStyleImplCopyWithImpl<$Res>
       share: freezed == share
           ? _value.share
           : share // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
       customActionButtons: freezed == customActionButtons
           ? _value._customActionButtons
@@ -1759,6 +1845,7 @@ class _$BlazeStoryPlayerButtonsStyleImpl
       {this.mute,
       this.exit,
       this.share,
+      this.captions,
       final List<BlazeCustomActionButton>? customActionButtons})
       : _customActionButtons = customActionButtons;
 
@@ -1772,6 +1859,8 @@ class _$BlazeStoryPlayerButtonsStyleImpl
   final BlazePlayerButtonStyle? exit;
   @override
   final BlazePlayerButtonStyle? share;
+  @override
+  final BlazePlayerButtonStyle? captions;
   final List<BlazeCustomActionButton>? _customActionButtons;
   @override
   List<BlazeCustomActionButton>? get customActionButtons {
@@ -1785,7 +1874,7 @@ class _$BlazeStoryPlayerButtonsStyleImpl
 
   @override
   String toString() {
-    return 'BlazeStoryPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, customActionButtons: $customActionButtons)';
+    return 'BlazeStoryPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, captions: $captions, customActionButtons: $customActionButtons)';
   }
 
   @override
@@ -1796,13 +1885,15 @@ class _$BlazeStoryPlayerButtonsStyleImpl
             (identical(other.mute, mute) || other.mute == mute) &&
             (identical(other.exit, exit) || other.exit == exit) &&
             (identical(other.share, share) || other.share == share) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions) &&
             const DeepCollectionEquality()
                 .equals(other._customActionButtons, _customActionButtons));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, mute, exit, share,
+  int get hashCode => Object.hash(runtimeType, mute, exit, share, captions,
       const DeepCollectionEquality().hash(_customActionButtons));
 
   /// Create a copy of BlazeStoryPlayerButtonsStyle
@@ -1857,6 +1948,7 @@ abstract class _BlazeStoryPlayerButtonsStyle
           {final BlazePlayerButtonStyle? mute,
           final BlazePlayerButtonStyle? exit,
           final BlazePlayerButtonStyle? share,
+          final BlazePlayerButtonStyle? captions,
           final List<BlazeCustomActionButton>? customActionButtons}) =
       _$BlazeStoryPlayerButtonsStyleImpl;
 
@@ -1869,6 +1961,8 @@ abstract class _BlazeStoryPlayerButtonsStyle
   BlazePlayerButtonStyle? get exit;
   @override
   BlazePlayerButtonStyle? get share;
+  @override
+  BlazePlayerButtonStyle? get captions;
   @override
   List<BlazeCustomActionButton>? get customActionButtons;
 
@@ -1892,6 +1986,17 @@ mixin _$BlazeStoryPlayerCtaStyle {
   double? get textSize => throw _privateConstructorUsedError;
   BlazeFont? get font => throw _privateConstructorUsedError;
   bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  String? get borderColor => throw _privateConstructorUsedError;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  double? get borderWidth => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1930,7 +2035,9 @@ abstract class $BlazeStoryPlayerCtaStyleCopyWith<$Res> {
       {double? cornerRadius,
       double? textSize,
       BlazeFont? font,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   $BlazeFontCopyWith<$Res>? get font;
 }
@@ -1955,6 +2062,8 @@ class _$BlazeStoryPlayerCtaStyleCopyWithImpl<$Res,
     Object? textSize = freezed,
     Object? font = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -1973,6 +2082,14 @@ class _$BlazeStoryPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 
@@ -2004,7 +2121,9 @@ abstract class _$$BlazeStoryPlayerCtaStyleImplCopyWith<$Res>
       {double? cornerRadius,
       double? textSize,
       BlazeFont? font,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
@@ -2029,6 +2148,8 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? textSize = freezed,
     Object? font = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_$BlazeStoryPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -2047,6 +2168,14 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -2055,7 +2184,12 @@ class __$$BlazeStoryPlayerCtaStyleImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
   const _$BlazeStoryPlayerCtaStyleImpl(
-      {this.cornerRadius, this.textSize, this.font, this.isVisible});
+      {this.cornerRadius,
+      this.textSize,
+      this.font,
+      this.isVisible,
+      this.borderColor,
+      this.borderWidth});
 
   factory _$BlazeStoryPlayerCtaStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeStoryPlayerCtaStyleImplFromJson(json);
@@ -2069,9 +2203,22 @@ class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
   @override
   final bool? isVisible;
 
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  final String? borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  final double? borderWidth;
+
   @override
   String toString() {
-    return 'BlazeStoryPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, isVisible: $isVisible)';
+    return 'BlazeStoryPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, isVisible: $isVisible, borderColor: $borderColor, borderWidth: $borderWidth)';
   }
 
   @override
@@ -2085,13 +2232,17 @@ class _$BlazeStoryPlayerCtaStyleImpl implements _BlazeStoryPlayerCtaStyle {
                 other.textSize == textSize) &&
             (identical(other.font, font) || other.font == font) &&
             (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+                other.isVisible == isVisible) &&
+            (identical(other.borderColor, borderColor) ||
+                other.borderColor == borderColor) &&
+            (identical(other.borderWidth, borderWidth) ||
+                other.borderWidth == borderWidth));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, cornerRadius, textSize, font, isVisible);
+  int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font,
+      isVisible, borderColor, borderWidth);
 
   /// Create a copy of BlazeStoryPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2143,7 +2294,9 @@ abstract class _BlazeStoryPlayerCtaStyle implements BlazeStoryPlayerCtaStyle {
       {final double? cornerRadius,
       final double? textSize,
       final BlazeFont? font,
-      final bool? isVisible}) = _$BlazeStoryPlayerCtaStyleImpl;
+      final bool? isVisible,
+      final String? borderColor,
+      final double? borderWidth}) = _$BlazeStoryPlayerCtaStyleImpl;
 
   factory _BlazeStoryPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeStoryPlayerCtaStyleImpl.fromJson;
@@ -2156,6 +2309,19 @@ abstract class _BlazeStoryPlayerCtaStyle implements BlazeStoryPlayerCtaStyle {
   BlazeFont? get font;
   @override
   bool? get isVisible;
+
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  String? get borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  double? get borderWidth;
 
   /// Create a copy of BlazeStoryPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.

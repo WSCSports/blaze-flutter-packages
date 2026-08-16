@@ -235,7 +235,12 @@ mixin _$BlazeVideosPlaybackConfiguration {
   ///   orientation to maximize screen utilization.
   /// - `false` — use the first available rendition regardless of orientation
   ///   changes.
-  bool get multiAspectRatio => throw _privateConstructorUsedError;
+  ///
+  /// Optional — omitting it falls through to the native SDK's own default,
+  /// which is `true` as of native iOS `1.20.0` / Android `1.20.3` (previously
+  /// `false`). Pass an explicit value to opt out of picking up native default
+  /// changes automatically.
+  bool? get multiAspectRatio => throw _privateConstructorUsedError;
 
   /// Whether to force rotation to landscape when entering fullscreen from
   /// portrait.
@@ -288,7 +293,7 @@ abstract class $BlazeVideosPlaybackConfigurationCopyWith<$Res> {
           BlazeVideosPlaybackConfiguration>;
   @useResult
   $Res call(
-      {bool multiAspectRatio,
+      {bool? multiAspectRatio,
       bool shouldOpenInLandscape,
       BlazePipConfiguration? pipConfiguration,
       int? bufferingSpinnerDelayMs});
@@ -312,16 +317,16 @@ class _$BlazeVideosPlaybackConfigurationCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? multiAspectRatio = null,
+    Object? multiAspectRatio = freezed,
     Object? shouldOpenInLandscape = null,
     Object? pipConfiguration = freezed,
     Object? bufferingSpinnerDelayMs = freezed,
   }) {
     return _then(_value.copyWith(
-      multiAspectRatio: null == multiAspectRatio
+      multiAspectRatio: freezed == multiAspectRatio
           ? _value.multiAspectRatio
           : multiAspectRatio // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       shouldOpenInLandscape: null == shouldOpenInLandscape
           ? _value.shouldOpenInLandscape
           : shouldOpenInLandscape // ignore: cast_nullable_to_non_nullable
@@ -363,7 +368,7 @@ abstract class _$$BlazeVideosPlaybackConfigurationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool multiAspectRatio,
+      {bool? multiAspectRatio,
       bool shouldOpenInLandscape,
       BlazePipConfiguration? pipConfiguration,
       int? bufferingSpinnerDelayMs});
@@ -387,16 +392,16 @@ class __$$BlazeVideosPlaybackConfigurationImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? multiAspectRatio = null,
+    Object? multiAspectRatio = freezed,
     Object? shouldOpenInLandscape = null,
     Object? pipConfiguration = freezed,
     Object? bufferingSpinnerDelayMs = freezed,
   }) {
     return _then(_$BlazeVideosPlaybackConfigurationImpl(
-      multiAspectRatio: null == multiAspectRatio
+      multiAspectRatio: freezed == multiAspectRatio
           ? _value.multiAspectRatio
           : multiAspectRatio // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as bool?,
       shouldOpenInLandscape: null == shouldOpenInLandscape
           ? _value.shouldOpenInLandscape
           : shouldOpenInLandscape // ignore: cast_nullable_to_non_nullable
@@ -418,7 +423,7 @@ class __$$BlazeVideosPlaybackConfigurationImplCopyWithImpl<$Res>
 class _$BlazeVideosPlaybackConfigurationImpl
     implements _BlazeVideosPlaybackConfiguration {
   const _$BlazeVideosPlaybackConfigurationImpl(
-      {required this.multiAspectRatio,
+      {this.multiAspectRatio,
       required this.shouldOpenInLandscape,
       this.pipConfiguration,
       this.bufferingSpinnerDelayMs});
@@ -433,8 +438,13 @@ class _$BlazeVideosPlaybackConfigurationImpl
   ///   orientation to maximize screen utilization.
   /// - `false` — use the first available rendition regardless of orientation
   ///   changes.
+  ///
+  /// Optional — omitting it falls through to the native SDK's own default,
+  /// which is `true` as of native iOS `1.20.0` / Android `1.20.3` (previously
+  /// `false`). Pass an explicit value to opt out of picking up native default
+  /// changes automatically.
   @override
-  final bool multiAspectRatio;
+  final bool? multiAspectRatio;
 
   /// Whether to force rotation to landscape when entering fullscreen from
   /// portrait.
@@ -528,7 +538,7 @@ class _$BlazeVideosPlaybackConfigurationImpl
 abstract class _BlazeVideosPlaybackConfiguration
     implements BlazeVideosPlaybackConfiguration {
   const factory _BlazeVideosPlaybackConfiguration(
-          {required final bool multiAspectRatio,
+          {final bool? multiAspectRatio,
           required final bool shouldOpenInLandscape,
           final BlazePipConfiguration? pipConfiguration,
           final int? bufferingSpinnerDelayMs}) =
@@ -544,8 +554,13 @@ abstract class _BlazeVideosPlaybackConfiguration
   ///   orientation to maximize screen utilization.
   /// - `false` — use the first available rendition regardless of orientation
   ///   changes.
+  ///
+  /// Optional — omitting it falls through to the native SDK's own default,
+  /// which is `true` as of native iOS `1.20.0` / Android `1.20.3` (previously
+  /// `false`). Pass an explicit value to opt out of picking up native default
+  /// changes automatically.
   @override
-  bool get multiAspectRatio;
+  bool? get multiAspectRatio;
 
   /// Whether to force rotation to landscape when entering fullscreen from
   /// portrait.

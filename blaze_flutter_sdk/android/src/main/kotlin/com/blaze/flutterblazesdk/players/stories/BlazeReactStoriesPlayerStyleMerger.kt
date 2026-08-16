@@ -43,6 +43,7 @@ fun BlazeStoryPlayerStyle.mergedWith(
     merged.headerGradient = this.headerGradient.mergedWith(customization.headerGradient)
     merged.firstTimeSlide = this.firstTimeSlide.mergedWith(customization.firstTimeSlide, context)
     merged.progressBar = this.progressBar.mergedWith(customization.progressBar)
+    merged.captions = this.captions.mergedWith(customization.captions, context)
     return merged
 }
 
@@ -171,6 +172,7 @@ fun BlazeStoryPlayerButtonsStyle.mergedWith(
     merged.mute = merged.mute.mergeButtonThemes(customization.mute, context)
     merged.exit = merged.exit.mergeButtonThemes(customization.exit, context)
     merged.share = merged.share.mergeButtonThemes(customization.share, context)
+    merged.captions = merged.captions.mergeButtonThemes(customization.captions, context)
 
     mergeCustomActionButtons(customization.customActionButtons, context)?.let {
         merged.setTopStackCustomActionButtons(it)
@@ -204,6 +206,8 @@ fun BlazeStoryPlayerCtaStyle.mergedWith(
     merged.textSize = customization.textSize ?: this.textSize
     merged.fontResId = customization.font?.toFontResId(context)
     merged.isVisible = customization.isVisible ?: this.isVisible
+    safeParseColor(customization.borderColor)?.let { merged.borderColor = it }
+    merged.borderWidth = customization.borderWidth?.blazeDp ?: this.borderWidth
 
     return merged
 }

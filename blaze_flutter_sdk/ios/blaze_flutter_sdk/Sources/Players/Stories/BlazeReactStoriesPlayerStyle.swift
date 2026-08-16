@@ -17,6 +17,7 @@ struct BlazeReactStoryPlayerStyle: Codable {
     var headerGradient: BlazeReactStoryPlayerHeaderGradientStyle?
     var progressBar: BlazeReactStoryPlayerProgressBarStyle?
     var firstTimeSlide: BlazeReactStoryPlayerFirstTimeSlideStyle?
+    var captions: BlazeReactCaptionsStyle?
 }
 
 struct BlazeReactStoryPlayerTitleTextStyle : Codable {
@@ -57,6 +58,7 @@ struct BlazeReactStoryPlayerButtonsStyle : Codable {
     var mute: BlazeReactPlayerButtonStyle?
     var exit: BlazeReactPlayerButtonStyle?
     var share: BlazeReactPlayerButtonStyle?
+    var captions: BlazeReactPlayerButtonStyle?
     var customActionButtons: [BlazeReactCustomActionButton]?
 }
 
@@ -78,6 +80,8 @@ struct BlazeReactStoryPlayerCtaStyle : Codable {
     let font: BlazeReactTitleFont?
     let textSize: CGFloat? // Only Android
     let isVisible: Bool?
+    let borderColor: String?
+    let borderWidth: CGFloat?
 }
 
 struct BlazeReactStoryPlayerHeaderGradientStyle : Codable {

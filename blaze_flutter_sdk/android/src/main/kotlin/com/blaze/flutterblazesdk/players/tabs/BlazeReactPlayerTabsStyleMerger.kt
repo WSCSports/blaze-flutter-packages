@@ -40,6 +40,15 @@ fun BlazePlayerTabsStyle.mergedWith(
     merged.selectedTabState.mergedWith(customization.selectedTabState, context)
     merged.unselectedTabState.mergedWith(customization.unselectedTabState, context)
 
+    customization.activeTabIndicator?.let { indicator ->
+        indicator.isVisible?.let { merged.activeTabIndicator.isVisible = it }
+        indicator.height?.let { merged.activeTabIndicator.height = it.toInt().blazeDp }
+    }
+    customization.isTabTitleVisibleWhenSingleTab?.let {
+        merged.isTabTitleVisibleWhenSingleTab = it
+    }
+    customization.isTabVisibleWhenEmpty?.let { merged.isTabVisibleWhenEmpty = it }
+
     return merged
 }
 

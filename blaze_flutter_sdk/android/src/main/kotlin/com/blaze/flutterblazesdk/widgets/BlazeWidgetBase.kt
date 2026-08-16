@@ -11,7 +11,9 @@ import com.blaze.blazesdk.delegates.BlazeWidgetDelegate
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.extentions.blazeDeepCopy
+import com.blaze.blazesdk.features.moments.widgets.tabs.BlazeMomentsWidgetTabsController
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
 import com.blaze.blazesdk.shared.results.BlazeResult
@@ -76,6 +78,20 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         creationParams?.get("playbackConfiguration") as? Map<String, Any>
     }
 
+    // Parse the videos filter params from creation params (Videos widgets only). Init-time only -
+    // the native SDK has no runtime-update hook for it (unlike dataSource).
+    val videosFilterParamsMap: Map<String, Any>? by lazy {
+        creationParams?.get("videosFilterParams") as? Map<String, Any>
+    }
+
+    // Parse the remote-widget identifier from creation params. Init-time only - unlike dataSource,
+    // there is no runtime setter for it natively. Not forwarded on the Moments tabs-backed
+    // initWidget overload - see the callers in native_moment_row/NativeMomentRowView.kt and
+    // native_moment_grid/NativeMomentGridView.kt.
+    val widgetRemoteIdentifier: String? by lazy {
+        creationParams?.get("widgetRemoteIdentifier") as? String
+    }
+
     // Parse the shouldOrderWidgetByReadStatus from creation params
     val shouldOrderWidgetByReadStatus: Boolean by lazy {
         creationParams?.get("shouldOrderWidgetByReadStatus") as? Boolean ?: true
@@ -97,6 +113,11 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         creationParams?.get("tabsConfiguration") as? Map<String, Any>
     }
 
+    // Moments-only: set by NativeMomentRowView/NativeMomentGridView when a tabs-backed widget is
+    // built, so the reload commands below have a live handle to the fullscreen tabs session.
+    // Stays null for Stories/Videos and non-tabs Moments widgets, making those commands no-ops.
+    var tabsController: BlazeMomentsWidgetTabsController? = null
+
     private var methodChannel: MethodChannel? =
             MethodChannel(binaryMessenger, "blaze-widget-$widgetId").apply {
                 setMethodCallHandler { call, result ->
@@ -115,6 +136,19 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                         }
                         "updateOverrideStyles" -> {
                             updateOverrideStyles(call)
+                        }
+                        "reloadAllTabs" -> {
+                            tabsController?.reloadAllTabs()
+                        }
+                        "reloadNonActiveTabs" -> {
+                            tabsController?.reloadNonActiveTabs()
+                        }
+                        "reloadTab", "reloadTabByContainerId" -> {
+                            // No native per-tab reload hook for the widget-driven tabs flow on
+                            // Android (confirmed absent through publicSDK/v1.20.4 -
+                            // BlazeMomentsWidgetTabsController only exposes reloadAllTabs/
+                            // reloadNonActiveTabs). Documented no-op - see reloadTab/
+                            // reloadTabByContainerId on BlazeWidgetController (Dart).
                         }
                         else -> {}
                     }
@@ -329,6 +363,23 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 }
             }
 
+            override fun onShareClicked(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                shareParams: BlazeShareParams
+            ): String? {
+                return sharedDelegateHandler.onShareClicked(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    shareParams = shareParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onShareClicked",
+                        params = params
+                    )
+                }
+            }
+
             override fun onItemClicked(
                 sourceId: String?,
                 itemId: String,
@@ -501,8 +552,27 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 }
             }
 
-            // `onSearchButtonClicked` (sync return) and `onShareClicked` (not bridged anywhere) are
-            // intentionally left at their native defaults.
+            override fun onShareClicked(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                shareParams: BlazeShareParams
+            ): String? {
+                return sharedDelegateHandler.onShareClicked(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    shareParams = shareParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsShareClicked",
+                        params = params
+                    )
+                }
+            }
+
+            // `onSearchButtonClicked` (sync return) is intentionally left at its native
+            // default — see the observer-only note on `onShareClicked` in
+            // BlazeSharedDelegateHandler.kt for why that one's callback is now bridged
+            // while this one isn't.
         }
     }
 

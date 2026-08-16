@@ -1592,7 +1592,18 @@ mixin _$BlazeOnTriggerCustomActionButtonParams {
   String? get sourceId => throw _privateConstructorUsedError;
   String get buttonId => throw _privateConstructorUsedError;
   String get buttonName => throw _privateConstructorUsedError;
+
+  /// Metadata the app attached to the button via
+  /// [BlazeCustomActionButtonParams.appMetadata].
   Map<String, dynamic>? get appMetadata => throw _privateConstructorUsedError;
+
+  /// Metadata populated by the SDK, reflecting the content's extra info at
+  /// the moment the button was clicked.
+  ///
+  /// Read-only: there is no corresponding "set" path — the SDK manages this
+  /// and the app cannot supply it when constructing a button. `null` when the
+  /// SDK attached no metadata.
+  Map<String, dynamic>? get sdkMetadata => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1635,7 +1646,8 @@ abstract class $BlazeOnTriggerCustomActionButtonParamsCopyWith<$Res> {
       String? sourceId,
       String buttonId,
       String buttonName,
-      Map<String, dynamic>? appMetadata});
+      Map<String, dynamic>? appMetadata,
+      Map<String, dynamic>? sdkMetadata});
 }
 
 /// @nodoc
@@ -1659,6 +1671,7 @@ class _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl<$Res,
     Object? buttonId = null,
     Object? buttonName = null,
     Object? appMetadata = freezed,
+    Object? sdkMetadata = freezed,
   }) {
     return _then(_value.copyWith(
       playerType: null == playerType
@@ -1681,6 +1694,10 @@ class _$BlazeOnTriggerCustomActionButtonParamsCopyWithImpl<$Res,
           ? _value.appMetadata
           : appMetadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      sdkMetadata: freezed == sdkMetadata
+          ? _value.sdkMetadata
+          : sdkMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ) as $Val);
   }
 }
@@ -1699,7 +1716,8 @@ abstract class _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<$Res>
       String? sourceId,
       String buttonId,
       String buttonName,
-      Map<String, dynamic>? appMetadata});
+      Map<String, dynamic>? appMetadata,
+      Map<String, dynamic>? sdkMetadata});
 }
 
 /// @nodoc
@@ -1722,6 +1740,7 @@ class __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl<$Res>
     Object? buttonId = null,
     Object? buttonName = null,
     Object? appMetadata = freezed,
+    Object? sdkMetadata = freezed,
   }) {
     return _then(_$BlazeOnTriggerCustomActionButtonParamsImpl(
       playerType: null == playerType
@@ -1744,6 +1763,10 @@ class __$$BlazeOnTriggerCustomActionButtonParamsImplCopyWithImpl<$Res>
           ? _value._appMetadata
           : appMetadata // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>?,
+      sdkMetadata: freezed == sdkMetadata
+          ? _value._sdkMetadata
+          : sdkMetadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
     ));
   }
 }
@@ -1758,8 +1781,10 @@ class _$BlazeOnTriggerCustomActionButtonParamsImpl
       this.sourceId,
       required this.buttonId,
       required this.buttonName,
-      final Map<String, dynamic>? appMetadata})
-      : _appMetadata = appMetadata;
+      final Map<String, dynamic>? appMetadata,
+      final Map<String, dynamic>? sdkMetadata})
+      : _appMetadata = appMetadata,
+        _sdkMetadata = sdkMetadata;
 
   factory _$BlazeOnTriggerCustomActionButtonParamsImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -1773,7 +1798,13 @@ class _$BlazeOnTriggerCustomActionButtonParamsImpl
   final String buttonId;
   @override
   final String buttonName;
+
+  /// Metadata the app attached to the button via
+  /// [BlazeCustomActionButtonParams.appMetadata].
   final Map<String, dynamic>? _appMetadata;
+
+  /// Metadata the app attached to the button via
+  /// [BlazeCustomActionButtonParams.appMetadata].
   @override
   Map<String, dynamic>? get appMetadata {
     final value = _appMetadata;
@@ -1783,9 +1814,32 @@ class _$BlazeOnTriggerCustomActionButtonParamsImpl
     return EqualUnmodifiableMapView(value);
   }
 
+  /// Metadata populated by the SDK, reflecting the content's extra info at
+  /// the moment the button was clicked.
+  ///
+  /// Read-only: there is no corresponding "set" path — the SDK manages this
+  /// and the app cannot supply it when constructing a button. `null` when the
+  /// SDK attached no metadata.
+  final Map<String, dynamic>? _sdkMetadata;
+
+  /// Metadata populated by the SDK, reflecting the content's extra info at
+  /// the moment the button was clicked.
+  ///
+  /// Read-only: there is no corresponding "set" path — the SDK manages this
+  /// and the app cannot supply it when constructing a button. `null` when the
+  /// SDK attached no metadata.
+  @override
+  Map<String, dynamic>? get sdkMetadata {
+    final value = _sdkMetadata;
+    if (value == null) return null;
+    if (_sdkMetadata is EqualUnmodifiableMapView) return _sdkMetadata;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BlazeOnTriggerCustomActionButtonParams(playerType: $playerType, sourceId: $sourceId, buttonId: $buttonId, buttonName: $buttonName, appMetadata: $appMetadata)';
+    return 'BlazeOnTriggerCustomActionButtonParams(playerType: $playerType, sourceId: $sourceId, buttonId: $buttonId, buttonName: $buttonName, appMetadata: $appMetadata, sdkMetadata: $sdkMetadata)';
   }
 
   @override
@@ -1798,7 +1852,8 @@ class _$BlazeOnTriggerCustomActionButtonParamsImpl
       ..add(DiagnosticsProperty('sourceId', sourceId))
       ..add(DiagnosticsProperty('buttonId', buttonId))
       ..add(DiagnosticsProperty('buttonName', buttonName))
-      ..add(DiagnosticsProperty('appMetadata', appMetadata));
+      ..add(DiagnosticsProperty('appMetadata', appMetadata))
+      ..add(DiagnosticsProperty('sdkMetadata', sdkMetadata));
   }
 
   @override
@@ -1815,13 +1870,21 @@ class _$BlazeOnTriggerCustomActionButtonParamsImpl
             (identical(other.buttonName, buttonName) ||
                 other.buttonName == buttonName) &&
             const DeepCollectionEquality()
-                .equals(other._appMetadata, _appMetadata));
+                .equals(other._appMetadata, _appMetadata) &&
+            const DeepCollectionEquality()
+                .equals(other._sdkMetadata, _sdkMetadata));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, playerType, sourceId, buttonId,
-      buttonName, const DeepCollectionEquality().hash(_appMetadata));
+  int get hashCode => Object.hash(
+      runtimeType,
+      playerType,
+      sourceId,
+      buttonId,
+      buttonName,
+      const DeepCollectionEquality().hash(_appMetadata),
+      const DeepCollectionEquality().hash(_sdkMetadata));
 
   /// Create a copy of BlazeOnTriggerCustomActionButtonParams
   /// with the given fields replaced by the non-null parameter values.
@@ -1877,7 +1940,8 @@ abstract class _BlazeOnTriggerCustomActionButtonParams
           final String? sourceId,
           required final String buttonId,
           required final String buttonName,
-          final Map<String, dynamic>? appMetadata}) =
+          final Map<String, dynamic>? appMetadata,
+          final Map<String, dynamic>? sdkMetadata}) =
       _$BlazeOnTriggerCustomActionButtonParamsImpl;
 
   factory _BlazeOnTriggerCustomActionButtonParams.fromJson(
@@ -1892,8 +1956,20 @@ abstract class _BlazeOnTriggerCustomActionButtonParams
   String get buttonId;
   @override
   String get buttonName;
+
+  /// Metadata the app attached to the button via
+  /// [BlazeCustomActionButtonParams.appMetadata].
   @override
   Map<String, dynamic>? get appMetadata;
+
+  /// Metadata populated by the SDK, reflecting the content's extra info at
+  /// the moment the button was clicked.
+  ///
+  /// Read-only: there is no corresponding "set" path — the SDK manages this
+  /// and the app cannot supply it when constructing a button. `null` when the
+  /// SDK attached no metadata.
+  @override
+  Map<String, dynamic>? get sdkMetadata;
 
   /// Create a copy of BlazeOnTriggerCustomActionButtonParams
   /// with the given fields replaced by the non-null parameter values.
@@ -1901,6 +1977,997 @@ abstract class _BlazeOnTriggerCustomActionButtonParams
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeOnTriggerCustomActionButtonParamsImplCopyWith<
           _$BlazeOnTriggerCustomActionButtonParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeShareContentType _$BlazeShareContentTypeFromJson(
+    Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'story':
+      return BlazeShareContentTypeStory.fromJson(json);
+    case 'moment':
+      return BlazeShareContentTypeMoment.fromJson(json);
+    case 'video':
+      return BlazeShareContentTypeVideo.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(
+          json,
+          'runtimeType',
+          'BlazeShareContentType',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
+/// @nodoc
+mixin _$BlazeShareContentType {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pageId) story,
+    required TResult Function() moment,
+    required TResult Function() video,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pageId)? story,
+    TResult? Function()? moment,
+    TResult? Function()? video,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pageId)? story,
+    TResult Function()? moment,
+    TResult Function()? video,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeShareContentTypeStory value) story,
+    required TResult Function(BlazeShareContentTypeMoment value) moment,
+    required TResult Function(BlazeShareContentTypeVideo value) video,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeShareContentTypeStory value)? story,
+    TResult? Function(BlazeShareContentTypeMoment value)? moment,
+    TResult? Function(BlazeShareContentTypeVideo value)? video,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeShareContentTypeStory value)? story,
+    TResult Function(BlazeShareContentTypeMoment value)? moment,
+    TResult Function(BlazeShareContentTypeVideo value)? video,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeShareContentType to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeShareContentTypeCopyWith<$Res> {
+  factory $BlazeShareContentTypeCopyWith(BlazeShareContentType value,
+          $Res Function(BlazeShareContentType) then) =
+      _$BlazeShareContentTypeCopyWithImpl<$Res, BlazeShareContentType>;
+}
+
+/// @nodoc
+class _$BlazeShareContentTypeCopyWithImpl<$Res,
+        $Val extends BlazeShareContentType>
+    implements $BlazeShareContentTypeCopyWith<$Res> {
+  _$BlazeShareContentTypeCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$BlazeShareContentTypeStoryImplCopyWith<$Res> {
+  factory _$$BlazeShareContentTypeStoryImplCopyWith(
+          _$BlazeShareContentTypeStoryImpl value,
+          $Res Function(_$BlazeShareContentTypeStoryImpl) then) =
+      __$$BlazeShareContentTypeStoryImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String pageId});
+}
+
+/// @nodoc
+class __$$BlazeShareContentTypeStoryImplCopyWithImpl<$Res>
+    extends _$BlazeShareContentTypeCopyWithImpl<$Res,
+        _$BlazeShareContentTypeStoryImpl>
+    implements _$$BlazeShareContentTypeStoryImplCopyWith<$Res> {
+  __$$BlazeShareContentTypeStoryImplCopyWithImpl(
+      _$BlazeShareContentTypeStoryImpl _value,
+      $Res Function(_$BlazeShareContentTypeStoryImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? pageId = null,
+  }) {
+    return _then(_$BlazeShareContentTypeStoryImpl(
+      pageId: null == pageId
+          ? _value.pageId
+          : pageId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeShareContentTypeStoryImpl
+    with DiagnosticableTreeMixin
+    implements BlazeShareContentTypeStory {
+  const _$BlazeShareContentTypeStoryImpl(
+      {required this.pageId, final String? $type})
+      : $type = $type ?? 'story';
+
+  factory _$BlazeShareContentTypeStoryImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeShareContentTypeStoryImplFromJson(json);
+
+  @override
+  final String pageId;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeShareContentType.story(pageId: $pageId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeShareContentType.story'))
+      ..add(DiagnosticsProperty('pageId', pageId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeShareContentTypeStoryImpl &&
+            (identical(other.pageId, pageId) || other.pageId == pageId));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, pageId);
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeShareContentTypeStoryImplCopyWith<_$BlazeShareContentTypeStoryImpl>
+      get copyWith => __$$BlazeShareContentTypeStoryImplCopyWithImpl<
+          _$BlazeShareContentTypeStoryImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pageId) story,
+    required TResult Function() moment,
+    required TResult Function() video,
+  }) {
+    return story(pageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pageId)? story,
+    TResult? Function()? moment,
+    TResult? Function()? video,
+  }) {
+    return story?.call(pageId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pageId)? story,
+    TResult Function()? moment,
+    TResult Function()? video,
+    required TResult orElse(),
+  }) {
+    if (story != null) {
+      return story(pageId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeShareContentTypeStory value) story,
+    required TResult Function(BlazeShareContentTypeMoment value) moment,
+    required TResult Function(BlazeShareContentTypeVideo value) video,
+  }) {
+    return story(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeShareContentTypeStory value)? story,
+    TResult? Function(BlazeShareContentTypeMoment value)? moment,
+    TResult? Function(BlazeShareContentTypeVideo value)? video,
+  }) {
+    return story?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeShareContentTypeStory value)? story,
+    TResult Function(BlazeShareContentTypeMoment value)? moment,
+    TResult Function(BlazeShareContentTypeVideo value)? video,
+    required TResult orElse(),
+  }) {
+    if (story != null) {
+      return story(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeShareContentTypeStoryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeShareContentTypeStory implements BlazeShareContentType {
+  const factory BlazeShareContentTypeStory({required final String pageId}) =
+      _$BlazeShareContentTypeStoryImpl;
+
+  factory BlazeShareContentTypeStory.fromJson(Map<String, dynamic> json) =
+      _$BlazeShareContentTypeStoryImpl.fromJson;
+
+  String get pageId;
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeShareContentTypeStoryImplCopyWith<_$BlazeShareContentTypeStoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeShareContentTypeMomentImplCopyWith<$Res> {
+  factory _$$BlazeShareContentTypeMomentImplCopyWith(
+          _$BlazeShareContentTypeMomentImpl value,
+          $Res Function(_$BlazeShareContentTypeMomentImpl) then) =
+      __$$BlazeShareContentTypeMomentImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BlazeShareContentTypeMomentImplCopyWithImpl<$Res>
+    extends _$BlazeShareContentTypeCopyWithImpl<$Res,
+        _$BlazeShareContentTypeMomentImpl>
+    implements _$$BlazeShareContentTypeMomentImplCopyWith<$Res> {
+  __$$BlazeShareContentTypeMomentImplCopyWithImpl(
+      _$BlazeShareContentTypeMomentImpl _value,
+      $Res Function(_$BlazeShareContentTypeMomentImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeShareContentTypeMomentImpl
+    with DiagnosticableTreeMixin
+    implements BlazeShareContentTypeMoment {
+  const _$BlazeShareContentTypeMomentImpl({final String? $type})
+      : $type = $type ?? 'moment';
+
+  factory _$BlazeShareContentTypeMomentImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeShareContentTypeMomentImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeShareContentType.moment()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeShareContentType.moment'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeShareContentTypeMomentImpl);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pageId) story,
+    required TResult Function() moment,
+    required TResult Function() video,
+  }) {
+    return moment();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pageId)? story,
+    TResult? Function()? moment,
+    TResult? Function()? video,
+  }) {
+    return moment?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pageId)? story,
+    TResult Function()? moment,
+    TResult Function()? video,
+    required TResult orElse(),
+  }) {
+    if (moment != null) {
+      return moment();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeShareContentTypeStory value) story,
+    required TResult Function(BlazeShareContentTypeMoment value) moment,
+    required TResult Function(BlazeShareContentTypeVideo value) video,
+  }) {
+    return moment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeShareContentTypeStory value)? story,
+    TResult? Function(BlazeShareContentTypeMoment value)? moment,
+    TResult? Function(BlazeShareContentTypeVideo value)? video,
+  }) {
+    return moment?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeShareContentTypeStory value)? story,
+    TResult Function(BlazeShareContentTypeMoment value)? moment,
+    TResult Function(BlazeShareContentTypeVideo value)? video,
+    required TResult orElse(),
+  }) {
+    if (moment != null) {
+      return moment(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeShareContentTypeMomentImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeShareContentTypeMoment implements BlazeShareContentType {
+  const factory BlazeShareContentTypeMoment() =
+      _$BlazeShareContentTypeMomentImpl;
+
+  factory BlazeShareContentTypeMoment.fromJson(Map<String, dynamic> json) =
+      _$BlazeShareContentTypeMomentImpl.fromJson;
+}
+
+/// @nodoc
+abstract class _$$BlazeShareContentTypeVideoImplCopyWith<$Res> {
+  factory _$$BlazeShareContentTypeVideoImplCopyWith(
+          _$BlazeShareContentTypeVideoImpl value,
+          $Res Function(_$BlazeShareContentTypeVideoImpl) then) =
+      __$$BlazeShareContentTypeVideoImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BlazeShareContentTypeVideoImplCopyWithImpl<$Res>
+    extends _$BlazeShareContentTypeCopyWithImpl<$Res,
+        _$BlazeShareContentTypeVideoImpl>
+    implements _$$BlazeShareContentTypeVideoImplCopyWith<$Res> {
+  __$$BlazeShareContentTypeVideoImplCopyWithImpl(
+      _$BlazeShareContentTypeVideoImpl _value,
+      $Res Function(_$BlazeShareContentTypeVideoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeShareContentType
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeShareContentTypeVideoImpl
+    with DiagnosticableTreeMixin
+    implements BlazeShareContentTypeVideo {
+  const _$BlazeShareContentTypeVideoImpl({final String? $type})
+      : $type = $type ?? 'video';
+
+  factory _$BlazeShareContentTypeVideoImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeShareContentTypeVideoImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeShareContentType.video()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'BlazeShareContentType.video'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeShareContentTypeVideoImpl);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String pageId) story,
+    required TResult Function() moment,
+    required TResult Function() video,
+  }) {
+    return video();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String pageId)? story,
+    TResult? Function()? moment,
+    TResult? Function()? video,
+  }) {
+    return video?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String pageId)? story,
+    TResult Function()? moment,
+    TResult Function()? video,
+    required TResult orElse(),
+  }) {
+    if (video != null) {
+      return video();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeShareContentTypeStory value) story,
+    required TResult Function(BlazeShareContentTypeMoment value) moment,
+    required TResult Function(BlazeShareContentTypeVideo value) video,
+  }) {
+    return video(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeShareContentTypeStory value)? story,
+    TResult? Function(BlazeShareContentTypeMoment value)? moment,
+    TResult? Function(BlazeShareContentTypeVideo value)? video,
+  }) {
+    return video?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeShareContentTypeStory value)? story,
+    TResult Function(BlazeShareContentTypeMoment value)? moment,
+    TResult Function(BlazeShareContentTypeVideo value)? video,
+    required TResult orElse(),
+  }) {
+    if (video != null) {
+      return video(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeShareContentTypeVideoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeShareContentTypeVideo implements BlazeShareContentType {
+  const factory BlazeShareContentTypeVideo() = _$BlazeShareContentTypeVideoImpl;
+
+  factory BlazeShareContentTypeVideo.fromJson(Map<String, dynamic> json) =
+      _$BlazeShareContentTypeVideoImpl.fromJson;
+}
+
+BlazeOnShareClickedParams _$BlazeOnShareClickedParamsFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeOnShareClickedParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeOnShareClickedParams {
+  BlazePlayerType get playerType => throw _privateConstructorUsedError;
+  String? get sourceId => throw _privateConstructorUsedError;
+
+  /// The unique identifier of the content being shared.
+  String get id => throw _privateConstructorUsedError;
+  BlazeShareContentType get contentType => throw _privateConstructorUsedError;
+  String? get title => throw _privateConstructorUsedError;
+  String? get description => throw _privateConstructorUsedError;
+
+  /// The link the SDK shares by default, generated by its own universal
+  /// links mechanism. This callback cannot override it — see
+  /// [BlazeBasePlayerDelegate.onShareClicked].
+  String get sdkGeneratedLink => throw _privateConstructorUsedError;
+
+  /// Content-level extra info metadata for the shared item. For Stories this
+  /// is the story's extra info; for Moments/Videos, the item's own. Empty
+  /// when the content has no extra info.
+  Map<String, String> get extraInfo => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnShareClickedParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnShareClickedParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnShareClickedParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeOnShareClickedParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeOnShareClickedParamsCopyWith<BlazeOnShareClickedParams> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeOnShareClickedParamsCopyWith<$Res> {
+  factory $BlazeOnShareClickedParamsCopyWith(BlazeOnShareClickedParams value,
+          $Res Function(BlazeOnShareClickedParams) then) =
+      _$BlazeOnShareClickedParamsCopyWithImpl<$Res, BlazeOnShareClickedParams>;
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String id,
+      BlazeShareContentType contentType,
+      String? title,
+      String? description,
+      String sdkGeneratedLink,
+      Map<String, String> extraInfo});
+
+  $BlazeShareContentTypeCopyWith<$Res> get contentType;
+}
+
+/// @nodoc
+class _$BlazeOnShareClickedParamsCopyWithImpl<$Res,
+        $Val extends BlazeOnShareClickedParams>
+    implements $BlazeOnShareClickedParamsCopyWith<$Res> {
+  _$BlazeOnShareClickedParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? id = null,
+    Object? contentType = null,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? sdkGeneratedLink = null,
+    Object? extraInfo = null,
+  }) {
+    return _then(_value.copyWith(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as BlazeShareContentType,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sdkGeneratedLink: null == sdkGeneratedLink
+          ? _value.sdkGeneratedLink
+          : sdkGeneratedLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      extraInfo: null == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeShareContentTypeCopyWith<$Res> get contentType {
+    return $BlazeShareContentTypeCopyWith<$Res>(_value.contentType, (value) {
+      return _then(_value.copyWith(contentType: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeOnShareClickedParamsImplCopyWith<$Res>
+    implements $BlazeOnShareClickedParamsCopyWith<$Res> {
+  factory _$$BlazeOnShareClickedParamsImplCopyWith(
+          _$BlazeOnShareClickedParamsImpl value,
+          $Res Function(_$BlazeOnShareClickedParamsImpl) then) =
+      __$$BlazeOnShareClickedParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String id,
+      BlazeShareContentType contentType,
+      String? title,
+      String? description,
+      String sdkGeneratedLink,
+      Map<String, String> extraInfo});
+
+  @override
+  $BlazeShareContentTypeCopyWith<$Res> get contentType;
+}
+
+/// @nodoc
+class __$$BlazeOnShareClickedParamsImplCopyWithImpl<$Res>
+    extends _$BlazeOnShareClickedParamsCopyWithImpl<$Res,
+        _$BlazeOnShareClickedParamsImpl>
+    implements _$$BlazeOnShareClickedParamsImplCopyWith<$Res> {
+  __$$BlazeOnShareClickedParamsImplCopyWithImpl(
+      _$BlazeOnShareClickedParamsImpl _value,
+      $Res Function(_$BlazeOnShareClickedParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? id = null,
+    Object? contentType = null,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? sdkGeneratedLink = null,
+    Object? extraInfo = null,
+  }) {
+    return _then(_$BlazeOnShareClickedParamsImpl(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      contentType: null == contentType
+          ? _value.contentType
+          : contentType // ignore: cast_nullable_to_non_nullable
+              as BlazeShareContentType,
+      title: freezed == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      sdkGeneratedLink: null == sdkGeneratedLink
+          ? _value.sdkGeneratedLink
+          : sdkGeneratedLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      extraInfo: null == extraInfo
+          ? _value._extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeOnShareClickedParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeOnShareClickedParams {
+  const _$BlazeOnShareClickedParamsImpl(
+      {required this.playerType,
+      this.sourceId,
+      required this.id,
+      required this.contentType,
+      this.title,
+      this.description,
+      required this.sdkGeneratedLink,
+      required final Map<String, String> extraInfo})
+      : _extraInfo = extraInfo;
+
+  factory _$BlazeOnShareClickedParamsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BlazeOnShareClickedParamsImplFromJson(json);
+
+  @override
+  final BlazePlayerType playerType;
+  @override
+  final String? sourceId;
+
+  /// The unique identifier of the content being shared.
+  @override
+  final String id;
+  @override
+  final BlazeShareContentType contentType;
+  @override
+  final String? title;
+  @override
+  final String? description;
+
+  /// The link the SDK shares by default, generated by its own universal
+  /// links mechanism. This callback cannot override it — see
+  /// [BlazeBasePlayerDelegate.onShareClicked].
+  @override
+  final String sdkGeneratedLink;
+
+  /// Content-level extra info metadata for the shared item. For Stories this
+  /// is the story's extra info; for Moments/Videos, the item's own. Empty
+  /// when the content has no extra info.
+  final Map<String, String> _extraInfo;
+
+  /// Content-level extra info metadata for the shared item. For Stories this
+  /// is the story's extra info; for Moments/Videos, the item's own. Empty
+  /// when the content has no extra info.
+  @override
+  Map<String, String> get extraInfo {
+    if (_extraInfo is EqualUnmodifiableMapView) return _extraInfo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_extraInfo);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeOnShareClickedParams(playerType: $playerType, sourceId: $sourceId, id: $id, contentType: $contentType, title: $title, description: $description, sdkGeneratedLink: $sdkGeneratedLink, extraInfo: $extraInfo)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeOnShareClickedParams'))
+      ..add(DiagnosticsProperty('playerType', playerType))
+      ..add(DiagnosticsProperty('sourceId', sourceId))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('contentType', contentType))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('sdkGeneratedLink', sdkGeneratedLink))
+      ..add(DiagnosticsProperty('extraInfo', extraInfo));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeOnShareClickedParamsImpl &&
+            (identical(other.playerType, playerType) ||
+                other.playerType == playerType) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.contentType, contentType) ||
+                other.contentType == contentType) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.sdkGeneratedLink, sdkGeneratedLink) ||
+                other.sdkGeneratedLink == sdkGeneratedLink) &&
+            const DeepCollectionEquality()
+                .equals(other._extraInfo, _extraInfo));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      playerType,
+      sourceId,
+      id,
+      contentType,
+      title,
+      description,
+      sdkGeneratedLink,
+      const DeepCollectionEquality().hash(_extraInfo));
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeOnShareClickedParamsImplCopyWith<_$BlazeOnShareClickedParamsImpl>
+      get copyWith => __$$BlazeOnShareClickedParamsImplCopyWithImpl<
+          _$BlazeOnShareClickedParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnShareClickedParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnShareClickedParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnShareClickedParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeOnShareClickedParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeOnShareClickedParams implements BlazeOnShareClickedParams {
+  const factory _BlazeOnShareClickedParams(
+          {required final BlazePlayerType playerType,
+          final String? sourceId,
+          required final String id,
+          required final BlazeShareContentType contentType,
+          final String? title,
+          final String? description,
+          required final String sdkGeneratedLink,
+          required final Map<String, String> extraInfo}) =
+      _$BlazeOnShareClickedParamsImpl;
+
+  factory _BlazeOnShareClickedParams.fromJson(Map<String, dynamic> json) =
+      _$BlazeOnShareClickedParamsImpl.fromJson;
+
+  @override
+  BlazePlayerType get playerType;
+  @override
+  String? get sourceId;
+
+  /// The unique identifier of the content being shared.
+  @override
+  String get id;
+  @override
+  BlazeShareContentType get contentType;
+  @override
+  String? get title;
+  @override
+  String? get description;
+
+  /// The link the SDK shares by default, generated by its own universal
+  /// links mechanism. This callback cannot override it — see
+  /// [BlazeBasePlayerDelegate.onShareClicked].
+  @override
+  String get sdkGeneratedLink;
+
+  /// Content-level extra info metadata for the shared item. For Stories this
+  /// is the story's extra info; for Moments/Videos, the item's own. Empty
+  /// when the content has no extra info.
+  @override
+  Map<String, String> get extraInfo;
+
+  /// Create a copy of BlazeOnShareClickedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeOnShareClickedParamsImplCopyWith<_$BlazeOnShareClickedParamsImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

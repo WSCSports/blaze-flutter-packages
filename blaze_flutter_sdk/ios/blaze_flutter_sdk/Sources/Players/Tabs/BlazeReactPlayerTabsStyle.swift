@@ -17,6 +17,14 @@ struct BlazeReactPlayerTabsStyle: Codable {
     var icon: BlazeReactPlayerTabItemIconStyle?
     var selectedTabState: BlazeReactPlayerTabItemStyle?
     var unselectedTabState: BlazeReactPlayerTabItemStyle?
+    var activeTabIndicator: BlazeReactPlayerActiveTabIndicatorStyle?
+    var isTabTitleVisibleWhenSingleTab: Bool?
+    var isTabVisibleWhenEmpty: Bool?
+}
+
+struct BlazeReactPlayerActiveTabIndicatorStyle: Codable {
+    var isVisible: Bool?
+    var height: CGFloat?
 }
 
 struct BlazeReactPlayerTabsGradientStyle: Codable {

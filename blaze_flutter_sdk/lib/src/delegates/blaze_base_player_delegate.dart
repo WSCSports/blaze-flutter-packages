@@ -46,6 +46,19 @@ abstract class BlazeBasePlayerDelegate {
   final void Function(BlazeOnTriggerCustomActionButtonParams params)?
       onTriggerCustomActionButton;
 
+  /// Called when the player's share button is tapped.
+  ///
+  /// Observer-only: unlike native's `onShareClicked`, this callback cannot
+  /// override the link that gets shared — native returns a value from that
+  /// call synchronously, which the async bridge (a ~2 second round-trip) has
+  /// no way to satisfy with a Dart-computed result (the same constraint as
+  /// [onTriggerCTA] and [onTriggerPlayerBodyTextLink]). The SDK always shares
+  /// [BlazeOnShareClickedParams.sdkGeneratedLink]; use this callback to
+  /// observe the click and read [BlazeOnShareClickedParams.extraInfo].
+  ///
+  /// [params] The share clicked parameters.
+  final void Function(BlazeOnShareClickedParams params)? onShareClicked;
+
   /// Constructor with shared function parameters - matches iOS BlazePlayerSourceDelegate pattern
   const BlazeBasePlayerDelegate({
     this.onDataLoadStarted,
@@ -56,5 +69,6 @@ abstract class BlazeBasePlayerDelegate {
     this.onTriggerPlayerBodyTextLink,
     this.onPlayerEventTriggered,
     this.onTriggerCustomActionButton,
+    this.onShareClicked,
   });
 }

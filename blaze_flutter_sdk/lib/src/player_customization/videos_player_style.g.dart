@@ -26,6 +26,12 @@ _$BlazeVideosPlayerStyleImpl _$$BlazeVideosPlayerStyleImplFromJson(
           ? null
           : BlazeVideosPlayerSeekBarStyle.fromJson(
               json['seekBar'] as Map<String, dynamic>),
+      overlayVisibilityThresholdMs:
+          (json['overlayVisibilityThresholdMs'] as num?)?.toInt(),
+      captions: json['captions'] == null
+          ? null
+          : BlazeCaptionsStyle.fromJson(
+              json['captions'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeVideosPlayerStyleImplToJson(
@@ -36,6 +42,8 @@ Map<String, dynamic> _$$BlazeVideosPlayerStyleImplToJson(
       'backgroundColor': instance.backgroundColor,
       'cta': instance.cta?.toJson(),
       'seekBar': instance.seekBar?.toJson(),
+      'overlayVisibilityThresholdMs': instance.overlayVisibilityThresholdMs,
+      'captions': instance.captions?.toJson(),
     };
 
 _$BlazeVideosPlayerHeadingTextStyleImpl
@@ -160,6 +168,8 @@ _$BlazeVideosPlayerCtaStyleImpl _$$BlazeVideosPlayerCtaStyleImplFromJson(
           : BlazeVideosPlayerCtaIconStyle.fromJson(
               json['icon'] as Map<String, dynamic>),
       isVisible: json['isVisible'] as bool?,
+      borderColor: json['borderColor'] as String?,
+      borderWidth: (json['borderWidth'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$BlazeVideosPlayerCtaStyleImplToJson(
@@ -172,6 +182,8 @@ Map<String, dynamic> _$$BlazeVideosPlayerCtaStyleImplToJson(
       'height': instance.height,
       'icon': instance.icon?.toJson(),
       'isVisible': instance.isVisible,
+      'borderColor': instance.borderColor,
+      'borderWidth': instance.borderWidth,
     };
 
 _$BlazeVideosPlayerCtaIconStyleImpl

@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../types/shared_types.dart';
 import '../types/custom_action_button.dart';
 import '../widgets/types/widget_layout_common.dart';
+import 'captions_style.dart';
 
 part 'moments_player_style.freezed.dart';
 part 'moments_player_style.g.dart';
@@ -23,6 +24,10 @@ class BlazeMomentsPlayerStyle with _$BlazeMomentsPlayerStyle {
     BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
     BlazePlayerDisplayMode? playerDisplayMode,
     BlazeMomentsPlayerFollowEntityStyle? followEntity,
+
+    /// Styles the rendered captions text. To style the CC toggle button
+    /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
+    BlazeCaptionsStyle? captions,
   }) = _BlazeMomentsPlayerStyle;
 
   factory BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -70,10 +75,19 @@ class BlazeMomentsPlayerButtonsStyle with _$BlazeMomentsPlayerButtonsStyle {
     BlazePlayerButtonStyle? share,
     BlazePlayerButtonStyle? like,
     BlazePlayerButtonStyle? play,
+    BlazePlayerButtonStyle? captions,
     BlazePlayerButtonStyle? seekForward,
     BlazePlayerButtonStyle? seekBackward,
     BlazePlayerButtonStyle? search,
     List<BlazeCustomActionButton>? customActionButtons,
+
+    /// Whether the space below the like button is preserved when the likes
+    /// count is hidden (because it is below the display threshold).
+    ///
+    /// When `true` the layout keeps that space reserved, so buttons do not
+    /// shift as the count crosses the threshold. When `false` the container
+    /// collapses to the button height. Omit to keep the preset value.
+    bool? shouldPreserveLikesCountBelowThreshold,
   }) = _BlazeMomentsPlayerButtonsStyle;
 
   factory BlazeMomentsPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =>
@@ -119,6 +133,17 @@ class BlazeMomentsPlayerCtaStyle with _$BlazeMomentsPlayerCtaStyle {
     BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
     BlazeMomentsPlayerCtaIconStyle? icon,
     bool? isVisible,
+
+    /// Fallback border color for the CTA button.
+    ///
+    /// A border color supplied by the backend/CMS for the CTA takes precedence
+    /// when present and parseable; this value is used otherwise. Omit to keep
+    /// the preset value (no border).
+    String? borderColor,
+
+    /// Fallback border width for the CTA button. See [borderColor] for
+    /// precedence rules.
+    double? borderWidth,
   }) = _BlazeMomentsPlayerCtaStyle;
 
   factory BlazeMomentsPlayerCtaStyle.fromJson(Map<String, dynamic> json) =>

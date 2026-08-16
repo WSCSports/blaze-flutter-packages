@@ -14,6 +14,7 @@ class BlazeStoriesRowView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeStoryPlayerStyle? super.playerStyle,
     BlazeStoriesPlaybackConfiguration? super.playbackConfiguration,
+    super.widgetRemoteIdentifier,
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,

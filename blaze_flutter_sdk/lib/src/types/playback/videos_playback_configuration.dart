@@ -26,7 +26,12 @@ class BlazeVideosPlaybackConfiguration with _$BlazeVideosPlaybackConfiguration {
     ///   orientation to maximize screen utilization.
     /// - `false` — use the first available rendition regardless of orientation
     ///   changes.
-    required bool multiAspectRatio,
+    ///
+    /// Optional — omitting it falls through to the native SDK's own default,
+    /// which is `true` as of native iOS `1.20.0` / Android `1.20.3` (previously
+    /// `false`). Pass an explicit value to opt out of picking up native default
+    /// changes automatically.
+    bool? multiAspectRatio,
 
     /// Whether to force rotation to landscape when entering fullscreen from
     /// portrait.

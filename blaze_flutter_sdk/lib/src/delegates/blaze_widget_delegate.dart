@@ -20,6 +20,7 @@ class BlazeWidgetDelegate extends BlazeBasePlayerDelegate {
     super.onTriggerPlayerBodyTextLink,
     super.onPlayerEventTriggered,
     super.onTriggerCustomActionButton,
+    super.onShareClicked,
     // Widget-specific methods
     this.onWidgetItemClicked,
   });

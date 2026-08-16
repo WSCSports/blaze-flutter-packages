@@ -20,6 +20,7 @@ struct BlazeReactMomentsPlayerStyle: Codable {
     var bottomComponentsAlignment: BlazeReactBottomComponentsAlignment?
     var playerDisplayMode: BlazeReactPlayerDisplayMode?
     var followEntity: BlazeReactMomentsPlayerFollowEntityStyle?
+    var captions: BlazeReactCaptionsStyle?
 }
 
 struct BlazeReactMomentsPlayerFollowEntityStyle: Codable {
@@ -95,10 +96,12 @@ struct BlazeReactMomentsPlayerButtonsStyle: Codable {
     var share: BlazeReactPlayerButtonStyle?
     var like: BlazeReactPlayerButtonStyle?
     var play: BlazeReactPlayerButtonStyle?
+    var captions: BlazeReactPlayerButtonStyle?
     var seekForward: BlazeReactPlayerButtonStyle?
     var seekBackward: BlazeReactPlayerButtonStyle?
     var search: BlazeReactPlayerButtonStyle?
     var customActionButtons: [BlazeReactCustomActionButton]?
+    var shouldPreserveLikesCountBelowThreshold: Bool?
 }
 
 struct BlazeReactMomentsPlayerChipsStyle: Codable {
@@ -123,6 +126,8 @@ struct BlazeReactMomentsPlayerCtaStyle: Codable {
     var icon: BlazeReactMomentCtaIcon?
     var horizontalAlignment: CTAHorizontalAlignment?
     var isVisible: Bool?
+    var borderColor: String?
+    var borderWidth: CGFloat?
 
     enum CTAPositioning: String, Codable {
         case bellowBottomButtonsBox = "CtaBellowBottomButtonsBox"

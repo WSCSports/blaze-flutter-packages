@@ -23,8 +23,17 @@ class BlazeFlutterSDKModule {
         static let setDefaultVideosPlaybackConfiguration = "setDefaultVideosPlaybackConfiguration"
         static let getDefaultVideosPlaybackConfiguration = "getDefaultVideosPlaybackConfiguration"
         static let dismissPlayer = "dismissPlayer"
+        static let pauseCurrentPlayer = "pauseCurrentPlayer"
+        static let resumeCurrentPlayer = "resumeCurrentPlayer"
         static let setDoNotTrack = "setDoNotTrack"
         static let setDisableAnalytics = "setDisableAnalytics"
+        static let setDisableUserActivity = "setDisableUserActivity"
+        static let clearLocalUserActivity = "clearLocalUserActivity"
+        static let hostingAppContextGetValue = "hostingAppContextGetValue"
+        static let hostingAppContextGetContext = "hostingAppContextGetContext"
+        static let hostingAppContextSetValue = "hostingAppContextSetValue"
+        static let hostingAppContextSetContext = "hostingAppContextSetContext"
+        static let hostingAppContextDeleteValue = "hostingAppContextDeleteValue"
         static let setPreferredLanguage = "setPreferredLanguage"
         static let setPlayerSoundState = "setPlayerSoundState"
         static let isMuted = "isMuted"
@@ -120,10 +129,28 @@ class BlazeFlutterSDKModule {
             getDefaultVideosPlaybackConfiguration(call: call, result: result)
         case MethodNameConstants.dismissPlayer:
             dismissPlayer(call: call, result: result)
+        case MethodNameConstants.pauseCurrentPlayer:
+            pauseCurrentPlayer(call: call, result: result)
+        case MethodNameConstants.resumeCurrentPlayer:
+            resumeCurrentPlayer(call: call, result: result)
         case MethodNameConstants.setDoNotTrack:
             setDoNotTrack(call: call, result: result)
         case MethodNameConstants.setDisableAnalytics:
             setDisableAnalytics(call: call, result: result)
+        case MethodNameConstants.setDisableUserActivity:
+            setDisableUserActivity(call: call, result: result)
+        case MethodNameConstants.clearLocalUserActivity:
+            clearLocalUserActivity(call: call, result: result)
+        case MethodNameConstants.hostingAppContextGetValue:
+            hostingAppContextGetValue(call: call, result: result)
+        case MethodNameConstants.hostingAppContextGetContext:
+            hostingAppContextGetContext(call: call, result: result)
+        case MethodNameConstants.hostingAppContextSetValue:
+            hostingAppContextSetValue(call: call, result: result)
+        case MethodNameConstants.hostingAppContextSetContext:
+            hostingAppContextSetContext(call: call, result: result)
+        case MethodNameConstants.hostingAppContextDeleteValue:
+            hostingAppContextDeleteValue(call: call, result: result)
         case MethodNameConstants.setPreferredLanguage:
             setPreferredLanguage(call: call, result: result)
         case MethodNameConstants.setPlayerSoundState:
@@ -191,6 +218,8 @@ class BlazeFlutterSDKModule {
         }
 
         let cachingLevel = cachingLevelString?.asCachingLevel ?? .Default
+        let forceLayoutDirection =
+            call.safeGetArg("forceLayoutDirection", String.self)?.asBlazeLayoutDirection
 
         Blaze.shared.initialize(
             apiKey: apiKey,
@@ -198,6 +227,7 @@ class BlazeFlutterSDKModule {
             cachingSize: cachingSize,
             prefetchingPolicy: cachingLevel,
             geo: geoLocation,
+            forceLayoutDirection: forceLayoutDirection,
             delegate: globalDelegate
         ) { blazeResult in
             blazeResult.handleResult(result)
@@ -263,10 +293,14 @@ class BlazeFlutterSDKModule {
         let playbackConfiguration =
             call.safeGetArg("playbackConfiguration", [String: AnyHashable].self)
             .extractStoriesPlaybackConfiguration()
+        let eventId = call.safeGetArg("eventId", String.self)
+        let sourceId = call.safeGetArg("sourceId", String.self)
 
         Blaze.shared.playStory(
             storyId,
             pageId: pageId,
+            sourceId: sourceId,
+            eventId: eventId,
             style: playerStyle,
             playbackConfiguration: playbackConfiguration,
             triggerSource: triggerSource
@@ -293,8 +327,13 @@ class BlazeFlutterSDKModule {
         }
 
         let entryContentId = call.safeGetArg("entryContentId", String.self)
+        let sourceId = call.safeGetArg("sourceId", String.self)
 
-        Blaze.shared.prepareStories(dataSourceType: dataSource, entryContentId: entryContentId) {
+        Blaze.shared.prepareStories(
+            dataSourceType: dataSource,
+            entryContentId: entryContentId,
+            sourceId: sourceId
+        ) {
             blazeResult in
             blazeResult.handleResult(result)
         }
@@ -327,10 +366,12 @@ class BlazeFlutterSDKModule {
         let playbackConfiguration =
             call.safeGetArg("playbackConfiguration", [String: AnyHashable].self)
             .extractStoriesPlaybackConfiguration()
+        let sourceId = call.safeGetArg("sourceId", String.self)
 
         Blaze.shared.playStories(
             dataSourceType: dataSource,
             entryContentId: entryContentId,
+            sourceId: sourceId,
             style: playerStyle,
             playbackConfiguration: playbackConfiguration,
             shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
@@ -364,7 +405,8 @@ class BlazeFlutterSDKModule {
     ) {
         let config = Blaze.shared.getDefaultStoriesPlaybackConfiguration()
         let configMap: [String: Any] = [
-            "bufferingSpinnerDelayMs": Int((config.bufferingSpinnerDelay * 1000).rounded())
+            "bufferingSpinnerDelayMs": Int((config.bufferingSpinnerDelay * 1000).rounded()),
+            "ads": ["enablePreroll": config.ads.enablePreroll],
         ]
         result(configMap)
     }
@@ -383,8 +425,11 @@ class BlazeFlutterSDKModule {
         let triggerSource =
             call.safeGetArg("triggerSource", String.self)?.asEntryPointTriggerSource ?? .entryPoint
 
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
         Blaze.shared.playMoment(
             for: momentId,
+            sourceId: sourceId,
             style: playerStyle,
             triggerSource: triggerSource
         ) { blazeResult in
@@ -410,8 +455,13 @@ class BlazeFlutterSDKModule {
         }
 
         let entryContentId = call.safeGetArg("entryContentId", String.self)
+        let sourceId = call.safeGetArg("sourceId", String.self)
 
-        Blaze.shared.prepareMoments(dataSourceType: dataSource, entryContentId: entryContentId) {
+        Blaze.shared.prepareMoments(
+            dataSourceType: dataSource,
+            entryContentId: entryContentId,
+            sourceId: sourceId
+        ) {
             blazeResult in
             blazeResult.handleResult(result)
         }
@@ -442,9 +492,12 @@ class BlazeFlutterSDKModule {
         let triggerSource =
             call.safeGetArg("triggerSource", String.self)?.asEntryPointTriggerSource ?? .entryPoint
 
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
         Blaze.shared.playMoments(
             dataSourceType: dataSource,
             entryContentId: entryContentId,
+            sourceId: sourceId,
             style: playerStyle,
             shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
             triggerSource: triggerSource
@@ -544,8 +597,11 @@ class BlazeFlutterSDKModule {
             call.safeGetArg("playbackConfiguration", [String: AnyHashable].self)
             .extractVideosPlaybackConfiguration()
 
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
         Blaze.shared.playVideo(
             for: videoId,
+            sourceId: sourceId,
             style: playerStyle,
             playbackConfiguration: playbackConfiguration,
             triggerSource: triggerSource
@@ -572,8 +628,18 @@ class BlazeFlutterSDKModule {
         }
 
         let entryContentId = call.safeGetArg("entryContentId", String.self)
+        let videosFilterParams =
+            call.safeGetArg("videosFilterParams", [String: AnyHashable].self)
+            .extractVideosFilterParams()
 
-        Blaze.shared.prepareVideos(dataSourceType: dataSource, entryContentId: entryContentId) {
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
+        Blaze.shared.prepareVideos(
+            dataSourceType: dataSource,
+            videosFilterParams: videosFilterParams,
+            entryContentId: entryContentId,
+            sourceId: sourceId
+        ) {
             blazeResult in
             blazeResult.handleResult(result)
         }
@@ -606,10 +672,17 @@ class BlazeFlutterSDKModule {
         let playbackConfiguration =
             call.safeGetArg("playbackConfiguration", [String: AnyHashable].self)
             .extractVideosPlaybackConfiguration()
+        let videosFilterParams =
+            call.safeGetArg("videosFilterParams", [String: AnyHashable].self)
+            .extractVideosFilterParams()
+
+        let sourceId = call.safeGetArg("sourceId", String.self)
 
         Blaze.shared.playVideos(
             dataSourceType: dataSource,
+            videosFilterParams: videosFilterParams,
             entryContentId: entryContentId,
+            sourceId: sourceId,
             style: playerStyle,
             playbackConfiguration: playbackConfiguration,
             shouldOrderContentByReadStatus: shouldOrderContentByReadStatus,
@@ -684,6 +757,109 @@ class BlazeFlutterSDKModule {
         }
 
         Blaze.shared.disableAnalytics = disableAnalytics
+        result(nil)
+    }
+
+    private func pauseCurrentPlayer(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        DispatchQueue.main.async {
+            Blaze.shared.pauseCurrentPlayer()
+            result(nil)
+        }
+    }
+
+    private func resumeCurrentPlayer(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        DispatchQueue.main.async {
+            Blaze.shared.resumeCurrentPlayer()
+            result(nil)
+        }
+    }
+
+    private func setDisableUserActivity(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        guard let disableUserActivity = call.safeGetArg("disableUserActivity", Bool.self) else {
+            handleError(
+                result,
+                errCode: "setDisableUserActivity",
+                errMessage: "No disableUserActivity param found")
+            return
+        }
+
+        Blaze.shared.disableUserActivity = disableUserActivity
+        result(nil)
+    }
+
+    private func clearLocalUserActivity(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        Blaze.shared.clearLocalUserActivity()
+        result(nil)
+    }
+
+    // ======================================
+    // HOSTING APP CONTEXT
+    // ======================================
+
+    private func hostingAppContextGetValue(
+        call: FlutterMethodCall, result: @escaping FlutterResult
+    ) {
+        guard let key = call.safeGetArg("key", String.self) else {
+            handleError(
+                result,
+                errCode: "hostingAppContextGetValue",
+                errMessage: "No key param found")
+            return
+        }
+
+        result(Blaze.shared.hostingAppContext.getValue(forKey: key))
+    }
+
+    private func hostingAppContextGetContext(
+        call: FlutterMethodCall, result: @escaping FlutterResult
+    ) {
+        result(Blaze.shared.hostingAppContext.getContext())
+    }
+
+    private func hostingAppContextSetValue(
+        call: FlutterMethodCall, result: @escaping FlutterResult
+    ) {
+        guard let key = call.safeGetArg("key", String.self) else {
+            handleError(
+                result,
+                errCode: "hostingAppContextSetValue",
+                errMessage: "No key param found")
+            return
+        }
+
+        // A nil value is valid and clears the stored entry.
+        let value = (call.arguments as? [String: Any])?["value"]
+        Blaze.shared.hostingAppContext.setValue(value, forKey: key)
+        result(nil)
+    }
+
+    private func hostingAppContextSetContext(
+        call: FlutterMethodCall, result: @escaping FlutterResult
+    ) {
+        guard let context = call.safeGetArg("context", [String: AnyHashable].self) else {
+            handleError(
+                result,
+                errCode: "hostingAppContextSetContext",
+                errMessage: "No context param found")
+            return
+        }
+
+        Blaze.shared.hostingAppContext.setContext(context)
+        result(nil)
+    }
+
+    private func hostingAppContextDeleteValue(
+        call: FlutterMethodCall, result: @escaping FlutterResult
+    ) {
+        guard let key = call.safeGetArg("key", String.self) else {
+            handleError(
+                result,
+                errCode: "hostingAppContextDeleteValue",
+                errMessage: "No key param found")
+            return
+        }
+
+        Blaze.shared.hostingAppContext.deleteValue(forKey: key)
         result(nil)
     }
 
@@ -830,7 +1006,9 @@ class BlazeFlutterSDKModule {
             return
         }
 
-        Blaze.shared.handlePushNotificationPayload(payload) { blazeResult in
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
+        Blaze.shared.handlePushNotificationPayload(payload, sourceId: sourceId) { blazeResult in
             blazeResult.handleResult(result)
         }
     }
@@ -852,7 +1030,9 @@ class BlazeFlutterSDKModule {
             return
         }
 
-        Blaze.shared.handleUniversalLink(link) { blazeResult in
+        let sourceId = call.safeGetArg("sourceId", String.self)
+
+        Blaze.shared.handleUniversalLink(link, sourceId: sourceId) { blazeResult in
             blazeResult.handleResult(result)
         }
     }
@@ -957,6 +1137,14 @@ class BlazeFlutterSDKModule {
                 isEntireContentRead: params.isEntireContentRead,
                 itemReadStatus: params.itemReadStatus
             )
+        },
+
+        onShareClicked: { [weak self] params in
+            return self?.onShareClicked(
+                playerType: params.playerType,
+                sourceId: params.sourceId,
+                shareParams: params.shareParams
+            ) ?? nil
         }
     )
 
@@ -1133,6 +1321,20 @@ class BlazeFlutterSDKModule {
             itemReadStatus: itemReadStatus
         ) { [weak self] params in
             self?.asyncBridge?.sendEvent("Blaze.onReadStatusChanged", params: params)
+        }
+    }
+
+    private func onShareClicked(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        shareParams: BlazeShareParams
+    ) -> String? {
+        return sharedDelegateHandler.onShareClicked(
+            playerType: playerType,
+            sourceId: sourceId,
+            shareParams: shareParams
+        ) { [weak self] params in
+            self?.asyncBridge?.sendEvent("Blaze.onShareClicked", params: params)
         }
     }
 

@@ -1,3 +1,3 @@
-## 1.19.0
+## 1.20.0
 
 * Changelog can be found here: https://dev.wsc-sports.com/changelog.

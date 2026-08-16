@@ -1548,6 +1548,22 @@ mixin _$BlazePlayerTabsStyle {
   BlazePlayerTabItemStyle? get unselectedTabState =>
       throw _privateConstructorUsedError;
 
+  /// Underline indicator style for the active (selected) tab. Opt-in - not
+  /// shown unless [BlazePlayerActiveTabIndicatorStyle.isVisible] is `true`.
+  BlazePlayerActiveTabIndicatorStyle? get activeTabIndicator =>
+      throw _privateConstructorUsedError;
+
+  /// Whether the tab bar is shown when the container has only a single
+  /// (visible) tab. When omitted, the native default is kept.
+  bool? get isTabTitleVisibleWhenSingleTab =>
+      throw _privateConstructorUsedError;
+
+  /// Whether a tab stays visible when it has no content. Native default is
+  /// `true`: an empty tab (or one that failed to load) stays visible and
+  /// presents the player's empty/error state. Set to `false` to have such
+  /// tabs auto-removed instead (the first tab is always kept regardless).
+  bool? get isTabVisibleWhenEmpty => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazePlayerTabsStyle value) $default,
@@ -1586,13 +1602,17 @@ abstract class $BlazePlayerTabsStyleCopyWith<$Res> {
       BlazePlayerTabsGradientStyle? gradient,
       BlazePlayerTabItemIconStyle? icon,
       BlazePlayerTabItemStyle? selectedTabState,
-      BlazePlayerTabItemStyle? unselectedTabState});
+      BlazePlayerTabItemStyle? unselectedTabState,
+      BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
+      bool? isTabTitleVisibleWhenSingleTab,
+      bool? isTabVisibleWhenEmpty});
 
   $BlazeMarginsCopyWith<$Res>? get padding;
   $BlazePlayerTabsGradientStyleCopyWith<$Res>? get gradient;
   $BlazePlayerTabItemIconStyleCopyWith<$Res>? get icon;
   $BlazePlayerTabItemStyleCopyWith<$Res>? get selectedTabState;
   $BlazePlayerTabItemStyleCopyWith<$Res>? get unselectedTabState;
+  $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res>? get activeTabIndicator;
 }
 
 /// @nodoc
@@ -1616,6 +1636,9 @@ class _$BlazePlayerTabsStyleCopyWithImpl<$Res,
     Object? icon = freezed,
     Object? selectedTabState = freezed,
     Object? unselectedTabState = freezed,
+    Object? activeTabIndicator = freezed,
+    Object? isTabTitleVisibleWhenSingleTab = freezed,
+    Object? isTabVisibleWhenEmpty = freezed,
   }) {
     return _then(_value.copyWith(
       padding: freezed == padding
@@ -1638,6 +1661,18 @@ class _$BlazePlayerTabsStyleCopyWithImpl<$Res,
           ? _value.unselectedTabState
           : unselectedTabState // ignore: cast_nullable_to_non_nullable
               as BlazePlayerTabItemStyle?,
+      activeTabIndicator: freezed == activeTabIndicator
+          ? _value.activeTabIndicator
+          : activeTabIndicator // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerActiveTabIndicatorStyle?,
+      isTabTitleVisibleWhenSingleTab: freezed == isTabTitleVisibleWhenSingleTab
+          ? _value.isTabTitleVisibleWhenSingleTab
+          : isTabTitleVisibleWhenSingleTab // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isTabVisibleWhenEmpty: freezed == isTabVisibleWhenEmpty
+          ? _value.isTabVisibleWhenEmpty
+          : isTabVisibleWhenEmpty // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -1713,6 +1748,21 @@ class _$BlazePlayerTabsStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(unselectedTabState: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazePlayerTabsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res>? get activeTabIndicator {
+    if (_value.activeTabIndicator == null) {
+      return null;
+    }
+
+    return $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res>(
+        _value.activeTabIndicator!, (value) {
+      return _then(_value.copyWith(activeTabIndicator: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -1728,7 +1778,10 @@ abstract class _$$BlazePlayerTabsStyleImplCopyWith<$Res>
       BlazePlayerTabsGradientStyle? gradient,
       BlazePlayerTabItemIconStyle? icon,
       BlazePlayerTabItemStyle? selectedTabState,
-      BlazePlayerTabItemStyle? unselectedTabState});
+      BlazePlayerTabItemStyle? unselectedTabState,
+      BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
+      bool? isTabTitleVisibleWhenSingleTab,
+      bool? isTabVisibleWhenEmpty});
 
   @override
   $BlazeMarginsCopyWith<$Res>? get padding;
@@ -1740,6 +1793,8 @@ abstract class _$$BlazePlayerTabsStyleImplCopyWith<$Res>
   $BlazePlayerTabItemStyleCopyWith<$Res>? get selectedTabState;
   @override
   $BlazePlayerTabItemStyleCopyWith<$Res>? get unselectedTabState;
+  @override
+  $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res>? get activeTabIndicator;
 }
 
 /// @nodoc
@@ -1760,6 +1815,9 @@ class __$$BlazePlayerTabsStyleImplCopyWithImpl<$Res>
     Object? icon = freezed,
     Object? selectedTabState = freezed,
     Object? unselectedTabState = freezed,
+    Object? activeTabIndicator = freezed,
+    Object? isTabTitleVisibleWhenSingleTab = freezed,
+    Object? isTabVisibleWhenEmpty = freezed,
   }) {
     return _then(_$BlazePlayerTabsStyleImpl(
       padding: freezed == padding
@@ -1782,6 +1840,18 @@ class __$$BlazePlayerTabsStyleImplCopyWithImpl<$Res>
           ? _value.unselectedTabState
           : unselectedTabState // ignore: cast_nullable_to_non_nullable
               as BlazePlayerTabItemStyle?,
+      activeTabIndicator: freezed == activeTabIndicator
+          ? _value.activeTabIndicator
+          : activeTabIndicator // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerActiveTabIndicatorStyle?,
+      isTabTitleVisibleWhenSingleTab: freezed == isTabTitleVisibleWhenSingleTab
+          ? _value.isTabTitleVisibleWhenSingleTab
+          : isTabTitleVisibleWhenSingleTab // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isTabVisibleWhenEmpty: freezed == isTabVisibleWhenEmpty
+          ? _value.isTabVisibleWhenEmpty
+          : isTabVisibleWhenEmpty // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1794,7 +1864,10 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
       this.gradient,
       this.icon,
       this.selectedTabState,
-      this.unselectedTabState});
+      this.unselectedTabState,
+      this.activeTabIndicator,
+      this.isTabTitleVisibleWhenSingleTab,
+      this.isTabVisibleWhenEmpty});
 
   factory _$BlazePlayerTabsStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazePlayerTabsStyleImplFromJson(json);
@@ -1810,9 +1883,26 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
   @override
   final BlazePlayerTabItemStyle? unselectedTabState;
 
+  /// Underline indicator style for the active (selected) tab. Opt-in - not
+  /// shown unless [BlazePlayerActiveTabIndicatorStyle.isVisible] is `true`.
+  @override
+  final BlazePlayerActiveTabIndicatorStyle? activeTabIndicator;
+
+  /// Whether the tab bar is shown when the container has only a single
+  /// (visible) tab. When omitted, the native default is kept.
+  @override
+  final bool? isTabTitleVisibleWhenSingleTab;
+
+  /// Whether a tab stays visible when it has no content. Native default is
+  /// `true`: an empty tab (or one that failed to load) stays visible and
+  /// presents the player's empty/error state. Set to `false` to have such
+  /// tabs auto-removed instead (the first tab is always kept regardless).
+  @override
+  final bool? isTabVisibleWhenEmpty;
+
   @override
   String toString() {
-    return 'BlazePlayerTabsStyle(padding: $padding, gradient: $gradient, icon: $icon, selectedTabState: $selectedTabState, unselectedTabState: $unselectedTabState)';
+    return 'BlazePlayerTabsStyle(padding: $padding, gradient: $gradient, icon: $icon, selectedTabState: $selectedTabState, unselectedTabState: $unselectedTabState, activeTabIndicator: $activeTabIndicator, isTabTitleVisibleWhenSingleTab: $isTabTitleVisibleWhenSingleTab, isTabVisibleWhenEmpty: $isTabVisibleWhenEmpty)';
   }
 
   @override
@@ -1827,13 +1917,29 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
             (identical(other.selectedTabState, selectedTabState) ||
                 other.selectedTabState == selectedTabState) &&
             (identical(other.unselectedTabState, unselectedTabState) ||
-                other.unselectedTabState == unselectedTabState));
+                other.unselectedTabState == unselectedTabState) &&
+            (identical(other.activeTabIndicator, activeTabIndicator) ||
+                other.activeTabIndicator == activeTabIndicator) &&
+            (identical(other.isTabTitleVisibleWhenSingleTab,
+                    isTabTitleVisibleWhenSingleTab) ||
+                other.isTabTitleVisibleWhenSingleTab ==
+                    isTabTitleVisibleWhenSingleTab) &&
+            (identical(other.isTabVisibleWhenEmpty, isTabVisibleWhenEmpty) ||
+                other.isTabVisibleWhenEmpty == isTabVisibleWhenEmpty));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, padding, gradient, icon,
-      selectedTabState, unselectedTabState);
+  int get hashCode => Object.hash(
+      runtimeType,
+      padding,
+      gradient,
+      icon,
+      selectedTabState,
+      unselectedTabState,
+      activeTabIndicator,
+      isTabTitleVisibleWhenSingleTab,
+      isTabVisibleWhenEmpty);
 
   /// Create a copy of BlazePlayerTabsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1883,12 +1989,14 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
 
 abstract class _BlazePlayerTabsStyle implements BlazePlayerTabsStyle {
   const factory _BlazePlayerTabsStyle(
-          {final BlazeMargins? padding,
-          final BlazePlayerTabsGradientStyle? gradient,
-          final BlazePlayerTabItemIconStyle? icon,
-          final BlazePlayerTabItemStyle? selectedTabState,
-          final BlazePlayerTabItemStyle? unselectedTabState}) =
-      _$BlazePlayerTabsStyleImpl;
+      {final BlazeMargins? padding,
+      final BlazePlayerTabsGradientStyle? gradient,
+      final BlazePlayerTabItemIconStyle? icon,
+      final BlazePlayerTabItemStyle? selectedTabState,
+      final BlazePlayerTabItemStyle? unselectedTabState,
+      final BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
+      final bool? isTabTitleVisibleWhenSingleTab,
+      final bool? isTabVisibleWhenEmpty}) = _$BlazePlayerTabsStyleImpl;
 
   factory _BlazePlayerTabsStyle.fromJson(Map<String, dynamic> json) =
       _$BlazePlayerTabsStyleImpl.fromJson;
@@ -1904,11 +2012,268 @@ abstract class _BlazePlayerTabsStyle implements BlazePlayerTabsStyle {
   @override
   BlazePlayerTabItemStyle? get unselectedTabState;
 
+  /// Underline indicator style for the active (selected) tab. Opt-in - not
+  /// shown unless [BlazePlayerActiveTabIndicatorStyle.isVisible] is `true`.
+  @override
+  BlazePlayerActiveTabIndicatorStyle? get activeTabIndicator;
+
+  /// Whether the tab bar is shown when the container has only a single
+  /// (visible) tab. When omitted, the native default is kept.
+  @override
+  bool? get isTabTitleVisibleWhenSingleTab;
+
+  /// Whether a tab stays visible when it has no content. Native default is
+  /// `true`: an empty tab (or one that failed to load) stays visible and
+  /// presents the player's empty/error state. Set to `false` to have such
+  /// tabs auto-removed instead (the first tab is always kept regardless).
+  @override
+  bool? get isTabVisibleWhenEmpty;
+
   /// Create a copy of BlazePlayerTabsStyle
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazePlayerTabsStyleImplCopyWith<_$BlazePlayerTabsStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazePlayerActiveTabIndicatorStyle _$BlazePlayerActiveTabIndicatorStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazePlayerActiveTabIndicatorStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazePlayerActiveTabIndicatorStyle {
+  /// Whether the indicator is shown on the active tab. Native default is
+  /// `false` (no indicator).
+  bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// The height of the underline bar, in logical pixels.
+  double? get height => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlayerActiveTabIndicatorStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlayerActiveTabIndicatorStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlayerActiveTabIndicatorStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazePlayerActiveTabIndicatorStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazePlayerActiveTabIndicatorStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazePlayerActiveTabIndicatorStyleCopyWith<
+          BlazePlayerActiveTabIndicatorStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res> {
+  factory $BlazePlayerActiveTabIndicatorStyleCopyWith(
+          BlazePlayerActiveTabIndicatorStyle value,
+          $Res Function(BlazePlayerActiveTabIndicatorStyle) then) =
+      _$BlazePlayerActiveTabIndicatorStyleCopyWithImpl<$Res,
+          BlazePlayerActiveTabIndicatorStyle>;
+  @useResult
+  $Res call({bool? isVisible, double? height});
+}
+
+/// @nodoc
+class _$BlazePlayerActiveTabIndicatorStyleCopyWithImpl<$Res,
+        $Val extends BlazePlayerActiveTabIndicatorStyle>
+    implements $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res> {
+  _$BlazePlayerActiveTabIndicatorStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazePlayerActiveTabIndicatorStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? height = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      height: freezed == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazePlayerActiveTabIndicatorStyleImplCopyWith<$Res>
+    implements $BlazePlayerActiveTabIndicatorStyleCopyWith<$Res> {
+  factory _$$BlazePlayerActiveTabIndicatorStyleImplCopyWith(
+          _$BlazePlayerActiveTabIndicatorStyleImpl value,
+          $Res Function(_$BlazePlayerActiveTabIndicatorStyleImpl) then) =
+      __$$BlazePlayerActiveTabIndicatorStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool? isVisible, double? height});
+}
+
+/// @nodoc
+class __$$BlazePlayerActiveTabIndicatorStyleImplCopyWithImpl<$Res>
+    extends _$BlazePlayerActiveTabIndicatorStyleCopyWithImpl<$Res,
+        _$BlazePlayerActiveTabIndicatorStyleImpl>
+    implements _$$BlazePlayerActiveTabIndicatorStyleImplCopyWith<$Res> {
+  __$$BlazePlayerActiveTabIndicatorStyleImplCopyWithImpl(
+      _$BlazePlayerActiveTabIndicatorStyleImpl _value,
+      $Res Function(_$BlazePlayerActiveTabIndicatorStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazePlayerActiveTabIndicatorStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? height = freezed,
+  }) {
+    return _then(_$BlazePlayerActiveTabIndicatorStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      height: freezed == height
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazePlayerActiveTabIndicatorStyleImpl
+    implements _BlazePlayerActiveTabIndicatorStyle {
+  const _$BlazePlayerActiveTabIndicatorStyleImpl({this.isVisible, this.height});
+
+  factory _$BlazePlayerActiveTabIndicatorStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazePlayerActiveTabIndicatorStyleImplFromJson(json);
+
+  /// Whether the indicator is shown on the active tab. Native default is
+  /// `false` (no indicator).
+  @override
+  final bool? isVisible;
+
+  /// The height of the underline bar, in logical pixels.
+  @override
+  final double? height;
+
+  @override
+  String toString() {
+    return 'BlazePlayerActiveTabIndicatorStyle(isVisible: $isVisible, height: $height)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazePlayerActiveTabIndicatorStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.height, height) || other.height == height));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isVisible, height);
+
+  /// Create a copy of BlazePlayerActiveTabIndicatorStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazePlayerActiveTabIndicatorStyleImplCopyWith<
+          _$BlazePlayerActiveTabIndicatorStyleImpl>
+      get copyWith => __$$BlazePlayerActiveTabIndicatorStyleImplCopyWithImpl<
+          _$BlazePlayerActiveTabIndicatorStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazePlayerActiveTabIndicatorStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazePlayerActiveTabIndicatorStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazePlayerActiveTabIndicatorStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazePlayerActiveTabIndicatorStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazePlayerActiveTabIndicatorStyle
+    implements BlazePlayerActiveTabIndicatorStyle {
+  const factory _BlazePlayerActiveTabIndicatorStyle(
+      {final bool? isVisible,
+      final double? height}) = _$BlazePlayerActiveTabIndicatorStyleImpl;
+
+  factory _BlazePlayerActiveTabIndicatorStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazePlayerActiveTabIndicatorStyleImpl.fromJson;
+
+  /// Whether the indicator is shown on the active tab. Native default is
+  /// `false` (no indicator).
+  @override
+  bool? get isVisible;
+
+  /// The height of the underline bar, in logical pixels.
+  @override
+  double? get height;
+
+  /// Create a copy of BlazePlayerActiveTabIndicatorStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazePlayerActiveTabIndicatorStyleImplCopyWith<
+          _$BlazePlayerActiveTabIndicatorStyleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

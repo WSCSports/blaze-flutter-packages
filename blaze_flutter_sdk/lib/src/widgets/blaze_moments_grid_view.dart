@@ -15,6 +15,7 @@ class BlazeMomentsGridView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeMomentsPlayerStyle? super.playerStyle,
     BlazeMomentsPlaybackConfiguration? super.playbackConfiguration,
+    super.widgetRemoteIdentifier,
     super.isEmbeddedInScrollView = false,
     super.perItemStyleOverrides,
     super.widgetDelegate,

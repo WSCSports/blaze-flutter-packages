@@ -26,6 +26,7 @@ class BlazePlayerContainerTabsDelegate extends BlazeBasePlayerDelegate {
     super.onTriggerPlayerBodyTextLink,
     super.onPlayerEventTriggered,
     super.onTriggerCustomActionButton,
+    super.onShareClicked,
     // Tabs-specific method
     this.onTabSelected,
   });

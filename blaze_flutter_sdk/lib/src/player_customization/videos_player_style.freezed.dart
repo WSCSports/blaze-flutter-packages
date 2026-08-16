@@ -30,6 +30,17 @@ mixin _$BlazeVideosPlayerStyle {
   BlazeVideosPlayerSeekBarStyle? get seekBar =>
       throw _privateConstructorUsedError;
 
+  /// How long, in milliseconds, the controls overlay stays visible before
+  /// auto-hiding after it is shown.
+  ///
+  /// Non-positive values (zero or negative) are rejected natively and fall
+  /// back to the SDK default. Omit to keep the preset value.
+  int? get overlayVisibilityThresholdMs => throw _privateConstructorUsedError;
+
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeVideosPlayerButtonsStyle.captions].
+  BlazeCaptionsStyle? get captions => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeVideosPlayerStyle value) $default,
@@ -68,12 +79,15 @@ abstract class $BlazeVideosPlayerStyleCopyWith<$Res> {
       BlazeVideosPlayerButtonsStyle? buttons,
       String? backgroundColor,
       BlazeVideosPlayerCtaStyle? cta,
-      BlazeVideosPlayerSeekBarStyle? seekBar});
+      BlazeVideosPlayerSeekBarStyle? seekBar,
+      int? overlayVisibilityThresholdMs,
+      BlazeCaptionsStyle? captions});
 
   $BlazeVideosPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
   $BlazeVideosPlayerButtonsStyleCopyWith<$Res>? get buttons;
   $BlazeVideosPlayerCtaStyleCopyWith<$Res>? get cta;
   $BlazeVideosPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -97,6 +111,8 @@ class _$BlazeVideosPlayerStyleCopyWithImpl<$Res,
     Object? backgroundColor = freezed,
     Object? cta = freezed,
     Object? seekBar = freezed,
+    Object? overlayVisibilityThresholdMs = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_value.copyWith(
       headingText: freezed == headingText
@@ -119,6 +135,14 @@ class _$BlazeVideosPlayerStyleCopyWithImpl<$Res,
           ? _value.seekBar
           : seekBar // ignore: cast_nullable_to_non_nullable
               as BlazeVideosPlayerSeekBarStyle?,
+      overlayVisibilityThresholdMs: freezed == overlayVisibilityThresholdMs
+          ? _value.overlayVisibilityThresholdMs
+          : overlayVisibilityThresholdMs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ) as $Val);
   }
 
@@ -180,6 +204,20 @@ class _$BlazeVideosPlayerStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(seekBar: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeVideosPlayerStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazeCaptionsStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -196,7 +234,9 @@ abstract class _$$BlazeVideosPlayerStyleImplCopyWith<$Res>
       BlazeVideosPlayerButtonsStyle? buttons,
       String? backgroundColor,
       BlazeVideosPlayerCtaStyle? cta,
-      BlazeVideosPlayerSeekBarStyle? seekBar});
+      BlazeVideosPlayerSeekBarStyle? seekBar,
+      int? overlayVisibilityThresholdMs,
+      BlazeCaptionsStyle? captions});
 
   @override
   $BlazeVideosPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
@@ -206,6 +246,8 @@ abstract class _$$BlazeVideosPlayerStyleImplCopyWith<$Res>
   $BlazeVideosPlayerCtaStyleCopyWith<$Res>? get cta;
   @override
   $BlazeVideosPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
+  @override
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -228,6 +270,8 @@ class __$$BlazeVideosPlayerStyleImplCopyWithImpl<$Res>
     Object? backgroundColor = freezed,
     Object? cta = freezed,
     Object? seekBar = freezed,
+    Object? overlayVisibilityThresholdMs = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_$BlazeVideosPlayerStyleImpl(
       headingText: freezed == headingText
@@ -250,6 +294,14 @@ class __$$BlazeVideosPlayerStyleImplCopyWithImpl<$Res>
           ? _value.seekBar
           : seekBar // ignore: cast_nullable_to_non_nullable
               as BlazeVideosPlayerSeekBarStyle?,
+      overlayVisibilityThresholdMs: freezed == overlayVisibilityThresholdMs
+          ? _value.overlayVisibilityThresholdMs
+          : overlayVisibilityThresholdMs // ignore: cast_nullable_to_non_nullable
+              as int?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ));
   }
 }
@@ -262,7 +314,9 @@ class _$BlazeVideosPlayerStyleImpl implements _BlazeVideosPlayerStyle {
       this.buttons,
       this.backgroundColor,
       this.cta,
-      this.seekBar});
+      this.seekBar,
+      this.overlayVisibilityThresholdMs,
+      this.captions});
 
   factory _$BlazeVideosPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeVideosPlayerStyleImplFromJson(json);
@@ -278,9 +332,22 @@ class _$BlazeVideosPlayerStyleImpl implements _BlazeVideosPlayerStyle {
   @override
   final BlazeVideosPlayerSeekBarStyle? seekBar;
 
+  /// How long, in milliseconds, the controls overlay stays visible before
+  /// auto-hiding after it is shown.
+  ///
+  /// Non-positive values (zero or negative) are rejected natively and fall
+  /// back to the SDK default. Omit to keep the preset value.
+  @override
+  final int? overlayVisibilityThresholdMs;
+
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeVideosPlayerButtonsStyle.captions].
+  @override
+  final BlazeCaptionsStyle? captions;
+
   @override
   String toString() {
-    return 'BlazeVideosPlayerStyle(headingText: $headingText, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, seekBar: $seekBar)';
+    return 'BlazeVideosPlayerStyle(headingText: $headingText, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, seekBar: $seekBar, overlayVisibilityThresholdMs: $overlayVisibilityThresholdMs, captions: $captions)';
   }
 
   @override
@@ -294,13 +361,19 @@ class _$BlazeVideosPlayerStyleImpl implements _BlazeVideosPlayerStyle {
             (identical(other.backgroundColor, backgroundColor) ||
                 other.backgroundColor == backgroundColor) &&
             (identical(other.cta, cta) || other.cta == cta) &&
-            (identical(other.seekBar, seekBar) || other.seekBar == seekBar));
+            (identical(other.seekBar, seekBar) || other.seekBar == seekBar) &&
+            (identical(other.overlayVisibilityThresholdMs,
+                    overlayVisibilityThresholdMs) ||
+                other.overlayVisibilityThresholdMs ==
+                    overlayVisibilityThresholdMs) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, headingText, buttons, backgroundColor, cta, seekBar);
+  int get hashCode => Object.hash(runtimeType, headingText, buttons,
+      backgroundColor, cta, seekBar, overlayVisibilityThresholdMs, captions);
 
   /// Create a copy of BlazeVideosPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -349,12 +422,13 @@ class _$BlazeVideosPlayerStyleImpl implements _BlazeVideosPlayerStyle {
 
 abstract class _BlazeVideosPlayerStyle implements BlazeVideosPlayerStyle {
   const factory _BlazeVideosPlayerStyle(
-          {final BlazeVideosPlayerHeadingTextStyle? headingText,
-          final BlazeVideosPlayerButtonsStyle? buttons,
-          final String? backgroundColor,
-          final BlazeVideosPlayerCtaStyle? cta,
-          final BlazeVideosPlayerSeekBarStyle? seekBar}) =
-      _$BlazeVideosPlayerStyleImpl;
+      {final BlazeVideosPlayerHeadingTextStyle? headingText,
+      final BlazeVideosPlayerButtonsStyle? buttons,
+      final String? backgroundColor,
+      final BlazeVideosPlayerCtaStyle? cta,
+      final BlazeVideosPlayerSeekBarStyle? seekBar,
+      final int? overlayVisibilityThresholdMs,
+      final BlazeCaptionsStyle? captions}) = _$BlazeVideosPlayerStyleImpl;
 
   factory _BlazeVideosPlayerStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeVideosPlayerStyleImpl.fromJson;
@@ -369,6 +443,19 @@ abstract class _BlazeVideosPlayerStyle implements BlazeVideosPlayerStyle {
   BlazeVideosPlayerCtaStyle? get cta;
   @override
   BlazeVideosPlayerSeekBarStyle? get seekBar;
+
+  /// How long, in milliseconds, the controls overlay stays visible before
+  /// auto-hiding after it is shown.
+  ///
+  /// Non-positive values (zero or negative) are rejected natively and fall
+  /// back to the SDK default. Omit to keep the preset value.
+  @override
+  int? get overlayVisibilityThresholdMs;
+
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeVideosPlayerButtonsStyle.captions].
+  @override
+  BlazeCaptionsStyle? get captions;
 
   /// Create a copy of BlazeVideosPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1432,6 +1519,17 @@ mixin _$BlazeVideosPlayerCtaStyle {
   BlazeVideosPlayerCtaIconStyle? get icon => throw _privateConstructorUsedError;
   bool? get isVisible => throw _privateConstructorUsedError;
 
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  String? get borderColor => throw _privateConstructorUsedError;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  double? get borderWidth => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeVideosPlayerCtaStyle value) $default,
@@ -1472,7 +1570,9 @@ abstract class $BlazeVideosPlayerCtaStyleCopyWith<$Res> {
       double? width,
       double? height,
       BlazeVideosPlayerCtaIconStyle? icon,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   $BlazeFontCopyWith<$Res>? get font;
   $BlazeVideosPlayerCtaIconStyleCopyWith<$Res>? get icon;
@@ -1501,6 +1601,8 @@ class _$BlazeVideosPlayerCtaStyleCopyWithImpl<$Res,
     Object? height = freezed,
     Object? icon = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -1531,6 +1633,14 @@ class _$BlazeVideosPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 
@@ -1579,7 +1689,9 @@ abstract class _$$BlazeVideosPlayerCtaStyleImplCopyWith<$Res>
       double? width,
       double? height,
       BlazeVideosPlayerCtaIconStyle? icon,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
@@ -1609,6 +1721,8 @@ class __$$BlazeVideosPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? height = freezed,
     Object? icon = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_$BlazeVideosPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -1639,6 +1753,14 @@ class __$$BlazeVideosPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -1653,7 +1775,9 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
       this.width,
       this.height,
       this.icon,
-      this.isVisible});
+      this.isVisible,
+      this.borderColor,
+      this.borderWidth});
 
   factory _$BlazeVideosPlayerCtaStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeVideosPlayerCtaStyleImplFromJson(json);
@@ -1673,9 +1797,22 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
   @override
   final bool? isVisible;
 
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  final String? borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  final double? borderWidth;
+
   @override
   String toString() {
-    return 'BlazeVideosPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, icon: $icon, isVisible: $isVisible)';
+    return 'BlazeVideosPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, icon: $icon, isVisible: $isVisible, borderColor: $borderColor, borderWidth: $borderWidth)';
   }
 
   @override
@@ -1692,13 +1829,17 @@ class _$BlazeVideosPlayerCtaStyleImpl implements _BlazeVideosPlayerCtaStyle {
             (identical(other.height, height) || other.height == height) &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+                other.isVisible == isVisible) &&
+            (identical(other.borderColor, borderColor) ||
+                other.borderColor == borderColor) &&
+            (identical(other.borderWidth, borderWidth) ||
+                other.borderWidth == borderWidth));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font,
-      width, height, icon, isVisible);
+      width, height, icon, isVisible, borderColor, borderWidth);
 
   /// Create a copy of BlazeVideosPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1753,7 +1894,9 @@ abstract class _BlazeVideosPlayerCtaStyle implements BlazeVideosPlayerCtaStyle {
       final double? width,
       final double? height,
       final BlazeVideosPlayerCtaIconStyle? icon,
-      final bool? isVisible}) = _$BlazeVideosPlayerCtaStyleImpl;
+      final bool? isVisible,
+      final String? borderColor,
+      final double? borderWidth}) = _$BlazeVideosPlayerCtaStyleImpl;
 
   factory _BlazeVideosPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeVideosPlayerCtaStyleImpl.fromJson;
@@ -1772,6 +1915,19 @@ abstract class _BlazeVideosPlayerCtaStyle implements BlazeVideosPlayerCtaStyle {
   BlazeVideosPlayerCtaIconStyle? get icon;
   @override
   bool? get isVisible;
+
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  String? get borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  double? get borderWidth;
 
   /// Create a copy of BlazeVideosPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.

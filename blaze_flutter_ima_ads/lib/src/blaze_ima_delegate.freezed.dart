@@ -700,6 +700,485 @@ abstract class _BlazeIMAAdRequestParams implements BlazeIMAAdRequestParams {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+BlazeIMAAdInfo _$BlazeIMAAdInfoFromJson(Map<String, dynamic> json) {
+  return _BlazeIMAAdInfo.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeIMAAdInfo {
+  /// The unique identifier of the ad as specified in the VAST response.
+  String? get adId => throw _privateConstructorUsedError;
+
+  /// The title of the ad provided in the VAST response.
+  String? get adTitle => throw _privateConstructorUsedError;
+
+  /// A description of the ad.
+  String? get adDescription => throw _privateConstructorUsedError;
+
+  /// Information about the source ad server included in the ad response.
+  String? get adSystem => throw _privateConstructorUsedError;
+
+  /// Whether the ad is skippable.
+  bool? get isSkippable => throw _privateConstructorUsedError;
+
+  /// The number of seconds of playback before the ad becomes skippable.
+  /// Native reports `-1` for non-skippable ads or when unavailable.
+  double? get skipTimeOffset => throw _privateConstructorUsedError;
+
+  /// The total duration of the ad in seconds, as provided in the VAST
+  /// response.
+  double? get adDuration => throw _privateConstructorUsedError;
+
+  /// The name of the advertiser as defined by the serving party.
+  String? get advertiserName => throw _privateConstructorUsedError;
+
+  /// The ad tag used to fetch the ad.
+  String? get adTag => throw _privateConstructorUsedError;
+
+  /// Contextual metadata about the content surrounding the ad.
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeIMAAdInfo value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeIMAAdInfo value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeIMAAdInfo value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeIMAAdInfo to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeIMAAdInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeIMAAdInfoCopyWith<BlazeIMAAdInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeIMAAdInfoCopyWith<$Res> {
+  factory $BlazeIMAAdInfoCopyWith(
+          BlazeIMAAdInfo value, $Res Function(BlazeIMAAdInfo) then) =
+      _$BlazeIMAAdInfoCopyWithImpl<$Res, BlazeIMAAdInfo>;
+  @useResult
+  $Res call(
+      {String? adId,
+      String? adTitle,
+      String? adDescription,
+      String? adSystem,
+      bool? isSkippable,
+      double? skipTimeOffset,
+      double? adDuration,
+      String? advertiserName,
+      String? adTag,
+      BlazeContentExtraInfo? extraInfo});
+}
+
+/// @nodoc
+class _$BlazeIMAAdInfoCopyWithImpl<$Res, $Val extends BlazeIMAAdInfo>
+    implements $BlazeIMAAdInfoCopyWith<$Res> {
+  _$BlazeIMAAdInfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeIMAAdInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? adId = freezed,
+    Object? adTitle = freezed,
+    Object? adDescription = freezed,
+    Object? adSystem = freezed,
+    Object? isSkippable = freezed,
+    Object? skipTimeOffset = freezed,
+    Object? adDuration = freezed,
+    Object? advertiserName = freezed,
+    Object? adTag = freezed,
+    Object? extraInfo = freezed,
+  }) {
+    return _then(_value.copyWith(
+      adId: freezed == adId
+          ? _value.adId
+          : adId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adTitle: freezed == adTitle
+          ? _value.adTitle
+          : adTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adDescription: freezed == adDescription
+          ? _value.adDescription
+          : adDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adSystem: freezed == adSystem
+          ? _value.adSystem
+          : adSystem // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isSkippable: freezed == isSkippable
+          ? _value.isSkippable
+          : isSkippable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      skipTimeOffset: freezed == skipTimeOffset
+          ? _value.skipTimeOffset
+          : skipTimeOffset // ignore: cast_nullable_to_non_nullable
+              as double?,
+      adDuration: freezed == adDuration
+          ? _value.adDuration
+          : adDuration // ignore: cast_nullable_to_non_nullable
+              as double?,
+      advertiserName: freezed == advertiserName
+          ? _value.advertiserName
+          : advertiserName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adTag: freezed == adTag
+          ? _value.adTag
+          : adTag // ignore: cast_nullable_to_non_nullable
+              as String?,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeIMAAdInfoImplCopyWith<$Res>
+    implements $BlazeIMAAdInfoCopyWith<$Res> {
+  factory _$$BlazeIMAAdInfoImplCopyWith(_$BlazeIMAAdInfoImpl value,
+          $Res Function(_$BlazeIMAAdInfoImpl) then) =
+      __$$BlazeIMAAdInfoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? adId,
+      String? adTitle,
+      String? adDescription,
+      String? adSystem,
+      bool? isSkippable,
+      double? skipTimeOffset,
+      double? adDuration,
+      String? advertiserName,
+      String? adTag,
+      BlazeContentExtraInfo? extraInfo});
+}
+
+/// @nodoc
+class __$$BlazeIMAAdInfoImplCopyWithImpl<$Res>
+    extends _$BlazeIMAAdInfoCopyWithImpl<$Res, _$BlazeIMAAdInfoImpl>
+    implements _$$BlazeIMAAdInfoImplCopyWith<$Res> {
+  __$$BlazeIMAAdInfoImplCopyWithImpl(
+      _$BlazeIMAAdInfoImpl _value, $Res Function(_$BlazeIMAAdInfoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeIMAAdInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? adId = freezed,
+    Object? adTitle = freezed,
+    Object? adDescription = freezed,
+    Object? adSystem = freezed,
+    Object? isSkippable = freezed,
+    Object? skipTimeOffset = freezed,
+    Object? adDuration = freezed,
+    Object? advertiserName = freezed,
+    Object? adTag = freezed,
+    Object? extraInfo = freezed,
+  }) {
+    return _then(_$BlazeIMAAdInfoImpl(
+      adId: freezed == adId
+          ? _value.adId
+          : adId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adTitle: freezed == adTitle
+          ? _value.adTitle
+          : adTitle // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adDescription: freezed == adDescription
+          ? _value.adDescription
+          : adDescription // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adSystem: freezed == adSystem
+          ? _value.adSystem
+          : adSystem // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isSkippable: freezed == isSkippable
+          ? _value.isSkippable
+          : isSkippable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      skipTimeOffset: freezed == skipTimeOffset
+          ? _value.skipTimeOffset
+          : skipTimeOffset // ignore: cast_nullable_to_non_nullable
+              as double?,
+      adDuration: freezed == adDuration
+          ? _value.adDuration
+          : adDuration // ignore: cast_nullable_to_non_nullable
+              as double?,
+      advertiserName: freezed == advertiserName
+          ? _value.advertiserName
+          : advertiserName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      adTag: freezed == adTag
+          ? _value.adTag
+          : adTag // ignore: cast_nullable_to_non_nullable
+              as String?,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeIMAAdInfoImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeIMAAdInfo {
+  const _$BlazeIMAAdInfoImpl(
+      {this.adId,
+      this.adTitle,
+      this.adDescription,
+      this.adSystem,
+      this.isSkippable,
+      this.skipTimeOffset,
+      this.adDuration,
+      this.advertiserName,
+      this.adTag,
+      this.extraInfo});
+
+  factory _$BlazeIMAAdInfoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BlazeIMAAdInfoImplFromJson(json);
+
+  /// The unique identifier of the ad as specified in the VAST response.
+  @override
+  final String? adId;
+
+  /// The title of the ad provided in the VAST response.
+  @override
+  final String? adTitle;
+
+  /// A description of the ad.
+  @override
+  final String? adDescription;
+
+  /// Information about the source ad server included in the ad response.
+  @override
+  final String? adSystem;
+
+  /// Whether the ad is skippable.
+  @override
+  final bool? isSkippable;
+
+  /// The number of seconds of playback before the ad becomes skippable.
+  /// Native reports `-1` for non-skippable ads or when unavailable.
+  @override
+  final double? skipTimeOffset;
+
+  /// The total duration of the ad in seconds, as provided in the VAST
+  /// response.
+  @override
+  final double? adDuration;
+
+  /// The name of the advertiser as defined by the serving party.
+  @override
+  final String? advertiserName;
+
+  /// The ad tag used to fetch the ad.
+  @override
+  final String? adTag;
+
+  /// Contextual metadata about the content surrounding the ad.
+  @override
+  final BlazeContentExtraInfo? extraInfo;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeIMAAdInfo(adId: $adId, adTitle: $adTitle, adDescription: $adDescription, adSystem: $adSystem, isSkippable: $isSkippable, skipTimeOffset: $skipTimeOffset, adDuration: $adDuration, advertiserName: $advertiserName, adTag: $adTag, extraInfo: $extraInfo)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeIMAAdInfo'))
+      ..add(DiagnosticsProperty('adId', adId))
+      ..add(DiagnosticsProperty('adTitle', adTitle))
+      ..add(DiagnosticsProperty('adDescription', adDescription))
+      ..add(DiagnosticsProperty('adSystem', adSystem))
+      ..add(DiagnosticsProperty('isSkippable', isSkippable))
+      ..add(DiagnosticsProperty('skipTimeOffset', skipTimeOffset))
+      ..add(DiagnosticsProperty('adDuration', adDuration))
+      ..add(DiagnosticsProperty('advertiserName', advertiserName))
+      ..add(DiagnosticsProperty('adTag', adTag))
+      ..add(DiagnosticsProperty('extraInfo', extraInfo));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeIMAAdInfoImpl &&
+            (identical(other.adId, adId) || other.adId == adId) &&
+            (identical(other.adTitle, adTitle) || other.adTitle == adTitle) &&
+            (identical(other.adDescription, adDescription) ||
+                other.adDescription == adDescription) &&
+            (identical(other.adSystem, adSystem) ||
+                other.adSystem == adSystem) &&
+            (identical(other.isSkippable, isSkippable) ||
+                other.isSkippable == isSkippable) &&
+            (identical(other.skipTimeOffset, skipTimeOffset) ||
+                other.skipTimeOffset == skipTimeOffset) &&
+            (identical(other.adDuration, adDuration) ||
+                other.adDuration == adDuration) &&
+            (identical(other.advertiserName, advertiserName) ||
+                other.advertiserName == advertiserName) &&
+            (identical(other.adTag, adTag) || other.adTag == adTag) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      adId,
+      adTitle,
+      adDescription,
+      adSystem,
+      isSkippable,
+      skipTimeOffset,
+      adDuration,
+      advertiserName,
+      adTag,
+      extraInfo);
+
+  /// Create a copy of BlazeIMAAdInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeIMAAdInfoImplCopyWith<_$BlazeIMAAdInfoImpl> get copyWith =>
+      __$$BlazeIMAAdInfoImplCopyWithImpl<_$BlazeIMAAdInfoImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeIMAAdInfo value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeIMAAdInfo value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeIMAAdInfo value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeIMAAdInfoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeIMAAdInfo implements BlazeIMAAdInfo {
+  const factory _BlazeIMAAdInfo(
+      {final String? adId,
+      final String? adTitle,
+      final String? adDescription,
+      final String? adSystem,
+      final bool? isSkippable,
+      final double? skipTimeOffset,
+      final double? adDuration,
+      final String? advertiserName,
+      final String? adTag,
+      final BlazeContentExtraInfo? extraInfo}) = _$BlazeIMAAdInfoImpl;
+
+  factory _BlazeIMAAdInfo.fromJson(Map<String, dynamic> json) =
+      _$BlazeIMAAdInfoImpl.fromJson;
+
+  /// The unique identifier of the ad as specified in the VAST response.
+  @override
+  String? get adId;
+
+  /// The title of the ad provided in the VAST response.
+  @override
+  String? get adTitle;
+
+  /// A description of the ad.
+  @override
+  String? get adDescription;
+
+  /// Information about the source ad server included in the ad response.
+  @override
+  String? get adSystem;
+
+  /// Whether the ad is skippable.
+  @override
+  bool? get isSkippable;
+
+  /// The number of seconds of playback before the ad becomes skippable.
+  /// Native reports `-1` for non-skippable ads or when unavailable.
+  @override
+  double? get skipTimeOffset;
+
+  /// The total duration of the ad in seconds, as provided in the VAST
+  /// response.
+  @override
+  double? get adDuration;
+
+  /// The name of the advertiser as defined by the serving party.
+  @override
+  String? get advertiserName;
+
+  /// The ad tag used to fetch the ad.
+  @override
+  String? get adTag;
+
+  /// Contextual metadata about the content surrounding the ad.
+  @override
+  BlazeContentExtraInfo? get extraInfo;
+
+  /// Create a copy of BlazeIMAAdInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeIMAAdInfoImplCopyWith<_$BlazeIMAAdInfoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 BlazeIMADelegateOnAdEventParams _$BlazeIMADelegateOnAdEventParamsFromJson(
     Map<String, dynamic> json) {
   return _BlazeIMADelegateOnAdEventParams.fromJson(json);
@@ -709,6 +1188,10 @@ BlazeIMADelegateOnAdEventParams _$BlazeIMADelegateOnAdEventParamsFromJson(
 mixin _$BlazeIMADelegateOnAdEventParams {
   BlazeIMAOnAdEventEventType get eventType =>
       throw _privateConstructorUsedError;
+
+  /// Details of the ad this event refers to. `null` when the IMA SDK reported
+  /// no ad information for the event.
+  BlazeIMAAdInfo? get adInfo => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -745,7 +1228,9 @@ abstract class $BlazeIMADelegateOnAdEventParamsCopyWith<$Res> {
       _$BlazeIMADelegateOnAdEventParamsCopyWithImpl<$Res,
           BlazeIMADelegateOnAdEventParams>;
   @useResult
-  $Res call({BlazeIMAOnAdEventEventType eventType});
+  $Res call({BlazeIMAOnAdEventEventType eventType, BlazeIMAAdInfo? adInfo});
+
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo;
 }
 
 /// @nodoc
@@ -765,13 +1250,32 @@ class _$BlazeIMADelegateOnAdEventParamsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? eventType = null,
+    Object? adInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeIMAOnAdEventEventType,
+      adInfo: freezed == adInfo
+          ? _value.adInfo
+          : adInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeIMAAdInfo?,
     ) as $Val);
+  }
+
+  /// Create a copy of BlazeIMADelegateOnAdEventParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo {
+    if (_value.adInfo == null) {
+      return null;
+    }
+
+    return $BlazeIMAAdInfoCopyWith<$Res>(_value.adInfo!, (value) {
+      return _then(_value.copyWith(adInfo: value) as $Val);
+    });
   }
 }
 
@@ -784,7 +1288,10 @@ abstract class _$$BlazeIMADelegateOnAdEventParamsImplCopyWith<$Res>
       __$$BlazeIMADelegateOnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BlazeIMAOnAdEventEventType eventType});
+  $Res call({BlazeIMAOnAdEventEventType eventType, BlazeIMAAdInfo? adInfo});
+
+  @override
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo;
 }
 
 /// @nodoc
@@ -803,12 +1310,17 @@ class __$$BlazeIMADelegateOnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? adInfo = freezed,
   }) {
     return _then(_$BlazeIMADelegateOnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeIMAOnAdEventEventType,
+      adInfo: freezed == adInfo
+          ? _value.adInfo
+          : adInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeIMAAdInfo?,
     ));
   }
 }
@@ -818,7 +1330,8 @@ class __$$BlazeIMADelegateOnAdEventParamsImplCopyWithImpl<$Res>
 class _$BlazeIMADelegateOnAdEventParamsImpl
     with DiagnosticableTreeMixin
     implements _BlazeIMADelegateOnAdEventParams {
-  const _$BlazeIMADelegateOnAdEventParamsImpl({required this.eventType});
+  const _$BlazeIMADelegateOnAdEventParamsImpl(
+      {required this.eventType, this.adInfo});
 
   factory _$BlazeIMADelegateOnAdEventParamsImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -827,9 +1340,14 @@ class _$BlazeIMADelegateOnAdEventParamsImpl
   @override
   final BlazeIMAOnAdEventEventType eventType;
 
+  /// Details of the ad this event refers to. `null` when the IMA SDK reported
+  /// no ad information for the event.
+  @override
+  final BlazeIMAAdInfo? adInfo;
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BlazeIMADelegateOnAdEventParams(eventType: $eventType)';
+    return 'BlazeIMADelegateOnAdEventParams(eventType: $eventType, adInfo: $adInfo)';
   }
 
   @override
@@ -837,7 +1355,8 @@ class _$BlazeIMADelegateOnAdEventParamsImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BlazeIMADelegateOnAdEventParams'))
-      ..add(DiagnosticsProperty('eventType', eventType));
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('adInfo', adInfo));
   }
 
   @override
@@ -846,12 +1365,13 @@ class _$BlazeIMADelegateOnAdEventParamsImpl
         (other.runtimeType == runtimeType &&
             other is _$BlazeIMADelegateOnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.adInfo, adInfo) || other.adInfo == adInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, adInfo);
 
   /// Create a copy of BlazeIMADelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -902,14 +1422,19 @@ class _$BlazeIMADelegateOnAdEventParamsImpl
 abstract class _BlazeIMADelegateOnAdEventParams
     implements BlazeIMADelegateOnAdEventParams {
   const factory _BlazeIMADelegateOnAdEventParams(
-          {required final BlazeIMAOnAdEventEventType eventType}) =
-      _$BlazeIMADelegateOnAdEventParamsImpl;
+      {required final BlazeIMAOnAdEventEventType eventType,
+      final BlazeIMAAdInfo? adInfo}) = _$BlazeIMADelegateOnAdEventParamsImpl;
 
   factory _BlazeIMADelegateOnAdEventParams.fromJson(Map<String, dynamic> json) =
       _$BlazeIMADelegateOnAdEventParamsImpl.fromJson;
 
   @override
   BlazeIMAOnAdEventEventType get eventType;
+
+  /// Details of the ad this event refers to. `null` when the IMA SDK reported
+  /// no ad information for the event.
+  @override
+  BlazeIMAAdInfo? get adInfo;
 
   /// Create a copy of BlazeIMADelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -927,6 +1452,7 @@ _OnAdEventParams _$OnAdEventParamsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OnAdEventParams {
   String get eventType => throw _privateConstructorUsedError;
+  BlazeIMAAdInfo? get adInfo => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -961,7 +1487,9 @@ abstract class _$OnAdEventParamsCopyWith<$Res> {
           _OnAdEventParams value, $Res Function(_OnAdEventParams) then) =
       __$OnAdEventParamsCopyWithImpl<$Res, _OnAdEventParams>;
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeIMAAdInfo? adInfo});
+
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo;
 }
 
 /// @nodoc
@@ -980,13 +1508,32 @@ class __$OnAdEventParamsCopyWithImpl<$Res, $Val extends _OnAdEventParams>
   @override
   $Res call({
     Object? eventType = null,
+    Object? adInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      adInfo: freezed == adInfo
+          ? _value.adInfo
+          : adInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeIMAAdInfo?,
     ) as $Val);
+  }
+
+  /// Create a copy of _OnAdEventParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo {
+    if (_value.adInfo == null) {
+      return null;
+    }
+
+    return $BlazeIMAAdInfoCopyWith<$Res>(_value.adInfo!, (value) {
+      return _then(_value.copyWith(adInfo: value) as $Val);
+    });
   }
 }
 
@@ -998,7 +1545,10 @@ abstract class _$$_OnAdEventParamsImplCopyWith<$Res>
       __$$_OnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeIMAAdInfo? adInfo});
+
+  @override
+  $BlazeIMAAdInfoCopyWith<$Res>? get adInfo;
 }
 
 /// @nodoc
@@ -1015,12 +1565,17 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? adInfo = freezed,
   }) {
     return _then(_$_OnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      adInfo: freezed == adInfo
+          ? _value.adInfo
+          : adInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeIMAAdInfo?,
     ));
   }
 }
@@ -1030,17 +1585,19 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
 class _$_OnAdEventParamsImpl
     with DiagnosticableTreeMixin
     implements __OnAdEventParams {
-  const _$_OnAdEventParamsImpl({required this.eventType});
+  const _$_OnAdEventParamsImpl({required this.eventType, required this.adInfo});
 
   factory _$_OnAdEventParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$_OnAdEventParamsImplFromJson(json);
 
   @override
   final String eventType;
+  @override
+  final BlazeIMAAdInfo? adInfo;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return '_OnAdEventParams(eventType: $eventType)';
+    return '_OnAdEventParams(eventType: $eventType, adInfo: $adInfo)';
   }
 
   @override
@@ -1048,7 +1605,8 @@ class _$_OnAdEventParamsImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', '_OnAdEventParams'))
-      ..add(DiagnosticsProperty('eventType', eventType));
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('adInfo', adInfo));
   }
 
   @override
@@ -1057,12 +1615,13 @@ class _$_OnAdEventParamsImpl
         (other.runtimeType == runtimeType &&
             other is _$_OnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.adInfo, adInfo) || other.adInfo == adInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, adInfo);
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -1110,14 +1669,17 @@ class _$_OnAdEventParamsImpl
 }
 
 abstract class __OnAdEventParams implements _OnAdEventParams {
-  const factory __OnAdEventParams({required final String eventType}) =
-      _$_OnAdEventParamsImpl;
+  const factory __OnAdEventParams(
+      {required final String eventType,
+      required final BlazeIMAAdInfo? adInfo}) = _$_OnAdEventParamsImpl;
 
   factory __OnAdEventParams.fromJson(Map<String, dynamic> json) =
       _$_OnAdEventParamsImpl.fromJson;
 
   @override
   String get eventType;
+  @override
+  BlazeIMAAdInfo? get adInfo;
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.

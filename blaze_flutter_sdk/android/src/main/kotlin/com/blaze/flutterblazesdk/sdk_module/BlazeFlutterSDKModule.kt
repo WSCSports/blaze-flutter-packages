@@ -16,6 +16,7 @@ import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationRequest
 import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationResponse
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.external_modules.BlazeExternalModulesBinder
 import com.blaze.blazesdk.follow.models.BlazeFollowEntity
 import com.blaze.blazesdk.features.moments.models.configuration.BlazeMomentsLoopBehavior
@@ -27,6 +28,7 @@ import com.blaze.blazesdk.shared.models.BlazePlayerSoundState
 import com.blaze.blazesdk.shared.results.BlazeResult
 import com.blaze.blazesdk.style.shared.models.BlazePlayerCustomActionButtonParams
 import com.blaze.flutterblazesdk.delegates.BlazeSharedDelegateHandler
+import com.blaze.flutterblazesdk.parsers.asBlazeLayoutDirection
 import com.blaze.flutterblazesdk.parsers.asCachingLevel
 import com.blaze.flutterblazesdk.parsers.toBlazeDataSourceType
 import com.blaze.flutterblazesdk.players.extractMomentsPlayerStyle
@@ -40,6 +42,7 @@ import com.blaze.flutterblazesdk.utils.BlazeFlutterSDKHelper
 import com.blaze.flutterblazesdk.utils.extractMomentsPlaybackConfiguration
 import com.blaze.flutterblazesdk.utils.extractStoriesPlaybackConfiguration
 import com.blaze.flutterblazesdk.utils.extractVideosPlaybackConfiguration
+import com.blaze.flutterblazesdk.utils.extractVideosFilterParams
 import com.blaze.flutterblazesdk.utils.handleBlazeResult
 import com.blaze.flutterblazesdk.utils.handleError
 import com.blaze.flutterblazesdk.utils.safeGetArgument
@@ -101,8 +104,22 @@ object BlazeFlutterSDKModule {
                         "getDefaultVideosPlaybackConfiguration" ->
                                 getDefaultVideosPlaybackConfiguration(call, result)
                         "dismissPlayer" -> dismissPlayer(call, result)
+                        "pauseCurrentPlayer" -> pauseCurrentPlayer(call, result)
+                        "resumeCurrentPlayer" -> resumeCurrentPlayer(call, result)
                         "setDoNotTrack" -> setDoNotTrack(call, result)
                         "setDisableAnalytics" -> setDisableAnalytics(call, result)
+                        "setDisableUserActivity" -> setDisableUserActivity(call, result)
+                        "clearLocalUserActivity" -> clearLocalUserActivity(call, result)
+                        "hostingAppContextGetValue" ->
+                                hostingAppContextGetValue(call, result)
+                        "hostingAppContextGetContext" ->
+                                hostingAppContextGetContext(call, result)
+                        "hostingAppContextSetValue" ->
+                                hostingAppContextSetValue(call, result)
+                        "hostingAppContextSetContext" ->
+                                hostingAppContextSetContext(call, result)
+                        "hostingAppContextDeleteValue" ->
+                                hostingAppContextDeleteValue(call, result)
                         "setPreferredLanguage" -> setPreferredLanguage(call, result)
                         "setPlayerSoundState" -> setPlayerSoundState(call, result)
                         "isMuted" -> isMuted(call, result)
@@ -236,6 +253,18 @@ object BlazeFlutterSDKModule {
                                 )
                         }
 
+                        override fun onShareClicked(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                shareParams: BlazeShareParams
+                        ): String? {
+                                return this@BlazeFlutterSDKModule.onShareClicked(
+                                        playerType,
+                                        sourceId,
+                                        shareParams
+                                )
+                        }
+
                         override fun onReadStatusChanged(
                                 playerType: BlazePlayerType,
                                 sourceId: String?,
@@ -328,6 +357,9 @@ object BlazeFlutterSDKModule {
                 }
 
                 val cachingLevel = cachingLevelString.asCachingLevel()
+                val forceLayoutDirection =
+                        call.safeGetArgument<String>("forceLayoutDirection")
+                                .asBlazeLayoutDirection()
 
                 BlazeSDK.init(
                         apiKey = apiKey,
@@ -335,6 +367,7 @@ object BlazeFlutterSDKModule {
                         cachingSize = cachingSize,
                         cachingLevel = cachingLevel,
                         geoLocation = geoLocation,
+                        forceLayoutDirection = forceLayoutDirection,
                         completionBlock = { result.success(null) },
                         errorBlock = { e ->
                                 result.handleBlazeResult(
@@ -397,13 +430,17 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
                                 .extractStoriesPlaybackConfiguration()
                                 ?: BlazeSDK.getDefaultStoriesPlaybackConfiguration()
+                val eventId = call.safeGetArgument<String>("eventId")
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playStory(
                         storyId = storyId,
                         pageId = pageId,
                         storyPlayerStyle = playerStyle,
                         triggerSource = triggerSource,
-                        playbackConfiguration = playbackConfiguration
+                        playbackConfiguration = playbackConfiguration,
+                        eventId = eventId,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -439,6 +476,7 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
                                 .extractStoriesPlaybackConfiguration()
                                 ?: BlazeSDK.getDefaultStoriesPlaybackConfiguration()
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playStories(
                         dataSource = dataSource,
@@ -446,7 +484,8 @@ object BlazeFlutterSDKModule {
                         storyPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource,
-                        playbackConfiguration = playbackConfiguration
+                        playbackConfiguration = playbackConfiguration,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -474,7 +513,12 @@ object BlazeFlutterSDKModule {
                 result: MethodChannel.Result
         ) {
                 val config = BlazeSDK.getDefaultStoriesPlaybackConfiguration()
-                result.success(mapOf("bufferingSpinnerDelayMs" to config.bufferingSpinnerDelayMs))
+                result.success(
+                        mapOf(
+                                "bufferingSpinnerDelayMs" to config.bufferingSpinnerDelayMs,
+                                "ads" to mapOf("enablePreroll" to config.ads.enablePreroll)
+                        )
+                )
         }
 
         private fun playMoment(call: MethodCall, result: MethodChannel.Result) {
@@ -492,11 +536,13 @@ object BlazeFlutterSDKModule {
                 val playerStyle = playerStyleMap.extractMomentsPlayerStyle(application)
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playMoment(
                         momentId = momentId,
                         momentsPlayerStyle = playerStyle,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -528,13 +574,15 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Boolean>("shouldOrderContentByReadStatus") ?: true
                 val triggerSource =
                         call.safeGetArgument<String>("triggerSource").asEntryPointTriggerSource
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playMoments(
                         dataSource = dataSource,
                         entryContentId = entryContentId,
                         momentsPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
-                        triggerSource = triggerSource
+                        triggerSource = triggerSource,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -640,12 +688,14 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
                                 .extractVideosPlaybackConfiguration()
                                 ?: BlazeSDK.getDefaultVideosPlaybackConfiguration()
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playVideo(
                         videoId = videoId,
                         videosPlayerStyle = playerStyle,
                         triggerSource = triggerSource,
-                        playbackConfiguration = playbackConfiguration
+                        playbackConfiguration = playbackConfiguration,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -681,6 +731,10 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("playbackConfiguration")
                                 .extractVideosPlaybackConfiguration()
                                 ?: BlazeSDK.getDefaultVideosPlaybackConfiguration()
+                val videosFilterParams =
+                        call.safeGetArgument<Map<String, Any>>("videosFilterParams")
+                                .extractVideosFilterParams()
+                val sourceId = call.safeGetArgument<String>("sourceId")
 
                 BlazeSDK.playVideos(
                         dataSource = dataSource,
@@ -688,7 +742,9 @@ object BlazeFlutterSDKModule {
                         videosPlayerStyle = playerStyle,
                         shouldOrderContentByReadStatus = shouldOrderContentByReadStatus,
                         triggerSource = triggerSource,
-                        playbackConfiguration = playbackConfiguration
+                        playbackConfiguration = playbackConfiguration,
+                        videosFilterParams = videosFilterParams,
+                        sourceId = sourceId
                 ) { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
@@ -749,7 +805,9 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
-                BlazeSDK.handleUniversalLink(link) { blazeResult ->
+                val sourceId = call.safeGetArgument<String>("sourceId")
+
+                BlazeSDK.handleUniversalLink(link, sourceId = sourceId) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
         }
@@ -776,9 +834,11 @@ object BlazeFlutterSDKModule {
                                 }
 
                 val entryContentId = call.safeGetArgument<String>("entryContentId")
+                val sourceId = call.safeGetArgument<String>("sourceId")
                 BlazeSDK.prepareStories(
                         dataSource = dataSource,
-                        entryContentId = entryContentId
+                        entryContentId = entryContentId,
+                        sourceId = sourceId
                 ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
@@ -806,9 +866,11 @@ object BlazeFlutterSDKModule {
                                 }
 
                 val entryContentId = call.safeGetArgument<String>("entryContentId")
+                val sourceId = call.safeGetArgument<String>("sourceId")
                 BlazeSDK.prepareMoments(
                         dataSource = dataSource,
-                        entryContentId = entryContentId
+                        entryContentId = entryContentId,
+                        sourceId = sourceId
                 ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
@@ -836,9 +898,15 @@ object BlazeFlutterSDKModule {
                                 }
 
                 val entryContentId = call.safeGetArgument<String>("entryContentId")
+                val videosFilterParams =
+                        call.safeGetArgument<Map<String, Any>>("videosFilterParams")
+                                .extractVideosFilterParams()
+                val sourceId = call.safeGetArgument<String>("sourceId")
                 BlazeSDK.prepareVideos(
                         dataSource = dataSource,
-                        entryContentId = entryContentId
+                        entryContentId = entryContentId,
+                        videosFilterParams = videosFilterParams,
+                        sourceId = sourceId
                 ) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
@@ -876,6 +944,104 @@ object BlazeFlutterSDKModule {
                                 }
 
                 BlazeSDK.disableAnalytics = disableAnalytics
+                result.success(null)
+        }
+
+        private fun pauseCurrentPlayer(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.pauseCurrentPlayer()
+                result.success(null)
+        }
+
+        private fun resumeCurrentPlayer(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.resumeCurrentPlayer()
+                result.success(null)
+        }
+
+        private fun setDisableUserActivity(call: MethodCall, result: MethodChannel.Result) {
+                val disableUserActivity =
+                        call.safeGetArgument<Boolean>("disableUserActivity")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setDisableUserActivity",
+                                                errMessage = "disableUserActivity is invalid"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.disableUserActivity = disableUserActivity
+                result.success(null)
+        }
+
+        private fun clearLocalUserActivity(call: MethodCall, result: MethodChannel.Result) {
+                BlazeSDK.clearLocalUserActivity()
+                result.success(null)
+        }
+
+        // ======================================
+        // HOSTING APP CONTEXT
+        // ======================================
+
+        private fun hostingAppContextGetValue(call: MethodCall, result: MethodChannel.Result) {
+                val key =
+                        call.safeGetArgument<String>("key")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "hostingAppContextGetValue",
+                                                errMessage = "key is invalid"
+                                        )
+                                        return
+                                }
+
+                result.success(BlazeSDK.hostingAppContext.getValue(key))
+        }
+
+        private fun hostingAppContextGetContext(call: MethodCall, result: MethodChannel.Result) {
+                result.success(BlazeSDK.hostingAppContext.getContext())
+        }
+
+        private fun hostingAppContextSetValue(call: MethodCall, result: MethodChannel.Result) {
+                val key =
+                        call.safeGetArgument<String>("key")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "hostingAppContextSetValue",
+                                                errMessage = "key is invalid"
+                                        )
+                                        return
+                                }
+
+                // A null value is valid and clears the stored entry.
+                BlazeSDK.hostingAppContext.setValue(key, call.safeGetArgument<Any>("value"))
+                result.success(null)
+        }
+
+        private fun hostingAppContextSetContext(call: MethodCall, result: MethodChannel.Result) {
+                val context =
+                        call.safeGetArgument<Map<String, Any>>("context")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "hostingAppContextSetContext",
+                                                errMessage = "context is invalid"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.hostingAppContext.setContext(context)
+                result.success(null)
+        }
+
+        private fun hostingAppContextDeleteValue(call: MethodCall, result: MethodChannel.Result) {
+                val key =
+                        call.safeGetArgument<String>("key")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "hostingAppContextDeleteValue",
+                                                errMessage = "key is invalid"
+                                        )
+                                        return
+                                }
+
+                BlazeSDK.hostingAppContext.deleteValue(key)
                 result.success(null)
         }
 
@@ -1022,9 +1188,11 @@ object BlazeFlutterSDKModule {
                                         return
                                 }
 
+                val sourceId = call.safeGetArgument<String>("sourceId")
+
                 // Convert to HashMap<String, String> as required by Android SDK
                 val hashMap = payload.mapValues { it.value.toString() } as HashMap<String, String>
-                BlazeSDK.handlePushNotificationPayload(hashMap) { blazeResult ->
+                BlazeSDK.handlePushNotificationPayload(hashMap, sourceId = sourceId) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
         }
@@ -1193,6 +1361,23 @@ object BlazeFlutterSDKModule {
                 ) { params ->
                         asyncBridge?.sendEvent(
                                 name = "Blaze.onTriggerCustomActionButton",
+                                params = params
+                        )
+                }
+        }
+
+        private fun onShareClicked(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                shareParams: BlazeShareParams
+        ): String? {
+                return sharedDelegateHandler.onShareClicked(
+                        playerType = playerType,
+                        sourceId = sourceId,
+                        shareParams = shareParams
+                ) { params ->
+                        asyncBridge?.sendEvent(
+                                name = "Blaze.onShareClicked",
                                 params = params
                         )
                 }

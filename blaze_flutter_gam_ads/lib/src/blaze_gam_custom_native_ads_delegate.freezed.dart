@@ -25,6 +25,11 @@ mixin _$BlazeGAMCustomNativeAdsDelegateOnAdEventParams {
   BlazeCustomNativeAdEventType get eventType =>
       throw _privateConstructorUsedError;
 
+  /// Contextual metadata about the content surrounding the ad, as delivered by
+  /// the native SDK alongside the event. `null` when the native SDK attached
+  /// no extra info to this event.
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeGAMDelegateOnAdEventParams value) $default,
@@ -61,7 +66,9 @@ abstract class $BlazeGAMCustomNativeAdsDelegateOnAdEventParamsCopyWith<$Res> {
       _$BlazeGAMCustomNativeAdsDelegateOnAdEventParamsCopyWithImpl<$Res,
           BlazeGAMCustomNativeAdsDelegateOnAdEventParams>;
   @useResult
-  $Res call({BlazeCustomNativeAdEventType eventType});
+  $Res call(
+      {BlazeCustomNativeAdEventType eventType,
+      BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -82,12 +89,17 @@ class _$BlazeGAMCustomNativeAdsDelegateOnAdEventParamsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeCustomNativeAdEventType,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ) as $Val);
   }
 }
@@ -101,7 +113,9 @@ abstract class _$$BlazeGAMDelegateOnAdEventParamsImplCopyWith<$Res>
       __$$BlazeGAMDelegateOnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BlazeCustomNativeAdEventType eventType});
+  $Res call(
+      {BlazeCustomNativeAdEventType eventType,
+      BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -120,12 +134,17 @@ class __$$BlazeGAMDelegateOnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_$BlazeGAMDelegateOnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeCustomNativeAdEventType,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ));
   }
 }
@@ -134,7 +153,8 @@ class __$$BlazeGAMDelegateOnAdEventParamsImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BlazeGAMDelegateOnAdEventParamsImpl
     implements _BlazeGAMDelegateOnAdEventParams {
-  const _$BlazeGAMDelegateOnAdEventParamsImpl({required this.eventType});
+  const _$BlazeGAMDelegateOnAdEventParamsImpl(
+      {required this.eventType, this.extraInfo});
 
   factory _$BlazeGAMDelegateOnAdEventParamsImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -143,9 +163,15 @@ class _$BlazeGAMDelegateOnAdEventParamsImpl
   @override
   final BlazeCustomNativeAdEventType eventType;
 
+  /// Contextual metadata about the content surrounding the ad, as delivered by
+  /// the native SDK alongside the event. `null` when the native SDK attached
+  /// no extra info to this event.
+  @override
+  final BlazeContentExtraInfo? extraInfo;
+
   @override
   String toString() {
-    return 'BlazeGAMCustomNativeAdsDelegateOnAdEventParams(eventType: $eventType)';
+    return 'BlazeGAMCustomNativeAdsDelegateOnAdEventParams(eventType: $eventType, extraInfo: $extraInfo)';
   }
 
   @override
@@ -154,12 +180,14 @@ class _$BlazeGAMDelegateOnAdEventParamsImpl
         (other.runtimeType == runtimeType &&
             other is _$BlazeGAMDelegateOnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, extraInfo);
 
   /// Create a copy of BlazeGAMCustomNativeAdsDelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -210,7 +238,8 @@ class _$BlazeGAMDelegateOnAdEventParamsImpl
 abstract class _BlazeGAMDelegateOnAdEventParams
     implements BlazeGAMCustomNativeAdsDelegateOnAdEventParams {
   const factory _BlazeGAMDelegateOnAdEventParams(
-          {required final BlazeCustomNativeAdEventType eventType}) =
+          {required final BlazeCustomNativeAdEventType eventType,
+          final BlazeContentExtraInfo? extraInfo}) =
       _$BlazeGAMDelegateOnAdEventParamsImpl;
 
   factory _BlazeGAMDelegateOnAdEventParams.fromJson(Map<String, dynamic> json) =
@@ -218,6 +247,12 @@ abstract class _BlazeGAMDelegateOnAdEventParams
 
   @override
   BlazeCustomNativeAdEventType get eventType;
+
+  /// Contextual metadata about the content surrounding the ad, as delivered by
+  /// the native SDK alongside the event. `null` when the native SDK attached
+  /// no extra info to this event.
+  @override
+  BlazeContentExtraInfo? get extraInfo;
 
   /// Create a copy of BlazeGAMCustomNativeAdsDelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -1185,6 +1220,7 @@ _OnAdEventParams _$OnAdEventParamsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OnAdEventParams {
   String get eventType => throw _privateConstructorUsedError;
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -1219,7 +1255,7 @@ abstract class _$OnAdEventParamsCopyWith<$Res> {
           _OnAdEventParams value, $Res Function(_OnAdEventParams) then) =
       __$OnAdEventParamsCopyWithImpl<$Res, _OnAdEventParams>;
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -1238,12 +1274,17 @@ class __$OnAdEventParamsCopyWithImpl<$Res, $Val extends _OnAdEventParams>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ) as $Val);
   }
 }
@@ -1256,7 +1297,7 @@ abstract class _$$_OnAdEventParamsImplCopyWith<$Res>
       __$$_OnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -1273,12 +1314,17 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_$_OnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ));
   }
 }
@@ -1286,17 +1332,20 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_OnAdEventParamsImpl implements __OnAdEventParams {
-  const _$_OnAdEventParamsImpl({required this.eventType});
+  const _$_OnAdEventParamsImpl(
+      {required this.eventType, required this.extraInfo});
 
   factory _$_OnAdEventParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$_OnAdEventParamsImplFromJson(json);
 
   @override
   final String eventType;
+  @override
+  final BlazeContentExtraInfo? extraInfo;
 
   @override
   String toString() {
-    return '_OnAdEventParams(eventType: $eventType)';
+    return '_OnAdEventParams(eventType: $eventType, extraInfo: $extraInfo)';
   }
 
   @override
@@ -1305,12 +1354,14 @@ class _$_OnAdEventParamsImpl implements __OnAdEventParams {
         (other.runtimeType == runtimeType &&
             other is _$_OnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, extraInfo);
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -1358,7 +1409,9 @@ class _$_OnAdEventParamsImpl implements __OnAdEventParams {
 }
 
 abstract class __OnAdEventParams implements _OnAdEventParams {
-  const factory __OnAdEventParams({required final String eventType}) =
+  const factory __OnAdEventParams(
+          {required final String eventType,
+          required final BlazeContentExtraInfo? extraInfo}) =
       _$_OnAdEventParamsImpl;
 
   factory __OnAdEventParams.fromJson(Map<String, dynamic> json) =
@@ -1366,6 +1419,8 @@ abstract class __OnAdEventParams implements _OnAdEventParams {
 
   @override
   String get eventType;
+  @override
+  BlazeContentExtraInfo? get extraInfo;
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.

@@ -9,6 +9,7 @@ import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFooterGradient
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerFollowEntityChipStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerHeadingTextStyle
 import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCaptionsStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideCTAStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideInstructionStyle
@@ -35,7 +36,8 @@ data class BlazeReactMomentsPlayerStyle(
     val seekBar: BlazeReactMomentsPlayerSeekBarStyle?,
     val bottomComponentsAlignment: BlazeReactBottomComponentsAlignment?,
     var playerDisplayMode: BlazeReactPlayerDisplayMode?,
-    val followEntity: BlazeReactMomentsPlayerFollowEntityStyle?
+    val followEntity: BlazeReactMomentsPlayerFollowEntityStyle?,
+    val captions: BlazeReactCaptionsStyle?
 )
 
 @Keep
@@ -140,10 +142,12 @@ data class BlazeReactMomentsPlayerButtonsStyle(
     val share: BlazeReactPlayerButtonStyle?,
     val like: BlazeReactPlayerButtonStyle?,
     val play: BlazeReactPlayerButtonStyle?,
+    val captions: BlazeReactPlayerButtonStyle?,
     val seekForward: BlazeReactPlayerButtonStyle?,
     val seekBackward: BlazeReactPlayerButtonStyle?,
     val search: BlazeReactPlayerButtonStyle?,
-    val customActionButtons: List<BlazeReactCustomActionButton>?
+    val customActionButtons: List<BlazeReactCustomActionButton>?,
+    val shouldPreserveLikesCountBelowThreshold: Boolean?
 )
 
 @Keep data class BlazeReactMomentsPlayerChipsStyle(val ad: BlazeReactMomentsPlayerChipStyle?)
@@ -167,7 +171,9 @@ data class BlazeReactMomentsPlayerCtaStyle(
     val icon: BlazeReactMomentsPlayerCtaIconStyle?,
     val layoutPositioning: CTAPositioning?,
     val horizontalAlignment: CTAHorizontalAlignment?,
-    val isVisible: Boolean?
+    val isVisible: Boolean?,
+    val borderColor: String?, // Hex
+    val borderWidth: Int?
 ) {
     @Keep
     enum class CTAPositioning(override val rawValue: String) :

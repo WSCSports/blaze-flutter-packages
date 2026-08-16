@@ -47,6 +47,7 @@ class NativeStoryRowView(
                         dataSource = dataSource,
                         cachingLevel = cachingLevel,
                         widgetId = widgetId,
+                        widgetRemoteIdentifier = widgetRemoteIdentifier,
                         shouldOrderWidgetByReadStatus = shouldOrderWidgetByReadStatus,
                         widgetDelegate = delegate,
                         perItemStyleOverrides = perItemStyleOverrides

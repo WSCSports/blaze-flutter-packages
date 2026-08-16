@@ -33,6 +33,11 @@ class BlazeGAMCustomNativeAdsDelegateOnAdEventParams
     with _$BlazeGAMCustomNativeAdsDelegateOnAdEventParams {
   const factory BlazeGAMCustomNativeAdsDelegateOnAdEventParams({
     required BlazeCustomNativeAdEventType eventType,
+
+    /// Contextual metadata about the content surrounding the ad, as delivered by
+    /// the native SDK alongside the event. `null` when the native SDK attached
+    /// no extra info to this event.
+    BlazeContentExtraInfo? extraInfo,
   }) = _BlazeGAMDelegateOnAdEventParams;
 
   factory BlazeGAMCustomNativeAdsDelegateOnAdEventParams.fromJson(
@@ -145,6 +150,7 @@ class _OnAdErrorParams with _$OnAdErrorParams {
 class _OnAdEventParams with _$OnAdEventParams {
   const factory _OnAdEventParams({
     required String eventType,
+    required BlazeContentExtraInfo? extraInfo,
   }) = __OnAdEventParams;
 
   factory _OnAdEventParams.fromJson(Map<String, dynamic> json) =>
@@ -179,7 +185,9 @@ class BlazeCustomNativeAdsDelegateHelper {
                 _$BlazeCustomNativeAdEventTypeEnumMap, eventData.eventType);
 
             final eventParams = BlazeGAMCustomNativeAdsDelegateOnAdEventParams(
-                eventType: eventType);
+              eventType: eventType,
+              extraInfo: eventData.extraInfo,
+            );
             callback(eventParams);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(

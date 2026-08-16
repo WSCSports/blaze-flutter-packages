@@ -12,6 +12,8 @@ struct BlazeReactVideosPlayerStyle: Codable {
     var backgroundColor: String?
     var cta: BlazeReactVideosPlayerCtaStyle?
     var seekBar: BlazeReactVideosPlayerSeekBarStyle?
+    var overlayVisibilityThresholdMs: Int?
+    var captions: BlazeReactCaptionsStyle?
 }
 
 struct BlazeReactVideosPlayerHeadingTextStyle: Codable {
@@ -51,6 +53,8 @@ struct BlazeReactVideosPlayerCtaStyle: Codable {
     var textSize: CGFloat?
     var icon: BlazeReactVideosPlayerCtaIconStyle?
     var isVisible: Bool?
+    var borderColor: String?
+    var borderWidth: CGFloat?
 }
 
 struct BlazeReactVideosPlayerCtaIconStyle: Codable {

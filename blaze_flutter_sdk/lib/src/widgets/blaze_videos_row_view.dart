@@ -14,6 +14,8 @@ class BlazeVideosRowView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeVideosPlayerStyle? super.playerStyle,
     BlazeVideosPlaybackConfiguration? super.playbackConfiguration,
+    super.videosFilterParams,
+    super.widgetRemoteIdentifier,
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,

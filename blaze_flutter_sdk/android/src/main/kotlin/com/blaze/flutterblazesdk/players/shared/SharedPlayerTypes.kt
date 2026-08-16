@@ -22,6 +22,19 @@ data class BlazeReactPlayerButtonCustomImageStates(
 )
 
 @Keep
+data class BlazeReactCaptionsStyle(
+    val font: BlazeReactTitleFont?,
+    val textSize: Float?,
+    val positioning: BlazeReactCaptionsPositioning?
+)
+
+@Keep
+data class BlazeReactCaptionsPositioning(
+    val xPosition: Map<String, Any?>?,
+    val yPosition: Map<String, Any?>?
+)
+
+@Keep
 data class BlazeReactFirstTimeSlideInstructionStyle(
     val headerText: BlazeReactFirstTimeSlideTextStyle?,
     val descriptionText: BlazeReactFirstTimeSlideTextStyle?

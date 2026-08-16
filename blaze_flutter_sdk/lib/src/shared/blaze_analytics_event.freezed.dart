@@ -2602,6 +2602,7 @@ mixin _$VideoProps {
       throw _privateConstructorUsedError;
   AnalyticsVideosCtaConfig? get cta_config =>
       throw _privateConstructorUsedError;
+  String? get cc_state => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -2652,7 +2653,8 @@ abstract class $VideoPropsCopyWith<$Res> {
       BlazeAnalyticsOrientation? player_orientation,
       BlazeAnalyticsOrientation? device_orientation,
       Map<String, String>? content_extra_info,
-      AnalyticsVideosCtaConfig? cta_config});
+      AnalyticsVideosCtaConfig? cta_config,
+      String? cc_state});
 
   $AnalyticsVideosCtaConfigCopyWith<$Res>? get cta_config;
 }
@@ -2688,6 +2690,7 @@ class _$VideoPropsCopyWithImpl<$Res, $Val extends VideoProps>
     Object? device_orientation = freezed,
     Object? content_extra_info = freezed,
     Object? cta_config = freezed,
+    Object? cc_state = freezed,
   }) {
     return _then(_value.copyWith(
       video_session_id: freezed == video_session_id
@@ -2754,6 +2757,10 @@ class _$VideoPropsCopyWithImpl<$Res, $Val extends VideoProps>
           ? _value.cta_config
           : cta_config // ignore: cast_nullable_to_non_nullable
               as AnalyticsVideosCtaConfig?,
+      cc_state: freezed == cc_state
+          ? _value.cc_state
+          : cc_state // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -2796,7 +2803,8 @@ abstract class _$$VideoPropsImplCopyWith<$Res>
       BlazeAnalyticsOrientation? player_orientation,
       BlazeAnalyticsOrientation? device_orientation,
       Map<String, String>? content_extra_info,
-      AnalyticsVideosCtaConfig? cta_config});
+      AnalyticsVideosCtaConfig? cta_config,
+      String? cc_state});
 
   @override
   $AnalyticsVideosCtaConfigCopyWith<$Res>? get cta_config;
@@ -2831,6 +2839,7 @@ class __$$VideoPropsImplCopyWithImpl<$Res>
     Object? device_orientation = freezed,
     Object? content_extra_info = freezed,
     Object? cta_config = freezed,
+    Object? cc_state = freezed,
   }) {
     return _then(_$VideoPropsImpl(
       video_session_id: freezed == video_session_id
@@ -2897,6 +2906,10 @@ class __$$VideoPropsImplCopyWithImpl<$Res>
           ? _value.cta_config
           : cta_config // ignore: cast_nullable_to_non_nullable
               as AnalyticsVideosCtaConfig?,
+      cc_state: freezed == cc_state
+          ? _value.cc_state
+          : cc_state // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2920,7 +2933,8 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
       this.player_orientation,
       this.device_orientation,
       final Map<String, String>? content_extra_info,
-      this.cta_config})
+      this.cta_config,
+      this.cc_state})
       : _content_extra_info = content_extra_info;
 
   factory _$VideoPropsImpl.fromJson(Map<String, dynamic> json) =>
@@ -2967,10 +2981,12 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
 
   @override
   final AnalyticsVideosCtaConfig? cta_config;
+  @override
+  final String? cc_state;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'VideoProps(video_session_id: $video_session_id, video_id: $video_id, video_title: $video_title, audio_state: $audio_state, video_start_trigger: $video_start_trigger, video_end_trigger: $video_end_trigger, video_duration: $video_duration, seek_type: $seek_type, seek_total_time: $seek_total_time, seek_direction: $seek_direction, video_time_start: $video_time_start, video_time_end: $video_time_end, player_orientation: $player_orientation, device_orientation: $device_orientation, content_extra_info: $content_extra_info, cta_config: $cta_config)';
+    return 'VideoProps(video_session_id: $video_session_id, video_id: $video_id, video_title: $video_title, audio_state: $audio_state, video_start_trigger: $video_start_trigger, video_end_trigger: $video_end_trigger, video_duration: $video_duration, seek_type: $seek_type, seek_total_time: $seek_total_time, seek_direction: $seek_direction, video_time_start: $video_time_start, video_time_end: $video_time_end, player_orientation: $player_orientation, device_orientation: $device_orientation, content_extra_info: $content_extra_info, cta_config: $cta_config, cc_state: $cc_state)';
   }
 
   @override
@@ -2993,7 +3009,8 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
       ..add(DiagnosticsProperty('player_orientation', player_orientation))
       ..add(DiagnosticsProperty('device_orientation', device_orientation))
       ..add(DiagnosticsProperty('content_extra_info', content_extra_info))
-      ..add(DiagnosticsProperty('cta_config', cta_config));
+      ..add(DiagnosticsProperty('cta_config', cta_config))
+      ..add(DiagnosticsProperty('cc_state', cc_state));
   }
 
   @override
@@ -3032,7 +3049,9 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
             const DeepCollectionEquality()
                 .equals(other._content_extra_info, _content_extra_info) &&
             (identical(other.cta_config, cta_config) ||
-                other.cta_config == cta_config));
+                other.cta_config == cta_config) &&
+            (identical(other.cc_state, cc_state) ||
+                other.cc_state == cc_state));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3054,7 +3073,8 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
       player_orientation,
       device_orientation,
       const DeepCollectionEquality().hash(_content_extra_info),
-      cta_config);
+      cta_config,
+      cc_state);
 
   /// Create a copy of VideoProps
   /// with the given fields replaced by the non-null parameter values.
@@ -3117,7 +3137,8 @@ abstract class _VideoProps implements VideoProps {
       final BlazeAnalyticsOrientation? player_orientation,
       final BlazeAnalyticsOrientation? device_orientation,
       final Map<String, String>? content_extra_info,
-      final AnalyticsVideosCtaConfig? cta_config}) = _$VideoPropsImpl;
+      final AnalyticsVideosCtaConfig? cta_config,
+      final String? cc_state}) = _$VideoPropsImpl;
 
   factory _VideoProps.fromJson(Map<String, dynamic> json) =
       _$VideoPropsImpl.fromJson;
@@ -3154,6 +3175,8 @@ abstract class _VideoProps implements VideoProps {
   Map<String, String>? get content_extra_info;
   @override
   AnalyticsVideosCtaConfig? get cta_config;
+  @override
+  String? get cc_state;
 
   /// Create a copy of VideoProps
   /// with the given fields replaced by the non-null parameter values.

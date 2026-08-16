@@ -123,6 +123,7 @@ _$BlazeOnTriggerCustomActionButtonParamsImpl
           buttonId: json['buttonId'] as String,
           buttonName: json['buttonName'] as String,
           appMetadata: json['appMetadata'] as Map<String, dynamic>?,
+          sdkMetadata: json['sdkMetadata'] as Map<String, dynamic>?,
         );
 
 Map<String, dynamic> _$$BlazeOnTriggerCustomActionButtonParamsImplToJson(
@@ -133,6 +134,72 @@ Map<String, dynamic> _$$BlazeOnTriggerCustomActionButtonParamsImplToJson(
       'buttonId': instance.buttonId,
       'buttonName': instance.buttonName,
       'appMetadata': instance.appMetadata,
+      'sdkMetadata': instance.sdkMetadata,
+    };
+
+_$BlazeShareContentTypeStoryImpl _$$BlazeShareContentTypeStoryImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeShareContentTypeStoryImpl(
+      pageId: json['pageId'] as String,
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeShareContentTypeStoryImplToJson(
+        _$BlazeShareContentTypeStoryImpl instance) =>
+    <String, dynamic>{
+      'pageId': instance.pageId,
+      'runtimeType': instance.$type,
+    };
+
+_$BlazeShareContentTypeMomentImpl _$$BlazeShareContentTypeMomentImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeShareContentTypeMomentImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeShareContentTypeMomentImplToJson(
+        _$BlazeShareContentTypeMomentImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$BlazeShareContentTypeVideoImpl _$$BlazeShareContentTypeVideoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeShareContentTypeVideoImpl(
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeShareContentTypeVideoImplToJson(
+        _$BlazeShareContentTypeVideoImpl instance) =>
+    <String, dynamic>{
+      'runtimeType': instance.$type,
+    };
+
+_$BlazeOnShareClickedParamsImpl _$$BlazeOnShareClickedParamsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeOnShareClickedParamsImpl(
+      playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
+      sourceId: json['sourceId'] as String?,
+      id: json['id'] as String,
+      contentType: BlazeShareContentType.fromJson(
+          json['contentType'] as Map<String, dynamic>),
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      sdkGeneratedLink: json['sdkGeneratedLink'] as String,
+      extraInfo: Map<String, String>.from(json['extraInfo'] as Map),
+    );
+
+Map<String, dynamic> _$$BlazeOnShareClickedParamsImplToJson(
+        _$BlazeOnShareClickedParamsImpl instance) =>
+    <String, dynamic>{
+      'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
+      'sourceId': instance.sourceId,
+      'id': instance.id,
+      'contentType': instance.contentType.toJson(),
+      'title': instance.title,
+      'description': instance.description,
+      'sdkGeneratedLink': instance.sdkGeneratedLink,
+      'extraInfo': instance.extraInfo,
     };
 
 _$BlazeOnReadStatusChangedParamsImpl

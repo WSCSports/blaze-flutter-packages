@@ -14,6 +14,8 @@ extension Dictionary where Key == String, Value == AnyHashable {
             return parseIdsDataSource()
         } else if self["recommendationsType"] != nil {
             return parseRecommendationsDataSource()
+        } else if self["dataSources"] != nil {
+            return parseCompositeDataSource()
         }
         return nil
     }
@@ -63,26 +65,60 @@ extension Dictionary where Key == String, Value == AnyHashable {
         }
         
         let anyLabelFilter = recommendationsDict["anyLabelFilter"] as? [String] ?? []
-        let promotedLabels = recommendationsDict["promotedLabels"] as? [String] ?? []
-        
+        let coldStartLabels = recommendationsDict["coldStartLabels"] as? [String] ?? []
+
         let recommendationsType: BlazeRecommendationsType
         switch type {
         case "ForYou":
-            recommendationsType = .forYou(anyLabelFilter: anyLabelFilter, promotedLabels: promotedLabels)
+            recommendationsType = .forYou(anyLabelFilter: anyLabelFilter, coldStartLabels: coldStartLabels)
         case "Trending":
             recommendationsType = .trending(anyLabelFilter: anyLabelFilter)
         default:
             return nil
         }
-        
+
         return .recommendations(recommendationsType)
     }
-    
+
+    /// Nested entries are validated natively (non-empty, no nested composite) - any structural
+    /// violation surfaces as a `BlazeResult.failure` through the normal completion callback, so
+    /// an empty/malformed list is intentionally passed through rather than pre-validated here.
+    private func parseCompositeDataSource() -> BlazeDataSourceType? {
+        guard let dataSourcesList = self["dataSources"] as? [AnyHashable] else {
+            return nil
+        }
+
+        var entries: [BlazeCompositeDataSourceEntry] = []
+        for item in dataSourcesList {
+            guard let entryDict = item as? [String: AnyHashable],
+                  let entry = entryDict.toBlazeCompositeDataSourceEntry else {
+                return nil
+            }
+            entries.append(entry)
+        }
+
+        return .composite(dataSources: entries)
+    }
+
+    private var toBlazeCompositeDataSourceEntry: BlazeCompositeDataSourceEntry? {
+        guard let dataSourceDict = self["dataSource"] as? [String: AnyHashable],
+              let dataSource = dataSourceDict.toBlazeDataSourceType else {
+            return nil
+        }
+
+        let isMandatory = (self["config"] as? [String: AnyHashable])?["isMandatory"] as? Bool ?? false
+
+        return BlazeCompositeDataSourceEntry(
+            dataSource: dataSource,
+            config: BlazeCompositeDataSourceConfig(isMandatory: isMandatory)
+        )
+    }
+
     private func parseLabelsPriority() -> [BlazeWidgetLabel]? {
         guard let labelsPriorityArray = self["labelsPriority"] as? [AnyHashable] else {
             return nil
         }
-        
+
         let labels = labelsPriorityArray.toBlazeWidgetLabelArray
         return labels.isEmpty ? nil : labels
     }
@@ -173,6 +209,10 @@ extension String {
             return .recentlyCreatedFirst
         case "recentlyCreatedLast":
             return .recentlyCreatedLast
+        case "startTimeDesc":
+            return .startTimeDesc
+        case "startTimeAsc":
+            return .startTimeAsc
         case "random":
             return .random
         default:
@@ -210,6 +250,19 @@ extension String {
             return .High
         case "extreme":
             return .Extreme
+        default:
+            return nil
+        }
+    }
+
+    /// Returns nil when absent or unrecognized, which leaves the native default
+    /// (follow the system layout direction) in place.
+    var asBlazeLayoutDirection: BlazeLayoutDirection? {
+        switch self {
+        case "ltr":
+            return .ltr
+        case "rtl":
+            return .rtl
         default:
             return nil
         }

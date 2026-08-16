@@ -24,6 +24,11 @@ BlazeGAMBannerAdsDelegateOnAdEventParams
 mixin _$BlazeGAMBannerAdsDelegateOnAdEventParams {
   BlazeBannerAdEventType get eventType => throw _privateConstructorUsedError;
 
+  /// Contextual metadata about the content surrounding the banner, as
+  /// delivered by the native SDK alongside the event. `null` when the native
+  /// SDK attached no extra info to this event.
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeGAMBannerAdsDelegateOnAdEventParams value) $default,
@@ -62,7 +67,8 @@ abstract class $BlazeGAMBannerAdsDelegateOnAdEventParamsCopyWith<$Res> {
       _$BlazeGAMBannerAdsDelegateOnAdEventParamsCopyWithImpl<$Res,
           BlazeGAMBannerAdsDelegateOnAdEventParams>;
   @useResult
-  $Res call({BlazeBannerAdEventType eventType});
+  $Res call(
+      {BlazeBannerAdEventType eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -83,12 +89,17 @@ class _$BlazeGAMBannerAdsDelegateOnAdEventParamsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeBannerAdEventType,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ) as $Val);
   }
 }
@@ -102,7 +113,8 @@ abstract class _$$BlazeGAMBannerAdsDelegateOnAdEventParamsImplCopyWith<$Res>
       __$$BlazeGAMBannerAdsDelegateOnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({BlazeBannerAdEventType eventType});
+  $Res call(
+      {BlazeBannerAdEventType eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -121,12 +133,17 @@ class __$$BlazeGAMBannerAdsDelegateOnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as BlazeBannerAdEventType,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ));
   }
 }
@@ -136,7 +153,7 @@ class __$$BlazeGAMBannerAdsDelegateOnAdEventParamsImplCopyWithImpl<$Res>
 class _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl
     implements _BlazeGAMBannerAdsDelegateOnAdEventParams {
   const _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl(
-      {required this.eventType});
+      {required this.eventType, this.extraInfo});
 
   factory _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -145,9 +162,15 @@ class _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl
   @override
   final BlazeBannerAdEventType eventType;
 
+  /// Contextual metadata about the content surrounding the banner, as
+  /// delivered by the native SDK alongside the event. `null` when the native
+  /// SDK attached no extra info to this event.
+  @override
+  final BlazeContentExtraInfo? extraInfo;
+
   @override
   String toString() {
-    return 'BlazeGAMBannerAdsDelegateOnAdEventParams(eventType: $eventType)';
+    return 'BlazeGAMBannerAdsDelegateOnAdEventParams(eventType: $eventType, extraInfo: $extraInfo)';
   }
 
   @override
@@ -156,12 +179,14 @@ class _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl
         (other.runtimeType == runtimeType &&
             other is _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, extraInfo);
 
   /// Create a copy of BlazeGAMBannerAdsDelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -215,7 +240,8 @@ class _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl
 abstract class _BlazeGAMBannerAdsDelegateOnAdEventParams
     implements BlazeGAMBannerAdsDelegateOnAdEventParams {
   const factory _BlazeGAMBannerAdsDelegateOnAdEventParams(
-          {required final BlazeBannerAdEventType eventType}) =
+          {required final BlazeBannerAdEventType eventType,
+          final BlazeContentExtraInfo? extraInfo}) =
       _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl;
 
   factory _BlazeGAMBannerAdsDelegateOnAdEventParams.fromJson(
@@ -224,6 +250,12 @@ abstract class _BlazeGAMBannerAdsDelegateOnAdEventParams
 
   @override
   BlazeBannerAdEventType get eventType;
+
+  /// Contextual metadata about the content surrounding the banner, as
+  /// delivered by the native SDK alongside the event. `null` when the native
+  /// SDK attached no extra info to this event.
+  @override
+  BlazeContentExtraInfo? get extraInfo;
 
   /// Create a copy of BlazeGAMBannerAdsDelegateOnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -234,153 +266,195 @@ abstract class _BlazeGAMBannerAdsDelegateOnAdEventParams
       get copyWith => throw _privateConstructorUsedError;
 }
 
-_OnAdErrorParams _$OnAdErrorParamsFromJson(Map<String, dynamic> json) {
-  return __OnAdErrorParams.fromJson(json);
+BlazeGAMBannerAdsDelegateOnAdErrorParams
+    _$BlazeGAMBannerAdsDelegateOnAdErrorParamsFromJson(
+        Map<String, dynamic> json) {
+  return _BlazeGAMBannerAdsDelegateOnAdErrorParams.fromJson(json);
 }
 
 /// @nodoc
-mixin _$OnAdErrorParams {
+mixin _$BlazeGAMBannerAdsDelegateOnAdErrorParams {
+  /// The error message associated with the error.
   String get errorMessage => throw _privateConstructorUsedError;
+
+  /// Contextual metadata about the content surrounding the failed banner, as
+  /// delivered by the native SDK alongside the error. `null` when the native
+  /// SDK attached no extra info to this error.
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(__OnAdErrorParams value) $default,
+    TResult Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value) $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(__OnAdErrorParams value)? $default,
+    TResult? Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value)?
+        $default,
   ) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(__OnAdErrorParams value)? $default, {
+    TResult Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value)?
+        $default, {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this _OnAdErrorParams to a JSON map.
+  /// Serializes this BlazeGAMBannerAdsDelegateOnAdErrorParams to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of _OnAdErrorParams
+  /// Create a copy of BlazeGAMBannerAdsDelegateOnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$OnAdErrorParamsCopyWith<_OnAdErrorParams> get copyWith =>
-      throw _privateConstructorUsedError;
+  $BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWith<
+          BlazeGAMBannerAdsDelegateOnAdErrorParams>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$OnAdErrorParamsCopyWith<$Res> {
-  factory _$OnAdErrorParamsCopyWith(
-          _OnAdErrorParams value, $Res Function(_OnAdErrorParams) then) =
-      __$OnAdErrorParamsCopyWithImpl<$Res, _OnAdErrorParams>;
+abstract class $BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWith<$Res> {
+  factory $BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWith(
+          BlazeGAMBannerAdsDelegateOnAdErrorParams value,
+          $Res Function(BlazeGAMBannerAdsDelegateOnAdErrorParams) then) =
+      _$BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWithImpl<$Res,
+          BlazeGAMBannerAdsDelegateOnAdErrorParams>;
   @useResult
-  $Res call({String errorMessage});
+  $Res call({String errorMessage, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
-class __$OnAdErrorParamsCopyWithImpl<$Res, $Val extends _OnAdErrorParams>
-    implements _$OnAdErrorParamsCopyWith<$Res> {
-  __$OnAdErrorParamsCopyWithImpl(this._value, this._then);
+class _$BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWithImpl<$Res,
+        $Val extends BlazeGAMBannerAdsDelegateOnAdErrorParams>
+    implements $BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWith<$Res> {
+  _$BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWithImpl(
+      this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of _OnAdErrorParams
+  /// Create a copy of BlazeGAMBannerAdsDelegateOnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorMessage = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_value.copyWith(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_OnAdErrorParamsImplCopyWith<$Res>
-    implements _$OnAdErrorParamsCopyWith<$Res> {
-  factory _$$_OnAdErrorParamsImplCopyWith(_$_OnAdErrorParamsImpl value,
-          $Res Function(_$_OnAdErrorParamsImpl) then) =
-      __$$_OnAdErrorParamsImplCopyWithImpl<$Res>;
+abstract class _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWith<$Res>
+    implements $BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWith<$Res> {
+  factory _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWith(
+          _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl value,
+          $Res Function(_$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl) then) =
+      __$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String errorMessage});
+  $Res call({String errorMessage, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
-class __$$_OnAdErrorParamsImplCopyWithImpl<$Res>
-    extends __$OnAdErrorParamsCopyWithImpl<$Res, _$_OnAdErrorParamsImpl>
-    implements _$$_OnAdErrorParamsImplCopyWith<$Res> {
-  __$$_OnAdErrorParamsImplCopyWithImpl(_$_OnAdErrorParamsImpl _value,
-      $Res Function(_$_OnAdErrorParamsImpl) _then)
+class __$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWithImpl<$Res>
+    extends _$BlazeGAMBannerAdsDelegateOnAdErrorParamsCopyWithImpl<$Res,
+        _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl>
+    implements _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWith<$Res> {
+  __$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWithImpl(
+      _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl _value,
+      $Res Function(_$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of _OnAdErrorParams
+  /// Create a copy of BlazeGAMBannerAdsDelegateOnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? errorMessage = null,
+    Object? extraInfo = freezed,
   }) {
-    return _then(_$_OnAdErrorParamsImpl(
+    return _then(_$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl(
       errorMessage: null == errorMessage
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_OnAdErrorParamsImpl implements __OnAdErrorParams {
-  const _$_OnAdErrorParamsImpl({required this.errorMessage});
+class _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl
+    implements _BlazeGAMBannerAdsDelegateOnAdErrorParams {
+  const _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl(
+      {required this.errorMessage, this.extraInfo});
 
-  factory _$_OnAdErrorParamsImpl.fromJson(Map<String, dynamic> json) =>
-      _$$_OnAdErrorParamsImplFromJson(json);
+  factory _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplFromJson(json);
 
+  /// The error message associated with the error.
   @override
   final String errorMessage;
 
+  /// Contextual metadata about the content surrounding the failed banner, as
+  /// delivered by the native SDK alongside the error. `null` when the native
+  /// SDK attached no extra info to this error.
+  @override
+  final BlazeContentExtraInfo? extraInfo;
+
   @override
   String toString() {
-    return '_OnAdErrorParams(errorMessage: $errorMessage)';
+    return 'BlazeGAMBannerAdsDelegateOnAdErrorParams(errorMessage: $errorMessage, extraInfo: $extraInfo)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_OnAdErrorParamsImpl &&
+            other is _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, errorMessage);
+  int get hashCode => Object.hash(runtimeType, errorMessage, extraInfo);
 
-  /// Create a copy of _OnAdErrorParams
+  /// Create a copy of BlazeGAMBannerAdsDelegateOnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$_OnAdErrorParamsImplCopyWith<_$_OnAdErrorParamsImpl> get copyWith =>
-      __$$_OnAdErrorParamsImplCopyWithImpl<_$_OnAdErrorParamsImpl>(
-          this, _$identity);
+  _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWith<
+          _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl>
+      get copyWith =>
+          __$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWithImpl<
+              _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(__OnAdErrorParams value) $default,
+    TResult Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value) $default,
   ) {
     return $default(this);
   }
@@ -388,7 +462,8 @@ class _$_OnAdErrorParamsImpl implements __OnAdErrorParams {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(__OnAdErrorParams value)? $default,
+    TResult? Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value)?
+        $default,
   ) {
     return $default?.call(this);
   }
@@ -396,7 +471,8 @@ class _$_OnAdErrorParamsImpl implements __OnAdErrorParams {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(__OnAdErrorParams value)? $default, {
+    TResult Function(_BlazeGAMBannerAdsDelegateOnAdErrorParams value)?
+        $default, {
     required TResult orElse(),
   }) {
     if ($default != null) {
@@ -407,28 +483,40 @@ class _$_OnAdErrorParamsImpl implements __OnAdErrorParams {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_OnAdErrorParamsImplToJson(
+    return _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplToJson(
       this,
     );
   }
 }
 
-abstract class __OnAdErrorParams implements _OnAdErrorParams {
-  const factory __OnAdErrorParams({required final String errorMessage}) =
-      _$_OnAdErrorParamsImpl;
+abstract class _BlazeGAMBannerAdsDelegateOnAdErrorParams
+    implements BlazeGAMBannerAdsDelegateOnAdErrorParams {
+  const factory _BlazeGAMBannerAdsDelegateOnAdErrorParams(
+          {required final String errorMessage,
+          final BlazeContentExtraInfo? extraInfo}) =
+      _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl;
 
-  factory __OnAdErrorParams.fromJson(Map<String, dynamic> json) =
-      _$_OnAdErrorParamsImpl.fromJson;
+  factory _BlazeGAMBannerAdsDelegateOnAdErrorParams.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl.fromJson;
 
+  /// The error message associated with the error.
   @override
   String get errorMessage;
 
-  /// Create a copy of _OnAdErrorParams
+  /// Contextual metadata about the content surrounding the failed banner, as
+  /// delivered by the native SDK alongside the error. `null` when the native
+  /// SDK attached no extra info to this error.
+  @override
+  BlazeContentExtraInfo? get extraInfo;
+
+  /// Create a copy of BlazeGAMBannerAdsDelegateOnAdErrorParams
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$_OnAdErrorParamsImplCopyWith<_$_OnAdErrorParamsImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplCopyWith<
+          _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 _OnAdEventParams _$OnAdEventParamsFromJson(Map<String, dynamic> json) {
@@ -438,6 +526,7 @@ _OnAdEventParams _$OnAdEventParamsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$OnAdEventParams {
   String get eventType => throw _privateConstructorUsedError;
+  BlazeContentExtraInfo? get extraInfo => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -472,7 +561,7 @@ abstract class _$OnAdEventParamsCopyWith<$Res> {
           _OnAdEventParams value, $Res Function(_OnAdEventParams) then) =
       __$OnAdEventParamsCopyWithImpl<$Res, _OnAdEventParams>;
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -491,12 +580,17 @@ class __$OnAdEventParamsCopyWithImpl<$Res, $Val extends _OnAdEventParams>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ) as $Val);
   }
 }
@@ -509,7 +603,7 @@ abstract class _$$_OnAdEventParamsImplCopyWith<$Res>
       __$$_OnAdEventParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType});
+  $Res call({String eventType, BlazeContentExtraInfo? extraInfo});
 }
 
 /// @nodoc
@@ -526,12 +620,17 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
+    Object? extraInfo = freezed,
   }) {
     return _then(_$_OnAdEventParamsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
+      extraInfo: freezed == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as BlazeContentExtraInfo?,
     ));
   }
 }
@@ -539,17 +638,20 @@ class __$$_OnAdEventParamsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_OnAdEventParamsImpl implements __OnAdEventParams {
-  const _$_OnAdEventParamsImpl({required this.eventType});
+  const _$_OnAdEventParamsImpl(
+      {required this.eventType, required this.extraInfo});
 
   factory _$_OnAdEventParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$_OnAdEventParamsImplFromJson(json);
 
   @override
   final String eventType;
+  @override
+  final BlazeContentExtraInfo? extraInfo;
 
   @override
   String toString() {
-    return '_OnAdEventParams(eventType: $eventType)';
+    return '_OnAdEventParams(eventType: $eventType, extraInfo: $extraInfo)';
   }
 
   @override
@@ -558,12 +660,14 @@ class _$_OnAdEventParamsImpl implements __OnAdEventParams {
         (other.runtimeType == runtimeType &&
             other is _$_OnAdEventParamsImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType));
+                other.eventType == eventType) &&
+            (identical(other.extraInfo, extraInfo) ||
+                other.extraInfo == extraInfo));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType);
+  int get hashCode => Object.hash(runtimeType, eventType, extraInfo);
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.
@@ -611,7 +715,9 @@ class _$_OnAdEventParamsImpl implements __OnAdEventParams {
 }
 
 abstract class __OnAdEventParams implements _OnAdEventParams {
-  const factory __OnAdEventParams({required final String eventType}) =
+  const factory __OnAdEventParams(
+          {required final String eventType,
+          required final BlazeContentExtraInfo? extraInfo}) =
       _$_OnAdEventParamsImpl;
 
   factory __OnAdEventParams.fromJson(Map<String, dynamic> json) =
@@ -619,6 +725,8 @@ abstract class __OnAdEventParams implements _OnAdEventParams {
 
   @override
   String get eventType;
+  @override
+  BlazeContentExtraInfo? get extraInfo;
 
   /// Create a copy of _OnAdEventParams
   /// with the given fields replaced by the non-null parameter values.

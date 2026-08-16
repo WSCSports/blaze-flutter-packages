@@ -19,6 +19,10 @@ extension BlazeVideosPlayerStyle {
         merged.backgroundColor =
             UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
         merged.seekBar = merged.seekBar.mergedWith(customization.seekBar)
+        if let overlayVisibilityThresholdMs = customization.overlayVisibilityThresholdMs {
+            merged.overlayVisibilityThreshold = TimeInterval(overlayVisibilityThresholdMs) / 1000
+        }
+        merged.captions = merged.captions.mergedWith(customization.captions)
         return merged
     }
 }
@@ -48,6 +52,8 @@ extension BlazeVideosPlayerCtaStyle {
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
         merged.icon = UIImage.imageWith(customization.icon?.iconImage)
         merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
+        merged.borderWidth = customization.borderWidth ?? merged.borderWidth
         return merged
     }
 }

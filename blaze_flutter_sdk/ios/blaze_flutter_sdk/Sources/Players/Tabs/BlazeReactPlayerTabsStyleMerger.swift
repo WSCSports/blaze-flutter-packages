@@ -36,6 +36,14 @@ extension BlazePlayerTabsStyle {
         merged.selectedTabState = merged.selectedTabState.mergedWith(customization.selectedTabState)
         merged.unselectedTabState = merged.unselectedTabState.mergedWith(customization.unselectedTabState)
 
+        if let indicator = customization.activeTabIndicator {
+            merged.activeTabIndicator.isVisible = indicator.isVisible ?? merged.activeTabIndicator.isVisible
+            merged.activeTabIndicator.height = indicator.height ?? merged.activeTabIndicator.height
+        }
+        merged.isTabTitleVisibleWhenSingleTab =
+            customization.isTabTitleVisibleWhenSingleTab ?? merged.isTabTitleVisibleWhenSingleTab
+        merged.isTabVisibleWhenEmpty = customization.isTabVisibleWhenEmpty ?? merged.isTabVisibleWhenEmpty
+
         return merged
     }
 }

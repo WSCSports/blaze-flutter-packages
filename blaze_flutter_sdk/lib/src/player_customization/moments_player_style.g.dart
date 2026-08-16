@@ -55,6 +55,10 @@ _$BlazeMomentsPlayerStyleImpl _$$BlazeMomentsPlayerStyleImplFromJson(
           ? null
           : BlazeMomentsPlayerFollowEntityStyle.fromJson(
               json['followEntity'] as Map<String, dynamic>),
+      captions: json['captions'] == null
+          ? null
+          : BlazeCaptionsStyle.fromJson(
+              json['captions'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
@@ -76,6 +80,7 @@ Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
       'playerDisplayMode':
           _$BlazePlayerDisplayModeEnumMap[instance.playerDisplayMode],
       'followEntity': instance.followEntity?.toJson(),
+      'captions': instance.captions?.toJson(),
     };
 
 const _$BlazeMomentsPlayerBottomComponentsAlignmentEnumMap = {
@@ -178,6 +183,10 @@ _$BlazeMomentsPlayerButtonsStyleImpl
               ? null
               : BlazePlayerButtonStyle.fromJson(
                   json['play'] as Map<String, dynamic>),
+          captions: json['captions'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['captions'] as Map<String, dynamic>),
           seekForward: json['seekForward'] == null
               ? null
               : BlazePlayerButtonStyle.fromJson(
@@ -194,6 +203,8 @@ _$BlazeMomentsPlayerButtonsStyleImpl
               ?.map((e) =>
                   BlazeCustomActionButton.fromJson(e as Map<String, dynamic>))
               .toList(),
+          shouldPreserveLikesCountBelowThreshold:
+              json['shouldPreserveLikesCountBelowThreshold'] as bool?,
         );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerButtonsStyleImplToJson(
@@ -204,11 +215,14 @@ Map<String, dynamic> _$$BlazeMomentsPlayerButtonsStyleImplToJson(
       'share': instance.share?.toJson(),
       'like': instance.like?.toJson(),
       'play': instance.play?.toJson(),
+      'captions': instance.captions?.toJson(),
       'seekForward': instance.seekForward?.toJson(),
       'seekBackward': instance.seekBackward?.toJson(),
       'search': instance.search?.toJson(),
       'customActionButtons':
           instance.customActionButtons?.map((e) => e.toJson()).toList(),
+      'shouldPreserveLikesCountBelowThreshold':
+          instance.shouldPreserveLikesCountBelowThreshold,
     };
 
 _$BlazeMomentsPlayerChipsStyleImpl _$$BlazeMomentsPlayerChipsStyleImplFromJson(
@@ -268,6 +282,8 @@ _$BlazeMomentsPlayerCtaStyleImpl _$$BlazeMomentsPlayerCtaStyleImplFromJson(
           : BlazeMomentsPlayerCtaIconStyle.fromJson(
               json['icon'] as Map<String, dynamic>),
       isVisible: json['isVisible'] as bool?,
+      borderColor: json['borderColor'] as String?,
+      borderWidth: (json['borderWidth'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerCtaStyleImplToJson(
@@ -284,6 +300,8 @@ Map<String, dynamic> _$$BlazeMomentsPlayerCtaStyleImplToJson(
           instance.horizontalAlignment],
       'icon': instance.icon?.toJson(),
       'isVisible': instance.isVisible,
+      'borderColor': instance.borderColor,
+      'borderWidth': instance.borderWidth,
     };
 
 const _$BlazeMomentsPlayerCTAPositioningEnumMap = {

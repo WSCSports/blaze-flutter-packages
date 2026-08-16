@@ -23,6 +23,7 @@ class BlazePlayerEntryPointDelegate extends BlazeBasePlayerDelegate {
     super.onTriggerPlayerBodyTextLink,
     super.onPlayerEventTriggered,
     super.onTriggerCustomActionButton,
+    super.onShareClicked,
     // Entry-point-only delegate method
     this.onReadStatusChanged,
   });
@@ -40,6 +41,7 @@ class BlazePlayerEntryPointDelegateHelper {
     _onTriggerPlayerBodyTextLink(delegate?.onTriggerPlayerBodyTextLink);
     _onPlayerEventTriggered(delegate?.onPlayerEventTriggered);
     _onTriggerCustomActionButton(delegate?.onTriggerCustomActionButton);
+    _onShareClicked(delegate?.onShareClicked);
     _onReadStatusChanged(delegate?.onReadStatusChanged);
   }
 
@@ -171,6 +173,23 @@ class BlazePlayerEntryPointDelegateHelper {
         methodName,
         (args) async {
           BlazeBasePlayerDelegateHandler.handleTriggerCustomActionButton(
+              args.params, callback);
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _onShareClicked(
+    void Function(BlazeOnShareClickedParams params)? callback,
+  ) {
+    const methodName = 'Blaze.onShareClicked';
+    if (callback != null) {
+      BlazeAsyncBridge.registerDartEventHandler(
+        methodName,
+        (args) async {
+          BlazeBasePlayerDelegateHandler.handleShareClicked(
               args.params, callback);
         },
       );

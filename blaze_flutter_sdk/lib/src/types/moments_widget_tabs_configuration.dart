@@ -119,10 +119,47 @@ class BlazePlayerTabsStyle with _$BlazePlayerTabsStyle {
     BlazePlayerTabItemIconStyle? icon,
     BlazePlayerTabItemStyle? selectedTabState,
     BlazePlayerTabItemStyle? unselectedTabState,
+
+    /// Underline indicator style for the active (selected) tab. Opt-in - not
+    /// shown unless [BlazePlayerActiveTabIndicatorStyle.isVisible] is `true`.
+    BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
+
+    /// Whether the tab bar is shown when the container has only a single
+    /// (visible) tab. When omitted, the native default is kept.
+    bool? isTabTitleVisibleWhenSingleTab,
+
+    /// Whether a tab stays visible when it has no content. Native default is
+    /// `true`: an empty tab (or one that failed to load) stays visible and
+    /// presents the player's empty/error state. Set to `false` to have such
+    /// tabs auto-removed instead (the first tab is always kept regardless).
+    bool? isTabVisibleWhenEmpty,
   }) = _BlazePlayerTabsStyle;
 
   factory BlazePlayerTabsStyle.fromJson(Map<String, dynamic> json) =>
       _$BlazePlayerTabsStyleFromJson(json);
+}
+
+/// The underline indicator style for the active (selected) tab.
+///
+/// The indicator color always matches the selected tab's text color and the
+/// width always matches the selected tab title's text width - neither is
+/// configurable. The indicator is always center-aligned beneath the tab
+/// title.
+@freezed
+class BlazePlayerActiveTabIndicatorStyle
+    with _$BlazePlayerActiveTabIndicatorStyle {
+  const factory BlazePlayerActiveTabIndicatorStyle({
+    /// Whether the indicator is shown on the active tab. Native default is
+    /// `false` (no indicator).
+    bool? isVisible,
+
+    /// The height of the underline bar, in logical pixels.
+    double? height,
+  }) = _BlazePlayerActiveTabIndicatorStyle;
+
+  factory BlazePlayerActiveTabIndicatorStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazePlayerActiveTabIndicatorStyleFromJson(json);
 }
 
 /// Configuration that turns a Moments widget into a "widget to tabs" entry

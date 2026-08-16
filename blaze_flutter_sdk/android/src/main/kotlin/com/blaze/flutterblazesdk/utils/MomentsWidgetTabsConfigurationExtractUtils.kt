@@ -4,6 +4,7 @@ import android.content.Context
 import com.blaze.blazesdk.delegates.BlazePlayerContainerTabsDelegate
 import com.blaze.blazesdk.features.moments.container.tabs.models.BlazeMomentsContainerTabItem
 import com.blaze.blazesdk.features.moments.widgets.tabs.BlazeMomentsWidgetTabsConfiguration
+import com.blaze.blazesdk.features.moments.widgets.tabs.BlazeMomentsWidgetTabsController
 import com.blaze.blazesdk.style.players.BlazePlayerButtonCustomImageStates
 import com.blaze.blazesdk.style.players.tabs.BlazePlayerTabsStyle
 import com.blaze.flutterblazesdk.parsers.asCachingLevel
@@ -25,6 +26,7 @@ import com.blaze.flutterblazesdk.utils.parsing.gson.toObject
 fun Map<String, Any>?.extractMomentsWidgetTabsConfiguration(
     containerTabsDelegate: BlazePlayerContainerTabsDelegate,
     context: Context,
+    controller: BlazeMomentsWidgetTabsController = BlazeMomentsWidgetTabsController(),
 ): BlazeMomentsWidgetTabsConfiguration? {
     val dict = this ?: return null
 
@@ -47,6 +49,7 @@ fun Map<String, Any>?.extractMomentsWidgetTabsConfiguration(
         containerTabsDelegate = containerTabsDelegate,
         playerStyle = playerStyle,
         tabsStyle = tabsStyle,
+        controller = controller,
     )
 }
 

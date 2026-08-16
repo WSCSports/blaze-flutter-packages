@@ -116,7 +116,11 @@ object BlazeFlutterIMAModule {
         // Send event to Flutter with safe enum conversion
         asyncBridge?.sendEvent(
                 name = "BlazeIMA.onAdEvent",
-                params = mapOf("eventType" to eventType.toFlutterEventTypeParam())
+                params =
+                        BlazeFlutterIMAOnAdEventParams(
+                                eventType = eventType.toFlutterEventTypeParam(),
+                                adInfo = adInfo?.toFlutterModel()
+                        )
         )
     }
 
@@ -213,6 +217,42 @@ object BlazeFlutterIMAModule {
 @Keep
 private data class BlazeFlutterIMAAdRequestParams(val requestDataInfo: RequestDataInfo) {
     @Keep data class RequestDataInfo(val extraInfo: BlazeFlutterContentExtraInfo)
+}
+
+@Keep
+private data class BlazeFlutterIMAOnAdEventParams(
+        val eventType: String,
+        val adInfo: BlazeFlutterIMAAdInfo?
+)
+
+@Keep
+private data class BlazeFlutterIMAAdInfo(
+        val adId: String?,
+        val adTitle: String?,
+        val adDescription: String?,
+        val adSystem: String?,
+        val isSkippable: Boolean?,
+        val skipTimeOffset: Double?,
+        val adDuration: Double?,
+        val advertiserName: String?,
+        val adTag: String?,
+        val extraInfo: BlazeFlutterContentExtraInfo?
+)
+
+// Extension function to convert IMA ad info to Flutter model
+private fun BlazeImaAdInfo.toFlutterModel(): BlazeFlutterIMAAdInfo {
+    return BlazeFlutterIMAAdInfo(
+            adId = this.adId,
+            adTitle = this.adTitle,
+            adDescription = this.adDescription,
+            adSystem = this.adSystem,
+            isSkippable = this.isSkippable,
+            skipTimeOffset = this.skipTimeOffset,
+            adDuration = this.adDuration,
+            advertiserName = this.advertiserName,
+            adTag = this.adTag?.toString(),
+            extraInfo = this.extraInfo?.toFlutterModel()
+    )
 }
 
 @Keep

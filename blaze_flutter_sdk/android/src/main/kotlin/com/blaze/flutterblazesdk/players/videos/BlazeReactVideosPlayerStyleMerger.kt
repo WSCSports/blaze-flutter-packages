@@ -27,6 +27,8 @@ fun BlazeVideosPlayerStyle.mergedWith(
     merged.cta = this.cta.mergedWith(customization.cta, context)
     safeParseColor(customization.backgroundColor)?.let { merged.backgroundColor = it }
     merged.seekBar = this.seekBar.mergedWith(customization.seekBar, context)
+    merged.overlayVisibilityThreshold =
+        customization.overlayVisibilityThresholdMs ?: this.overlayVisibilityThreshold
 
     // BlazeVideosPlayerCastButtonStyle doesn't implement IPlayerItemButtonStyle so we merge it manually
     customization.buttons?.casting?.let { castCustom ->
@@ -34,6 +36,8 @@ fun BlazeVideosPlayerStyle.mergedWith(
         castCustom.width?.let { merged.cast.width = it.blazeDp }
         castCustom.height?.let { merged.cast.height = it.blazeDp }
     }
+
+    merged.captions = this.captions.mergedWith(customization.captions, context)
 
     return merged
 }
@@ -92,6 +96,8 @@ fun BlazeVideosPlayerCtaStyle.mergedWith(
     merged.height = customization.height?.blazeDp ?: this.height
     customization.icon?.let { this.icon = this.icon.mergeWith(it, context) }
     merged.isVisible = customization.isVisible ?: this.isVisible
+    safeParseColor(customization.borderColor)?.let { merged.borderColor = it }
+    merged.borderWidth = customization.borderWidth?.blazeDp ?: this.borderWidth
     return merged
 }
 

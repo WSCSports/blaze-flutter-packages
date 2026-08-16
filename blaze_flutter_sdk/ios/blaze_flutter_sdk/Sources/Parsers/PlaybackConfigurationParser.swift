@@ -67,6 +67,14 @@ extension [String: AnyHashable]? {
             config.bufferingSpinnerDelay = delaySeconds
         }
 
+        // Override only the ads keys Flutter actually supplied, so omissions
+        // fall through to the native `.base()` defaults.
+        if let adsDict = dict["ads"] as? [String: AnyHashable],
+            let enablePreroll = adsDict["enablePreroll"] as? Bool
+        {
+            config.ads.enablePreroll = enablePreroll
+        }
+
         return config
     }
 }

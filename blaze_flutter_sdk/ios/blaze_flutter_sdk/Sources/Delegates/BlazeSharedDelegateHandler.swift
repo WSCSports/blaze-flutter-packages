@@ -188,18 +188,72 @@ class BlazeSharedDelegateHandler {
             let buttonId: String
             let buttonName: String
             let appMetadata: [String: BlazeCodableValue]?
+            let sdkMetadata: [String: BlazeCodableValue]?
         }
 
         let appMetadata = buttonParams.appMetadata
+        let sdkMetadata = buttonParams.sdkMetadata
         let params = Params(
             playerType: playerType.toFlutterValue(),
             sourceId: sourceId,
             buttonId: buttonParams.id,
             buttonName: buttonParams.name,
-            appMetadata: appMetadata.isEmpty ? nil : appMetadata.blazeCodableValueDict
+            appMetadata: appMetadata.isEmpty ? nil : appMetadata.blazeCodableValueDict,
+            sdkMetadata: sdkMetadata.isEmpty ? nil : sdkMetadata.blazeCodableValueDict
         )
 
         completion(params)
+    }
+
+    // Observer-only: always returns nil so the SDK falls back to its own
+    // sdkGeneratedLink. Overriding the shared link would need a synchronous
+    // return value from Dart, which the async bridge (a ~2s round-trip) can't
+    // provide — same constraint as onTriggerCTA/onTriggerPlayerBodyTextLink.
+    func onShareClicked(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        shareParams: BlazeShareParams,
+        completion: (Encodable) -> Void
+    ) -> String? {
+        struct ContentTypeParams: Encodable {
+            let runtimeType: String
+            let pageId: String?
+        }
+
+        struct Params: Encodable {
+            let playerType: String
+            let sourceId: String?
+            let id: String
+            let contentType: ContentTypeParams
+            let title: String?
+            let description: String?
+            let sdkGeneratedLink: String
+            let extraInfo: [String: String]
+        }
+
+        let contentType: ContentTypeParams
+        switch shareParams.contentType {
+        case .story(let pageId):
+            contentType = ContentTypeParams(runtimeType: "story", pageId: pageId)
+        case .moment:
+            contentType = ContentTypeParams(runtimeType: "moment", pageId: nil)
+        case .video:
+            contentType = ContentTypeParams(runtimeType: "video", pageId: nil)
+        }
+
+        let params = Params(
+            playerType: playerType.toFlutterValue(),
+            sourceId: sourceId,
+            id: shareParams.id,
+            contentType: contentType,
+            title: shareParams.title,
+            description: shareParams.description,
+            sdkGeneratedLink: shareParams.sdkGeneratedLink,
+            extraInfo: shareParams.extraInfo
+        )
+
+        completion(params)
+        return nil
     }
 
     func onReadStatusChanged(

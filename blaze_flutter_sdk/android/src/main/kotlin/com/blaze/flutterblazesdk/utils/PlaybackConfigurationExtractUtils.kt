@@ -73,6 +73,14 @@ fun Map<String, Any>?.extractStoriesPlaybackConfiguration(): BlazeStoriesPlaybac
         config.bufferingSpinnerDelayMs = delayMs
     }
 
+    // The nested ads config has an internal constructor, so start from its own
+    // base() and override only the keys Flutter actually supplied.
+    (map["ads"] as? Map<*, *>)?.let { adsMap ->
+        (adsMap["enablePreroll"] as? Boolean)?.let { enablePreroll ->
+            config.ads.enablePreroll = enablePreroll
+        }
+    }
+
     return config
 }
 

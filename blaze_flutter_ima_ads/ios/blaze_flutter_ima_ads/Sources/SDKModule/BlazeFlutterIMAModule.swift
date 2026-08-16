@@ -91,9 +91,13 @@ extension BlazeFlutterIMAModule {
     private func onIMAAdEvent(eventType: BlazeIMAHandlerEventType,
                               adInfo: BlazeImaAdInfo) {
         // Send event to Flutter with safe enum conversion
-        asyncBridge?.sendEvent("BlazeIMA.onAdEvent", params: [
-            "eventType": eventType.toFlutterEventTypeParam()
-        ])
+        asyncBridge?.sendEvent(
+            "BlazeIMA.onAdEvent",
+            params: BlazeFlutterIMAOnAdEventParams(
+                eventType: eventType.toFlutterEventTypeParam(),
+                adInfo: adInfo.toFlutterModel
+            )
+        )
     }
     
     private func onIMAAdError(_ errorMessage: String) {
@@ -160,6 +164,43 @@ extension BlazeFlutterIMAModule {
             return nil
         }
     }
+}
+
+fileprivate struct BlazeFlutterIMAOnAdEventParams: Encodable {
+    let eventType: String
+    let adInfo: BlazeFlutterIMAAdInfo?
+}
+
+fileprivate struct BlazeFlutterIMAAdInfo: Encodable {
+    let adId: String?
+    let adTitle: String?
+    let adDescription: String?
+    let adSystem: String?
+    let isSkippable: Bool?
+    let skipTimeOffset: Double?
+    let adDuration: Double?
+    let advertiserName: String?
+    let adTag: String?
+    let extraInfo: BlazeFlutterContentExtraInfo?
+}
+
+fileprivate extension BlazeImaAdInfo {
+
+    var toFlutterModel: BlazeFlutterIMAAdInfo {
+        return .init(
+            adId: adId,
+            adTitle: adTitle,
+            adDescription: adDescription,
+            adSystem: adSystem,
+            isSkippable: isSkippable,
+            skipTimeOffset: skipTimeOffset,
+            adDuration: adDuration,
+            advertiserName: advertiserName,
+            adTag: adTag,
+            extraInfo: extraInfo?.toFlutterModel
+        )
+    }
+
 }
 
 struct BlazeRTNIMASettings: Codable {

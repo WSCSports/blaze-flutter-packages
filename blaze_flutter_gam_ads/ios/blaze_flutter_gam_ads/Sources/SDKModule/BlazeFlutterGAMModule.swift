@@ -155,9 +155,17 @@ extension BlazeFlutterGAMModule {
     }
     
     private func onGAMAdEvent(eventType: BlazeGoogleCustomNativeAdsHandlerEventType, adData: BlazeCustomNativeAdData) {
+        struct Params: Encodable {
+            let eventType: String
+            let extraInfo: BlazeFlutterContentExtraInfo
+        }
+
         asyncBridge?.sendEvent(
             "BlazeGAM.onAdEvent",
-            params: ["eventType": eventType.toFlutterEventTypeParam()]
+            params: Params(
+                eventType: eventType.toFlutterEventTypeParam(),
+                extraInfo: adData.extraInfo.toFlutterModel
+            )
         )
     }
     
@@ -258,28 +266,32 @@ extension BlazeFlutterGAMModule {
     
     func onGAMBannerAdsAdError(error: Error,
                                adData: BlazeGAMBannerAdsAdData) {
-        struct Params: Codable {
+        struct Params: Encodable {
             let errorMessage: String
+            let extraInfo: BlazeFlutterContentExtraInfo
         }
-        
+
         asyncBridge?.sendEvent(
             "BlazeGAM.onGAMBannerAdsAdError",
             params: Params(
-                errorMessage: error.localizedDescription
+                errorMessage: error.localizedDescription,
+                extraInfo: adData.extraInfo.toFlutterModel
             )
         )
     }
 
     func onGAMBannerAdsAdEvent(eventType: BlazeGAMBannerHandlerEventType,
                                adData: BlazeGAMBannerAdsAdData) {
-        struct Params: Codable {
+        struct Params: Encodable {
             let eventType: String
+            let extraInfo: BlazeFlutterContentExtraInfo
         }
-        
+
         asyncBridge?.sendEvent(
             "BlazeGAM.onGAMBannerAdsAdEvent",
             params: Params(
-                eventType: eventType.toReactEventTypeParam
+                eventType: eventType.toReactEventTypeParam,
+                extraInfo: adData.extraInfo.toFlutterModel
             )
         )
     }

@@ -54,6 +54,7 @@ fun BlazeMomentsPlayerStyle.mergedWith(
     }
     customization.playerDisplayMode?.let { merged.playerDisplayMode = it.mapToBlazeEnumClass() }
     merged.followEntity = this.followEntity.mergedWith(customization.followEntity)
+    merged.captions = this.captions.mergedWith(customization.captions, context)
     return merged
 }
 
@@ -182,6 +183,7 @@ fun BlazeMomentsPlayerButtonsStyle.mergedWith(
     merged.share = merged.share.mergeButtonThemes(customization.share, context)
     merged.like = merged.like.mergeButtonThemes(customization.like, context)
     merged.play = merged.play.mergeButtonThemes(customization.play, context)
+    merged.captions = merged.captions.mergeButtonThemes(customization.captions, context)
     merged.seekForward = merged.seekForward.mergeButtonThemes(customization.seekForward, context)
     merged.seekBackward = merged.seekBackward.mergeButtonThemes(customization.seekBackward, context)
     merged.search = merged.search.mergeButtonThemes(customization.search, context)
@@ -189,6 +191,10 @@ fun BlazeMomentsPlayerButtonsStyle.mergedWith(
     mergeCustomActionButtons(customization.customActionButtons, context)?.let {
         merged.setBottomStackCustomActionButtons(it)
     }
+
+    merged.shouldPreserveLikesCountBelowThreshold =
+        customization.shouldPreserveLikesCountBelowThreshold
+            ?: this.shouldPreserveLikesCountBelowThreshold
 
     return merged
 }
@@ -223,6 +229,8 @@ fun BlazeMomentsPlayerCtaStyle.mergedWith(
     customization.horizontalAlignment?.let { merged.horizontalAlignment = it.mapToBlazeEnumClass() }
     customization.icon?.let { this.icon = this.icon.mergeWith(it, context) }
     merged.isVisible = customization.isVisible ?: this.isVisible
+    safeParseColor(customization.borderColor)?.let { merged.borderColor = it }
+    merged.borderWidth = customization.borderWidth?.blazeDp ?: this.borderWidth
     return merged
 }
 

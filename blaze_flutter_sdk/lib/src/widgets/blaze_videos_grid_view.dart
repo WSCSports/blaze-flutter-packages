@@ -14,6 +14,8 @@ class BlazeVideosGridView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeVideosPlayerStyle? super.playerStyle,
     BlazeVideosPlaybackConfiguration? super.playbackConfiguration,
+    super.videosFilterParams,
+    super.widgetRemoteIdentifier,
     super.isEmbeddedInScrollView = false,
     super.perItemStyleOverrides,
     super.widgetDelegate,

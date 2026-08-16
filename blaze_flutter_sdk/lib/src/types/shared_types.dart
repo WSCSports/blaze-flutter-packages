@@ -34,6 +34,18 @@ enum BlazePlayerSoundState {
   unmute,
 }
 
+/// Forces the layout direction the SDK uses for its own screens, independently
+/// of the device locale.
+///
+/// When left unset, the SDK follows the system layout direction.
+enum BlazeLayoutDirection {
+  /// Force a left-to-right layout direction.
+  ltr,
+
+  /// Force a right-to-left layout direction.
+  rtl,
+}
+
 /// Color configuration for first time appearance and other UI elements
 @freezed
 class BlazeColor with _$BlazeColor {

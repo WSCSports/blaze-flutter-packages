@@ -47,6 +47,8 @@ const _$BlazeOrderTypeEnumMap = {
   BlazeOrderType.zToA: 'zToA',
   BlazeOrderType.recentlyCreatedFirst: 'recentlyCreatedFirst',
   BlazeOrderType.recentlyCreatedLast: 'recentlyCreatedLast',
+  BlazeOrderType.startTimeDesc: 'startTimeDesc',
+  BlazeOrderType.startTimeAsc: 'startTimeAsc',
   BlazeOrderType.random: 'random',
 };
 
@@ -111,6 +113,53 @@ Map<String, dynamic> _$$BlazeDataSourceTypeSearchImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$BlazeDataSourceTypeCompositeImpl _$$BlazeDataSourceTypeCompositeImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeDataSourceTypeCompositeImpl(
+      dataSources: (json['dataSources'] as List<dynamic>)
+          .map((e) =>
+              BlazeCompositeDataSourceEntry.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      $type: json['runtimeType'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeDataSourceTypeCompositeImplToJson(
+        _$BlazeDataSourceTypeCompositeImpl instance) =>
+    <String, dynamic>{
+      'dataSources': instance.dataSources.map((e) => e.toJson()).toList(),
+      'runtimeType': instance.$type,
+    };
+
+_$BlazeCompositeDataSourceEntryImpl
+    _$$BlazeCompositeDataSourceEntryImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeCompositeDataSourceEntryImpl(
+          dataSource: BlazeDataSourceType.fromJson(
+              json['dataSource'] as Map<String, dynamic>),
+          config: json['config'] == null
+              ? const BlazeCompositeDataSourceConfig()
+              : BlazeCompositeDataSourceConfig.fromJson(
+                  json['config'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeCompositeDataSourceEntryImplToJson(
+        _$BlazeCompositeDataSourceEntryImpl instance) =>
+    <String, dynamic>{
+      'dataSource': instance.dataSource.toJson(),
+      'config': instance.config.toJson(),
+    };
+
+_$BlazeCompositeDataSourceConfigImpl
+    _$$BlazeCompositeDataSourceConfigImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeCompositeDataSourceConfigImpl(
+          isMandatory: json['isMandatory'] as bool? ?? false,
+        );
+
+Map<String, dynamic> _$$BlazeCompositeDataSourceConfigImplToJson(
+        _$BlazeCompositeDataSourceConfigImpl instance) =>
+    <String, dynamic>{
+      'isMandatory': instance.isMandatory,
+    };
+
 _$BlazeDataSourcePersonalizedTypeIdsImpl
     _$$BlazeDataSourcePersonalizedTypeIdsImplFromJson(
             Map<String, dynamic> json) =>
@@ -143,9 +192,11 @@ _$BlazeDataSourcePersonalizedTypeLabelsImpl
         _$BlazeDataSourcePersonalizedTypeLabelsImpl(
           labelsFilter: BlazeWidgetLabel.fromJson(
               json['labelsFilter'] as Map<String, dynamic>),
-          labelsPriority: (json['labelsPriority'] as List<dynamic>)
-              .map((e) => BlazeWidgetLabel.fromJson(e as Map<String, dynamic>))
-              .toList(),
+          labelsPriority: (json['labelsPriority'] as List<dynamic>?)
+                  ?.map((e) =>
+                      BlazeWidgetLabel.fromJson(e as Map<String, dynamic>))
+                  .toList() ??
+              const [],
           $type: json['type'] as String?,
         );
 
@@ -159,18 +210,20 @@ Map<String, dynamic> _$$BlazeDataSourcePersonalizedTypeLabelsImplToJson(
 
 _$ForYouImpl _$$ForYouImplFromJson(Map<String, dynamic> json) => _$ForYouImpl(
       anyLabelFilter: (json['anyLabelFilter'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      promotedLabels: (json['promotedLabels'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      coldStartLabels: (json['coldStartLabels'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       $type: json['type'] as String?,
     );
 
 Map<String, dynamic> _$$ForYouImplToJson(_$ForYouImpl instance) =>
     <String, dynamic>{
       'anyLabelFilter': instance.anyLabelFilter,
-      'promotedLabels': instance.promotedLabels,
+      'coldStartLabels': instance.coldStartLabels,
       'type': instance.$type,
     };
 

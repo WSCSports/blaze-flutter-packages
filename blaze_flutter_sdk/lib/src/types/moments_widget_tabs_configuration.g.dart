@@ -140,6 +140,13 @@ _$BlazePlayerTabsStyleImpl _$$BlazePlayerTabsStyleImplFromJson(
           ? null
           : BlazePlayerTabItemStyle.fromJson(
               json['unselectedTabState'] as Map<String, dynamic>),
+      activeTabIndicator: json['activeTabIndicator'] == null
+          ? null
+          : BlazePlayerActiveTabIndicatorStyle.fromJson(
+              json['activeTabIndicator'] as Map<String, dynamic>),
+      isTabTitleVisibleWhenSingleTab:
+          json['isTabTitleVisibleWhenSingleTab'] as bool?,
+      isTabVisibleWhenEmpty: json['isTabVisibleWhenEmpty'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazePlayerTabsStyleImplToJson(
@@ -150,6 +157,24 @@ Map<String, dynamic> _$$BlazePlayerTabsStyleImplToJson(
       'icon': instance.icon?.toJson(),
       'selectedTabState': instance.selectedTabState?.toJson(),
       'unselectedTabState': instance.unselectedTabState?.toJson(),
+      'activeTabIndicator': instance.activeTabIndicator?.toJson(),
+      'isTabTitleVisibleWhenSingleTab': instance.isTabTitleVisibleWhenSingleTab,
+      'isTabVisibleWhenEmpty': instance.isTabVisibleWhenEmpty,
+    };
+
+_$BlazePlayerActiveTabIndicatorStyleImpl
+    _$$BlazePlayerActiveTabIndicatorStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazePlayerActiveTabIndicatorStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          height: (json['height'] as num?)?.toDouble(),
+        );
+
+Map<String, dynamic> _$$BlazePlayerActiveTabIndicatorStyleImplToJson(
+        _$BlazePlayerActiveTabIndicatorStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'height': instance.height,
     };
 
 _$BlazeMomentsWidgetTabsConfigurationImpl

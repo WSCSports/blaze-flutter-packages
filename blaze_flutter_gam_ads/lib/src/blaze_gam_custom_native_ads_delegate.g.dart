@@ -11,12 +11,17 @@ _$BlazeGAMDelegateOnAdEventParamsImpl
         _$BlazeGAMDelegateOnAdEventParamsImpl(
           eventType: $enumDecode(
               _$BlazeCustomNativeAdEventTypeEnumMap, json['eventType']),
+          extraInfo: json['extraInfo'] == null
+              ? null
+              : BlazeContentExtraInfo.fromJson(
+                  json['extraInfo'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeGAMDelegateOnAdEventParamsImplToJson(
         _$BlazeGAMDelegateOnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': _$BlazeCustomNativeAdEventTypeEnumMap[instance.eventType]!,
+      'extraInfo': instance.extraInfo?.toJson(),
     };
 
 const _$BlazeCustomNativeAdEventTypeEnumMap = {
@@ -96,10 +101,15 @@ _$_OnAdEventParamsImpl _$$_OnAdEventParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$_OnAdEventParamsImpl(
       eventType: json['eventType'] as String,
+      extraInfo: json['extraInfo'] == null
+          ? null
+          : BlazeContentExtraInfo.fromJson(
+              json['extraInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_OnAdEventParamsImplToJson(
         _$_OnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
+      'extraInfo': instance.extraInfo?.toJson(),
     };

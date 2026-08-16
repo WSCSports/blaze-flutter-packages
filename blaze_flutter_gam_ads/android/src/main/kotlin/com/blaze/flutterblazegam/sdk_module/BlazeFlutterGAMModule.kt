@@ -183,9 +183,19 @@ object BlazeFlutterGAMModule {
     ) {
         asyncBridge?.sendEvent(
                 name = "BlazeGAM.onAdEvent",
-                params = mapOf("eventType" to eventType.toReactEventTypeParam())
+                params =
+                        OnAdEventParams(
+                                eventType = eventType.toReactEventTypeParam(),
+                                extraInfo = adData.extraInfo.toFlutterModel()
+                        )
         )
     }
+
+    @Keep
+    private data class OnAdEventParams(
+            val eventType: String,
+            val extraInfo: BlazeFlutterContentExtraInfo,
+    )
 
     private suspend fun customGAMTargetingProperties(
             requestData: BlazeGamCustomNativeAdRequestInformation
@@ -306,15 +316,11 @@ object BlazeFlutterGAMModule {
         eventType: BlazeGAMBannerHandlerEventType,
         adData: BlazeGAMBannerAdsAdData
     ) {
-        @Keep
-        data class Params(
-            val eventType: String,
-        )
-
         asyncBridge?.sendEvent(
             name = "BlazeGAM.onGAMBannerAdsAdEvent",
-            params = Params(
-                eventType = eventType.toReactEventTypeParam()
+            params = OnBannerAdEventParams(
+                eventType = eventType.toReactEventTypeParam(),
+                extraInfo = adData.extraInfo.toFlutterModel()
             )
         )
     }
@@ -323,18 +329,26 @@ object BlazeFlutterGAMModule {
         errorMsg: String,
         adData: BlazeGAMBannerAdsAdData
     ) {
-        @Keep
-        data class Params(
-            val errorMessage: String,
-        )
-
         asyncBridge?.sendEvent(
             name = "BlazeGAM.onGAMBannerAdsAdError",
-            params = Params(
-                errorMessage = errorMsg
+            params = OnBannerAdErrorParams(
+                errorMessage = errorMsg,
+                extraInfo = adData.extraInfo.toFlutterModel()
             )
         )
     }
+
+    @Keep
+    private data class OnBannerAdEventParams(
+        val eventType: String,
+        val extraInfo: BlazeFlutterContentExtraInfo,
+    )
+
+    @Keep
+    private data class OnBannerAdErrorParams(
+        val errorMessage: String,
+        val extraInfo: BlazeFlutterContentExtraInfo,
+    )
 
     fun BlazeGAMBannerHandlerEventType.toReactEventTypeParam(): String {
         return when (this) {

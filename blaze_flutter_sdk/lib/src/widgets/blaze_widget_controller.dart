@@ -149,3 +149,83 @@ class BlazeWidgetController {
     developer.log('Controller method failed: $error', name: _loggerName);
   }
 }
+
+/// Controller for [BlazeMomentsGridView]/[BlazeMomentsRowView], adding the
+/// fullscreen "widget to tabs" reload commands on top of the base
+/// [BlazeWidgetController] capabilities.
+///
+/// Not usable with Stories/Videos widgets - their platform views don't
+/// register these commands, matching how the native SDK scopes them to the
+/// Moments widget-to-tabs flow.
+class BlazeMomentsWidgetController extends BlazeWidgetController {
+  void Function()? _onReloadAllTabs;
+  void Function()? _onReloadNonActiveTabs;
+  void Function({required int at})? _onReloadTab;
+  void Function({required String containerId})? _onReloadTabByContainerId;
+
+  /// Reloads content for every tab in the fullscreen Moments tabs player.
+  ///
+  /// Only meaningful when this controller is attached to a Moments widget
+  /// built with `.tabs()`, and only while the fullscreen tabs player is
+  /// visible - a no-op otherwise. A tab whose data source fails during reload
+  /// keeps its previous content; other tabs are unaffected.
+  void reloadAllTabs() {
+    _executeWhenReady(() => _onReloadAllTabs?.call());
+  }
+
+  /// Reloads content for every tab except the currently active one, leaving
+  /// active playback undisturbed.
+  ///
+  /// Same applicability constraints as [reloadAllTabs].
+  void reloadNonActiveTabs() {
+    _executeWhenReady(() => _onReloadNonActiveTabs?.call());
+  }
+
+  /// Reloads a single tab by its position.
+  ///
+  /// **iOS only** - a documented no-op on Android, where the widget-driven
+  /// tabs flow has no native per-tab reload hook (confirmed absent through
+  /// `publicSDK/v1.20.4`; only whole-container reload is available there via
+  /// [reloadAllTabs] / [reloadNonActiveTabs]). Same applicability constraints
+  /// as [reloadAllTabs] otherwise. An out-of-range [at] is a no-op.
+  void reloadTab({required int at}) {
+    _executeWhenReady(() => _onReloadTab?.call(at: at));
+  }
+
+  /// Reloads a single tab by its `containerId`.
+  ///
+  /// **iOS only** - see [reloadTab] for the Android constraint. An unmatched
+  /// [containerId] is a no-op.
+  void reloadTabByContainerId({required String containerId}) {
+    _executeWhenReady(
+        () => _onReloadTabByContainerId?.call(containerId: containerId));
+  }
+
+  /// **INTERNAL PACKAGE USE ONLY** - Attaches the Moments-tabs-specific
+  /// reload callbacks, in addition to the base callbacks attached via
+  /// [attach].
+  ///
+  /// ⚠️ This method should ONLY be called from BlazeWidgetBase within the
+  /// blaze_flutter_sdk package. External users should NOT call this method
+  /// directly.
+  void attachMomentsTabs({
+    void Function()? reloadAllTabs,
+    void Function()? reloadNonActiveTabs,
+    void Function({required int at})? reloadTab,
+    void Function({required String containerId})? reloadTabByContainerId,
+  }) {
+    _onReloadAllTabs = reloadAllTabs;
+    _onReloadNonActiveTabs = reloadNonActiveTabs;
+    _onReloadTab = reloadTab;
+    _onReloadTabByContainerId = reloadTabByContainerId;
+  }
+
+  @override
+  void detach() {
+    _onReloadAllTabs = null;
+    _onReloadNonActiveTabs = null;
+    _onReloadTab = null;
+    _onReloadTabByContainerId = null;
+    super.detach();
+  }
+}

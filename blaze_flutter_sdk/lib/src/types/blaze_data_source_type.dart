@@ -38,8 +38,52 @@ class BlazeDataSourceType with _$BlazeDataSourceType {
     BlazeWidgetLabel? labels,
   }) = BlazeDataSourceTypeSearch;
 
+  /// Combines multiple independent data sources into a single deduplicated feed.
+  ///
+  /// Entries are fetched in parallel, merged in declaration order, and
+  /// deduplicated by item ID with first-occurrence-wins.
+  ///
+  /// Validation (enforced natively): [dataSources] must not be empty, and no
+  /// entry's data source may itself be a composite data source - nesting is
+  /// rejected.
+  const factory BlazeDataSourceType.composite({
+    /// Ordered list of entries; declaration order determines merge priority.
+    required List<BlazeCompositeDataSourceEntry> dataSources,
+  }) = BlazeDataSourceTypeComposite;
+
   factory BlazeDataSourceType.fromJson(Map<String, dynamic> json) =>
       _$BlazeDataSourceTypeFromJson(json);
+}
+
+/// A single entry within a [BlazeDataSourceType.composite] data source.
+@freezed
+class BlazeCompositeDataSourceEntry with _$BlazeCompositeDataSourceEntry {
+  const factory BlazeCompositeDataSourceEntry({
+    /// The data source for this entry. Must not itself be a composite data
+    /// source - nesting composite data sources is rejected natively.
+    required BlazeDataSourceType dataSource,
+
+    /// Fetch-behavior configuration for this entry within the composite.
+    @Default(BlazeCompositeDataSourceConfig())
+    BlazeCompositeDataSourceConfig config,
+  }) = _BlazeCompositeDataSourceEntry;
+
+  factory BlazeCompositeDataSourceEntry.fromJson(Map<String, dynamic> json) =>
+      _$BlazeCompositeDataSourceEntryFromJson(json);
+}
+
+/// Fetch-behavior configuration for a [BlazeCompositeDataSourceEntry].
+@freezed
+class BlazeCompositeDataSourceConfig with _$BlazeCompositeDataSourceConfig {
+  const factory BlazeCompositeDataSourceConfig({
+    /// When `true`, a fetch failure for this entry fails the entire composite
+    /// fetch. When `false` (default), a failing entry is dropped as long as
+    /// at least one other entry in the composite succeeds.
+    @Default(false) bool isMandatory,
+  }) = _BlazeCompositeDataSourceConfig;
+
+  factory BlazeCompositeDataSourceConfig.fromJson(Map<String, dynamic> json) =>
+      _$BlazeCompositeDataSourceConfigFromJson(json);
 }
 
 // BlazeOrderType enum
@@ -51,6 +95,8 @@ enum BlazeOrderType {
   zToA, // Items are arranged in alphabetical order from Z to A based on their titles.
   recentlyCreatedFirst, // Recently created items appear first. Sorts the items by their last creation time in descending order, meaning the most recently created items will be displayed first.
   recentlyCreatedLast, // Recently created items appear last. Sorts the items by their last creation time in ascending order, meaning the least recently created items will be displayed first.
+  startTimeDesc, // Live/upcoming content ordered by start time, most recent first.
+  startTimeAsc, // Live/upcoming content ordered by start time, least recent first.
   random; // Items are ordered randomly.
 }
 
@@ -72,12 +118,24 @@ class BlazeDataSourcePersonalizedType with _$BlazeDataSourcePersonalizedType {
     /// Mandatory filter expression that defines which content is considered.
     required BlazeWidgetLabel labelsFilter,
 
-    /// Mandatory array of BlazeWidgetLabel to define the sorting priority for the labels.
-    required List<BlazeWidgetLabel> labelsPriority,
+    /// Array of BlazeWidgetLabel to define the sorting priority for the labels.
+    @Default([]) List<BlazeWidgetLabel> labelsPriority,
   }) = BlazeDataSourcePersonalizedTypeLabels;
 
   factory BlazeDataSourcePersonalizedType.fromJson(Map<String, dynamic> json) =>
       _$BlazeDataSourcePersonalizedTypeFromJson(json);
+
+  /// Convenience constructor for personalized content based on player and/or
+  /// team IDs, matching the native `Ids(playerIds:, teamIds:)` constructor.
+  factory BlazeDataSourcePersonalizedType.playerAndTeamIds({
+    List<String> playerIds = const [],
+    List<String> teamIds = const [],
+  }) {
+    return BlazeDataSourcePersonalizedType.ids(ids: {
+      BlazeDataSourcePersonalizedTypeContentType.players: playerIds,
+      BlazeDataSourcePersonalizedTypeContentType.teams: teamIds,
+    });
+  }
 }
 
 // BlazeDataSourcePersonalizedTypeContentType enum
@@ -94,11 +152,12 @@ class BlazeRecommendationsType with _$BlazeRecommendationsType {
   const factory BlazeRecommendationsType.forYou({
     /// [anyLabelFilter] is an array of strings, allowing you to filter the content received from a recommendation system.
     /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
-    List<String>? anyLabelFilter,
+    @Default([]) List<String> anyLabelFilter,
 
-    /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
-    /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
-    List<String>? promotedLabels,
+    /// [coldStartLabels] is an array of strings used to fetch cold-start content for users below the
+    /// interaction threshold. Content associated with these labels is returned (OR'd, ordered by
+    /// recency) while the user has too little interaction history for personalized recommendations.
+    @Default([]) List<String> coldStartLabels,
   }) = ForYou;
 
   /// Represents recommendations for content that is currently trending.

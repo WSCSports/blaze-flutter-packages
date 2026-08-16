@@ -24,6 +24,8 @@ BlazeDataSourceType _$BlazeDataSourceTypeFromJson(Map<String, dynamic> json) {
       return BlazeDataSourceTypeRecommendations.fromJson(json);
     case 'search':
       return BlazeDataSourceTypeSearch.fromJson(json);
+    case 'composite':
+      return BlazeDataSourceTypeComposite.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'BlazeDataSourceType',
@@ -51,6 +53,8 @@ mixin _$BlazeDataSourceType {
     required TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)
         search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +75,8 @@ mixin _$BlazeDataSourceType {
     TResult? Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -91,6 +97,8 @@ mixin _$BlazeDataSourceType {
     TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -101,6 +109,7 @@ mixin _$BlazeDataSourceType {
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -110,6 +119,7 @@ mixin _$BlazeDataSourceType {
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -118,6 +128,7 @@ mixin _$BlazeDataSourceType {
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -345,6 +356,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     required TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)
         search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
   }) {
     return labels(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -369,6 +382,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult? Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
   }) {
     return labels?.call(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -393,6 +408,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -410,6 +427,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
   }) {
     return labels(this);
   }
@@ -422,6 +440,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
   }) {
     return labels?.call(this);
   }
@@ -433,6 +452,7 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -605,6 +625,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     required TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)
         search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
   }) {
     return ids(this.ids, orderType, advancedOrderType);
   }
@@ -628,6 +650,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult? Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
   }) {
     return ids?.call(this.ids, orderType, advancedOrderType);
   }
@@ -651,6 +675,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -667,6 +693,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
   }) {
     return ids(this);
   }
@@ -679,6 +706,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
   }) {
     return ids?.call(this);
   }
@@ -690,6 +718,7 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -841,6 +870,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     required TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)
         search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
   }) {
     return recommendations(recommendationsType);
   }
@@ -864,6 +895,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult? Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
   }) {
     return recommendations?.call(recommendationsType);
   }
@@ -887,6 +920,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -903,6 +938,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
   }) {
     return recommendations(this);
   }
@@ -915,6 +951,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
   }) {
     return recommendations?.call(this);
   }
@@ -926,6 +963,7 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -1101,6 +1139,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     required TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)
         search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
   }) {
     return search(searchText, maxItems, this.labels);
   }
@@ -1124,6 +1164,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     TResult? Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
   }) {
     return search?.call(searchText, maxItems, this.labels);
   }
@@ -1147,6 +1189,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     TResult Function(
             String searchText, int? maxItems, BlazeWidgetLabel? labels)?
         search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1163,6 +1207,7 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     required TResult Function(BlazeDataSourceTypeRecommendations value)
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
   }) {
     return search(this);
   }
@@ -1175,6 +1220,7 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     TResult? Function(BlazeDataSourceTypeRecommendations value)?
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
   }) {
     return search?.call(this);
   }
@@ -1186,6 +1232,7 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     TResult Function(BlazeDataSourceTypeIds value)? ids,
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1224,6 +1271,740 @@ abstract class BlazeDataSourceTypeSearch implements BlazeDataSourceType {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeDataSourceTypeSearchImplCopyWith<_$BlazeDataSourceTypeSearchImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeDataSourceTypeCompositeImplCopyWith<$Res> {
+  factory _$$BlazeDataSourceTypeCompositeImplCopyWith(
+          _$BlazeDataSourceTypeCompositeImpl value,
+          $Res Function(_$BlazeDataSourceTypeCompositeImpl) then) =
+      __$$BlazeDataSourceTypeCompositeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<BlazeCompositeDataSourceEntry> dataSources});
+}
+
+/// @nodoc
+class __$$BlazeDataSourceTypeCompositeImplCopyWithImpl<$Res>
+    extends _$BlazeDataSourceTypeCopyWithImpl<$Res,
+        _$BlazeDataSourceTypeCompositeImpl>
+    implements _$$BlazeDataSourceTypeCompositeImplCopyWith<$Res> {
+  __$$BlazeDataSourceTypeCompositeImplCopyWithImpl(
+      _$BlazeDataSourceTypeCompositeImpl _value,
+      $Res Function(_$BlazeDataSourceTypeCompositeImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataSources = null,
+  }) {
+    return _then(_$BlazeDataSourceTypeCompositeImpl(
+      dataSources: null == dataSources
+          ? _value._dataSources
+          : dataSources // ignore: cast_nullable_to_non_nullable
+              as List<BlazeCompositeDataSourceEntry>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeDataSourceTypeCompositeImpl
+    implements BlazeDataSourceTypeComposite {
+  const _$BlazeDataSourceTypeCompositeImpl(
+      {required final List<BlazeCompositeDataSourceEntry> dataSources,
+      final String? $type})
+      : _dataSources = dataSources,
+        $type = $type ?? 'composite';
+
+  factory _$BlazeDataSourceTypeCompositeImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeDataSourceTypeCompositeImplFromJson(json);
+
+  /// Ordered list of entries; declaration order determines merge priority.
+  final List<BlazeCompositeDataSourceEntry> _dataSources;
+
+  /// Ordered list of entries; declaration order determines merge priority.
+  @override
+  List<BlazeCompositeDataSourceEntry> get dataSources {
+    if (_dataSources is EqualUnmodifiableListView) return _dataSources;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dataSources);
+  }
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeDataSourceType.composite(dataSources: $dataSources)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeDataSourceTypeCompositeImpl &&
+            const DeepCollectionEquality()
+                .equals(other._dataSources, _dataSources));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_dataSources));
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeDataSourceTypeCompositeImplCopyWith<
+          _$BlazeDataSourceTypeCompositeImpl>
+      get copyWith => __$$BlazeDataSourceTypeCompositeImplCopyWithImpl<
+          _$BlazeDataSourceTypeCompositeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)
+        labels,
+    required TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)
+        ids,
+    required TResult Function(BlazeRecommendationsType recommendationsType)
+        recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
+  }) {
+    return composite(dataSources);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult? Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult? Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
+  }) {
+    return composite?.call(dataSources);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
+    required TResult orElse(),
+  }) {
+    if (composite != null) {
+      return composite(dataSources);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeDataSourceTypeLabels value) labels,
+    required TResult Function(BlazeDataSourceTypeIds value) ids,
+    required TResult Function(BlazeDataSourceTypeRecommendations value)
+        recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
+  }) {
+    return composite(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult? Function(BlazeDataSourceTypeIds value)? ids,
+    TResult? Function(BlazeDataSourceTypeRecommendations value)?
+        recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+  }) {
+    return composite?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult Function(BlazeDataSourceTypeIds value)? ids,
+    TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    required TResult orElse(),
+  }) {
+    if (composite != null) {
+      return composite(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeDataSourceTypeCompositeImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeDataSourceTypeComposite implements BlazeDataSourceType {
+  const factory BlazeDataSourceTypeComposite(
+          {required final List<BlazeCompositeDataSourceEntry> dataSources}) =
+      _$BlazeDataSourceTypeCompositeImpl;
+
+  factory BlazeDataSourceTypeComposite.fromJson(Map<String, dynamic> json) =
+      _$BlazeDataSourceTypeCompositeImpl.fromJson;
+
+  /// Ordered list of entries; declaration order determines merge priority.
+  List<BlazeCompositeDataSourceEntry> get dataSources;
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeDataSourceTypeCompositeImplCopyWith<
+          _$BlazeDataSourceTypeCompositeImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeCompositeDataSourceEntry _$BlazeCompositeDataSourceEntryFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeCompositeDataSourceEntry.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeCompositeDataSourceEntry {
+  /// The data source for this entry. Must not itself be a composite data
+  /// source - nesting composite data sources is rejected natively.
+  BlazeDataSourceType get dataSource => throw _privateConstructorUsedError;
+
+  /// Fetch-behavior configuration for this entry within the composite.
+  BlazeCompositeDataSourceConfig get config =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceEntry value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeCompositeDataSourceEntry value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceEntry value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeCompositeDataSourceEntry to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeCompositeDataSourceEntryCopyWith<BlazeCompositeDataSourceEntry>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeCompositeDataSourceEntryCopyWith<$Res> {
+  factory $BlazeCompositeDataSourceEntryCopyWith(
+          BlazeCompositeDataSourceEntry value,
+          $Res Function(BlazeCompositeDataSourceEntry) then) =
+      _$BlazeCompositeDataSourceEntryCopyWithImpl<$Res,
+          BlazeCompositeDataSourceEntry>;
+  @useResult
+  $Res call(
+      {BlazeDataSourceType dataSource, BlazeCompositeDataSourceConfig config});
+
+  $BlazeDataSourceTypeCopyWith<$Res> get dataSource;
+  $BlazeCompositeDataSourceConfigCopyWith<$Res> get config;
+}
+
+/// @nodoc
+class _$BlazeCompositeDataSourceEntryCopyWithImpl<$Res,
+        $Val extends BlazeCompositeDataSourceEntry>
+    implements $BlazeCompositeDataSourceEntryCopyWith<$Res> {
+  _$BlazeCompositeDataSourceEntryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataSource = null,
+    Object? config = null,
+  }) {
+    return _then(_value.copyWith(
+      dataSource: null == dataSource
+          ? _value.dataSource
+          : dataSource // ignore: cast_nullable_to_non_nullable
+              as BlazeDataSourceType,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as BlazeCompositeDataSourceConfig,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeDataSourceTypeCopyWith<$Res> get dataSource {
+    return $BlazeDataSourceTypeCopyWith<$Res>(_value.dataSource, (value) {
+      return _then(_value.copyWith(dataSource: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeCompositeDataSourceConfigCopyWith<$Res> get config {
+    return $BlazeCompositeDataSourceConfigCopyWith<$Res>(_value.config,
+        (value) {
+      return _then(_value.copyWith(config: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeCompositeDataSourceEntryImplCopyWith<$Res>
+    implements $BlazeCompositeDataSourceEntryCopyWith<$Res> {
+  factory _$$BlazeCompositeDataSourceEntryImplCopyWith(
+          _$BlazeCompositeDataSourceEntryImpl value,
+          $Res Function(_$BlazeCompositeDataSourceEntryImpl) then) =
+      __$$BlazeCompositeDataSourceEntryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazeDataSourceType dataSource, BlazeCompositeDataSourceConfig config});
+
+  @override
+  $BlazeDataSourceTypeCopyWith<$Res> get dataSource;
+  @override
+  $BlazeCompositeDataSourceConfigCopyWith<$Res> get config;
+}
+
+/// @nodoc
+class __$$BlazeCompositeDataSourceEntryImplCopyWithImpl<$Res>
+    extends _$BlazeCompositeDataSourceEntryCopyWithImpl<$Res,
+        _$BlazeCompositeDataSourceEntryImpl>
+    implements _$$BlazeCompositeDataSourceEntryImplCopyWith<$Res> {
+  __$$BlazeCompositeDataSourceEntryImplCopyWithImpl(
+      _$BlazeCompositeDataSourceEntryImpl _value,
+      $Res Function(_$BlazeCompositeDataSourceEntryImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataSource = null,
+    Object? config = null,
+  }) {
+    return _then(_$BlazeCompositeDataSourceEntryImpl(
+      dataSource: null == dataSource
+          ? _value.dataSource
+          : dataSource // ignore: cast_nullable_to_non_nullable
+              as BlazeDataSourceType,
+      config: null == config
+          ? _value.config
+          : config // ignore: cast_nullable_to_non_nullable
+              as BlazeCompositeDataSourceConfig,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeCompositeDataSourceEntryImpl
+    implements _BlazeCompositeDataSourceEntry {
+  const _$BlazeCompositeDataSourceEntryImpl(
+      {required this.dataSource,
+      this.config = const BlazeCompositeDataSourceConfig()});
+
+  factory _$BlazeCompositeDataSourceEntryImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeCompositeDataSourceEntryImplFromJson(json);
+
+  /// The data source for this entry. Must not itself be a composite data
+  /// source - nesting composite data sources is rejected natively.
+  @override
+  final BlazeDataSourceType dataSource;
+
+  /// Fetch-behavior configuration for this entry within the composite.
+  @override
+  @JsonKey()
+  final BlazeCompositeDataSourceConfig config;
+
+  @override
+  String toString() {
+    return 'BlazeCompositeDataSourceEntry(dataSource: $dataSource, config: $config)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeCompositeDataSourceEntryImpl &&
+            (identical(other.dataSource, dataSource) ||
+                other.dataSource == dataSource) &&
+            (identical(other.config, config) || other.config == config));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, dataSource, config);
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeCompositeDataSourceEntryImplCopyWith<
+          _$BlazeCompositeDataSourceEntryImpl>
+      get copyWith => __$$BlazeCompositeDataSourceEntryImplCopyWithImpl<
+          _$BlazeCompositeDataSourceEntryImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceEntry value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeCompositeDataSourceEntry value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceEntry value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeCompositeDataSourceEntryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeCompositeDataSourceEntry
+    implements BlazeCompositeDataSourceEntry {
+  const factory _BlazeCompositeDataSourceEntry(
+          {required final BlazeDataSourceType dataSource,
+          final BlazeCompositeDataSourceConfig config}) =
+      _$BlazeCompositeDataSourceEntryImpl;
+
+  factory _BlazeCompositeDataSourceEntry.fromJson(Map<String, dynamic> json) =
+      _$BlazeCompositeDataSourceEntryImpl.fromJson;
+
+  /// The data source for this entry. Must not itself be a composite data
+  /// source - nesting composite data sources is rejected natively.
+  @override
+  BlazeDataSourceType get dataSource;
+
+  /// Fetch-behavior configuration for this entry within the composite.
+  @override
+  BlazeCompositeDataSourceConfig get config;
+
+  /// Create a copy of BlazeCompositeDataSourceEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeCompositeDataSourceEntryImplCopyWith<
+          _$BlazeCompositeDataSourceEntryImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeCompositeDataSourceConfig _$BlazeCompositeDataSourceConfigFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeCompositeDataSourceConfig.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeCompositeDataSourceConfig {
+  /// When `true`, a fetch failure for this entry fails the entire composite
+  /// fetch. When `false` (default), a failing entry is dropped as long as
+  /// at least one other entry in the composite succeeds.
+  bool get isMandatory => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceConfig value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeCompositeDataSourceConfig value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceConfig value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeCompositeDataSourceConfig to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeCompositeDataSourceConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeCompositeDataSourceConfigCopyWith<BlazeCompositeDataSourceConfig>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeCompositeDataSourceConfigCopyWith<$Res> {
+  factory $BlazeCompositeDataSourceConfigCopyWith(
+          BlazeCompositeDataSourceConfig value,
+          $Res Function(BlazeCompositeDataSourceConfig) then) =
+      _$BlazeCompositeDataSourceConfigCopyWithImpl<$Res,
+          BlazeCompositeDataSourceConfig>;
+  @useResult
+  $Res call({bool isMandatory});
+}
+
+/// @nodoc
+class _$BlazeCompositeDataSourceConfigCopyWithImpl<$Res,
+        $Val extends BlazeCompositeDataSourceConfig>
+    implements $BlazeCompositeDataSourceConfigCopyWith<$Res> {
+  _$BlazeCompositeDataSourceConfigCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeCompositeDataSourceConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isMandatory = null,
+  }) {
+    return _then(_value.copyWith(
+      isMandatory: null == isMandatory
+          ? _value.isMandatory
+          : isMandatory // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeCompositeDataSourceConfigImplCopyWith<$Res>
+    implements $BlazeCompositeDataSourceConfigCopyWith<$Res> {
+  factory _$$BlazeCompositeDataSourceConfigImplCopyWith(
+          _$BlazeCompositeDataSourceConfigImpl value,
+          $Res Function(_$BlazeCompositeDataSourceConfigImpl) then) =
+      __$$BlazeCompositeDataSourceConfigImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool isMandatory});
+}
+
+/// @nodoc
+class __$$BlazeCompositeDataSourceConfigImplCopyWithImpl<$Res>
+    extends _$BlazeCompositeDataSourceConfigCopyWithImpl<$Res,
+        _$BlazeCompositeDataSourceConfigImpl>
+    implements _$$BlazeCompositeDataSourceConfigImplCopyWith<$Res> {
+  __$$BlazeCompositeDataSourceConfigImplCopyWithImpl(
+      _$BlazeCompositeDataSourceConfigImpl _value,
+      $Res Function(_$BlazeCompositeDataSourceConfigImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeCompositeDataSourceConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isMandatory = null,
+  }) {
+    return _then(_$BlazeCompositeDataSourceConfigImpl(
+      isMandatory: null == isMandatory
+          ? _value.isMandatory
+          : isMandatory // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeCompositeDataSourceConfigImpl
+    implements _BlazeCompositeDataSourceConfig {
+  const _$BlazeCompositeDataSourceConfigImpl({this.isMandatory = false});
+
+  factory _$BlazeCompositeDataSourceConfigImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeCompositeDataSourceConfigImplFromJson(json);
+
+  /// When `true`, a fetch failure for this entry fails the entire composite
+  /// fetch. When `false` (default), a failing entry is dropped as long as
+  /// at least one other entry in the composite succeeds.
+  @override
+  @JsonKey()
+  final bool isMandatory;
+
+  @override
+  String toString() {
+    return 'BlazeCompositeDataSourceConfig(isMandatory: $isMandatory)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeCompositeDataSourceConfigImpl &&
+            (identical(other.isMandatory, isMandatory) ||
+                other.isMandatory == isMandatory));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isMandatory);
+
+  /// Create a copy of BlazeCompositeDataSourceConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeCompositeDataSourceConfigImplCopyWith<
+          _$BlazeCompositeDataSourceConfigImpl>
+      get copyWith => __$$BlazeCompositeDataSourceConfigImplCopyWithImpl<
+          _$BlazeCompositeDataSourceConfigImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceConfig value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeCompositeDataSourceConfig value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeCompositeDataSourceConfig value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeCompositeDataSourceConfigImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeCompositeDataSourceConfig
+    implements BlazeCompositeDataSourceConfig {
+  const factory _BlazeCompositeDataSourceConfig({final bool isMandatory}) =
+      _$BlazeCompositeDataSourceConfigImpl;
+
+  factory _BlazeCompositeDataSourceConfig.fromJson(Map<String, dynamic> json) =
+      _$BlazeCompositeDataSourceConfigImpl.fromJson;
+
+  /// When `true`, a fetch failure for this entry fails the entire composite
+  /// fetch. When `false` (default), a failing entry is dropped as long as
+  /// at least one other entry in the composite succeeds.
+  @override
+  bool get isMandatory;
+
+  /// Create a copy of BlazeCompositeDataSourceConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeCompositeDataSourceConfigImplCopyWith<
+          _$BlazeCompositeDataSourceConfigImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1582,7 +2363,7 @@ class _$BlazeDataSourcePersonalizedTypeLabelsImpl
     implements BlazeDataSourcePersonalizedTypeLabels {
   const _$BlazeDataSourcePersonalizedTypeLabelsImpl(
       {required this.labelsFilter,
-      required final List<BlazeWidgetLabel> labelsPriority,
+      final List<BlazeWidgetLabel> labelsPriority = const [],
       final String? $type})
       : _labelsPriority = labelsPriority,
         $type = $type ?? 'Labels';
@@ -1595,11 +2376,12 @@ class _$BlazeDataSourcePersonalizedTypeLabelsImpl
   @override
   final BlazeWidgetLabel labelsFilter;
 
-  /// Mandatory array of BlazeWidgetLabel to define the sorting priority for the labels.
+  /// Array of BlazeWidgetLabel to define the sorting priority for the labels.
   final List<BlazeWidgetLabel> _labelsPriority;
 
-  /// Mandatory array of BlazeWidgetLabel to define the sorting priority for the labels.
+  /// Array of BlazeWidgetLabel to define the sorting priority for the labels.
   @override
+  @JsonKey()
   List<BlazeWidgetLabel> get labelsPriority {
     if (_labelsPriority is EqualUnmodifiableListView) return _labelsPriority;
     // ignore: implicit_dynamic_type
@@ -1727,7 +2509,7 @@ abstract class BlazeDataSourcePersonalizedTypeLabels
     implements BlazeDataSourcePersonalizedType {
   const factory BlazeDataSourcePersonalizedTypeLabels(
           {required final BlazeWidgetLabel labelsFilter,
-          required final List<BlazeWidgetLabel> labelsPriority}) =
+          final List<BlazeWidgetLabel> labelsPriority}) =
       _$BlazeDataSourcePersonalizedTypeLabelsImpl;
 
   factory BlazeDataSourcePersonalizedTypeLabels.fromJson(
@@ -1737,7 +2519,7 @@ abstract class BlazeDataSourcePersonalizedTypeLabels
   /// Mandatory filter expression that defines which content is considered.
   BlazeWidgetLabel get labelsFilter;
 
-  /// Mandatory array of BlazeWidgetLabel to define the sorting priority for the labels.
+  /// Array of BlazeWidgetLabel to define the sorting priority for the labels.
   List<BlazeWidgetLabel> get labelsPriority;
 
   /// Create a copy of BlazeDataSourcePersonalizedType
@@ -1770,7 +2552,7 @@ mixin _$BlazeRecommendationsType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)
+            List<String> anyLabelFilter, List<String> coldStartLabels)
         forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) =>
@@ -1778,15 +2560,14 @@ mixin _$BlazeRecommendationsType {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+            List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+    TResult Function(List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),
@@ -1828,7 +2609,7 @@ abstract class $BlazeRecommendationsTypeCopyWith<$Res> {
           $Res Function(BlazeRecommendationsType) then) =
       _$BlazeRecommendationsTypeCopyWithImpl<$Res, BlazeRecommendationsType>;
   @useResult
-  $Res call({List<String>? anyLabelFilter});
+  $Res call({List<String> anyLabelFilter});
 }
 
 /// @nodoc
@@ -1847,13 +2628,13 @@ class _$BlazeRecommendationsTypeCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? anyLabelFilter = freezed,
+    Object? anyLabelFilter = null,
   }) {
     return _then(_value.copyWith(
-      anyLabelFilter: freezed == anyLabelFilter
-          ? _value.anyLabelFilter
+      anyLabelFilter: null == anyLabelFilter
+          ? _value.anyLabelFilter!
           : anyLabelFilter // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -1866,7 +2647,7 @@ abstract class _$$ForYouImplCopyWith<$Res>
       __$$ForYouImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<String>? anyLabelFilter, List<String>? promotedLabels});
+  $Res call({List<String> anyLabelFilter, List<String> coldStartLabels});
 }
 
 /// @nodoc
@@ -1882,18 +2663,18 @@ class __$$ForYouImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? anyLabelFilter = freezed,
-    Object? promotedLabels = freezed,
+    Object? anyLabelFilter = null,
+    Object? coldStartLabels = null,
   }) {
     return _then(_$ForYouImpl(
-      anyLabelFilter: freezed == anyLabelFilter
+      anyLabelFilter: null == anyLabelFilter
           ? _value._anyLabelFilter
           : anyLabelFilter // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
-      promotedLabels: freezed == promotedLabels
-          ? _value._promotedLabels
-          : promotedLabels // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
+      coldStartLabels: null == coldStartLabels
+          ? _value._coldStartLabels
+          : coldStartLabels // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -1902,11 +2683,11 @@ class __$$ForYouImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ForYouImpl implements ForYou {
   const _$ForYouImpl(
-      {final List<String>? anyLabelFilter,
-      final List<String>? promotedLabels,
+      {final List<String> anyLabelFilter = const [],
+      final List<String> coldStartLabels = const [],
       final String? $type})
       : _anyLabelFilter = anyLabelFilter,
-        _promotedLabels = promotedLabels,
+        _coldStartLabels = coldStartLabels,
         $type = $type ?? 'ForYou';
 
   factory _$ForYouImpl.fromJson(Map<String, dynamic> json) =>
@@ -1914,32 +2695,32 @@ class _$ForYouImpl implements ForYou {
 
   /// [anyLabelFilter] is an array of strings, allowing you to filter the content received from a recommendation system.
   /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
-  final List<String>? _anyLabelFilter;
+  final List<String> _anyLabelFilter;
 
   /// [anyLabelFilter] is an array of strings, allowing you to filter the content received from a recommendation system.
   /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
   @override
-  List<String>? get anyLabelFilter {
-    final value = _anyLabelFilter;
-    if (value == null) return null;
+  @JsonKey()
+  List<String> get anyLabelFilter {
     if (_anyLabelFilter is EqualUnmodifiableListView) return _anyLabelFilter;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_anyLabelFilter);
   }
 
-  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
-  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
-  final List<String>? _promotedLabels;
+  /// [coldStartLabels] is an array of strings used to fetch cold-start content for users below the
+  /// interaction threshold. Content associated with these labels is returned (OR'd, ordered by
+  /// recency) while the user has too little interaction history for personalized recommendations.
+  final List<String> _coldStartLabels;
 
-  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
-  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
+  /// [coldStartLabels] is an array of strings used to fetch cold-start content for users below the
+  /// interaction threshold. Content associated with these labels is returned (OR'd, ordered by
+  /// recency) while the user has too little interaction history for personalized recommendations.
   @override
-  List<String>? get promotedLabels {
-    final value = _promotedLabels;
-    if (value == null) return null;
-    if (_promotedLabels is EqualUnmodifiableListView) return _promotedLabels;
+  @JsonKey()
+  List<String> get coldStartLabels {
+    if (_coldStartLabels is EqualUnmodifiableListView) return _coldStartLabels;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_coldStartLabels);
   }
 
   @JsonKey(name: 'type')
@@ -1947,7 +2728,7 @@ class _$ForYouImpl implements ForYou {
 
   @override
   String toString() {
-    return 'BlazeRecommendationsType.forYou(anyLabelFilter: $anyLabelFilter, promotedLabels: $promotedLabels)';
+    return 'BlazeRecommendationsType.forYou(anyLabelFilter: $anyLabelFilter, coldStartLabels: $coldStartLabels)';
   }
 
   @override
@@ -1958,7 +2739,7 @@ class _$ForYouImpl implements ForYou {
             const DeepCollectionEquality()
                 .equals(other._anyLabelFilter, _anyLabelFilter) &&
             const DeepCollectionEquality()
-                .equals(other._promotedLabels, _promotedLabels));
+                .equals(other._coldStartLabels, _coldStartLabels));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1966,7 +2747,7 @@ class _$ForYouImpl implements ForYou {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(_anyLabelFilter),
-      const DeepCollectionEquality().hash(_promotedLabels));
+      const DeepCollectionEquality().hash(_coldStartLabels));
 
   /// Create a copy of BlazeRecommendationsType
   /// with the given fields replaced by the non-null parameter values.
@@ -1980,35 +2761,34 @@ class _$ForYouImpl implements ForYou {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)
+            List<String> anyLabelFilter, List<String> coldStartLabels)
         forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) {
-    return forYou(anyLabelFilter, promotedLabels);
+    return forYou(anyLabelFilter, coldStartLabels);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+            List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) {
-    return forYou?.call(anyLabelFilter, promotedLabels);
+    return forYou?.call(anyLabelFilter, coldStartLabels);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+    TResult Function(List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),
   }) {
     if (forYou != null) {
-      return forYou(anyLabelFilter, promotedLabels);
+      return forYou(anyLabelFilter, coldStartLabels);
     }
     return orElse();
   }
@@ -2054,19 +2834,20 @@ class _$ForYouImpl implements ForYou {
 
 abstract class ForYou implements BlazeRecommendationsType {
   const factory ForYou(
-      {final List<String>? anyLabelFilter,
-      final List<String>? promotedLabels}) = _$ForYouImpl;
+      {final List<String> anyLabelFilter,
+      final List<String> coldStartLabels}) = _$ForYouImpl;
 
   factory ForYou.fromJson(Map<String, dynamic> json) = _$ForYouImpl.fromJson;
 
   /// [anyLabelFilter] is an array of strings, allowing you to filter the content received from a recommendation system.
   /// This parameter ensures that your app only displays the most relevant and personalized suggestions to users.
   @override
-  List<String>? get anyLabelFilter;
+  List<String> get anyLabelFilter;
 
-  /// [promotedLabels] is an array of strings, allowing you to prioritize certain labels when fetching recommendations.
-  /// This parameter ensures that the content with the specified labels is given higher priority in the recommendation system.
-  List<String>? get promotedLabels;
+  /// [coldStartLabels] is an array of strings used to fetch cold-start content for users below the
+  /// interaction threshold. Content associated with these labels is returned (OR'd, ordered by
+  /// recency) while the user has too little interaction history for personalized recommendations.
+  List<String> get coldStartLabels;
 
   /// Create a copy of BlazeRecommendationsType
   /// with the given fields replaced by the non-null parameter values.
@@ -2171,7 +2952,7 @@ class _$TrendingImpl implements Trending {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)
+            List<String> anyLabelFilter, List<String> coldStartLabels)
         forYou,
     required TResult Function(List<String>? anyLabelFilter) trending,
   }) {
@@ -2182,7 +2963,7 @@ class _$TrendingImpl implements Trending {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+            List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult? Function(List<String>? anyLabelFilter)? trending,
   }) {
@@ -2192,8 +2973,7 @@ class _$TrendingImpl implements Trending {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            List<String>? anyLabelFilter, List<String>? promotedLabels)?
+    TResult Function(List<String> anyLabelFilter, List<String> coldStartLabels)?
         forYou,
     TResult Function(List<String>? anyLabelFilter)? trending,
     required TResult orElse(),

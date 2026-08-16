@@ -22,7 +22,12 @@ class FLVideosGridWidget: BlazeWidgetBase {
         if let playbackConfiguration = playbackConfigurationMap.extractVideosPlaybackConfiguration() {
             widget.videosPlaybackConfiguration = playbackConfiguration
         }
-        
+
+        // Extract and set videos filter params if provided
+        if let videosFilterParams = videosFilterParamsMap.extractVideosFilterParams() {
+            widget.videosFilterParams = videosFilterParams
+        }
+
         return widget
     }
     

@@ -45,6 +45,10 @@ mixin _$BlazeMomentsPlayerStyle {
   BlazeMomentsPlayerFollowEntityStyle? get followEntity =>
       throw _privateConstructorUsedError;
 
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
+  BlazeCaptionsStyle? get captions => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeMomentsPlayerStyle value) $default,
@@ -91,7 +95,8 @@ abstract class $BlazeMomentsPlayerStyleCopyWith<$Res> {
       BlazeMomentsPlayerSeekBarStyle? seekBar,
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
       BlazePlayerDisplayMode? playerDisplayMode,
-      BlazeMomentsPlayerFollowEntityStyle? followEntity});
+      BlazeMomentsPlayerFollowEntityStyle? followEntity,
+      BlazeCaptionsStyle? captions});
 
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
   $BlazeMomentsPlayerBodyTextStyleCopyWith<$Res>? get bodyText;
@@ -103,6 +108,7 @@ abstract class $BlazeMomentsPlayerStyleCopyWith<$Res> {
   $BlazeMomentsPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   $BlazeMomentsPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
   $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>? get followEntity;
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -134,6 +140,7 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
     Object? bottomComponentsAlignment = freezed,
     Object? playerDisplayMode = freezed,
     Object? followEntity = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_value.copyWith(
       headingText: freezed == headingText
@@ -188,6 +195,10 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
           ? _value.followEntity
           : followEntity // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerFollowEntityStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ) as $Val);
   }
 
@@ -338,6 +349,20 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(followEntity: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeMomentsPlayerStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazeCaptionsStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -362,7 +387,8 @@ abstract class _$$BlazeMomentsPlayerStyleImplCopyWith<$Res>
       BlazeMomentsPlayerSeekBarStyle? seekBar,
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
       BlazePlayerDisplayMode? playerDisplayMode,
-      BlazeMomentsPlayerFollowEntityStyle? followEntity});
+      BlazeMomentsPlayerFollowEntityStyle? followEntity,
+      BlazeCaptionsStyle? captions});
 
   @override
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
@@ -384,6 +410,8 @@ abstract class _$$BlazeMomentsPlayerStyleImplCopyWith<$Res>
   $BlazeMomentsPlayerSeekBarStyleCopyWith<$Res>? get seekBar;
   @override
   $BlazeMomentsPlayerFollowEntityStyleCopyWith<$Res>? get followEntity;
+  @override
+  $BlazeCaptionsStyleCopyWith<$Res>? get captions;
 }
 
 /// @nodoc
@@ -414,6 +442,7 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
     Object? bottomComponentsAlignment = freezed,
     Object? playerDisplayMode = freezed,
     Object? followEntity = freezed,
+    Object? captions = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerStyleImpl(
       headingText: freezed == headingText
@@ -468,6 +497,10 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
           ? _value.followEntity
           : followEntity // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerFollowEntityStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazeCaptionsStyle?,
     ));
   }
 }
@@ -488,7 +521,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       this.seekBar,
       this.bottomComponentsAlignment,
       this.playerDisplayMode,
-      this.followEntity});
+      this.followEntity,
+      this.captions});
 
   factory _$BlazeMomentsPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeMomentsPlayerStyleImplFromJson(json);
@@ -520,9 +554,14 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
   @override
   final BlazeMomentsPlayerFollowEntityStyle? followEntity;
 
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
+  @override
+  final BlazeCaptionsStyle? captions;
+
   @override
   String toString() {
-    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode, followEntity: $followEntity)';
+    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode, followEntity: $followEntity, captions: $captions)';
   }
 
   @override
@@ -552,7 +591,9 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
             (identical(other.playerDisplayMode, playerDisplayMode) ||
                 other.playerDisplayMode == playerDisplayMode) &&
             (identical(other.followEntity, followEntity) ||
-                other.followEntity == followEntity));
+                other.followEntity == followEntity) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -571,7 +612,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       seekBar,
       bottomComponentsAlignment,
       playerDisplayMode,
-      followEntity);
+      followEntity,
+      captions);
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -620,21 +662,21 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
 
 abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
   const factory _BlazeMomentsPlayerStyle(
-          {final BlazeMomentsPlayerHeadingTextStyle? headingText,
-          final BlazeMomentsPlayerBodyTextStyle? bodyText,
-          final BlazeMomentsPlayerButtonsStyle? buttons,
-          final BlazeMomentsPlayerChipsStyle? chips,
-          final String? backgroundColor,
-          final BlazeMomentsPlayerCtaStyle? cta,
-          final BlazeMomentsPlayerHeaderGradientStyle? headerGradient,
-          final BlazeMomentsPlayerFooterGradientStyle? footerGradient,
-          final BlazeMomentsPlayerFirstTimeSlideStyle? firstTimeSlide,
-          final BlazeMomentsPlayerSeekBarStyle? seekBar,
-          final BlazeMomentsPlayerBottomComponentsAlignment?
-              bottomComponentsAlignment,
-          final BlazePlayerDisplayMode? playerDisplayMode,
-          final BlazeMomentsPlayerFollowEntityStyle? followEntity}) =
-      _$BlazeMomentsPlayerStyleImpl;
+      {final BlazeMomentsPlayerHeadingTextStyle? headingText,
+      final BlazeMomentsPlayerBodyTextStyle? bodyText,
+      final BlazeMomentsPlayerButtonsStyle? buttons,
+      final BlazeMomentsPlayerChipsStyle? chips,
+      final String? backgroundColor,
+      final BlazeMomentsPlayerCtaStyle? cta,
+      final BlazeMomentsPlayerHeaderGradientStyle? headerGradient,
+      final BlazeMomentsPlayerFooterGradientStyle? footerGradient,
+      final BlazeMomentsPlayerFirstTimeSlideStyle? firstTimeSlide,
+      final BlazeMomentsPlayerSeekBarStyle? seekBar,
+      final BlazeMomentsPlayerBottomComponentsAlignment?
+          bottomComponentsAlignment,
+      final BlazePlayerDisplayMode? playerDisplayMode,
+      final BlazeMomentsPlayerFollowEntityStyle? followEntity,
+      final BlazeCaptionsStyle? captions}) = _$BlazeMomentsPlayerStyleImpl;
 
   factory _BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeMomentsPlayerStyleImpl.fromJson;
@@ -665,6 +707,11 @@ abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
   BlazePlayerDisplayMode? get playerDisplayMode;
   @override
   BlazeMomentsPlayerFollowEntityStyle? get followEntity;
+
+  /// Styles the rendered captions text. To style the CC toggle button
+  /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
+  @override
+  BlazeCaptionsStyle? get captions;
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1320,11 +1367,21 @@ mixin _$BlazeMomentsPlayerButtonsStyle {
   BlazePlayerButtonStyle? get share => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get like => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get play => throw _privateConstructorUsedError;
+  BlazePlayerButtonStyle? get captions => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get seekForward => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get seekBackward =>
       throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get search => throw _privateConstructorUsedError;
   List<BlazeCustomActionButton>? get customActionButtons =>
+      throw _privateConstructorUsedError;
+
+  /// Whether the space below the like button is preserved when the likes
+  /// count is hidden (because it is below the display threshold).
+  ///
+  /// When `true` the layout keeps that space reserved, so buttons do not
+  /// shift as the count crosses the threshold. When `false` the container
+  /// collapses to the button height. Omit to keep the preset value.
+  bool? get shouldPreserveLikesCountBelowThreshold =>
       throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -1368,16 +1425,19 @@ abstract class $BlazeMomentsPlayerButtonsStyleCopyWith<$Res> {
       BlazePlayerButtonStyle? share,
       BlazePlayerButtonStyle? like,
       BlazePlayerButtonStyle? play,
+      BlazePlayerButtonStyle? captions,
       BlazePlayerButtonStyle? seekForward,
       BlazePlayerButtonStyle? seekBackward,
       BlazePlayerButtonStyle? search,
-      List<BlazeCustomActionButton>? customActionButtons});
+      List<BlazeCustomActionButton>? customActionButtons,
+      bool? shouldPreserveLikesCountBelowThreshold});
 
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
   $BlazePlayerButtonStyleCopyWith<$Res>? get exit;
   $BlazePlayerButtonStyleCopyWith<$Res>? get share;
   $BlazePlayerButtonStyleCopyWith<$Res>? get like;
   $BlazePlayerButtonStyleCopyWith<$Res>? get play;
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
   $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
   $BlazePlayerButtonStyleCopyWith<$Res>? get seekBackward;
   $BlazePlayerButtonStyleCopyWith<$Res>? get search;
@@ -1404,10 +1464,12 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
     Object? share = freezed,
     Object? like = freezed,
     Object? play = freezed,
+    Object? captions = freezed,
     Object? seekForward = freezed,
     Object? seekBackward = freezed,
     Object? search = freezed,
     Object? customActionButtons = freezed,
+    Object? shouldPreserveLikesCountBelowThreshold = freezed,
   }) {
     return _then(_value.copyWith(
       mute: freezed == mute
@@ -1430,6 +1492,10 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
           ? _value.play
           : play // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
       seekForward: freezed == seekForward
           ? _value.seekForward
           : seekForward // ignore: cast_nullable_to_non_nullable
@@ -1446,6 +1512,11 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
           ? _value.customActionButtons
           : customActionButtons // ignore: cast_nullable_to_non_nullable
               as List<BlazeCustomActionButton>?,
+      shouldPreserveLikesCountBelowThreshold: freezed ==
+              shouldPreserveLikesCountBelowThreshold
+          ? _value.shouldPreserveLikesCountBelowThreshold
+          : shouldPreserveLikesCountBelowThreshold // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -1523,6 +1594,20 @@ class _$BlazeMomentsPlayerButtonsStyleCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions {
+    if (_value.captions == null) {
+      return null;
+    }
+
+    return $BlazePlayerButtonStyleCopyWith<$Res>(_value.captions!, (value) {
+      return _then(_value.copyWith(captions: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeMomentsPlayerButtonsStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward {
     if (_value.seekForward == null) {
       return null;
@@ -1577,10 +1662,12 @@ abstract class _$$BlazeMomentsPlayerButtonsStyleImplCopyWith<$Res>
       BlazePlayerButtonStyle? share,
       BlazePlayerButtonStyle? like,
       BlazePlayerButtonStyle? play,
+      BlazePlayerButtonStyle? captions,
       BlazePlayerButtonStyle? seekForward,
       BlazePlayerButtonStyle? seekBackward,
       BlazePlayerButtonStyle? search,
-      List<BlazeCustomActionButton>? customActionButtons});
+      List<BlazeCustomActionButton>? customActionButtons,
+      bool? shouldPreserveLikesCountBelowThreshold});
 
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get mute;
@@ -1592,6 +1679,8 @@ abstract class _$$BlazeMomentsPlayerButtonsStyleImplCopyWith<$Res>
   $BlazePlayerButtonStyleCopyWith<$Res>? get like;
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get play;
+  @override
+  $BlazePlayerButtonStyleCopyWith<$Res>? get captions;
   @override
   $BlazePlayerButtonStyleCopyWith<$Res>? get seekForward;
   @override
@@ -1620,10 +1709,12 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
     Object? share = freezed,
     Object? like = freezed,
     Object? play = freezed,
+    Object? captions = freezed,
     Object? seekForward = freezed,
     Object? seekBackward = freezed,
     Object? search = freezed,
     Object? customActionButtons = freezed,
+    Object? shouldPreserveLikesCountBelowThreshold = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerButtonsStyleImpl(
       mute: freezed == mute
@@ -1646,6 +1737,10 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
           ? _value.play
           : play // ignore: cast_nullable_to_non_nullable
               as BlazePlayerButtonStyle?,
+      captions: freezed == captions
+          ? _value.captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerButtonStyle?,
       seekForward: freezed == seekForward
           ? _value.seekForward
           : seekForward // ignore: cast_nullable_to_non_nullable
@@ -1662,6 +1757,11 @@ class __$$BlazeMomentsPlayerButtonsStyleImplCopyWithImpl<$Res>
           ? _value._customActionButtons
           : customActionButtons // ignore: cast_nullable_to_non_nullable
               as List<BlazeCustomActionButton>?,
+      shouldPreserveLikesCountBelowThreshold: freezed ==
+              shouldPreserveLikesCountBelowThreshold
+          ? _value.shouldPreserveLikesCountBelowThreshold
+          : shouldPreserveLikesCountBelowThreshold // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1676,10 +1776,12 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
       this.share,
       this.like,
       this.play,
+      this.captions,
       this.seekForward,
       this.seekBackward,
       this.search,
-      final List<BlazeCustomActionButton>? customActionButtons})
+      final List<BlazeCustomActionButton>? customActionButtons,
+      this.shouldPreserveLikesCountBelowThreshold})
       : _customActionButtons = customActionButtons;
 
   factory _$BlazeMomentsPlayerButtonsStyleImpl.fromJson(
@@ -1697,6 +1799,8 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
   @override
   final BlazePlayerButtonStyle? play;
   @override
+  final BlazePlayerButtonStyle? captions;
+  @override
   final BlazePlayerButtonStyle? seekForward;
   @override
   final BlazePlayerButtonStyle? seekBackward;
@@ -1713,9 +1817,18 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
     return EqualUnmodifiableListView(value);
   }
 
+  /// Whether the space below the like button is preserved when the likes
+  /// count is hidden (because it is below the display threshold).
+  ///
+  /// When `true` the layout keeps that space reserved, so buttons do not
+  /// shift as the count crosses the threshold. When `false` the container
+  /// collapses to the button height. Omit to keep the preset value.
+  @override
+  final bool? shouldPreserveLikesCountBelowThreshold;
+
   @override
   String toString() {
-    return 'BlazeMomentsPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, play: $play, seekForward: $seekForward, seekBackward: $seekBackward, search: $search, customActionButtons: $customActionButtons)';
+    return 'BlazeMomentsPlayerButtonsStyle(mute: $mute, exit: $exit, share: $share, like: $like, play: $play, captions: $captions, seekForward: $seekForward, seekBackward: $seekBackward, search: $search, customActionButtons: $customActionButtons, shouldPreserveLikesCountBelowThreshold: $shouldPreserveLikesCountBelowThreshold)';
   }
 
   @override
@@ -1728,13 +1841,19 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
             (identical(other.share, share) || other.share == share) &&
             (identical(other.like, like) || other.like == like) &&
             (identical(other.play, play) || other.play == play) &&
+            (identical(other.captions, captions) ||
+                other.captions == captions) &&
             (identical(other.seekForward, seekForward) ||
                 other.seekForward == seekForward) &&
             (identical(other.seekBackward, seekBackward) ||
                 other.seekBackward == seekBackward) &&
             (identical(other.search, search) || other.search == search) &&
             const DeepCollectionEquality()
-                .equals(other._customActionButtons, _customActionButtons));
+                .equals(other._customActionButtons, _customActionButtons) &&
+            (identical(other.shouldPreserveLikesCountBelowThreshold,
+                    shouldPreserveLikesCountBelowThreshold) ||
+                other.shouldPreserveLikesCountBelowThreshold ==
+                    shouldPreserveLikesCountBelowThreshold));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1746,10 +1865,12 @@ class _$BlazeMomentsPlayerButtonsStyleImpl
       share,
       like,
       play,
+      captions,
       seekForward,
       seekBackward,
       search,
-      const DeepCollectionEquality().hash(_customActionButtons));
+      const DeepCollectionEquality().hash(_customActionButtons),
+      shouldPreserveLikesCountBelowThreshold);
 
   /// Create a copy of BlazeMomentsPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1805,10 +1926,12 @@ abstract class _BlazeMomentsPlayerButtonsStyle
           final BlazePlayerButtonStyle? share,
           final BlazePlayerButtonStyle? like,
           final BlazePlayerButtonStyle? play,
+          final BlazePlayerButtonStyle? captions,
           final BlazePlayerButtonStyle? seekForward,
           final BlazePlayerButtonStyle? seekBackward,
           final BlazePlayerButtonStyle? search,
-          final List<BlazeCustomActionButton>? customActionButtons}) =
+          final List<BlazeCustomActionButton>? customActionButtons,
+          final bool? shouldPreserveLikesCountBelowThreshold}) =
       _$BlazeMomentsPlayerButtonsStyleImpl;
 
   factory _BlazeMomentsPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =
@@ -1825,6 +1948,8 @@ abstract class _BlazeMomentsPlayerButtonsStyle
   @override
   BlazePlayerButtonStyle? get play;
   @override
+  BlazePlayerButtonStyle? get captions;
+  @override
   BlazePlayerButtonStyle? get seekForward;
   @override
   BlazePlayerButtonStyle? get seekBackward;
@@ -1832,6 +1957,15 @@ abstract class _BlazeMomentsPlayerButtonsStyle
   BlazePlayerButtonStyle? get search;
   @override
   List<BlazeCustomActionButton>? get customActionButtons;
+
+  /// Whether the space below the like button is preserved when the likes
+  /// count is hidden (because it is below the display threshold).
+  ///
+  /// When `true` the layout keeps that space reserved, so buttons do not
+  /// shift as the count crosses the threshold. When `false` the container
+  /// collapses to the button height. Omit to keep the preset value.
+  @override
+  bool? get shouldPreserveLikesCountBelowThreshold;
 
   /// Create a copy of BlazeMomentsPlayerButtonsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2403,6 +2537,17 @@ mixin _$BlazeMomentsPlayerCtaStyle {
       throw _privateConstructorUsedError;
   bool? get isVisible => throw _privateConstructorUsedError;
 
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  String? get borderColor => throw _privateConstructorUsedError;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  double? get borderWidth => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeMomentsPlayerCtaStyle value) $default,
@@ -2446,7 +2591,9 @@ abstract class $BlazeMomentsPlayerCtaStyleCopyWith<$Res> {
       BlazeMomentsPlayerCTAPositioning? layoutPositioning,
       BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
       BlazeMomentsPlayerCtaIconStyle? icon,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   $BlazeFontCopyWith<$Res>? get font;
   $BlazeMomentsPlayerCtaIconStyleCopyWith<$Res>? get icon;
@@ -2477,6 +2624,8 @@ class _$BlazeMomentsPlayerCtaStyleCopyWithImpl<$Res,
     Object? horizontalAlignment = freezed,
     Object? icon = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_value.copyWith(
       cornerRadius: freezed == cornerRadius
@@ -2515,6 +2664,14 @@ class _$BlazeMomentsPlayerCtaStyleCopyWithImpl<$Res,
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 
@@ -2565,7 +2722,9 @@ abstract class _$$BlazeMomentsPlayerCtaStyleImplCopyWith<$Res>
       BlazeMomentsPlayerCTAPositioning? layoutPositioning,
       BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
       BlazeMomentsPlayerCtaIconStyle? icon,
-      bool? isVisible});
+      bool? isVisible,
+      String? borderColor,
+      double? borderWidth});
 
   @override
   $BlazeFontCopyWith<$Res>? get font;
@@ -2597,6 +2756,8 @@ class __$$BlazeMomentsPlayerCtaStyleImplCopyWithImpl<$Res>
     Object? horizontalAlignment = freezed,
     Object? icon = freezed,
     Object? isVisible = freezed,
+    Object? borderColor = freezed,
+    Object? borderWidth = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerCtaStyleImpl(
       cornerRadius: freezed == cornerRadius
@@ -2635,6 +2796,14 @@ class __$$BlazeMomentsPlayerCtaStyleImplCopyWithImpl<$Res>
           ? _value.isVisible
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool?,
+      borderColor: freezed == borderColor
+          ? _value.borderColor
+          : borderColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      borderWidth: freezed == borderWidth
+          ? _value.borderWidth
+          : borderWidth // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -2651,7 +2820,9 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
       this.layoutPositioning,
       this.horizontalAlignment,
       this.icon,
-      this.isVisible});
+      this.isVisible,
+      this.borderColor,
+      this.borderWidth});
 
   factory _$BlazeMomentsPlayerCtaStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -2676,9 +2847,22 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
   @override
   final bool? isVisible;
 
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  final String? borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  final double? borderWidth;
+
   @override
   String toString() {
-    return 'BlazeMomentsPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, layoutPositioning: $layoutPositioning, horizontalAlignment: $horizontalAlignment, icon: $icon, isVisible: $isVisible)';
+    return 'BlazeMomentsPlayerCtaStyle(cornerRadius: $cornerRadius, textSize: $textSize, font: $font, width: $width, height: $height, layoutPositioning: $layoutPositioning, horizontalAlignment: $horizontalAlignment, icon: $icon, isVisible: $isVisible, borderColor: $borderColor, borderWidth: $borderWidth)';
   }
 
   @override
@@ -2699,13 +2883,28 @@ class _$BlazeMomentsPlayerCtaStyleImpl implements _BlazeMomentsPlayerCtaStyle {
                 other.horizontalAlignment == horizontalAlignment) &&
             (identical(other.icon, icon) || other.icon == icon) &&
             (identical(other.isVisible, isVisible) ||
-                other.isVisible == isVisible));
+                other.isVisible == isVisible) &&
+            (identical(other.borderColor, borderColor) ||
+                other.borderColor == borderColor) &&
+            (identical(other.borderWidth, borderWidth) ||
+                other.borderWidth == borderWidth));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, cornerRadius, textSize, font,
-      width, height, layoutPositioning, horizontalAlignment, icon, isVisible);
+  int get hashCode => Object.hash(
+      runtimeType,
+      cornerRadius,
+      textSize,
+      font,
+      width,
+      height,
+      layoutPositioning,
+      horizontalAlignment,
+      icon,
+      isVisible,
+      borderColor,
+      borderWidth);
 
   /// Create a copy of BlazeMomentsPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2763,7 +2962,9 @@ abstract class _BlazeMomentsPlayerCtaStyle
       final BlazeMomentsPlayerCTAPositioning? layoutPositioning,
       final BlazeMomentsPlayerCTAHorizontalAlignment? horizontalAlignment,
       final BlazeMomentsPlayerCtaIconStyle? icon,
-      final bool? isVisible}) = _$BlazeMomentsPlayerCtaStyleImpl;
+      final bool? isVisible,
+      final String? borderColor,
+      final double? borderWidth}) = _$BlazeMomentsPlayerCtaStyleImpl;
 
   factory _BlazeMomentsPlayerCtaStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeMomentsPlayerCtaStyleImpl.fromJson;
@@ -2786,6 +2987,19 @@ abstract class _BlazeMomentsPlayerCtaStyle
   BlazeMomentsPlayerCtaIconStyle? get icon;
   @override
   bool? get isVisible;
+
+  /// Fallback border color for the CTA button.
+  ///
+  /// A border color supplied by the backend/CMS for the CTA takes precedence
+  /// when present and parseable; this value is used otherwise. Omit to keep
+  /// the preset value (no border).
+  @override
+  String? get borderColor;
+
+  /// Fallback border width for the CTA button. See [borderColor] for
+  /// precedence rules.
+  @override
+  double? get borderWidth;
 
   /// Create a copy of BlazeMomentsPlayerCtaStyle
   /// with the given fields replaced by the non-null parameter values.

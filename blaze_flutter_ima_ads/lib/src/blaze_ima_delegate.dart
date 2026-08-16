@@ -84,11 +84,61 @@ class BlazeIMAAdRequestParams with _$BlazeIMAAdRequestParams {
       _$BlazeIMAAdRequestParamsFromJson(json);
 }
 
+/// Information about the ad involved in an IMA ad event, as reported by the IMA
+/// SDK from the VAST response.
+///
+/// Every field is optional: for some events Google returns no ad information at
+/// all (for example `allAdsCompleted`), and individual fields are absent
+/// whenever the VAST response omits them.
+@freezed
+class BlazeIMAAdInfo with _$BlazeIMAAdInfo {
+  const factory BlazeIMAAdInfo({
+    /// The unique identifier of the ad as specified in the VAST response.
+    String? adId,
+
+    /// The title of the ad provided in the VAST response.
+    String? adTitle,
+
+    /// A description of the ad.
+    String? adDescription,
+
+    /// Information about the source ad server included in the ad response.
+    String? adSystem,
+
+    /// Whether the ad is skippable.
+    bool? isSkippable,
+
+    /// The number of seconds of playback before the ad becomes skippable.
+    /// Native reports `-1` for non-skippable ads or when unavailable.
+    double? skipTimeOffset,
+
+    /// The total duration of the ad in seconds, as provided in the VAST
+    /// response.
+    double? adDuration,
+
+    /// The name of the advertiser as defined by the serving party.
+    String? advertiserName,
+
+    /// The ad tag used to fetch the ad.
+    String? adTag,
+
+    /// Contextual metadata about the content surrounding the ad.
+    BlazeContentExtraInfo? extraInfo,
+  }) = _BlazeIMAAdInfo;
+
+  factory BlazeIMAAdInfo.fromJson(Map<String, dynamic> json) =>
+      _$BlazeIMAAdInfoFromJson(json);
+}
+
 /// Parameters for IMA ad event callbacks
 @freezed
 class BlazeIMADelegateOnAdEventParams with _$BlazeIMADelegateOnAdEventParams {
   const factory BlazeIMADelegateOnAdEventParams({
     required BlazeIMAOnAdEventEventType eventType,
+
+    /// Details of the ad this event refers to. `null` when the IMA SDK reported
+    /// no ad information for the event.
+    BlazeIMAAdInfo? adInfo,
   }) = _BlazeIMADelegateOnAdEventParams;
 
   factory BlazeIMADelegateOnAdEventParams.fromJson(Map<String, dynamic> json) =>
@@ -131,6 +181,7 @@ class BlazeIMADelegate {
 class _OnAdEventParams with _$OnAdEventParams {
   const factory _OnAdEventParams({
     required String eventType,
+    required BlazeIMAAdInfo? adInfo,
   }) = __OnAdEventParams;
 
   factory _OnAdEventParams.fromJson(Map<String, dynamic> json) =>
@@ -175,8 +226,10 @@ class BlazeIMADelegateHelper {
             final eventType = $enumDecode(
                 _$BlazeIMAOnAdEventEventTypeEnumMap, eventData.eventType);
 
-            final eventParams =
-                BlazeIMADelegateOnAdEventParams(eventType: eventType);
+            final eventParams = BlazeIMADelegateOnAdEventParams(
+              eventType: eventType,
+              adInfo: eventData.adInfo,
+            );
             callback(eventParams);
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(

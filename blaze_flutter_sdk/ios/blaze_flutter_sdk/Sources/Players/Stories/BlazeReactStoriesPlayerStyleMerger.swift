@@ -24,6 +24,7 @@ extension BlazeStoryPlayerStyle {
         merged.headerGradient = merged.headerGradient.mergedWith(customization.headerGradient)
         merged.firstTimeSlide = merged.firstTimeSlide.mergedWith(customization.firstTimeSlide)
         merged.progressBar = merged.progressBar.mergedWith(customization.progressBar)
+        merged.captions = merged.captions.mergedWith(customization.captions)
 
         return merged
     }
@@ -62,6 +63,8 @@ extension BlazeStoryPlayerCtaStyle {
         merged.cornerRadius = customization.cornerRadius ?? merged.cornerRadius
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
         merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
+        merged.borderWidth = customization.borderWidth ?? merged.borderWidth
         return merged
     }
 }
@@ -101,6 +104,7 @@ extension BlazeStoryPlayerButtonsStyle {
         merged.mute = merged.mute.mergedWith(customization.mute)
         merged.exit = merged.exit.mergedWith(customization.exit)
         merged.share = merged.share.mergedWith(customization.share)
+        merged.captions = merged.captions.mergedWith(customization.captions)
 
         if let customActionButtons = customization.customActionButtons, !customActionButtons.isEmpty {
             let nativeButtons = customActionButtons.compactMap { $0.toNativeStoryCustomActionButton() }

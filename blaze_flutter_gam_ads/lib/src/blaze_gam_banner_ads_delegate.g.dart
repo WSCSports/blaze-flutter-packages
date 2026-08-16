@@ -12,12 +12,17 @@ _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl
         _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl(
           eventType:
               $enumDecode(_$BlazeBannerAdEventTypeEnumMap, json['eventType']),
+          extraInfo: json['extraInfo'] == null
+              ? null
+              : BlazeContentExtraInfo.fromJson(
+                  json['extraInfo'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeGAMBannerAdsDelegateOnAdEventParamsImplToJson(
         _$BlazeGAMBannerAdsDelegateOnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': _$BlazeBannerAdEventTypeEnumMap[instance.eventType]!,
+      'extraInfo': instance.extraInfo?.toJson(),
     };
 
 const _$BlazeBannerAdEventTypeEnumMap = {
@@ -27,26 +32,37 @@ const _$BlazeBannerAdEventTypeEnumMap = {
   BlazeBannerAdEventType.adRequested: 'adRequested',
 };
 
-_$_OnAdErrorParamsImpl _$$_OnAdErrorParamsImplFromJson(
-        Map<String, dynamic> json) =>
-    _$_OnAdErrorParamsImpl(
-      errorMessage: json['errorMessage'] as String,
-    );
+_$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl
+    _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl(
+          errorMessage: json['errorMessage'] as String,
+          extraInfo: json['extraInfo'] == null
+              ? null
+              : BlazeContentExtraInfo.fromJson(
+                  json['extraInfo'] as Map<String, dynamic>),
+        );
 
-Map<String, dynamic> _$$_OnAdErrorParamsImplToJson(
-        _$_OnAdErrorParamsImpl instance) =>
+Map<String, dynamic> _$$BlazeGAMBannerAdsDelegateOnAdErrorParamsImplToJson(
+        _$BlazeGAMBannerAdsDelegateOnAdErrorParamsImpl instance) =>
     <String, dynamic>{
       'errorMessage': instance.errorMessage,
+      'extraInfo': instance.extraInfo?.toJson(),
     };
 
 _$_OnAdEventParamsImpl _$$_OnAdEventParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$_OnAdEventParamsImpl(
       eventType: json['eventType'] as String,
+      extraInfo: json['extraInfo'] == null
+          ? null
+          : BlazeContentExtraInfo.fromJson(
+              json['extraInfo'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_OnAdEventParamsImplToJson(
         _$_OnAdEventParamsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
+      'extraInfo': instance.extraInfo?.toJson(),
     };

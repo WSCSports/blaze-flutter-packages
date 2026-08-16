@@ -438,6 +438,7 @@ class VideoProps with _$VideoProps {
     BlazeAnalyticsOrientation? device_orientation,
     Map<String, String>? content_extra_info,
     AnalyticsVideosCtaConfig? cta_config,
+    String? cc_state,
   }) = _VideoProps;
 
   factory VideoProps.fromJson(Map<String, dynamic> json) =>

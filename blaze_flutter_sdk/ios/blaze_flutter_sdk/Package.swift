@@ -11,7 +11,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "FlutterFramework", path: "../FlutterFramework"),
-        .package(url: "https://github.com/WSCSports/blaze-specs-ios", exact: "1.19.0")
+        .package(url: "https://github.com/WSCSports/blaze-specs-ios", exact: "1.20.1")
     ],
     targets: [
         .target(

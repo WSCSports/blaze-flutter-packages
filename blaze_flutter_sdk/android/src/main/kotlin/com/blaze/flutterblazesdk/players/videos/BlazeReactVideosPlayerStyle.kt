@@ -3,6 +3,7 @@ package com.blaze.flutterblazesdk.players.videos
 import androidx.annotation.Keep
 import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerCtaIconStyle
 import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerHeadingTextStyle
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCaptionsStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactPlayerButtonStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactSeekBarStyle
 import com.blaze.flutterblazesdk.utils.parsing.BlazeReactImage
@@ -19,7 +20,9 @@ data class BlazeReactVideosPlayerStyle(
         val buttons: BlazeReactVideosPlayerButtonsStyle?,
         val backgroundColor: String?, // Hex
         val cta: BlazeReactVideosPlayerCtaStyle?,
-        val seekBar: BlazeReactVideosPlayerSeekBarStyle?
+        val seekBar: BlazeReactVideosPlayerSeekBarStyle?,
+        val overlayVisibilityThresholdMs: Long?,
+        val captions: BlazeReactCaptionsStyle?
 )
 
 @Keep
@@ -66,7 +69,9 @@ data class BlazeReactVideosPlayerCtaStyle(
         val width: Int?,
         val height: Int?,
         val icon: BlazeReactVideosPlayerCtaIconStyle?,
-        val isVisible: Boolean?
+        val isVisible: Boolean?,
+        val borderColor: String?, // Hex
+        val borderWidth: Int?
 )
 
 @Keep

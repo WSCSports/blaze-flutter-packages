@@ -45,6 +45,17 @@ struct BlazeReactPlayerButtonCustomImageStates: Codable {
     var unselectedImage: BlazeReactImage?
 }
 
+struct BlazeReactCaptionsStyle: Codable {
+    var font: BlazeReactTitleFont?
+    var textSize: CGFloat?
+    var positioning: BlazeReactCaptionsPositioning?
+}
+
+struct BlazeReactCaptionsPositioning: Codable {
+    var xPosition: [String: BlazeCodableValue]?
+    var yPosition: [String: BlazeCodableValue]?
+}
+
 struct BlazeReactSeekBarStyle: Codable {
     var isVisible: Bool?
     var backgroundColor: String?

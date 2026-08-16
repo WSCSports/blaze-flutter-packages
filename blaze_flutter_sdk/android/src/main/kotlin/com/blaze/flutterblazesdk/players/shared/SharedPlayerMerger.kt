@@ -1,6 +1,7 @@
 package com.blaze.flutterblazesdk.players.shared
 
 import android.content.Context
+import com.blaze.blazesdk.style.players.BlazeCaptionsStyle
 import com.blaze.blazesdk.style.players.BlazeFirstTimeSlideCTAStyle
 import com.blaze.blazesdk.style.players.BlazeFirstTimeSlideInstructionStyle
 import com.blaze.blazesdk.style.players.BlazeFirstTimeSlideTextStyle
@@ -37,6 +38,28 @@ fun BlazeFirstTimeSlideTextStyle.mergedWith(
     }
     merged.fontResId = customization.font?.toFontResId(context)
     merged.textSize = customization.textSize ?: this.textSize
+
+    return merged
+}
+
+// Styles the rendered captions text (font, size, on-screen position). Each positioning axis is
+// applied independently - a customization supplying only xPosition leaves yPosition untouched.
+fun BlazeCaptionsStyle.mergedWith(
+        customization: BlazeReactCaptionsStyle?,
+        context: Context
+): BlazeCaptionsStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.fontResId = customization.font?.toFontResId(context)
+    merged.textSize = customization.textSize ?: this.textSize
+
+    customization.positioning?.xPosition?.toBlazeCaptionsXPosition()?.let {
+        merged.positioning.xPosition = it
+    }
+    customization.positioning?.yPosition?.toBlazeCaptionsYPosition()?.let {
+        merged.positioning.yPosition = it
+    }
 
     return merged
 }

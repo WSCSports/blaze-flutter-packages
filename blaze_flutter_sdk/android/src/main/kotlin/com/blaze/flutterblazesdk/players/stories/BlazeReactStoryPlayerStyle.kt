@@ -2,6 +2,7 @@ package com.blaze.flutterblazesdk.players.stories
 
 import androidx.annotation.Keep
 import com.blaze.blazesdk.style.players.BlazeTextCase
+import com.blaze.flutterblazesdk.players.shared.BlazeReactCaptionsStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideCTAStyle
 import com.blaze.flutterblazesdk.players.shared.BlazeReactFirstTimeSlideInstructionStyle
@@ -23,7 +24,8 @@ data class BlazeReactStoryPlayerStyle(
         val cta: BlazeReactStoryPlayerCtaStyle?,
         val headerGradient: BlazeReactStoryPlayerHeaderGradientStyle?,
         val progressBar: BlazeReactStoryPlayerProgressBarStyle?,
-        val firstTimeSlide: BlazeReactStoryPlayerFirstTimeSlideStyle?
+        val firstTimeSlide: BlazeReactStoryPlayerFirstTimeSlideStyle?,
+        val captions: BlazeReactCaptionsStyle?
 )
 
 @Keep
@@ -70,6 +72,7 @@ data class BlazeReactStoryPlayerButtonsStyle(
         val mute: BlazeReactPlayerButtonStyle?,
         val exit: BlazeReactPlayerButtonStyle?,
         val share: BlazeReactPlayerButtonStyle?,
+        val captions: BlazeReactPlayerButtonStyle?,
         val customActionButtons: List<BlazeReactCustomActionButton>?
 )
 
@@ -93,7 +96,9 @@ data class BlazeReactStoryPlayerCtaStyle(
         val cornerRadius: Int?,
         val textSize: Float?,
         val font: BlazeReactTitleFont?,
-        val isVisible: Boolean?
+        val isVisible: Boolean?,
+        val borderColor: String?, // Hex
+        val borderWidth: Int?
 )
 
 @Keep

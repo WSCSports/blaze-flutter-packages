@@ -22,7 +22,7 @@ _$BlazeVideosPlaybackConfigurationImpl
     _$$BlazeVideosPlaybackConfigurationImplFromJson(
             Map<String, dynamic> json) =>
         _$BlazeVideosPlaybackConfigurationImpl(
-          multiAspectRatio: json['multiAspectRatio'] as bool,
+          multiAspectRatio: json['multiAspectRatio'] as bool?,
           shouldOpenInLandscape: json['shouldOpenInLandscape'] as bool,
           pipConfiguration: json['pipConfiguration'] == null
               ? null

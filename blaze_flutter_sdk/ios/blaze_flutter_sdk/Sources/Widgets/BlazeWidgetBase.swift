@@ -22,6 +22,10 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         static let playMessageName = "play"
         static let updateWidgetsUiMessageName = "updateWidgetsUi"
         static let updateOverrideStylesMessageName = "updateOverrideStyles"
+        static let reloadAllTabsMessageName = "reloadAllTabs"
+        static let reloadNonActiveTabsMessageName = "reloadNonActiveTabs"
+        static let reloadTabMessageName = "reloadTab"
+        static let reloadTabByContainerIdMessageName = "reloadTabByContainerId"
     }
     
     let creationParams: [String : AnyHashable]
@@ -69,6 +73,24 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         }
     }
 
+    // Videos widgets only. Init-time only - the native SDK has no runtime-update hook for it
+    // (unlike dataSource).
+    var videosFilterParamsMap: [String: AnyHashable]? {
+        get {
+            return creationParams["videosFilterParams"] as? [String: AnyHashable]
+        }
+    }
+
+    // Init-time only - unlike dataSource, there is no runtime setter for it natively on Android
+    // (iOS's native property is live-settable, but this bridge applies it once at widget
+    // creation for parity - see `widgetView` below). Applied unconditionally (tabs or not) -
+    // unlike Android, iOS has no separate tabs initializer to special-case.
+    var widgetRemoteIdentifier: String? {
+        get {
+            return creationParams["widgetRemoteIdentifier"] as? String
+        }
+    }
+
     var perItemStyleOverridesMap: [String: AnyHashable]? {
         get {
             return creationParams["perItemStyleOverrides"] as? [String: AnyHashable]
@@ -88,7 +110,13 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             return creationParams["tabsConfiguration"] as? [String: AnyHashable]
         }
     }
-    
+
+    // Moments-only: retained by FLMomentsRowWidget/FLMomentsGridWidget's createWidget() when a
+    // tabs-backed widget is built, so the reload commands below have a live handle to the
+    // fullscreen tabs session. Stays nil for Stories/Videos and non-tabs Moments widgets, making
+    // those commands no-ops.
+    var momentsTabsContainer: BlazeMomentsPlayerContainerTabs?
+
     // Override this property if you want to disable content inset adjustment behavior.
     // This is critical - in Flutter PlatformViews are embeded inside a ScrollView and widgets may be shrinked by the status bar.
     // Grids already handling this in the sdk.
@@ -97,7 +125,9 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
     }
 
     lazy var widgetView: BlazeWidgetView = {
-        return createWidget()
+        let widget = createWidget()
+        widget.widgetRemoteIdentifier = widgetRemoteIdentifier
+        return widget
     }()
     
     lazy var widgetContainer: UIView = {
@@ -171,6 +201,12 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             self?.onTriggerCustomActionButton(playerType: params.playerType,
                                               sourceId: params.sourceId,
                                               buttonParams: params.customActionParams)
+        },
+
+        onShareClicked: { [weak self] params in
+            return self?.onShareClicked(playerType: params.playerType,
+                                        sourceId: params.sourceId,
+                                        shareParams: params.shareParams) ?? nil
         }
 
     )
@@ -224,9 +260,16 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             self?.onMomentsContainerTabsTabSelected(playerType: params.playerType,
                                                     sourceId: params.sourceId,
                                                     tabIndex: params.tabIndex)
+        },
+        onShareClicked: { [weak self] params in
+            return self?.onMomentsContainerTabsShareClicked(playerType: params.playerType,
+                                                             sourceId: params.sourceId,
+                                                             shareParams: params.shareParams) ?? nil
         }
-        // `onSearchClicked` (sync return the async bridge can't provide) and `onShareClicked`
-        // (not bridged anywhere) are intentionally left at their native defaults.
+        // `onSearchClicked` (sync return the async bridge can't provide) is intentionally
+        // left at its native default — see the observer-only note on `onShareClicked` in
+        // BlazeSharedDelegateHandler.swift for why that one's callback is now bridged while
+        // this one isn't.
     )
 
     init(frame: CGRect,
@@ -273,6 +316,14 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
                 self.updateWidgetsUi()
             case ChannelConstants.updateOverrideStylesMessageName:
                 self.updateOverrideStyles(call: call)
+            case ChannelConstants.reloadAllTabsMessageName:
+                self.momentsTabsContainer?.reloadAllTabs()
+            case ChannelConstants.reloadNonActiveTabsMessageName:
+                self.momentsTabsContainer?.reloadNonActiveTabs()
+            case ChannelConstants.reloadTabMessageName:
+                self.reloadTab(call: call)
+            case ChannelConstants.reloadTabByContainerIdMessageName:
+                self.reloadTabByContainerId(call: call)
             default:
                 break
             }
@@ -390,7 +441,28 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             widgetView.updateOverrideStyles(stylesPerItem: customizationMap, shouldUpdateUI: shouldUpdateUi)
         }
     }
-    
+
+    // Moments `.tabs()` widgets only - a no-op when momentsTabsContainer is nil (Stories/Videos,
+    // or a Moments widget not built with `.tabs()`). Out-of-range index is a no-op natively.
+    func reloadTab(call: FlutterMethodCall) {
+        guard let args = call.arguments as? [String: Any],
+              let at = args["at"] as? Int else {
+            return
+        }
+        momentsTabsContainer?.reloadTab(at: at)
+    }
+
+    // Moments `.tabs()` widgets only - see reloadTab(call:). Unmatched containerId is a no-op
+    // natively.
+    func reloadTabByContainerId(call: FlutterMethodCall) {
+        guard let args = call.arguments as? [String: Any],
+              let containerId = args["containerId"] as? String else {
+            return
+        }
+        momentsTabsContainer?.reloadTab(containerId: containerId)
+    }
+
+
     func convertPerItemStyleOverrides(_ perItemStyleOverridesRaw: [String: AnyHashable]) -> [BlazeSDK.BlazeWidgetItemCustomMapping: BlazeSDK.BlazeWidgetItemStyleOverrides]? {
         
         guard let customizationReactMap = perItemStyleOverridesRaw.toReactWidgetStylesOverridesMap else {
@@ -569,6 +641,16 @@ extension BlazeWidgetBase {
         }
     }
 
+    func onShareClicked(playerType: BlazePlayerType, sourceId: String?, shareParams: BlazeShareParams) -> String? {
+        return sharedDelegateHandler.onShareClicked(
+            playerType: playerType,
+            sourceId: sourceId,
+            shareParams: shareParams
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onShareClicked", encodable: params)
+        }
+    }
+
 }
 
 // MARK: - Moments "widget to tabs" container delegate callbacks
@@ -667,6 +749,16 @@ extension BlazeWidgetBase {
             tabIndex: tabIndex
         ) { [weak self] params in
             self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsTabSelected", encodable: params)
+        }
+    }
+
+    func onMomentsContainerTabsShareClicked(playerType: BlazePlayerType, sourceId: String?, shareParams: BlazeShareParams) -> String? {
+        return sharedDelegateHandler.onShareClicked(
+            playerType: playerType,
+            sourceId: sourceId,
+            shareParams: shareParams
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsShareClicked", encodable: params)
         }
     }
 

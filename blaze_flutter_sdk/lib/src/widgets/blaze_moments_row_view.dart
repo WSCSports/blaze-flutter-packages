@@ -15,6 +15,7 @@ class BlazeMomentsRowView extends BlazeWidgetBase {
     super.shouldOrderWidgetByReadStatus,
     BlazeMomentsPlayerStyle? super.playerStyle,
     BlazeMomentsPlaybackConfiguration? super.playbackConfiguration,
+    super.widgetRemoteIdentifier,
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,
