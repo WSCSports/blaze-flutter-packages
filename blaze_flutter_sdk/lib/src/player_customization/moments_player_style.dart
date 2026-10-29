@@ -28,6 +28,14 @@ class BlazeMomentsPlayerStyle with _$BlazeMomentsPlayerStyle {
     /// Styles the rendered captions text. To style the CC toggle button
     /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
     BlazeCaptionsStyle? captions,
+
+    /// iOS-only. No-op on Android. Whether the player content extends under
+    /// the bottom safe area (behind the home indicator or the host's bottom
+    /// chrome); the player controls stay above it. Has no effect inside a
+    /// Moments tabs container, which uses
+    /// [BlazePlayerTabsStyle.ignoresBottomSafeArea]. When omitted, the native
+    /// default (`false`) is kept.
+    bool? ignoresBottomSafeArea,
   }) = _BlazeMomentsPlayerStyle;
 
   factory BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -295,6 +303,11 @@ class BlazeMomentsPlayerFollowEntityChipStyle
     String? backgroundColor,
     String? iconColor,
     BlazeMomentsPlayerFollowEntityChipContentSource? contentSource,
+
+    /// The follow / following icons: the default `+` and checkmark, or an
+    /// outlined and filled star. No effect while the chip shows text
+    /// ([contentSource] `text`). When omitted, the native default is kept.
+    BlazeMomentsPlayerFollowEntityIconSource? iconSource,
   }) = _BlazeMomentsPlayerFollowEntityChipStyle;
 
   factory BlazeMomentsPlayerFollowEntityChipStyle.fromJson(
@@ -390,6 +403,17 @@ enum BlazeMomentsPlayerFollowEntityChipContentSource {
   icon,
   @JsonValue('Text')
   text,
+}
+
+/// Follow entity chip icon set enumeration
+enum BlazeMomentsPlayerFollowEntityIconSource {
+  /// The default `+` (follow) and checkmark (following) icons.
+  @JsonValue('Default')
+  defaultIcon,
+
+  /// An outlined (follow) and filled (following) star.
+  @JsonValue('Star')
+  star,
 }
 
 /// Follow entity type value enumeration

@@ -61,6 +61,8 @@ _$BlazePlayerButtonStyleImpl _$$BlazePlayerButtonStyleImplFromJson(
           ? null
           : BlazePlayerItemButtonImageStates.fromJson(
               json['customImage'] as Map<String, dynamic>),
+      glassBackground: $enumDecodeNullable(
+          _$BlazeGlassBackgroundStateEnumMap, json['glassBackground']),
     );
 
 Map<String, dynamic> _$$BlazePlayerButtonStyleImplToJson(
@@ -73,6 +75,8 @@ Map<String, dynamic> _$$BlazePlayerButtonStyleImplToJson(
       'scaleType': _$BlazeButtonScaleTypeEnumMap[instance.scaleType],
       'isVisibleForAds': instance.isVisibleForAds,
       'customImage': instance.customImage?.toJson(),
+      'glassBackground':
+          _$BlazeGlassBackgroundStateEnumMap[instance.glassBackground],
     };
 
 const _$BlazeButtonScaleTypeEnumMap = {
@@ -84,6 +88,12 @@ const _$BlazeButtonScaleTypeEnumMap = {
   BlazeButtonScaleType.center: 'CENTER',
   BlazeButtonScaleType.centerCrop: 'CENTER_CROP',
   BlazeButtonScaleType.centerInside: 'CENTER_INSIDE',
+};
+
+const _$BlazeGlassBackgroundStateEnumMap = {
+  BlazeGlassBackgroundState.automatic: 'automatic',
+  BlazeGlassBackgroundState.on: 'on',
+  BlazeGlassBackgroundState.off: 'off',
 };
 
 _$BlazeFirstTimeSlideInstructionStyleImpl

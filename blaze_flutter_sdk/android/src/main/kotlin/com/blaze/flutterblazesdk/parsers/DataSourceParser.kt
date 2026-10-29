@@ -10,6 +10,7 @@ import com.blaze.blazesdk.data_source.BlazeRecommendationsType
 import com.blaze.blazesdk.data_source.BlazeWidgetLabel
 import com.blaze.blazesdk.prefetch.models.BlazeCachingLevel
 import com.blaze.blazesdk.shared.models.BlazeLayoutDirection
+import com.blaze.flutterblazesdk.follow.toFollowedEntityCategory
 
 /** Extension functions to parse BlazeDataSourceType from Flutter's Map representation */
 fun Map<String, Any?>.toBlazeDataSourceType(): BlazeDataSourceType? {
@@ -20,8 +21,22 @@ fun Map<String, Any?>.toBlazeDataSourceType(): BlazeDataSourceType? {
         containsKey("ids") -> parseIdsDataSource()
         containsKey("recommendationsType") -> parseRecommendationsDataSource()
         containsKey("dataSources") -> parseCompositeDataSource()
+        containsKey("entityTypes") -> parseFollowedEntitiesDataSource()
         else -> null
     }
+}
+
+private fun Map<String, Any?>.parseFollowedEntitiesDataSource(): BlazeDataSourceType.FollowedEntities {
+    val entityTypes = (get("entityTypes") as? List<*>).orEmpty()
+        .mapNotNull { (it as? String).toFollowedEntityCategory() }
+        .toSet()
+
+    return BlazeDataSourceType.FollowedEntities(
+        entityTypes = entityTypes,
+        orderType = (get("orderType") as? String)?.toBlazeOrderType(),
+        advancedOrderType = (get("advancedOrderType") as? String)?.toBlazeAdvancedOrderType(),
+        maxItems = (get("maxItems") as? Number)?.toInt()
+    )
 }
 
 private fun Map<String, Any?>.parseSearchDataSource(): BlazeDataSourceType.Search? {

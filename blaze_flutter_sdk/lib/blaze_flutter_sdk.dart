@@ -7,6 +7,7 @@ export 'src/sdk_module/blaze_sdk_module.dart';
 export 'src/types/blaze_data_source_type.dart';
 export 'src/types/blaze_videos_filter_params.dart';
 export 'src/types/shared_types.dart';
+export 'src/types/entitlements.dart';
 export 'src/types/widget_presets.dart';
 export 'src/types/blaze_widget_label.dart';
 export 'src/types/search_screen_options.dart';

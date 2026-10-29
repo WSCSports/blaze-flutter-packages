@@ -19,6 +19,12 @@ enum EventCategory {
   ad,
   @JsonValue('Interaction')
   interaction,
+  @JsonValue('Search')
+  search,
+
+  /// A category this SDK version doesn't know yet (D24).
+  @JsonValue('Unknown')
+  unknown,
 }
 
 enum EventActionName {
@@ -161,6 +167,57 @@ enum EventActionName {
   interactionView,
   @JsonValue('interaction_answer')
   interactionAnswer,
+  // Follow
+  @JsonValue('follow')
+  follow,
+  @JsonValue('unfollow')
+  unfollow,
+  // Casting and picture-in-picture
+  @JsonValue('casting_started')
+  castingStarted,
+  @JsonValue('casting_ended')
+  castingEnded,
+  @JsonValue('pip_enabled')
+  pipEnabled,
+  @JsonValue('pip_disabled')
+  pipDisabled,
+  // Search
+  @JsonValue('search_click')
+  searchClick,
+  @JsonValue('search_opened')
+  searchOpened,
+  @JsonValue('search_query_submitted')
+  searchQuerySubmitted,
+  @JsonValue('search_results_shown')
+  searchResultsShown,
+  @JsonValue('search_result_clicked')
+  searchResultClicked,
+  @JsonValue('search_suggestions_shown')
+  searchSuggestionsShown,
+  @JsonValue('search_suggestions_clicked')
+  searchSuggestionsClicked,
+  // Videos playback and viewing
+  @JsonValue('back_to_live')
+  backToLive,
+  @JsonValue('playback_speed_change')
+  playbackSpeedChange,
+  @JsonValue('video_changed_status')
+  videoChangedStatus,
+  @JsonValue('viewing_mode_transition')
+  viewingModeTransition,
+  @JsonValue('viewing_orientation_changed')
+  viewingOrientationChanged,
+  // Containers and descriptions
+  @JsonValue('container_data_load')
+  containerDataLoad,
+  @JsonValue('description_expanded')
+  descriptionExpanded,
+  @JsonValue('description_collapsed')
+  descriptionCollapsed,
+
+  /// An action this SDK version doesn't know yet (D24).
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum ContentType {
@@ -218,14 +275,24 @@ enum PlayerStartTriggers {
   deeplink,
   @JsonValue('Entry Point')
   entryPoint,
-  @JsonValue('Auto Play From Widget')
+  @JsonValue('Auto Play from Widget')
   widgetAutoPlay,
   @JsonValue('Notification')
   notification,
   @JsonValue('App Foreground')
   appForeground,
+  @JsonValue('Inline')
+  inline,
+  @JsonValue('Moments Container')
+  momentsContainer,
+  @JsonValue('Viewing Mode Transition')
+  viewingModeTransition,
   @JsonValue('Skip')
   skip,
+  @JsonValue('Swipe')
+  swipe,
+  @JsonValue('Auto Skip')
+  autoSkip,
 }
 
 enum PlayerExitTriggers {
@@ -255,6 +322,12 @@ enum PlayerExitTriggers {
   backButton,
   @JsonValue('User Swipe To Dismiss')
   userSwipeToDismiss,
+  @JsonValue('Inline')
+  inline,
+  @JsonValue('Viewing Mode Transition')
+  viewingModeTransition,
+  @JsonValue('PIP Dismissed')
+  pipDismissed,
 }
 
 enum PlaybackActionMethod {
@@ -276,6 +349,8 @@ enum VideoSeekType {
   seekbar,
   @JsonValue('Double Tap')
   doubleTap,
+  @JsonValue('Seek Button')
+  seekButton,
 }
 
 enum VideoSeekDirection {
@@ -377,7 +452,13 @@ class StoryProps with _$StoryProps {
     int? story_page_count,
     PlayableNavigationType? story_page_navigation_type,
     PlayableNavigationDirection? story_page_navigation_direction,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerStartTriggers? story_start_trigger,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerExitTriggers? story_exit_trigger,
     double? story_page_duration,
     double? story_page_duration_viewed_percent,
@@ -403,7 +484,13 @@ class MomentsProps with _$MomentsProps {
     int? moment_index,
     PlayableNavigationType? moment_navigation_type,
     PlayableNavigationDirection? moment_navigation_direction,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerStartTriggers? moment_start_trigger,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerExitTriggers? moment_exit_trigger,
     double? moment_duration,
     double? moment_duration_viewed_percent,
@@ -426,9 +513,18 @@ class VideoProps with _$VideoProps {
     String? video_id,
     String? video_title,
     AudioState? audio_state,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerStartTriggers? video_start_trigger,
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerExitTriggers? video_end_trigger,
     double? video_duration,
+    // Unknown native seek types decode to null instead of dropping the event (D24).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     VideoSeekType? seek_type,
     double? seek_total_time,
     VideoSeekDirection? seek_direction,
@@ -461,6 +557,9 @@ class AdEventProps with _$AdEventProps {
     Map<String, String>? story_page_content_extra_info,
 
     // Properties relevant only for CustomNative
+    // Unknown native triggers decode to null instead of dropping the event (D23).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
     PlayerExitTriggers? ad_exit_trigger,
     double? ad_duration_viewed_percent,
     PlaybackActionMethod? playback_action_method,
@@ -527,7 +626,12 @@ class BlazeAnalyticsEvent with _$BlazeAnalyticsEvent {
     required String timestamp_user_tz,
     required String sdk_version,
     required String sdk_type,
+    // Unknown native values decode to `unknown` instead of dropping the event (D24).
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: EventCategory.unknown)
     required EventCategory event_category,
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: EventActionName.unknown)
     required EventActionName event_action,
     required UserProps user,
     required ReferringPropsAnalytics referring,

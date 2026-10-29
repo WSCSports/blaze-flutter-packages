@@ -21,6 +21,7 @@ struct BlazeReactMomentsPlayerStyle: Codable {
     var playerDisplayMode: BlazeReactPlayerDisplayMode?
     var followEntity: BlazeReactMomentsPlayerFollowEntityStyle?
     var captions: BlazeReactCaptionsStyle?
+    var ignoresBottomSafeArea: Bool?
 }
 
 struct BlazeReactMomentsPlayerFollowEntityStyle: Codable {
@@ -44,10 +45,16 @@ struct BlazeReactMomentsPlayerFollowEntityChipStyle: Codable {
     var backgroundColor: String?
     var iconColor: String?
     var contentSource: ContentSource?
+    var iconSource: IconSource?
 
     enum ContentSource: String, Codable {
         case icon = "Icon"
         case text = "Text"
+    }
+
+    enum IconSource: String, Codable {
+        case `default` = "Default"
+        case star = "Star"
     }
 }
 

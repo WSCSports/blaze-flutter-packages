@@ -21,6 +21,18 @@ class BlazeWidgetItemStyle with _$BlazeWidgetItemStyle {
     /// The duration element configuration of the widget item.
     /// Note: This property is only applicable for `Videos` and `Moments` player type.
     BlazeWidgetItemDurationElementStyle? durationElement,
+
+    /// The subtitle row under the title. When omitted, the native preset
+    /// value (hidden) is kept.
+    BlazeWidgetItemSubtitleStyle? subtitle,
+
+    /// The description row under the subtitle. When omitted, the native
+    /// preset value (hidden) is kept.
+    BlazeWidgetItemDescriptionStyle? description,
+
+    /// The play icon over the thumbnail. When omitted, the native preset
+    /// value (hidden) is kept.
+    BlazeWidgetItemPlayIconElementStyle? playIconElement,
   }) = _BlazeWidgetItemStyle;
 
   factory BlazeWidgetItemStyle.fromJson(Map<String, dynamic> json) =>

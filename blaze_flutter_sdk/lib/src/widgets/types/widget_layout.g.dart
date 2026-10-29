@@ -35,6 +35,18 @@ _$BlazeWidgetItemStyleImpl _$$BlazeWidgetItemStyleImplFromJson(
           ? null
           : BlazeWidgetItemDurationElementStyle.fromJson(
               json['durationElement'] as Map<String, dynamic>),
+      subtitle: json['subtitle'] == null
+          ? null
+          : BlazeWidgetItemSubtitleStyle.fromJson(
+              json['subtitle'] as Map<String, dynamic>),
+      description: json['description'] == null
+          ? null
+          : BlazeWidgetItemDescriptionStyle.fromJson(
+              json['description'] as Map<String, dynamic>),
+      playIconElement: json['playIconElement'] == null
+          ? null
+          : BlazeWidgetItemPlayIconElementStyle.fromJson(
+              json['playIconElement'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeWidgetItemStyleImplToJson(
@@ -49,6 +61,9 @@ Map<String, dynamic> _$$BlazeWidgetItemStyleImplToJson(
       'margins': instance.margins?.toJson(),
       'badge': instance.badge?.toJson(),
       'durationElement': instance.durationElement?.toJson(),
+      'subtitle': instance.subtitle?.toJson(),
+      'description': instance.description?.toJson(),
+      'playIconElement': instance.playIconElement?.toJson(),
     };
 
 _$BlazeWidgetLayoutImpl _$$BlazeWidgetLayoutImplFromJson(

@@ -38,18 +38,22 @@ class BlazeFlutterSDKModule {
         static let setPlayerSoundState = "setPlayerSoundState"
         static let isMuted = "isMuted"
         static let showSearchScreen = "showSearchScreen"
-        static let setFollowedEntities = "setFollowedEntities"
-        static let insertFollowedEntities = "insertFollowedEntities"
-        static let removeFollowedEntities = "removeFollowedEntities"
-        static let getFollowedEntities = "getFollowedEntities"
+        static let followEntitiesManagerSet = "followEntitiesManagerSet"
+        static let followEntitiesManagerInsert = "followEntitiesManagerInsert"
+        static let followEntitiesManagerRemove = "followEntitiesManagerRemove"
+        static let followEntitiesManagerGet = "followEntitiesManagerGet"
         static let stopActiveCastingSession = "stopActiveCastingSession"
         static let stopActivePiPSession = "stopActivePiPSession"
         static let isPiPActive = "isPiPActive"
+        static let isInColdStart = "isInColdStart"
+        static let setLiquidGlassEnabled = "setLiquidGlassEnabled"
+        static let isLiquidGlassEnabled = "isLiquidGlassEnabled"
         static let canHandleUniversalLink = "canHandleUniversalLink"
         static let updateGeoRestriction = "updateGeoRestriction"
         static let canHandlePushNotification = "canHandlePushNotification"
         static let handleNotificationPayload = "handleNotificationPayload"
         static let setExternalUserId = "setExternalUserId"
+        static let setExternalUserToken = "setExternalUserToken"
         static let handleUniversalLink = "handleUniversalLink"
         static let isInitialized = "isInitialized"
     }
@@ -72,6 +76,9 @@ class BlazeFlutterSDKModule {
 
     // store appOverridesCTAHandling setting
     private var appOverridesCTAHandling: Bool = false
+
+    // Global interactionLinkHandling from initSDK; widgets fall back to it
+    private(set) var interactionLinkHandling: BlazeInteractionLinkHandleType?
 
     let flutterSDKHelper = BlazeFlutterSDKHelper()
 
@@ -159,13 +166,13 @@ class BlazeFlutterSDKModule {
             isMuted(call: call, result: result)
         case MethodNameConstants.showSearchScreen:
             showSearchScreen(call: call, result: result)
-        case MethodNameConstants.setFollowedEntities:
+        case MethodNameConstants.followEntitiesManagerSet:
             setFollowedEntities(call: call, result: result)
-        case MethodNameConstants.insertFollowedEntities:
+        case MethodNameConstants.followEntitiesManagerInsert:
             insertFollowedEntities(call: call, result: result)
-        case MethodNameConstants.removeFollowedEntities:
+        case MethodNameConstants.followEntitiesManagerRemove:
             removeFollowedEntities(call: call, result: result)
-        case MethodNameConstants.getFollowedEntities:
+        case MethodNameConstants.followEntitiesManagerGet:
             getFollowedEntities(call: call, result: result)
         case MethodNameConstants.stopActiveCastingSession:
             stopActiveCastingSession(call: call, result: result)
@@ -173,6 +180,12 @@ class BlazeFlutterSDKModule {
             stopActivePiPSession(call: call, result: result)
         case MethodNameConstants.isPiPActive:
             isPiPActive(call: call, result: result)
+        case MethodNameConstants.isInColdStart:
+            isInColdStart(call: call, result: result)
+        case MethodNameConstants.setLiquidGlassEnabled:
+            setLiquidGlassEnabled(call: call, result: result)
+        case MethodNameConstants.isLiquidGlassEnabled:
+            result(Blaze.shared.isLiquidGlassEnabled)
         case MethodNameConstants.canHandleUniversalLink:
             canHandleUniversalLink(call: call, result: result)
         case MethodNameConstants.updateGeoRestriction:
@@ -183,6 +196,8 @@ class BlazeFlutterSDKModule {
             handleNotificationPayload(call: call, result: result)
         case MethodNameConstants.setExternalUserId:
             setExternalUserId(call: call, result: result)
+        case MethodNameConstants.setExternalUserToken:
+            setExternalUserToken(call: call, result: result)
         case MethodNameConstants.handleUniversalLink:
             handleUniversalLink(call: call, result: result)
         case MethodNameConstants.isInitialized:
@@ -209,6 +224,10 @@ class BlazeFlutterSDKModule {
         let cachingSize = call.safeGetArg("cachingSize", Int.self)
         let cachingLevelString = call.safeGetArg("cachingLevel", String.self)
         let geoLocation = call.safeGetArg("geoLocation", String.self)
+        let externalUserToken = call.safeGetArg("externalUserToken", String.self)
+        // Reset on every init: a re-init without the parameter falls back to the native default
+        self.interactionLinkHandling = call.safeGetArg("interactionLinkHandling", String.self)?
+            .asInteractionLinkHandleType
 
         // Read appOverridesCTAHandling from init params
         if let appOverridesCTAHandlingFromInit = call.safeGetArg(
@@ -228,7 +247,8 @@ class BlazeFlutterSDKModule {
             prefetchingPolicy: cachingLevel,
             geo: geoLocation,
             forceLayoutDirection: forceLayoutDirection,
-            delegate: globalDelegate
+            delegate: globalDelegate,
+            externalUserToken: externalUserToken
         ) { blazeResult in
             blazeResult.handleResult(result)
         }
@@ -916,29 +936,40 @@ class BlazeFlutterSDKModule {
         }
     }
 
-    private func followEntities(from call: FlutterMethodCall) -> Set<BlazeFollowEntity> {
-        let entityIds = call.safeGetArg("entityIds", [String].self) ?? []
-        return Set(entityIds.map { BlazeFollowEntity(id: $0) })
+    /// Parses the `entities` argument. Replies with an error and returns nil when it is missing
+    /// or any entry has no string `id`, so a bad call never clears the follows.
+    private func followEntities(from call: FlutterMethodCall,
+                                result: @escaping FlutterResult) -> Set<BlazeFollowEntity>? {
+        let entities = call.safeGetArg("entities", [[String: Any]].self)?
+            .map { BlazeFollowEntity.fromFlutterMap($0) }
+        guard let entities, !entities.contains(where: { $0 == nil }) else {
+            handleError(result, errCode: call.method, errMessage: "every entity needs a string id")
+            return nil
+        }
+        return Set(entities.compactMap { $0 })
     }
 
     private func setFollowedEntities(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        Blaze.shared.followEntitiesManager.setFollowedEntities(followEntities(from: call))
+        guard let entities = followEntities(from: call, result: result) else { return }
+        Blaze.shared.followEntitiesManager.setFollowedEntities(entities)
         result(nil)
     }
 
     private func insertFollowedEntities(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        Blaze.shared.followEntitiesManager.insertFollowedEntities(followEntities(from: call))
+        guard let entities = followEntities(from: call, result: result) else { return }
+        Blaze.shared.followEntitiesManager.insertFollowedEntities(entities)
         result(nil)
     }
 
     private func removeFollowedEntities(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        Blaze.shared.followEntitiesManager.removeFollowedEntities(followEntities(from: call))
+        guard let entities = followEntities(from: call, result: result) else { return }
+        Blaze.shared.followEntitiesManager.removeFollowedEntities(entities)
         result(nil)
     }
 
     private func getFollowedEntities(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        let ids = Blaze.shared.followEntitiesManager.getFollowedEntities().map { $0.id }
-        result(ids)
+        let entities = Blaze.shared.followEntitiesManager.getFollowedEntities().map { $0.flutterMap }
+        result(entities)
     }
 
     private func stopActiveCastingSession(call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -953,6 +984,31 @@ class BlazeFlutterSDKModule {
 
     private func isPiPActive(call: FlutterMethodCall, result: @escaping FlutterResult) {
         result(Blaze.shared.pipManager.isActive)
+    }
+
+    private func setLiquidGlassEnabled(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        guard let isEnabled = call.safeGetArg("isEnabled", Bool.self) else {
+            handleError(
+                result,
+                errCode: "setLiquidGlassEnabled",
+                errMessage: "isEnabled is invalid")
+            return
+        }
+
+        Blaze.shared.isLiquidGlassEnabled = isEnabled
+        result(nil)
+    }
+
+    private func isInColdStart(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        guard let playerType = call.safeGetArg("playerType", String.self)?.asBlazePlayerType else {
+            handleError(
+                result,
+                errCode: "isInColdStart",
+                errMessage: "playerType is invalid")
+            return
+        }
+
+        result(Blaze.shared.isInColdStart(for: playerType))
     }
 
     private func canHandleUniversalLink(call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -1018,6 +1074,31 @@ class BlazeFlutterSDKModule {
 
         Blaze.shared.setExternalUserId(userId) { blazeResult in
             blazeResult.handleResult(result)
+        }
+    }
+
+    private func setExternalUserToken(call: FlutterMethodCall, result: @escaping FlutterResult) {
+        let externalUserToken = call.safeGetArg("externalUserToken", String.self)
+        guard let cachedContentPolicy = call.safeGetArg("cachedContentPolicy", String.self)?
+            .asFetchedContentPolicy
+        else {
+            handleError(
+                result,
+                errCode: "setExternalUserToken",
+                errMessage: "cachedContentPolicy is invalid")
+            return
+        }
+
+        Blaze.shared.setExternalUserToken(
+            externalUserToken,
+            cachedContentPolicy: cachedContentPolicy
+        ) { tokenResult in
+            switch tokenResult {
+            case .success(let storedToken):
+                result(storedToken)
+            case .failure(let blazeError):
+                BlazeResult.failure(blazeError).handleResult(result)
+            }
         }
     }
 
@@ -1145,6 +1226,25 @@ class BlazeFlutterSDKModule {
                 sourceId: params.sourceId,
                 shareParams: params.shareParams
             ) ?? nil
+        },
+
+        onContentRestricted: { [weak self] params in
+            return self?.onContentRestricted(
+                playerType: params.playerType,
+                sourceId: params.sourceId,
+                reason: params.reason,
+                contentParams: params.contentParams
+            ) ?? .sdkShouldHandle
+        },
+
+        onTriggerInteractionLink: { [weak self] params in
+            return self?.onTriggerInteractionLink(
+                playerType: params.playerType,
+                sourceId: params.sourceId,
+                interactionId: params.interactionId,
+                interactionType: params.interactionType,
+                url: params.url
+            ) ?? .deeplink
         }
     )
 
@@ -1338,17 +1438,52 @@ class BlazeFlutterSDKModule {
         }
     }
 
+    private func onContentRestricted(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        reason: BlazeContentRestrictionReason,
+        contentParams: BlazeRestrictedContentParams
+    ) -> BlazeContentRestrictionHandleType {
+        return sharedDelegateHandler.onContentRestricted(
+            playerType: playerType,
+            sourceId: sourceId,
+            reason: reason,
+            contentParams: contentParams
+        ) { [weak self] params in
+            self?.asyncBridge?.sendEvent("Blaze.onContentRestricted", params: params)
+        }
+    }
+
+    private func onTriggerInteractionLink(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        interactionId: String,
+        interactionType: String,
+        url: String
+    ) -> BlazeInteractionLinkHandleType {
+        return sharedDelegateHandler.onTriggerInteractionLink(
+            playerType: playerType,
+            sourceId: sourceId,
+            interactionId: interactionId,
+            interactionType: interactionType,
+            url: url,
+            handling: resolveLinkHandling(widget: nil, global: interactionLinkHandling)
+        ) { [weak self] params in
+            self?.asyncBridge?.sendEvent("Blaze.onTriggerInteractionLink", params: params)
+        }
+    }
+
     private func onFollowEntityClicked(
         playerType: BlazePlayerType,
         sourceId: String?,
         newFollowingState: Bool,
-        followEntityId: String
+        followEntity: BlazeFollowEntity
     ) {
         sharedDelegateHandler.onFollowEntityClicked(
             playerType: playerType,
             sourceId: sourceId,
             newFollowingState: newFollowingState,
-            followEntityId: followEntityId
+            followEntity: followEntity
         ) { [weak self] params in
             self?.asyncBridge?.sendEvent("Blaze.onFollowEntityClicked", params: params)
         }
@@ -1393,7 +1528,7 @@ extension BlazeFlutterSDKModule: BlazeFollowEntitiesDelegate {
             playerType: params.playerType,
             sourceId: params.sourceId,
             newFollowingState: params.newFollowingState,
-            followEntityId: params.followEntity.id
+            followEntity: params.followEntity
         )
     }
 }

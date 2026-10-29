@@ -14,6 +14,58 @@ struct BlazeReactVideosPlayerStyle: Codable {
     var seekBar: BlazeReactVideosPlayerSeekBarStyle?
     var overlayVisibilityThresholdMs: Int?
     var captions: BlazeReactCaptionsStyle?
+    var statusIndicator: BlazeReactVideosPlayerStatusIndicatorStyle?
+    var backToLiveButton: BlazeReactVideosPlayerBackToLiveButtonStyle?
+}
+
+struct BlazeReactVideosPlayerTextStyle: Codable {
+    var font: BlazeReactTitleFont?
+    var textSize: CGFloat?
+    var textColor: String?
+}
+
+struct BlazeReactVideosPlayerStatusIndicatorStyle: Codable {
+    var isVisible: Bool?
+    var padding: BlazeReactMargins?
+    var streamStates: BlazeReactVideosPlayerStatusIndicatorStreamStatesStyle?
+}
+
+struct BlazeReactVideosPlayerStatusIndicatorStreamStatesStyle: Codable {
+    var liveStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?
+    var upcomingStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?
+    var endedStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?
+}
+
+struct BlazeReactVideosPlayerStatusIndicatorStateStyle: Codable {
+    var textStyle: BlazeReactVideosPlayerTextStyle?
+    var isVisible: Bool?
+    var text: String?
+    var backgroundColor: String?
+    var backgroundImage: BlazeReactImage?
+    var cornerRadius: CGFloat?
+    var cornerRadiusRatio: CGFloat?
+    var borderColor: String?
+    var borderWidth: CGFloat?
+}
+
+struct BlazeReactVideosPlayerBackToLiveButtonStyle: Codable {
+    var margins: BlazeReactMargins?
+    var padding: BlazeReactMargins?
+    var playbackStates: BlazeReactVideosPlayerBackToLiveButtonPlaybackStatesStyle?
+}
+
+struct BlazeReactVideosPlayerBackToLiveButtonPlaybackStatesStyle: Codable {
+    var atLiveEdgeState: BlazeReactVideosPlayerBackToLiveButtonStateStyle?
+    var behindLiveState: BlazeReactVideosPlayerBackToLiveButtonStateStyle?
+}
+
+struct BlazeReactVideosPlayerBackToLiveButtonStateStyle: Codable {
+    var textStyle: BlazeReactVideosPlayerTextStyle?
+    var text: String?
+    var backgroundColor: String?
+    var cornerRadius: CGFloat?
+    var cornerRadiusRatio: CGFloat?
+    var glassBackground: BlazeReactGlassBackgroundState?
 }
 
 struct BlazeReactVideosPlayerHeadingTextStyle: Codable {
@@ -43,6 +95,8 @@ struct BlazeReactVideosPlayerButtonsStyle: Codable {
     var pictureInPicture: BlazeReactPlayerButtonStyle?
     var seekForward: BlazeReactPlayerButtonStyle?
     var seekBackward: BlazeReactPlayerButtonStyle?
+    var audio: BlazeReactPlayerButtonStyle?
+    var liveCatchup: BlazeReactPlayerButtonStyle?
 }
 
 struct BlazeReactVideosPlayerCtaStyle: Codable {

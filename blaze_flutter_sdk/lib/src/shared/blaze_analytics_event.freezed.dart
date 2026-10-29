@@ -1298,9 +1298,13 @@ mixin _$StoryProps {
   PlayableNavigationType? get story_page_navigation_type =>
       throw _privateConstructorUsedError;
   PlayableNavigationDirection? get story_page_navigation_direction =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerStartTriggers? get story_start_trigger =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get story_exit_trigger =>
       throw _privateConstructorUsedError;
   double? get story_page_duration => throw _privateConstructorUsedError;
@@ -1361,7 +1365,9 @@ abstract class $StoryPropsCopyWith<$Res> {
       int? story_page_count,
       PlayableNavigationType? story_page_navigation_type,
       PlayableNavigationDirection? story_page_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? story_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? story_exit_trigger,
       double? story_page_duration,
       double? story_page_duration_viewed_percent,
@@ -1521,7 +1527,9 @@ abstract class _$$StoryPropsImplCopyWith<$Res>
       int? story_page_count,
       PlayableNavigationType? story_page_navigation_type,
       PlayableNavigationDirection? story_page_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? story_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? story_exit_trigger,
       double? story_page_duration,
       double? story_page_duration_viewed_percent,
@@ -1674,7 +1682,9 @@ class _$StoryPropsImpl with DiagnosticableTreeMixin implements _StoryProps {
       this.story_page_count,
       this.story_page_navigation_type,
       this.story_page_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.story_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.story_exit_trigger,
       this.story_page_duration,
       this.story_page_duration_viewed_percent,
@@ -1711,9 +1721,15 @@ class _$StoryPropsImpl with DiagnosticableTreeMixin implements _StoryProps {
   final PlayableNavigationType? story_page_navigation_type;
   @override
   final PlayableNavigationDirection? story_page_navigation_direction;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerStartTriggers? story_start_trigger;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerExitTriggers? story_exit_trigger;
   @override
   final double? story_page_duration;
@@ -1929,7 +1945,9 @@ abstract class _StoryProps implements StoryProps {
       final int? story_page_count,
       final PlayableNavigationType? story_page_navigation_type,
       final PlayableNavigationDirection? story_page_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerStartTriggers? story_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerExitTriggers? story_exit_trigger,
       final double? story_page_duration,
       final double? story_page_duration_viewed_percent,
@@ -1963,10 +1981,16 @@ abstract class _StoryProps implements StoryProps {
   @override
   PlayableNavigationType? get story_page_navigation_type;
   @override
-  PlayableNavigationDirection? get story_page_navigation_direction;
+  PlayableNavigationDirection?
+      get story_page_navigation_direction; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
-  PlayerStartTriggers? get story_start_trigger;
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  PlayerStartTriggers?
+      get story_start_trigger; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get story_exit_trigger;
   @override
   double? get story_page_duration;
@@ -2008,9 +2032,13 @@ mixin _$MomentsProps {
   PlayableNavigationType? get moment_navigation_type =>
       throw _privateConstructorUsedError;
   PlayableNavigationDirection? get moment_navigation_direction =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerStartTriggers? get moment_start_trigger =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get moment_exit_trigger =>
       throw _privateConstructorUsedError;
   double? get moment_duration => throw _privateConstructorUsedError;
@@ -2065,7 +2093,9 @@ abstract class $MomentsPropsCopyWith<$Res> {
       int? moment_index,
       PlayableNavigationType? moment_navigation_type,
       PlayableNavigationDirection? moment_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? moment_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? moment_exit_trigger,
       double? moment_duration,
       double? moment_duration_viewed_percent,
@@ -2193,7 +2223,9 @@ abstract class _$$MomentsPropsImplCopyWith<$Res>
       int? moment_index,
       PlayableNavigationType? moment_navigation_type,
       PlayableNavigationDirection? moment_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? moment_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? moment_exit_trigger,
       double? moment_duration,
       double? moment_duration_viewed_percent,
@@ -2314,7 +2346,9 @@ class _$MomentsPropsImpl with DiagnosticableTreeMixin implements _MomentsProps {
       this.moment_index,
       this.moment_navigation_type,
       this.moment_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.moment_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.moment_exit_trigger,
       this.moment_duration,
       this.moment_duration_viewed_percent,
@@ -2341,9 +2375,15 @@ class _$MomentsPropsImpl with DiagnosticableTreeMixin implements _MomentsProps {
   final PlayableNavigationType? moment_navigation_type;
   @override
   final PlayableNavigationDirection? moment_navigation_direction;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerStartTriggers? moment_start_trigger;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerExitTriggers? moment_exit_trigger;
   @override
   final double? moment_duration;
@@ -2519,7 +2559,9 @@ abstract class _MomentsProps implements MomentsProps {
       final int? moment_index,
       final PlayableNavigationType? moment_navigation_type,
       final PlayableNavigationDirection? moment_navigation_direction,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerStartTriggers? moment_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerExitTriggers? moment_exit_trigger,
       final double? moment_duration,
       final double? moment_duration_viewed_percent,
@@ -2544,10 +2586,16 @@ abstract class _MomentsProps implements MomentsProps {
   @override
   PlayableNavigationType? get moment_navigation_type;
   @override
-  PlayableNavigationDirection? get moment_navigation_direction;
+  PlayableNavigationDirection?
+      get moment_navigation_direction; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
-  PlayerStartTriggers? get moment_start_trigger;
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  PlayerStartTriggers?
+      get moment_start_trigger; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get moment_exit_trigger;
   @override
   double? get moment_duration;
@@ -2583,12 +2631,20 @@ mixin _$VideoProps {
   String? get video_session_id => throw _privateConstructorUsedError;
   String? get video_id => throw _privateConstructorUsedError;
   String? get video_title => throw _privateConstructorUsedError;
-  AudioState? get audio_state => throw _privateConstructorUsedError;
+  AudioState? get audio_state =>
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerStartTriggers? get video_start_trigger =>
-      throw _privateConstructorUsedError;
+      throw _privateConstructorUsedError; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get video_end_trigger =>
       throw _privateConstructorUsedError;
-  double? get video_duration => throw _privateConstructorUsedError;
+  double? get video_duration =>
+      throw _privateConstructorUsedError; // Unknown native seek types decode to null instead of dropping the event (D24).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   VideoSeekType? get seek_type => throw _privateConstructorUsedError;
   double? get seek_total_time => throw _privateConstructorUsedError;
   VideoSeekDirection? get seek_direction => throw _privateConstructorUsedError;
@@ -2642,9 +2698,12 @@ abstract class $VideoPropsCopyWith<$Res> {
       String? video_id,
       String? video_title,
       AudioState? audio_state,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? video_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? video_end_trigger,
       double? video_duration,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       VideoSeekType? seek_type,
       double? seek_total_time,
       VideoSeekDirection? seek_direction,
@@ -2792,9 +2851,12 @@ abstract class _$$VideoPropsImplCopyWith<$Res>
       String? video_id,
       String? video_title,
       AudioState? audio_state,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerStartTriggers? video_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? video_end_trigger,
       double? video_duration,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       VideoSeekType? seek_type,
       double? seek_total_time,
       VideoSeekDirection? seek_direction,
@@ -2922,9 +2984,12 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
       this.video_id,
       this.video_title,
       this.audio_state,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.video_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.video_end_trigger,
       this.video_duration,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.seek_type,
       this.seek_total_time,
       this.seek_direction,
@@ -2948,13 +3013,22 @@ class _$VideoPropsImpl with DiagnosticableTreeMixin implements _VideoProps {
   final String? video_title;
   @override
   final AudioState? audio_state;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerStartTriggers? video_start_trigger;
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerExitTriggers? video_end_trigger;
   @override
   final double? video_duration;
+// Unknown native seek types decode to null instead of dropping the event (D24).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final VideoSeekType? seek_type;
   @override
   final double? seek_total_time;
@@ -3126,9 +3200,12 @@ abstract class _VideoProps implements VideoProps {
       final String? video_id,
       final String? video_title,
       final AudioState? audio_state,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerStartTriggers? video_start_trigger,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerExitTriggers? video_end_trigger,
       final double? video_duration,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final VideoSeekType? seek_type,
       final double? seek_total_time,
       final VideoSeekDirection? seek_direction,
@@ -3150,14 +3227,23 @@ abstract class _VideoProps implements VideoProps {
   @override
   String? get video_title;
   @override
-  AudioState? get audio_state;
+  AudioState?
+      get audio_state; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
-  PlayerStartTriggers? get video_start_trigger;
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  PlayerStartTriggers?
+      get video_start_trigger; // Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get video_end_trigger;
   @override
-  double? get video_duration;
+  double?
+      get video_duration; // Unknown native seek types decode to null instead of dropping the event (D24).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   VideoSeekType? get seek_type;
   @override
   double? get seek_total_time;
@@ -3205,6 +3291,9 @@ mixin _$AdEventProps {
       throw _privateConstructorUsedError;
   Map<String, String>? get story_page_content_extra_info =>
       throw _privateConstructorUsedError; // Properties relevant only for CustomNative
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get ad_exit_trigger => throw _privateConstructorUsedError;
   double? get ad_duration_viewed_percent => throw _privateConstructorUsedError;
   PlaybackActionMethod? get playback_action_method =>
@@ -3274,6 +3363,7 @@ abstract class $AdEventPropsCopyWith<$Res> {
       ContentType? content_type,
       Map<String, String>? content_extra_info,
       Map<String, String>? story_page_content_extra_info,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? ad_exit_trigger,
       double? ad_duration_viewed_percent,
       PlaybackActionMethod? playback_action_method,
@@ -3492,6 +3582,7 @@ abstract class _$$AdEventPropsImplCopyWith<$Res>
       ContentType? content_type,
       Map<String, String>? content_extra_info,
       Map<String, String>? story_page_content_extra_info,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       PlayerExitTriggers? ad_exit_trigger,
       double? ad_duration_viewed_percent,
       PlaybackActionMethod? playback_action_method,
@@ -3703,6 +3794,7 @@ class _$AdEventPropsImpl with DiagnosticableTreeMixin implements _AdEventProps {
       this.content_type,
       final Map<String, String>? content_extra_info,
       final Map<String, String>? story_page_content_extra_info,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       this.ad_exit_trigger,
       this.ad_duration_viewed_percent,
       this.playback_action_method,
@@ -3770,7 +3862,10 @@ class _$AdEventPropsImpl with DiagnosticableTreeMixin implements _AdEventProps {
   }
 
 // Properties relevant only for CustomNative
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   final PlayerExitTriggers? ad_exit_trigger;
   @override
   final double? ad_duration_viewed_percent;
@@ -4024,6 +4119,7 @@ abstract class _AdEventProps implements AdEventProps {
       final ContentType? content_type,
       final Map<String, String>? content_extra_info,
       final Map<String, String>? story_page_content_extra_info,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
       final PlayerExitTriggers? ad_exit_trigger,
       final double? ad_duration_viewed_percent,
       final PlaybackActionMethod? playback_action_method,
@@ -4071,7 +4167,10 @@ abstract class _AdEventProps implements AdEventProps {
   @override
   Map<String, String>?
       get story_page_content_extra_info; // Properties relevant only for CustomNative
+// Unknown native triggers decode to null instead of dropping the event (D23).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   PlayerExitTriggers? get ad_exit_trigger;
   @override
   double? get ad_duration_viewed_percent;
@@ -4673,8 +4772,13 @@ mixin _$BlazeAnalyticsEvent {
   String get timestamp_utc => throw _privateConstructorUsedError;
   String get timestamp_user_tz => throw _privateConstructorUsedError;
   String get sdk_version => throw _privateConstructorUsedError;
-  String get sdk_type => throw _privateConstructorUsedError;
-  EventCategory get event_category => throw _privateConstructorUsedError;
+  String get sdk_type =>
+      throw _privateConstructorUsedError; // Unknown native values decode to `unknown` instead of dropping the event (D24).
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: EventCategory.unknown)
+  EventCategory get event_category =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: EventActionName.unknown)
   EventActionName get event_action => throw _privateConstructorUsedError;
   UserProps get user => throw _privateConstructorUsedError;
   ReferringPropsAnalytics get referring => throw _privateConstructorUsedError;
@@ -4723,7 +4827,9 @@ abstract class $BlazeAnalyticsEventCopyWith<$Res> {
       String timestamp_user_tz,
       String sdk_version,
       String sdk_type,
+      @JsonKey(unknownEnumValue: EventCategory.unknown)
       EventCategory event_category,
+      @JsonKey(unknownEnumValue: EventActionName.unknown)
       EventActionName event_action,
       UserProps user,
       ReferringPropsAnalytics referring,
@@ -4952,7 +5058,9 @@ abstract class _$$BlazeAnalyticsEventImplCopyWith<$Res>
       String timestamp_user_tz,
       String sdk_version,
       String sdk_type,
+      @JsonKey(unknownEnumValue: EventCategory.unknown)
       EventCategory event_category,
+      @JsonKey(unknownEnumValue: EventActionName.unknown)
       EventActionName event_action,
       UserProps user,
       ReferringPropsAnalytics referring,
@@ -5080,7 +5188,9 @@ class _$BlazeAnalyticsEventImpl
       required this.timestamp_user_tz,
       required this.sdk_version,
       required this.sdk_type,
+      @JsonKey(unknownEnumValue: EventCategory.unknown)
       required this.event_category,
+      @JsonKey(unknownEnumValue: EventActionName.unknown)
       required this.event_action,
       required this.user,
       required this.referring,
@@ -5102,9 +5212,14 @@ class _$BlazeAnalyticsEventImpl
   final String sdk_version;
   @override
   final String sdk_type;
+// Unknown native values decode to `unknown` instead of dropping the event (D24).
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: EventCategory.unknown)
   final EventCategory event_category;
+// ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: EventActionName.unknown)
   final EventActionName event_action;
   @override
   final UserProps user;
@@ -5248,7 +5363,9 @@ abstract class _BlazeAnalyticsEvent implements BlazeAnalyticsEvent {
       required final String timestamp_user_tz,
       required final String sdk_version,
       required final String sdk_type,
+      @JsonKey(unknownEnumValue: EventCategory.unknown)
       required final EventCategory event_category,
+      @JsonKey(unknownEnumValue: EventActionName.unknown)
       required final EventActionName event_action,
       required final UserProps user,
       required final ReferringPropsAnalytics referring,
@@ -5269,10 +5386,14 @@ abstract class _BlazeAnalyticsEvent implements BlazeAnalyticsEvent {
   @override
   String get sdk_version;
   @override
-  String get sdk_type;
+  String
+      get sdk_type; // Unknown native values decode to `unknown` instead of dropping the event (D24).
+// ignore: invalid_annotation_target
   @override
-  EventCategory get event_category;
+  @JsonKey(unknownEnumValue: EventCategory.unknown)
+  EventCategory get event_category; // ignore: invalid_annotation_target
   @override
+  @JsonKey(unknownEnumValue: EventActionName.unknown)
   EventActionName get event_action;
   @override
   UserProps get user;

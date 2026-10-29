@@ -7,14 +7,21 @@ import com.blaze.blazesdk.style.shared.models.BlazeObjectYPosition
 import com.blaze.blazesdk.style.shared.models.blazeDp
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemBadgeStateStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemBadgeStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemDescriptionStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemDurationElementStateStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemDurationElementStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemDurationElementStyle.BlazeWidgetItemDurationElementIconStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemDurationElementStyle.BlazeWidgetItemDurationElementIconStyle.BlazeIconPositioning
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemImageAnimatedThumbnailStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemImageContainerBorderStateStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemImageContainerBorderStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemImageGradientOverlayStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemImageStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemPlayIconElementStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStatusIndicatorStateStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStatusIndicatorStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStyle
+import com.blaze.blazesdk.style.widgets.BlazeWidgetItemSubtitleStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemTextStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetItemTitleStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
@@ -79,8 +86,121 @@ fun BlazeWidgetItemStyle.mergedWith(
         merged.statusIndicator =
                 this.statusIndicator.mergedWith(customization.statusIndicator, context = context)
         merged.badge = this.badge.mergedWith(customization = customization.badge, context = context)
+        merged.durationElement =
+                this.durationElement.mergedWith(customization.durationElement, context)
+        merged.subtitle = this.subtitle.mergedWith(customization.subtitle, context)
+        merged.description = this.description.mergedWith(customization.description, context)
+        merged.playIcon = this.playIcon.mergedWith(customization.playIconElement)
 
         return merged
+}
+
+fun BlazeWidgetItemSubtitleStyle.mergedWith(
+        customization: BlazeReactWidgetItemSecondaryTextStyle?,
+        context: Context
+): BlazeWidgetItemSubtitleStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.isVisible = customization.isVisible ?: this.isVisible
+        merged.topSpacing = customization.topSpacing?.toInt()?.blazeDp ?: this.topSpacing
+        merged.unreadState = this.unreadState.mergedKeepingFont(customization.unreadState, context)
+        merged.readState = this.readState.mergedKeepingFont(customization.readState, context)
+
+        return merged
+}
+
+fun BlazeWidgetItemDescriptionStyle.mergedWith(
+        customization: BlazeReactWidgetItemSecondaryTextStyle?,
+        context: Context
+): BlazeWidgetItemDescriptionStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.isVisible = customization.isVisible ?: this.isVisible
+        merged.topSpacing = customization.topSpacing?.toInt()?.blazeDp ?: this.topSpacing
+        merged.unreadState = this.unreadState.mergedKeepingFont(customization.unreadState, context)
+        merged.readState = this.readState.mergedKeepingFont(customization.readState, context)
+
+        return merged
+}
+
+fun BlazeWidgetItemPlayIconElementStyle.mergedWith(
+        customization: BlazeReactWidgetItemPlayIconElementStyle?
+): BlazeWidgetItemPlayIconElementStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.isVisible = customization.isVisible ?: this.isVisible
+
+        return merged
+}
+
+fun BlazeWidgetItemDurationElementStyle.mergedWith(
+        customization: BlazeReactWidgetItemDurationElementStyle?,
+        context: Context
+): BlazeWidgetItemDurationElementStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.isVisible = customization.isVisible ?: this.isVisible
+        merged.position = this.position.mergedWith(customization.position)
+        merged.margins = this.margins.mergedWith(customization.insets)
+        merged.padding = this.padding.mergedWith(customization.contentPadding)
+        // Only the image is customizable (as on iOS); a preset icon keeps its positioning and tint.
+        customization.icon?.toImageResId(context)?.let { iconResId ->
+                merged.icon = this.icon?.copy(iconResId = iconResId)
+                        ?: BlazeWidgetItemDurationElementIconStyle(
+                                iconResId = iconResId,
+                                iconPositioning = BlazeIconPositioning.START,
+                                iconTint = null
+                        )
+        }
+        merged.liveUnreadState =
+                this.liveUnreadState.mergedWith(customization.liveUnreadState, context)
+        merged.liveReadState = this.liveReadState.mergedWith(customization.liveReadState, context)
+        merged.unreadState = this.unreadState.mergedWith(customization.unreadState, context)
+        merged.readState = this.readState.mergedWith(customization.readState, context)
+
+        return merged
+}
+
+fun BlazeWidgetItemDurationElementStateStyle.mergedWith(
+        customization: BlazeReactWidgetItemDurationElementStateStyle?,
+        context: Context
+): BlazeWidgetItemDurationElementStateStyle {
+        customization ?: return this
+
+        val merged = this
+
+        merged.isVisible = customization.isVisible ?: merged.isVisible
+        merged.backgroundColor =
+                safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
+        merged.backgroundImageResId =
+                customization.backgroundImage?.toImageResId(context) ?: merged.backgroundImageResId
+        merged.textStyle = this.textStyle.mergedKeepingFont(customization.textStyle, context)
+        merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
+        merged.cornerRadiusRatio = customization.cornerRadiusRatio ?: merged.cornerRadiusRatio
+        merged.borderColor = safeParseColor(customization.borderColor) ?: merged.borderColor
+        merged.borderWidth = customization.borderWidth?.toInt()?.blazeDp ?: merged.borderWidth
+
+        return merged
+}
+
+/// Like [BlazeWidgetItemTextStyle.mergedWith], but an omitted font keeps the preset font
+/// instead of clearing it.
+private fun BlazeWidgetItemTextStyle.mergedKeepingFont(
+        customization: BlazeReactTitleStyle?,
+        context: Context
+): BlazeWidgetItemTextStyle {
+        val presetFontResId = this.fontResId
+        return this.mergedWith(customization, context).also { merged ->
+                if (customization?.font == null) merged.fontResId = presetFontResId
+        }
 }
 
 fun BlazeWidgetItemStatusIndicatorStyle.mergedWith(

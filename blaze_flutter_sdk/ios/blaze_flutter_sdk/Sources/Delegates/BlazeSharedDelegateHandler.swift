@@ -205,6 +205,74 @@ class BlazeSharedDelegateHandler {
         completion(params)
     }
 
+    // Observer-only: always returns the native default. Native treats a refused item
+    // the same whatever this returns, so there is nothing for the app to declare.
+    func onContentRestricted(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        reason: BlazeContentRestrictionReason,
+        contentParams: BlazeRestrictedContentParams,
+        completion: (Encodable) -> Void
+    ) -> BlazeContentRestrictionHandleType {
+        struct ContentParams: Encodable {
+            let contentIndex: Int
+            let contentId: String
+            let extraInfo: [String: String]
+            let contentThumbnailUrl: String?
+        }
+
+        struct Params: Encodable {
+            let playerType: String
+            let sourceId: String?
+            let reason: String
+            let contentParams: ContentParams
+        }
+
+        let params = Params(
+            playerType: playerType.toFlutterValue(),
+            sourceId: sourceId,
+            reason: reason.toFlutterValue(),
+            contentParams: ContentParams(
+                contentIndex: contentParams.contentIndex,
+                contentId: contentParams.contentId,
+                extraInfo: contentParams.extraInfo,
+                contentThumbnailUrl: contentParams.contentThumbnailUrl
+            )
+        )
+
+        completion(params)
+        return .sdkShouldHandle
+    }
+
+    func onTriggerInteractionLink(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        interactionId: String,
+        interactionType: String,
+        url: String,
+        handling: BlazeInteractionLinkHandleType,
+        completion: (Encodable) -> Void
+    ) -> BlazeInteractionLinkHandleType {
+        struct Params: Encodable {
+            let playerType: String
+            let sourceId: String?
+            let interactionId: String
+            let interactionType: String
+            let url: String
+        }
+
+        let params = Params(
+            playerType: playerType.toFlutterValue(),
+            sourceId: sourceId,
+            interactionId: interactionId,
+            interactionType: interactionType,
+            url: url
+        )
+
+        completion(params)
+        return handling
+    }
+
     // Observer-only: always returns nil so the SDK falls back to its own
     // sdkGeneratedLink. Overriding the shared link would need a synchronous
     // return value from Dart, which the async bridge (a ~2s round-trip) can't
@@ -287,7 +355,7 @@ class BlazeSharedDelegateHandler {
         playerType: BlazePlayerType,
         sourceId: String?,
         newFollowingState: Bool,
-        followEntityId: String,
+        followEntity: BlazeFollowEntity,
         completion: (Encodable) -> Void
     ) {
         struct Params: Codable {
@@ -295,13 +363,17 @@ class BlazeSharedDelegateHandler {
             let sourceId: String?
             let newFollowingState: Bool
             let followEntityId: String
+            let providerName: String?
+            let entityType: String?
         }
 
         let params = Params(
             playerType: playerType.toFlutterValue(),
             sourceId: sourceId,
             newFollowingState: newFollowingState,
-            followEntityId: followEntityId
+            followEntityId: followEntity.id,
+            providerName: followEntity.providerName,
+            entityType: followEntity.entityType?.toFlutterValue()
         )
 
         completion(params)

@@ -4189,6 +4189,12 @@ mixin _$BlazeWidgetItemDurationElementStateStyle {
   String? get borderColor => throw _privateConstructorUsedError;
   double? get borderWidth => throw _privateConstructorUsedError;
 
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  BlazeGlassBackgroundState? get glassBackground =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeWidgetItemDurationElementStateStyle value) $default,
@@ -4235,7 +4241,8 @@ abstract class $BlazeWidgetItemDurationElementStateStyleCopyWith<$Res> {
       double? cornerRadius,
       double? cornerRadiusRatio,
       String? borderColor,
-      double? borderWidth});
+      double? borderWidth,
+      BlazeGlassBackgroundState? glassBackground});
 
   $BlazeImageCopyWith<$Res>? get backgroundImage;
   $BlazeTitleStyleCopyWith<$Res>? get textStyle;
@@ -4266,6 +4273,7 @@ class _$BlazeWidgetItemDurationElementStateStyleCopyWithImpl<$Res,
     Object? cornerRadiusRatio = freezed,
     Object? borderColor = freezed,
     Object? borderWidth = freezed,
+    Object? glassBackground = freezed,
   }) {
     return _then(_value.copyWith(
       isVisible: freezed == isVisible
@@ -4300,6 +4308,10 @@ class _$BlazeWidgetItemDurationElementStateStyleCopyWithImpl<$Res,
           ? _value.borderWidth
           : borderWidth // ignore: cast_nullable_to_non_nullable
               as double?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
     ) as $Val);
   }
 
@@ -4349,7 +4361,8 @@ abstract class _$$BlazeWidgetItemDurationElementStateStyleImplCopyWith<$Res>
       double? cornerRadius,
       double? cornerRadiusRatio,
       String? borderColor,
-      double? borderWidth});
+      double? borderWidth,
+      BlazeGlassBackgroundState? glassBackground});
 
   @override
   $BlazeImageCopyWith<$Res>? get backgroundImage;
@@ -4380,6 +4393,7 @@ class __$$BlazeWidgetItemDurationElementStateStyleImplCopyWithImpl<$Res>
     Object? cornerRadiusRatio = freezed,
     Object? borderColor = freezed,
     Object? borderWidth = freezed,
+    Object? glassBackground = freezed,
   }) {
     return _then(_$BlazeWidgetItemDurationElementStateStyleImpl(
       isVisible: freezed == isVisible
@@ -4414,6 +4428,10 @@ class __$$BlazeWidgetItemDurationElementStateStyleImplCopyWithImpl<$Res>
           ? _value.borderWidth
           : borderWidth // ignore: cast_nullable_to_non_nullable
               as double?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
     ));
   }
 }
@@ -4430,7 +4448,8 @@ class _$BlazeWidgetItemDurationElementStateStyleImpl
       this.cornerRadius,
       this.cornerRadiusRatio,
       this.borderColor,
-      this.borderWidth});
+      this.borderWidth,
+      this.glassBackground});
 
   factory _$BlazeWidgetItemDurationElementStateStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -4453,9 +4472,15 @@ class _$BlazeWidgetItemDurationElementStateStyleImpl
   @override
   final double? borderWidth;
 
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  final BlazeGlassBackgroundState? glassBackground;
+
   @override
   String toString() {
-    return 'BlazeWidgetItemDurationElementStateStyle(isVisible: $isVisible, backgroundColor: $backgroundColor, backgroundImage: $backgroundImage, textStyle: $textStyle, cornerRadius: $cornerRadius, cornerRadiusRatio: $cornerRadiusRatio, borderColor: $borderColor, borderWidth: $borderWidth)';
+    return 'BlazeWidgetItemDurationElementStateStyle(isVisible: $isVisible, backgroundColor: $backgroundColor, backgroundImage: $backgroundImage, textStyle: $textStyle, cornerRadius: $cornerRadius, cornerRadiusRatio: $cornerRadiusRatio, borderColor: $borderColor, borderWidth: $borderWidth, glassBackground: $glassBackground)';
   }
 
   @override
@@ -4478,7 +4503,9 @@ class _$BlazeWidgetItemDurationElementStateStyleImpl
             (identical(other.borderColor, borderColor) ||
                 other.borderColor == borderColor) &&
             (identical(other.borderWidth, borderWidth) ||
-                other.borderWidth == borderWidth));
+                other.borderWidth == borderWidth) &&
+            (identical(other.glassBackground, glassBackground) ||
+                other.glassBackground == glassBackground));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -4492,7 +4519,8 @@ class _$BlazeWidgetItemDurationElementStateStyleImpl
       cornerRadius,
       cornerRadiusRatio,
       borderColor,
-      borderWidth);
+      borderWidth,
+      glassBackground);
 
   /// Create a copy of BlazeWidgetItemDurationElementStateStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -4553,7 +4581,8 @@ abstract class _BlazeWidgetItemDurationElementStateStyle
           final double? cornerRadius,
           final double? cornerRadiusRatio,
           final String? borderColor,
-          final double? borderWidth}) =
+          final double? borderWidth,
+          final BlazeGlassBackgroundState? glassBackground}) =
       _$BlazeWidgetItemDurationElementStateStyleImpl;
 
   factory _BlazeWidgetItemDurationElementStateStyle.fromJson(
@@ -4576,6 +4605,12 @@ abstract class _BlazeWidgetItemDurationElementStateStyle
   String? get borderColor;
   @override
   double? get borderWidth;
+
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  BlazeGlassBackgroundState? get glassBackground;
 
   /// Create a copy of BlazeWidgetItemDurationElementStateStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -5120,5 +5155,880 @@ abstract class _BlazeWidgetItemDurationElementStyle
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeWidgetItemDurationElementStyleImplCopyWith<
           _$BlazeWidgetItemDurationElementStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeWidgetItemSubtitleStyle _$BlazeWidgetItemSubtitleStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeWidgetItemSubtitleStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeWidgetItemSubtitleStyle {
+  bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// Space between the title and the subtitle.
+  double? get topSpacing => throw _privateConstructorUsedError;
+  BlazeTitleStyle? get unreadState => throw _privateConstructorUsedError;
+  BlazeTitleStyle? get readState => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemSubtitleStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemSubtitleStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemSubtitleStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeWidgetItemSubtitleStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeWidgetItemSubtitleStyleCopyWith<BlazeWidgetItemSubtitleStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeWidgetItemSubtitleStyleCopyWith<$Res> {
+  factory $BlazeWidgetItemSubtitleStyleCopyWith(
+          BlazeWidgetItemSubtitleStyle value,
+          $Res Function(BlazeWidgetItemSubtitleStyle) then) =
+      _$BlazeWidgetItemSubtitleStyleCopyWithImpl<$Res,
+          BlazeWidgetItemSubtitleStyle>;
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? topSpacing,
+      BlazeTitleStyle? unreadState,
+      BlazeTitleStyle? readState});
+
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState;
+  $BlazeTitleStyleCopyWith<$Res>? get readState;
+}
+
+/// @nodoc
+class _$BlazeWidgetItemSubtitleStyleCopyWithImpl<$Res,
+        $Val extends BlazeWidgetItemSubtitleStyle>
+    implements $BlazeWidgetItemSubtitleStyleCopyWith<$Res> {
+  _$BlazeWidgetItemSubtitleStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? topSpacing = freezed,
+    Object? unreadState = freezed,
+    Object? readState = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      topSpacing: freezed == topSpacing
+          ? _value.topSpacing
+          : topSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
+      unreadState: freezed == unreadState
+          ? _value.unreadState
+          : unreadState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+      readState: freezed == readState
+          ? _value.readState
+          : readState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState {
+    if (_value.unreadState == null) {
+      return null;
+    }
+
+    return $BlazeTitleStyleCopyWith<$Res>(_value.unreadState!, (value) {
+      return _then(_value.copyWith(unreadState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeTitleStyleCopyWith<$Res>? get readState {
+    if (_value.readState == null) {
+      return null;
+    }
+
+    return $BlazeTitleStyleCopyWith<$Res>(_value.readState!, (value) {
+      return _then(_value.copyWith(readState: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeWidgetItemSubtitleStyleImplCopyWith<$Res>
+    implements $BlazeWidgetItemSubtitleStyleCopyWith<$Res> {
+  factory _$$BlazeWidgetItemSubtitleStyleImplCopyWith(
+          _$BlazeWidgetItemSubtitleStyleImpl value,
+          $Res Function(_$BlazeWidgetItemSubtitleStyleImpl) then) =
+      __$$BlazeWidgetItemSubtitleStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? topSpacing,
+      BlazeTitleStyle? unreadState,
+      BlazeTitleStyle? readState});
+
+  @override
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState;
+  @override
+  $BlazeTitleStyleCopyWith<$Res>? get readState;
+}
+
+/// @nodoc
+class __$$BlazeWidgetItemSubtitleStyleImplCopyWithImpl<$Res>
+    extends _$BlazeWidgetItemSubtitleStyleCopyWithImpl<$Res,
+        _$BlazeWidgetItemSubtitleStyleImpl>
+    implements _$$BlazeWidgetItemSubtitleStyleImplCopyWith<$Res> {
+  __$$BlazeWidgetItemSubtitleStyleImplCopyWithImpl(
+      _$BlazeWidgetItemSubtitleStyleImpl _value,
+      $Res Function(_$BlazeWidgetItemSubtitleStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? topSpacing = freezed,
+    Object? unreadState = freezed,
+    Object? readState = freezed,
+  }) {
+    return _then(_$BlazeWidgetItemSubtitleStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      topSpacing: freezed == topSpacing
+          ? _value.topSpacing
+          : topSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
+      unreadState: freezed == unreadState
+          ? _value.unreadState
+          : unreadState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+      readState: freezed == readState
+          ? _value.readState
+          : readState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeWidgetItemSubtitleStyleImpl
+    implements _BlazeWidgetItemSubtitleStyle {
+  const _$BlazeWidgetItemSubtitleStyleImpl(
+      {this.isVisible, this.topSpacing, this.unreadState, this.readState});
+
+  factory _$BlazeWidgetItemSubtitleStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeWidgetItemSubtitleStyleImplFromJson(json);
+
+  @override
+  final bool? isVisible;
+
+  /// Space between the title and the subtitle.
+  @override
+  final double? topSpacing;
+  @override
+  final BlazeTitleStyle? unreadState;
+  @override
+  final BlazeTitleStyle? readState;
+
+  @override
+  String toString() {
+    return 'BlazeWidgetItemSubtitleStyle(isVisible: $isVisible, topSpacing: $topSpacing, unreadState: $unreadState, readState: $readState)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeWidgetItemSubtitleStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.topSpacing, topSpacing) ||
+                other.topSpacing == topSpacing) &&
+            (identical(other.unreadState, unreadState) ||
+                other.unreadState == unreadState) &&
+            (identical(other.readState, readState) ||
+                other.readState == readState));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, isVisible, topSpacing, unreadState, readState);
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeWidgetItemSubtitleStyleImplCopyWith<
+          _$BlazeWidgetItemSubtitleStyleImpl>
+      get copyWith => __$$BlazeWidgetItemSubtitleStyleImplCopyWithImpl<
+          _$BlazeWidgetItemSubtitleStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemSubtitleStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemSubtitleStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemSubtitleStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeWidgetItemSubtitleStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeWidgetItemSubtitleStyle
+    implements BlazeWidgetItemSubtitleStyle {
+  const factory _BlazeWidgetItemSubtitleStyle(
+      {final bool? isVisible,
+      final double? topSpacing,
+      final BlazeTitleStyle? unreadState,
+      final BlazeTitleStyle? readState}) = _$BlazeWidgetItemSubtitleStyleImpl;
+
+  factory _BlazeWidgetItemSubtitleStyle.fromJson(Map<String, dynamic> json) =
+      _$BlazeWidgetItemSubtitleStyleImpl.fromJson;
+
+  @override
+  bool? get isVisible;
+
+  /// Space between the title and the subtitle.
+  @override
+  double? get topSpacing;
+  @override
+  BlazeTitleStyle? get unreadState;
+  @override
+  BlazeTitleStyle? get readState;
+
+  /// Create a copy of BlazeWidgetItemSubtitleStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeWidgetItemSubtitleStyleImplCopyWith<
+          _$BlazeWidgetItemSubtitleStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeWidgetItemDescriptionStyle _$BlazeWidgetItemDescriptionStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeWidgetItemDescriptionStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeWidgetItemDescriptionStyle {
+  bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// Space between the row above and the description.
+  double? get topSpacing => throw _privateConstructorUsedError;
+  BlazeTitleStyle? get unreadState => throw _privateConstructorUsedError;
+  BlazeTitleStyle? get readState => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemDescriptionStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemDescriptionStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemDescriptionStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeWidgetItemDescriptionStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeWidgetItemDescriptionStyleCopyWith<BlazeWidgetItemDescriptionStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeWidgetItemDescriptionStyleCopyWith<$Res> {
+  factory $BlazeWidgetItemDescriptionStyleCopyWith(
+          BlazeWidgetItemDescriptionStyle value,
+          $Res Function(BlazeWidgetItemDescriptionStyle) then) =
+      _$BlazeWidgetItemDescriptionStyleCopyWithImpl<$Res,
+          BlazeWidgetItemDescriptionStyle>;
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? topSpacing,
+      BlazeTitleStyle? unreadState,
+      BlazeTitleStyle? readState});
+
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState;
+  $BlazeTitleStyleCopyWith<$Res>? get readState;
+}
+
+/// @nodoc
+class _$BlazeWidgetItemDescriptionStyleCopyWithImpl<$Res,
+        $Val extends BlazeWidgetItemDescriptionStyle>
+    implements $BlazeWidgetItemDescriptionStyleCopyWith<$Res> {
+  _$BlazeWidgetItemDescriptionStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? topSpacing = freezed,
+    Object? unreadState = freezed,
+    Object? readState = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      topSpacing: freezed == topSpacing
+          ? _value.topSpacing
+          : topSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
+      unreadState: freezed == unreadState
+          ? _value.unreadState
+          : unreadState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+      readState: freezed == readState
+          ? _value.readState
+          : readState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState {
+    if (_value.unreadState == null) {
+      return null;
+    }
+
+    return $BlazeTitleStyleCopyWith<$Res>(_value.unreadState!, (value) {
+      return _then(_value.copyWith(unreadState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeTitleStyleCopyWith<$Res>? get readState {
+    if (_value.readState == null) {
+      return null;
+    }
+
+    return $BlazeTitleStyleCopyWith<$Res>(_value.readState!, (value) {
+      return _then(_value.copyWith(readState: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeWidgetItemDescriptionStyleImplCopyWith<$Res>
+    implements $BlazeWidgetItemDescriptionStyleCopyWith<$Res> {
+  factory _$$BlazeWidgetItemDescriptionStyleImplCopyWith(
+          _$BlazeWidgetItemDescriptionStyleImpl value,
+          $Res Function(_$BlazeWidgetItemDescriptionStyleImpl) then) =
+      __$$BlazeWidgetItemDescriptionStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool? isVisible,
+      double? topSpacing,
+      BlazeTitleStyle? unreadState,
+      BlazeTitleStyle? readState});
+
+  @override
+  $BlazeTitleStyleCopyWith<$Res>? get unreadState;
+  @override
+  $BlazeTitleStyleCopyWith<$Res>? get readState;
+}
+
+/// @nodoc
+class __$$BlazeWidgetItemDescriptionStyleImplCopyWithImpl<$Res>
+    extends _$BlazeWidgetItemDescriptionStyleCopyWithImpl<$Res,
+        _$BlazeWidgetItemDescriptionStyleImpl>
+    implements _$$BlazeWidgetItemDescriptionStyleImplCopyWith<$Res> {
+  __$$BlazeWidgetItemDescriptionStyleImplCopyWithImpl(
+      _$BlazeWidgetItemDescriptionStyleImpl _value,
+      $Res Function(_$BlazeWidgetItemDescriptionStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? topSpacing = freezed,
+    Object? unreadState = freezed,
+    Object? readState = freezed,
+  }) {
+    return _then(_$BlazeWidgetItemDescriptionStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      topSpacing: freezed == topSpacing
+          ? _value.topSpacing
+          : topSpacing // ignore: cast_nullable_to_non_nullable
+              as double?,
+      unreadState: freezed == unreadState
+          ? _value.unreadState
+          : unreadState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+      readState: freezed == readState
+          ? _value.readState
+          : readState // ignore: cast_nullable_to_non_nullable
+              as BlazeTitleStyle?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeWidgetItemDescriptionStyleImpl
+    implements _BlazeWidgetItemDescriptionStyle {
+  const _$BlazeWidgetItemDescriptionStyleImpl(
+      {this.isVisible, this.topSpacing, this.unreadState, this.readState});
+
+  factory _$BlazeWidgetItemDescriptionStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeWidgetItemDescriptionStyleImplFromJson(json);
+
+  @override
+  final bool? isVisible;
+
+  /// Space between the row above and the description.
+  @override
+  final double? topSpacing;
+  @override
+  final BlazeTitleStyle? unreadState;
+  @override
+  final BlazeTitleStyle? readState;
+
+  @override
+  String toString() {
+    return 'BlazeWidgetItemDescriptionStyle(isVisible: $isVisible, topSpacing: $topSpacing, unreadState: $unreadState, readState: $readState)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeWidgetItemDescriptionStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.topSpacing, topSpacing) ||
+                other.topSpacing == topSpacing) &&
+            (identical(other.unreadState, unreadState) ||
+                other.unreadState == unreadState) &&
+            (identical(other.readState, readState) ||
+                other.readState == readState));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, isVisible, topSpacing, unreadState, readState);
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeWidgetItemDescriptionStyleImplCopyWith<
+          _$BlazeWidgetItemDescriptionStyleImpl>
+      get copyWith => __$$BlazeWidgetItemDescriptionStyleImplCopyWithImpl<
+          _$BlazeWidgetItemDescriptionStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemDescriptionStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemDescriptionStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemDescriptionStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeWidgetItemDescriptionStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeWidgetItemDescriptionStyle
+    implements BlazeWidgetItemDescriptionStyle {
+  const factory _BlazeWidgetItemDescriptionStyle(
+          {final bool? isVisible,
+          final double? topSpacing,
+          final BlazeTitleStyle? unreadState,
+          final BlazeTitleStyle? readState}) =
+      _$BlazeWidgetItemDescriptionStyleImpl;
+
+  factory _BlazeWidgetItemDescriptionStyle.fromJson(Map<String, dynamic> json) =
+      _$BlazeWidgetItemDescriptionStyleImpl.fromJson;
+
+  @override
+  bool? get isVisible;
+
+  /// Space between the row above and the description.
+  @override
+  double? get topSpacing;
+  @override
+  BlazeTitleStyle? get unreadState;
+  @override
+  BlazeTitleStyle? get readState;
+
+  /// Create a copy of BlazeWidgetItemDescriptionStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeWidgetItemDescriptionStyleImplCopyWith<
+          _$BlazeWidgetItemDescriptionStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeWidgetItemPlayIconElementStyle
+    _$BlazeWidgetItemPlayIconElementStyleFromJson(Map<String, dynamic> json) {
+  return _BlazeWidgetItemPlayIconElementStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeWidgetItemPlayIconElementStyle {
+  bool? get isVisible => throw _privateConstructorUsedError;
+
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  BlazeGlassBackgroundState? get glassBackground =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemPlayIconElementStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemPlayIconElementStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemPlayIconElementStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeWidgetItemPlayIconElementStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeWidgetItemPlayIconElementStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeWidgetItemPlayIconElementStyleCopyWith<
+          BlazeWidgetItemPlayIconElementStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res> {
+  factory $BlazeWidgetItemPlayIconElementStyleCopyWith(
+          BlazeWidgetItemPlayIconElementStyle value,
+          $Res Function(BlazeWidgetItemPlayIconElementStyle) then) =
+      _$BlazeWidgetItemPlayIconElementStyleCopyWithImpl<$Res,
+          BlazeWidgetItemPlayIconElementStyle>;
+  @useResult
+  $Res call({bool? isVisible, BlazeGlassBackgroundState? glassBackground});
+}
+
+/// @nodoc
+class _$BlazeWidgetItemPlayIconElementStyleCopyWithImpl<$Res,
+        $Val extends BlazeWidgetItemPlayIconElementStyle>
+    implements $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res> {
+  _$BlazeWidgetItemPlayIconElementStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeWidgetItemPlayIconElementStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? glassBackground = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeWidgetItemPlayIconElementStyleImplCopyWith<$Res>
+    implements $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res> {
+  factory _$$BlazeWidgetItemPlayIconElementStyleImplCopyWith(
+          _$BlazeWidgetItemPlayIconElementStyleImpl value,
+          $Res Function(_$BlazeWidgetItemPlayIconElementStyleImpl) then) =
+      __$$BlazeWidgetItemPlayIconElementStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool? isVisible, BlazeGlassBackgroundState? glassBackground});
+}
+
+/// @nodoc
+class __$$BlazeWidgetItemPlayIconElementStyleImplCopyWithImpl<$Res>
+    extends _$BlazeWidgetItemPlayIconElementStyleCopyWithImpl<$Res,
+        _$BlazeWidgetItemPlayIconElementStyleImpl>
+    implements _$$BlazeWidgetItemPlayIconElementStyleImplCopyWith<$Res> {
+  __$$BlazeWidgetItemPlayIconElementStyleImplCopyWithImpl(
+      _$BlazeWidgetItemPlayIconElementStyleImpl _value,
+      $Res Function(_$BlazeWidgetItemPlayIconElementStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeWidgetItemPlayIconElementStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = freezed,
+    Object? glassBackground = freezed,
+  }) {
+    return _then(_$BlazeWidgetItemPlayIconElementStyleImpl(
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeWidgetItemPlayIconElementStyleImpl
+    implements _BlazeWidgetItemPlayIconElementStyle {
+  const _$BlazeWidgetItemPlayIconElementStyleImpl(
+      {this.isVisible, this.glassBackground});
+
+  factory _$BlazeWidgetItemPlayIconElementStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeWidgetItemPlayIconElementStyleImplFromJson(json);
+
+  @override
+  final bool? isVisible;
+
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  final BlazeGlassBackgroundState? glassBackground;
+
+  @override
+  String toString() {
+    return 'BlazeWidgetItemPlayIconElementStyle(isVisible: $isVisible, glassBackground: $glassBackground)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeWidgetItemPlayIconElementStyleImpl &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible) &&
+            (identical(other.glassBackground, glassBackground) ||
+                other.glassBackground == glassBackground));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, isVisible, glassBackground);
+
+  /// Create a copy of BlazeWidgetItemPlayIconElementStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeWidgetItemPlayIconElementStyleImplCopyWith<
+          _$BlazeWidgetItemPlayIconElementStyleImpl>
+      get copyWith => __$$BlazeWidgetItemPlayIconElementStyleImplCopyWithImpl<
+          _$BlazeWidgetItemPlayIconElementStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemPlayIconElementStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeWidgetItemPlayIconElementStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeWidgetItemPlayIconElementStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeWidgetItemPlayIconElementStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeWidgetItemPlayIconElementStyle
+    implements BlazeWidgetItemPlayIconElementStyle {
+  const factory _BlazeWidgetItemPlayIconElementStyle(
+          {final bool? isVisible,
+          final BlazeGlassBackgroundState? glassBackground}) =
+      _$BlazeWidgetItemPlayIconElementStyleImpl;
+
+  factory _BlazeWidgetItemPlayIconElementStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeWidgetItemPlayIconElementStyleImpl.fromJson;
+
+  @override
+  bool? get isVisible;
+
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  BlazeGlassBackgroundState? get glassBackground;
+
+  /// Create a copy of BlazeWidgetItemPlayIconElementStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeWidgetItemPlayIconElementStyleImplCopyWith<
+          _$BlazeWidgetItemPlayIconElementStyleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

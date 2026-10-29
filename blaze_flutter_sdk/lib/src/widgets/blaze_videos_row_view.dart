@@ -19,6 +19,7 @@ class BlazeVideosRowView extends BlazeWidgetBase {
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_videos_row_view',

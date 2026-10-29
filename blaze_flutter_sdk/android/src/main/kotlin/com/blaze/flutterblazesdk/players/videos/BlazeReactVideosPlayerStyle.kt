@@ -9,6 +9,7 @@ import com.blaze.flutterblazesdk.players.shared.BlazeReactSeekBarStyle
 import com.blaze.flutterblazesdk.utils.parsing.BlazeReactImage
 import com.blaze.flutterblazesdk.utils.parsing.BlazeReactTitleFont
 import com.blaze.flutterblazesdk.utils.parsing.gson.BlazeEnumMapper
+import com.blaze.flutterblazesdk.widgets.customization.BlazeReactMargins
 
 // =================================
 // VIDEOS PLAYER STYLE
@@ -22,7 +23,65 @@ data class BlazeReactVideosPlayerStyle(
         val cta: BlazeReactVideosPlayerCtaStyle?,
         val seekBar: BlazeReactVideosPlayerSeekBarStyle?,
         val overlayVisibilityThresholdMs: Long?,
-        val captions: BlazeReactCaptionsStyle?
+        val captions: BlazeReactCaptionsStyle?,
+        val statusIndicator: BlazeReactVideosPlayerStatusIndicatorStyle?,
+        val backToLiveButton: BlazeReactVideosPlayerBackToLiveButtonStyle?
+)
+
+@Keep
+data class BlazeReactVideosPlayerTextStyle(
+        val font: BlazeReactTitleFont?,
+        val textSize: Float?,
+        val textColor: String? // Hex
+)
+
+@Keep
+data class BlazeReactVideosPlayerStatusIndicatorStyle(
+        val isVisible: Boolean?,
+        val padding: BlazeReactMargins?,
+        val streamStates: BlazeReactVideosPlayerStatusIndicatorStreamStatesStyle?
+)
+
+@Keep
+data class BlazeReactVideosPlayerStatusIndicatorStreamStatesStyle(
+        val liveStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?,
+        val upcomingStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?,
+        val endedStreamState: BlazeReactVideosPlayerStatusIndicatorStateStyle?
+)
+
+@Keep
+data class BlazeReactVideosPlayerStatusIndicatorStateStyle(
+        val textStyle: BlazeReactVideosPlayerTextStyle?,
+        val isVisible: Boolean?,
+        val text: String?,
+        val backgroundColor: String?, // Hex
+        val backgroundImage: BlazeReactImage?,
+        val cornerRadius: Float?,
+        val cornerRadiusRatio: Float?,
+        val borderColor: String?, // Hex
+        val borderWidth: Float?
+)
+
+@Keep
+data class BlazeReactVideosPlayerBackToLiveButtonStyle(
+        val margins: BlazeReactMargins?,
+        val padding: BlazeReactMargins?,
+        val playbackStates: BlazeReactVideosPlayerBackToLiveButtonPlaybackStatesStyle?
+)
+
+@Keep
+data class BlazeReactVideosPlayerBackToLiveButtonPlaybackStatesStyle(
+        val atLiveEdgeState: BlazeReactVideosPlayerBackToLiveButtonStateStyle?,
+        val behindLiveState: BlazeReactVideosPlayerBackToLiveButtonStateStyle?
+)
+
+@Keep
+data class BlazeReactVideosPlayerBackToLiveButtonStateStyle(
+        val textStyle: BlazeReactVideosPlayerTextStyle?,
+        val text: String?,
+        val backgroundColor: String?, // Hex
+        val cornerRadius: Float?,
+        val cornerRadiusRatio: Float?
 )
 
 @Keep
@@ -58,7 +117,9 @@ data class BlazeReactVideosPlayerButtonsStyle(
         val casting: BlazeReactPlayerButtonStyle?,
         val pictureInPicture: BlazeReactPlayerButtonStyle?,
         val seekForward: BlazeReactPlayerButtonStyle?,
-        val seekBackward: BlazeReactPlayerButtonStyle?
+        val seekBackward: BlazeReactPlayerButtonStyle?,
+        val audio: BlazeReactPlayerButtonStyle?,
+        val liveCatchup: BlazeReactPlayerButtonStyle?
 )
 
 @Keep

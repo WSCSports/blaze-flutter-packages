@@ -313,3 +313,84 @@ Map<String, dynamic> _$$BlazePlayerEventDataImplToJson(
       'playerEventType': instance.playerEventType,
       'playerEventParams': instance.playerEventParams,
     };
+
+_$BlazeRestrictedContentParamsImpl _$$BlazeRestrictedContentParamsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeRestrictedContentParamsImpl(
+      contentIndex: (json['contentIndex'] as num).toInt(),
+      contentId: json['contentId'] as String,
+      extraInfo: (json['extraInfo'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k, e as String),
+          ) ??
+          const {},
+      contentThumbnailUrl: json['contentThumbnailUrl'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeRestrictedContentParamsImplToJson(
+        _$BlazeRestrictedContentParamsImpl instance) =>
+    <String, dynamic>{
+      'contentIndex': instance.contentIndex,
+      'contentId': instance.contentId,
+      'extraInfo': instance.extraInfo,
+      'contentThumbnailUrl': instance.contentThumbnailUrl,
+    };
+
+_$BlazeOnContentRestrictedParamsImpl
+    _$$BlazeOnContentRestrictedParamsImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeOnContentRestrictedParamsImpl(
+          playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
+          sourceId: json['sourceId'] as String?,
+          reason: $enumDecode(
+              _$BlazeContentRestrictionReasonEnumMap, json['reason'],
+              unknownValue: BlazeContentRestrictionReason.unknown),
+          contentParams: BlazeRestrictedContentParams.fromJson(
+              json['contentParams'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeOnContentRestrictedParamsImplToJson(
+        _$BlazeOnContentRestrictedParamsImpl instance) =>
+    <String, dynamic>{
+      'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
+      'sourceId': instance.sourceId,
+      'reason': _$BlazeContentRestrictionReasonEnumMap[instance.reason]!,
+      'contentParams': instance.contentParams.toJson(),
+    };
+
+const _$BlazeContentRestrictionReasonEnumMap = {
+  BlazeContentRestrictionReason.subscriptionRequired: 'SubscriptionRequired',
+  BlazeContentRestrictionReason.geoBlocked: 'GeoBlocked',
+  BlazeContentRestrictionReason.vpnBlocked: 'VpnBlocked',
+  BlazeContentRestrictionReason.deviceLimitReached: 'DeviceLimitReached',
+  BlazeContentRestrictionReason.contentNotAvailable: 'ContentNotAvailable',
+  BlazeContentRestrictionReason.externalUserTokenMissing:
+      'ExternalUserTokenMissing',
+  BlazeContentRestrictionReason.externalUserTokenInvalid:
+      'ExternalUserTokenInvalid',
+  BlazeContentRestrictionReason.externalUserTokenExpired:
+      'ExternalUserTokenExpired',
+  BlazeContentRestrictionReason.rateLimited: 'RateLimited',
+  BlazeContentRestrictionReason.temporarilyUnavailable:
+      'TemporarilyUnavailable',
+  BlazeContentRestrictionReason.unknown: 'Unknown',
+};
+
+_$BlazeOnTriggerInteractionLinkParamsImpl
+    _$$BlazeOnTriggerInteractionLinkParamsImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeOnTriggerInteractionLinkParamsImpl(
+          playerType: $enumDecode(_$BlazePlayerTypeEnumMap, json['playerType']),
+          sourceId: json['sourceId'] as String?,
+          interactionId: json['interactionId'] as String,
+          interactionType: json['interactionType'] as String,
+          url: json['url'] as String,
+        );
+
+Map<String, dynamic> _$$BlazeOnTriggerInteractionLinkParamsImplToJson(
+        _$BlazeOnTriggerInteractionLinkParamsImpl instance) =>
+    <String, dynamic>{
+      'playerType': _$BlazePlayerTypeEnumMap[instance.playerType]!,
+      'sourceId': instance.sourceId,
+      'interactionId': instance.interactionId,
+      'interactionType': instance.interactionType,
+      'url': instance.url,
+    };

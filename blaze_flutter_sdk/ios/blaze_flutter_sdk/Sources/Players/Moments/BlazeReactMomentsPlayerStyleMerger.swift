@@ -30,6 +30,7 @@ extension BlazeMomentsPlayerStyle {
             customization.playerDisplayMode)
         merged.followEntity = merged.followEntity.mergedWith(customization.followEntity)
         merged.captions = merged.captions.mergedWith(customization.captions)
+        merged.ignoresBottomSafeArea = customization.ignoresBottomSafeArea ?? merged.ignoresBottomSafeArea
         return merged
     }
 }
@@ -78,6 +79,14 @@ extension BlazeMomentsPlayerFollowEntityChipStyle {
             UIColor(hexString: customization.backgroundColor) ?? merged.backgroundColor
         merged.iconColor = UIColor(hexString: customization.iconColor) ?? merged.iconColor
         merged.contentSource = merged.contentSource.mergedWith(customization.contentSource)
+        switch customization.iconSource {
+        case .default:
+            merged.iconSource = .default
+        case .star:
+            merged.iconSource = .star
+        case nil:
+            break
+        }
         return merged
     }
 }
@@ -330,6 +339,7 @@ extension BlazeMomentsPlayerButtonStyle {
         merged.contentHorizontalAlignment = .center
         merged.contentVerticalAlignment = .center
 
+        merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
     }
 }

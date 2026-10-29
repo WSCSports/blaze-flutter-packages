@@ -4731,3 +4731,928 @@ abstract class _BlazePlayerEventData implements BlazePlayerEventData {
   _$$BlazePlayerEventDataImplCopyWith<_$BlazePlayerEventDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+BlazeRestrictedContentParams _$BlazeRestrictedContentParamsFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeRestrictedContentParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeRestrictedContentParams {
+  /// The item's position in the player's content list.
+  int get contentIndex => throw _privateConstructorUsedError;
+  String get contentId => throw _privateConstructorUsedError;
+  Map<String, String> get extraInfo => throw _privateConstructorUsedError;
+  String? get contentThumbnailUrl => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeRestrictedContentParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeRestrictedContentParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeRestrictedContentParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeRestrictedContentParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeRestrictedContentParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeRestrictedContentParamsCopyWith<BlazeRestrictedContentParams>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeRestrictedContentParamsCopyWith<$Res> {
+  factory $BlazeRestrictedContentParamsCopyWith(
+          BlazeRestrictedContentParams value,
+          $Res Function(BlazeRestrictedContentParams) then) =
+      _$BlazeRestrictedContentParamsCopyWithImpl<$Res,
+          BlazeRestrictedContentParams>;
+  @useResult
+  $Res call(
+      {int contentIndex,
+      String contentId,
+      Map<String, String> extraInfo,
+      String? contentThumbnailUrl});
+}
+
+/// @nodoc
+class _$BlazeRestrictedContentParamsCopyWithImpl<$Res,
+        $Val extends BlazeRestrictedContentParams>
+    implements $BlazeRestrictedContentParamsCopyWith<$Res> {
+  _$BlazeRestrictedContentParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeRestrictedContentParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contentIndex = null,
+    Object? contentId = null,
+    Object? extraInfo = null,
+    Object? contentThumbnailUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      contentIndex: null == contentIndex
+          ? _value.contentIndex
+          : contentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      extraInfo: null == extraInfo
+          ? _value.extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      contentThumbnailUrl: freezed == contentThumbnailUrl
+          ? _value.contentThumbnailUrl
+          : contentThumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeRestrictedContentParamsImplCopyWith<$Res>
+    implements $BlazeRestrictedContentParamsCopyWith<$Res> {
+  factory _$$BlazeRestrictedContentParamsImplCopyWith(
+          _$BlazeRestrictedContentParamsImpl value,
+          $Res Function(_$BlazeRestrictedContentParamsImpl) then) =
+      __$$BlazeRestrictedContentParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int contentIndex,
+      String contentId,
+      Map<String, String> extraInfo,
+      String? contentThumbnailUrl});
+}
+
+/// @nodoc
+class __$$BlazeRestrictedContentParamsImplCopyWithImpl<$Res>
+    extends _$BlazeRestrictedContentParamsCopyWithImpl<$Res,
+        _$BlazeRestrictedContentParamsImpl>
+    implements _$$BlazeRestrictedContentParamsImplCopyWith<$Res> {
+  __$$BlazeRestrictedContentParamsImplCopyWithImpl(
+      _$BlazeRestrictedContentParamsImpl _value,
+      $Res Function(_$BlazeRestrictedContentParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeRestrictedContentParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contentIndex = null,
+    Object? contentId = null,
+    Object? extraInfo = null,
+    Object? contentThumbnailUrl = freezed,
+  }) {
+    return _then(_$BlazeRestrictedContentParamsImpl(
+      contentIndex: null == contentIndex
+          ? _value.contentIndex
+          : contentIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentId: null == contentId
+          ? _value.contentId
+          : contentId // ignore: cast_nullable_to_non_nullable
+              as String,
+      extraInfo: null == extraInfo
+          ? _value._extraInfo
+          : extraInfo // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
+      contentThumbnailUrl: freezed == contentThumbnailUrl
+          ? _value.contentThumbnailUrl
+          : contentThumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeRestrictedContentParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeRestrictedContentParams {
+  const _$BlazeRestrictedContentParamsImpl(
+      {required this.contentIndex,
+      required this.contentId,
+      final Map<String, String> extraInfo = const {},
+      this.contentThumbnailUrl})
+      : _extraInfo = extraInfo;
+
+  factory _$BlazeRestrictedContentParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeRestrictedContentParamsImplFromJson(json);
+
+  /// The item's position in the player's content list.
+  @override
+  final int contentIndex;
+  @override
+  final String contentId;
+  final Map<String, String> _extraInfo;
+  @override
+  @JsonKey()
+  Map<String, String> get extraInfo {
+    if (_extraInfo is EqualUnmodifiableMapView) return _extraInfo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_extraInfo);
+  }
+
+  @override
+  final String? contentThumbnailUrl;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeRestrictedContentParams(contentIndex: $contentIndex, contentId: $contentId, extraInfo: $extraInfo, contentThumbnailUrl: $contentThumbnailUrl)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeRestrictedContentParams'))
+      ..add(DiagnosticsProperty('contentIndex', contentIndex))
+      ..add(DiagnosticsProperty('contentId', contentId))
+      ..add(DiagnosticsProperty('extraInfo', extraInfo))
+      ..add(DiagnosticsProperty('contentThumbnailUrl', contentThumbnailUrl));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeRestrictedContentParamsImpl &&
+            (identical(other.contentIndex, contentIndex) ||
+                other.contentIndex == contentIndex) &&
+            (identical(other.contentId, contentId) ||
+                other.contentId == contentId) &&
+            const DeepCollectionEquality()
+                .equals(other._extraInfo, _extraInfo) &&
+            (identical(other.contentThumbnailUrl, contentThumbnailUrl) ||
+                other.contentThumbnailUrl == contentThumbnailUrl));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, contentIndex, contentId,
+      const DeepCollectionEquality().hash(_extraInfo), contentThumbnailUrl);
+
+  /// Create a copy of BlazeRestrictedContentParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeRestrictedContentParamsImplCopyWith<
+          _$BlazeRestrictedContentParamsImpl>
+      get copyWith => __$$BlazeRestrictedContentParamsImplCopyWithImpl<
+          _$BlazeRestrictedContentParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeRestrictedContentParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeRestrictedContentParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeRestrictedContentParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeRestrictedContentParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeRestrictedContentParams
+    implements BlazeRestrictedContentParams {
+  const factory _BlazeRestrictedContentParams(
+      {required final int contentIndex,
+      required final String contentId,
+      final Map<String, String> extraInfo,
+      final String? contentThumbnailUrl}) = _$BlazeRestrictedContentParamsImpl;
+
+  factory _BlazeRestrictedContentParams.fromJson(Map<String, dynamic> json) =
+      _$BlazeRestrictedContentParamsImpl.fromJson;
+
+  /// The item's position in the player's content list.
+  @override
+  int get contentIndex;
+  @override
+  String get contentId;
+  @override
+  Map<String, String> get extraInfo;
+  @override
+  String? get contentThumbnailUrl;
+
+  /// Create a copy of BlazeRestrictedContentParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeRestrictedContentParamsImplCopyWith<
+          _$BlazeRestrictedContentParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeOnContentRestrictedParams _$BlazeOnContentRestrictedParamsFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeOnContentRestrictedParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeOnContentRestrictedParams {
+  BlazePlayerType get playerType => throw _privateConstructorUsedError;
+  String? get sourceId =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+  BlazeContentRestrictionReason get reason =>
+      throw _privateConstructorUsedError;
+  BlazeRestrictedContentParams get contentParams =>
+      throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnContentRestrictedParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnContentRestrictedParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnContentRestrictedParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeOnContentRestrictedParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeOnContentRestrictedParamsCopyWith<BlazeOnContentRestrictedParams>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeOnContentRestrictedParamsCopyWith<$Res> {
+  factory $BlazeOnContentRestrictedParamsCopyWith(
+          BlazeOnContentRestrictedParams value,
+          $Res Function(BlazeOnContentRestrictedParams) then) =
+      _$BlazeOnContentRestrictedParamsCopyWithImpl<$Res,
+          BlazeOnContentRestrictedParams>;
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+      BlazeContentRestrictionReason reason,
+      BlazeRestrictedContentParams contentParams});
+
+  $BlazeRestrictedContentParamsCopyWith<$Res> get contentParams;
+}
+
+/// @nodoc
+class _$BlazeOnContentRestrictedParamsCopyWithImpl<$Res,
+        $Val extends BlazeOnContentRestrictedParams>
+    implements $BlazeOnContentRestrictedParamsCopyWith<$Res> {
+  _$BlazeOnContentRestrictedParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? reason = null,
+    Object? contentParams = null,
+  }) {
+    return _then(_value.copyWith(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as BlazeContentRestrictionReason,
+      contentParams: null == contentParams
+          ? _value.contentParams
+          : contentParams // ignore: cast_nullable_to_non_nullable
+              as BlazeRestrictedContentParams,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeRestrictedContentParamsCopyWith<$Res> get contentParams {
+    return $BlazeRestrictedContentParamsCopyWith<$Res>(_value.contentParams,
+        (value) {
+      return _then(_value.copyWith(contentParams: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeOnContentRestrictedParamsImplCopyWith<$Res>
+    implements $BlazeOnContentRestrictedParamsCopyWith<$Res> {
+  factory _$$BlazeOnContentRestrictedParamsImplCopyWith(
+          _$BlazeOnContentRestrictedParamsImpl value,
+          $Res Function(_$BlazeOnContentRestrictedParamsImpl) then) =
+      __$$BlazeOnContentRestrictedParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+      BlazeContentRestrictionReason reason,
+      BlazeRestrictedContentParams contentParams});
+
+  @override
+  $BlazeRestrictedContentParamsCopyWith<$Res> get contentParams;
+}
+
+/// @nodoc
+class __$$BlazeOnContentRestrictedParamsImplCopyWithImpl<$Res>
+    extends _$BlazeOnContentRestrictedParamsCopyWithImpl<$Res,
+        _$BlazeOnContentRestrictedParamsImpl>
+    implements _$$BlazeOnContentRestrictedParamsImplCopyWith<$Res> {
+  __$$BlazeOnContentRestrictedParamsImplCopyWithImpl(
+      _$BlazeOnContentRestrictedParamsImpl _value,
+      $Res Function(_$BlazeOnContentRestrictedParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? reason = null,
+    Object? contentParams = null,
+  }) {
+    return _then(_$BlazeOnContentRestrictedParamsImpl(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as BlazeContentRestrictionReason,
+      contentParams: null == contentParams
+          ? _value.contentParams
+          : contentParams // ignore: cast_nullable_to_non_nullable
+              as BlazeRestrictedContentParams,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeOnContentRestrictedParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeOnContentRestrictedParams {
+  const _$BlazeOnContentRestrictedParamsImpl(
+      {required this.playerType,
+      this.sourceId,
+      @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+      required this.reason,
+      required this.contentParams});
+
+  factory _$BlazeOnContentRestrictedParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeOnContentRestrictedParamsImplFromJson(json);
+
+  @override
+  final BlazePlayerType playerType;
+  @override
+  final String? sourceId;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+  final BlazeContentRestrictionReason reason;
+  @override
+  final BlazeRestrictedContentParams contentParams;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeOnContentRestrictedParams(playerType: $playerType, sourceId: $sourceId, reason: $reason, contentParams: $contentParams)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeOnContentRestrictedParams'))
+      ..add(DiagnosticsProperty('playerType', playerType))
+      ..add(DiagnosticsProperty('sourceId', sourceId))
+      ..add(DiagnosticsProperty('reason', reason))
+      ..add(DiagnosticsProperty('contentParams', contentParams));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeOnContentRestrictedParamsImpl &&
+            (identical(other.playerType, playerType) ||
+                other.playerType == playerType) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.reason, reason) || other.reason == reason) &&
+            (identical(other.contentParams, contentParams) ||
+                other.contentParams == contentParams));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, playerType, sourceId, reason, contentParams);
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeOnContentRestrictedParamsImplCopyWith<
+          _$BlazeOnContentRestrictedParamsImpl>
+      get copyWith => __$$BlazeOnContentRestrictedParamsImplCopyWithImpl<
+          _$BlazeOnContentRestrictedParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnContentRestrictedParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnContentRestrictedParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnContentRestrictedParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeOnContentRestrictedParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeOnContentRestrictedParams
+    implements BlazeOnContentRestrictedParams {
+  const factory _BlazeOnContentRestrictedParams(
+          {required final BlazePlayerType playerType,
+          final String? sourceId,
+          @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+          required final BlazeContentRestrictionReason reason,
+          required final BlazeRestrictedContentParams contentParams}) =
+      _$BlazeOnContentRestrictedParamsImpl;
+
+  factory _BlazeOnContentRestrictedParams.fromJson(Map<String, dynamic> json) =
+      _$BlazeOnContentRestrictedParamsImpl.fromJson;
+
+  @override
+  BlazePlayerType get playerType;
+  @override
+  String? get sourceId; // ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+  BlazeContentRestrictionReason get reason;
+  @override
+  BlazeRestrictedContentParams get contentParams;
+
+  /// Create a copy of BlazeOnContentRestrictedParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeOnContentRestrictedParamsImplCopyWith<
+          _$BlazeOnContentRestrictedParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeOnTriggerInteractionLinkParams
+    _$BlazeOnTriggerInteractionLinkParamsFromJson(Map<String, dynamic> json) {
+  return _BlazeOnTriggerInteractionLinkParams.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeOnTriggerInteractionLinkParams {
+  BlazePlayerType get playerType => throw _privateConstructorUsedError;
+  String? get sourceId => throw _privateConstructorUsedError;
+  String get interactionId => throw _privateConstructorUsedError;
+  String get interactionType => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerInteractionLinkParams value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnTriggerInteractionLinkParams value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerInteractionLinkParams value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeOnTriggerInteractionLinkParams to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeOnTriggerInteractionLinkParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeOnTriggerInteractionLinkParamsCopyWith<
+          BlazeOnTriggerInteractionLinkParams>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeOnTriggerInteractionLinkParamsCopyWith<$Res> {
+  factory $BlazeOnTriggerInteractionLinkParamsCopyWith(
+          BlazeOnTriggerInteractionLinkParams value,
+          $Res Function(BlazeOnTriggerInteractionLinkParams) then) =
+      _$BlazeOnTriggerInteractionLinkParamsCopyWithImpl<$Res,
+          BlazeOnTriggerInteractionLinkParams>;
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String interactionId,
+      String interactionType,
+      String url});
+}
+
+/// @nodoc
+class _$BlazeOnTriggerInteractionLinkParamsCopyWithImpl<$Res,
+        $Val extends BlazeOnTriggerInteractionLinkParams>
+    implements $BlazeOnTriggerInteractionLinkParamsCopyWith<$Res> {
+  _$BlazeOnTriggerInteractionLinkParamsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeOnTriggerInteractionLinkParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? interactionId = null,
+    Object? interactionType = null,
+    Object? url = null,
+  }) {
+    return _then(_value.copyWith(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      interactionId: null == interactionId
+          ? _value.interactionId
+          : interactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      interactionType: null == interactionType
+          ? _value.interactionType
+          : interactionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeOnTriggerInteractionLinkParamsImplCopyWith<$Res>
+    implements $BlazeOnTriggerInteractionLinkParamsCopyWith<$Res> {
+  factory _$$BlazeOnTriggerInteractionLinkParamsImplCopyWith(
+          _$BlazeOnTriggerInteractionLinkParamsImpl value,
+          $Res Function(_$BlazeOnTriggerInteractionLinkParamsImpl) then) =
+      __$$BlazeOnTriggerInteractionLinkParamsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazePlayerType playerType,
+      String? sourceId,
+      String interactionId,
+      String interactionType,
+      String url});
+}
+
+/// @nodoc
+class __$$BlazeOnTriggerInteractionLinkParamsImplCopyWithImpl<$Res>
+    extends _$BlazeOnTriggerInteractionLinkParamsCopyWithImpl<$Res,
+        _$BlazeOnTriggerInteractionLinkParamsImpl>
+    implements _$$BlazeOnTriggerInteractionLinkParamsImplCopyWith<$Res> {
+  __$$BlazeOnTriggerInteractionLinkParamsImplCopyWithImpl(
+      _$BlazeOnTriggerInteractionLinkParamsImpl _value,
+      $Res Function(_$BlazeOnTriggerInteractionLinkParamsImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeOnTriggerInteractionLinkParams
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerType = null,
+    Object? sourceId = freezed,
+    Object? interactionId = null,
+    Object? interactionType = null,
+    Object? url = null,
+  }) {
+    return _then(_$BlazeOnTriggerInteractionLinkParamsImpl(
+      playerType: null == playerType
+          ? _value.playerType
+          : playerType // ignore: cast_nullable_to_non_nullable
+              as BlazePlayerType,
+      sourceId: freezed == sourceId
+          ? _value.sourceId
+          : sourceId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      interactionId: null == interactionId
+          ? _value.interactionId
+          : interactionId // ignore: cast_nullable_to_non_nullable
+              as String,
+      interactionType: null == interactionType
+          ? _value.interactionType
+          : interactionType // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeOnTriggerInteractionLinkParamsImpl
+    with DiagnosticableTreeMixin
+    implements _BlazeOnTriggerInteractionLinkParams {
+  const _$BlazeOnTriggerInteractionLinkParamsImpl(
+      {required this.playerType,
+      this.sourceId,
+      required this.interactionId,
+      required this.interactionType,
+      required this.url});
+
+  factory _$BlazeOnTriggerInteractionLinkParamsImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeOnTriggerInteractionLinkParamsImplFromJson(json);
+
+  @override
+  final BlazePlayerType playerType;
+  @override
+  final String? sourceId;
+  @override
+  final String interactionId;
+  @override
+  final String interactionType;
+  @override
+  final String url;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BlazeOnTriggerInteractionLinkParams(playerType: $playerType, sourceId: $sourceId, interactionId: $interactionId, interactionType: $interactionType, url: $url)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BlazeOnTriggerInteractionLinkParams'))
+      ..add(DiagnosticsProperty('playerType', playerType))
+      ..add(DiagnosticsProperty('sourceId', sourceId))
+      ..add(DiagnosticsProperty('interactionId', interactionId))
+      ..add(DiagnosticsProperty('interactionType', interactionType))
+      ..add(DiagnosticsProperty('url', url));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeOnTriggerInteractionLinkParamsImpl &&
+            (identical(other.playerType, playerType) ||
+                other.playerType == playerType) &&
+            (identical(other.sourceId, sourceId) ||
+                other.sourceId == sourceId) &&
+            (identical(other.interactionId, interactionId) ||
+                other.interactionId == interactionId) &&
+            (identical(other.interactionType, interactionType) ||
+                other.interactionType == interactionType) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, playerType, sourceId, interactionId, interactionType, url);
+
+  /// Create a copy of BlazeOnTriggerInteractionLinkParams
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeOnTriggerInteractionLinkParamsImplCopyWith<
+          _$BlazeOnTriggerInteractionLinkParamsImpl>
+      get copyWith => __$$BlazeOnTriggerInteractionLinkParamsImplCopyWithImpl<
+          _$BlazeOnTriggerInteractionLinkParamsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerInteractionLinkParams value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeOnTriggerInteractionLinkParams value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeOnTriggerInteractionLinkParams value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeOnTriggerInteractionLinkParamsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeOnTriggerInteractionLinkParams
+    implements BlazeOnTriggerInteractionLinkParams {
+  const factory _BlazeOnTriggerInteractionLinkParams(
+      {required final BlazePlayerType playerType,
+      final String? sourceId,
+      required final String interactionId,
+      required final String interactionType,
+      required final String url}) = _$BlazeOnTriggerInteractionLinkParamsImpl;
+
+  factory _BlazeOnTriggerInteractionLinkParams.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeOnTriggerInteractionLinkParamsImpl.fromJson;
+
+  @override
+  BlazePlayerType get playerType;
+  @override
+  String? get sourceId;
+  @override
+  String get interactionId;
+  @override
+  String get interactionType;
+  @override
+  String get url;
+
+  /// Create a copy of BlazeOnTriggerInteractionLinkParams
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeOnTriggerInteractionLinkParamsImplCopyWith<
+          _$BlazeOnTriggerInteractionLinkParamsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

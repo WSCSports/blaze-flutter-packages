@@ -20,6 +20,7 @@ class BlazeMomentsGridView extends BlazeWidgetBase {
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_moments_grid_view',
@@ -46,6 +47,7 @@ class BlazeMomentsGridView extends BlazeWidgetBase {
     super.widgetDelegate,
     super.momentsContainerTabsDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_moments_grid_view',

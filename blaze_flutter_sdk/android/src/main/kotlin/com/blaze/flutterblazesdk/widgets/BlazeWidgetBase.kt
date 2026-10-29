@@ -11,6 +11,10 @@ import com.blaze.blazesdk.delegates.BlazeWidgetDelegate
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeInteractionLinkHandleType
+import com.blaze.blazesdk.delegates.models.BlazeRestrictedContentParams
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionHandleType
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionReason
 import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.extentions.blazeDeepCopy
 import com.blaze.blazesdk.features.moments.widgets.tabs.BlazeMomentsWidgetTabsController
@@ -23,12 +27,15 @@ import com.blaze.blazesdk.style.widgets.BlazeWidgetItemStyleOverrides
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.blazesdk.widgets.ui.BlazeBaseWidget
 import com.blaze.flutterblazesdk.delegates.BlazeSharedDelegateHandler
+import com.blaze.flutterblazesdk.delegates.resolveLinkHandling
+import com.blaze.flutterblazesdk.sdk_module.BlazeFlutterSDKModule
 import com.blaze.flutterblazesdk.parsers.asCachingLevel
 import com.blaze.flutterblazesdk.parsers.asWidgetLayoutPreset
 import com.blaze.flutterblazesdk.parsers.toBlazeDataSourceType
 import com.blaze.flutterblazesdk.utils.convertPixelsToDp
 import com.blaze.flutterblazesdk.utils.disableNestedScrolling
 import com.blaze.flutterblazesdk.utils.invokeMethodWithJsonStringFromObject
+import com.blaze.flutterblazesdk.utils.safeGetArgument
 import com.blaze.flutterblazesdk.widgets.customization.applyWidgetLayoutCustomization
 import com.blaze.flutterblazesdk.widgets.customization.mergedWith
 import com.blaze.flutterblazesdk.widgets.customization.toReactWidgetStylesOverridesMap
@@ -107,6 +114,13 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
         creationParams?.get("appOverridesCTAHandling") as? Boolean ?: false
     }
 
+    // Unset (null) inherits the global interactionLinkHandling from initSDK
+    private val interactionLinkHandling: BlazeInteractionLinkHandleType
+        get() = resolveLinkHandling(
+            widget = creationParams?.get("interactionLinkHandling") as? String,
+            global = BlazeFlutterSDKModule.interactionLinkHandling
+        )
+
     // Moments-only: raw "widget to tabs" configuration from creation params. Ignored by
     // Stories/Videos widgets (Dart never sends it for them).
     val tabsConfigurationMap: Map<String, Any>? by lazy {
@@ -143,15 +157,23 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                         "reloadNonActiveTabs" -> {
                             tabsController?.reloadNonActiveTabs()
                         }
-                        "reloadTab", "reloadTabByContainerId" -> {
-                            // No native per-tab reload hook for the widget-driven tabs flow on
-                            // Android (confirmed absent through publicSDK/v1.20.4 -
-                            // BlazeMomentsWidgetTabsController only exposes reloadAllTabs/
-                            // reloadNonActiveTabs). Documented no-op - see reloadTab/
-                            // reloadTabByContainerId on BlazeWidgetController (Dart).
+                        "reloadTab" -> {
+                            call.safeGetArgument<Int>("at")?.let { at ->
+                                tabsController?.reloadTab(at)
+                            }
                         }
-                        else -> {}
+                        "reloadTabByContainerId" -> {
+                            call.safeGetArgument<String>("containerId")?.let { containerId ->
+                                tabsController?.reloadTab(containerId)
+                            }
+                        }
+                        else -> {
+                            result.notImplemented()
+                            return@setMethodCallHandler
+                        }
                     }
+                    // Complete the Dart future for every handled command
+                    result.success(null)
                 }
             }
 
@@ -380,6 +402,47 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 }
             }
 
+            override fun onContentRestricted(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                reason: BlazeContentRestrictionReason,
+                contentParams: BlazeRestrictedContentParams
+            ): BlazeContentRestrictionHandleType {
+                return sharedDelegateHandler.onContentRestricted(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    reason = reason,
+                    contentParams = contentParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onContentRestricted",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTriggerInteractionLink(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                interactionId: String,
+                interactionType: String,
+                url: String
+            ): BlazeInteractionLinkHandleType {
+                return sharedDelegateHandler.onTriggerInteractionLink(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    interactionId = interactionId,
+                    interactionType = interactionType,
+                    url = url,
+                    handling = interactionLinkHandling
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onTriggerInteractionLink",
+                        params = params
+                    )
+                }
+            }
+
             override fun onItemClicked(
                 sourceId: String?,
                 itemId: String,
@@ -552,6 +615,24 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 }
             }
 
+            override fun onTabReselected(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                tabIndex: Int
+            ) {
+                // Same payload as onTabSelected.
+                sharedDelegateHandler.onTabSelected(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    tabIndex = tabIndex
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTabReselected",
+                        params = params
+                    )
+                }
+            }
+
             override fun onShareClicked(
                 playerType: BlazePlayerType,
                 sourceId: String?,
@@ -564,6 +645,47 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
                 ) { params ->
                     methodChannel?.invokeMethodWithJsonStringFromObject(
                         name = "onMomentsContainerTabsShareClicked",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onContentRestricted(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                reason: BlazeContentRestrictionReason,
+                contentParams: BlazeRestrictedContentParams
+            ): BlazeContentRestrictionHandleType {
+                return sharedDelegateHandler.onContentRestricted(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    reason = reason,
+                    contentParams = contentParams
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsContentRestricted",
+                        params = params
+                    )
+                }
+            }
+
+            override fun onTriggerInteractionLink(
+                playerType: BlazePlayerType,
+                sourceId: String?,
+                interactionId: String,
+                interactionType: String,
+                url: String
+            ): BlazeInteractionLinkHandleType {
+                return sharedDelegateHandler.onTriggerInteractionLink(
+                    playerType = playerType,
+                    sourceId = sourceId,
+                    interactionId = interactionId,
+                    interactionType = interactionType,
+                    url = url,
+                    handling = interactionLinkHandling
+                ) { params ->
+                    methodChannel?.invokeMethodWithJsonStringFromObject(
+                        name = "onMomentsContainerTabsTriggerInteractionLink",
                         params = params
                     )
                 }

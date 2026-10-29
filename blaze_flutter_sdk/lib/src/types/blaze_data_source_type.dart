@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'blaze_widget_label.dart';
+import '../delegates/blaze_follow_entities_delegate.dart';
 
 part 'blaze_data_source_type.freezed.dart';
 part 'blaze_data_source_type.g.dart';
@@ -50,6 +51,23 @@ class BlazeDataSourceType with _$BlazeDataSourceType {
     /// Ordered list of entries; declaration order determines merge priority.
     required List<BlazeCompositeDataSourceEntry> dataSources,
   }) = BlazeDataSourceTypeComposite;
+
+  /// Content about the entities the user follows (see
+  /// `BlazeSDK.followEntitiesManager`).
+  ///
+  /// When the user follows nothing (or nothing matches), no request is made
+  /// and the widget shows no content. Widgets don't refresh on their own when
+  /// follows change; reload them to pick up the change. Moments ignore
+  /// [advancedOrderType].
+  const factory BlazeDataSourceType.followedEntities({
+    /// The entity categories to include. Empty means every category;
+    /// entities without a category always match.
+    @Default(<BlazeFollowedEntityCategory>{})
+    Set<BlazeFollowedEntityCategory> entityTypes,
+    BlazeOrderType? orderType,
+    BlazeAdvancedOrderType? advancedOrderType,
+    int? maxItems,
+  }) = BlazeDataSourceTypeFollowedEntities;
 
   factory BlazeDataSourceType.fromJson(Map<String, dynamic> json) =>
       _$BlazeDataSourceTypeFromJson(json);

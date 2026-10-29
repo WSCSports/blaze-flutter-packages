@@ -26,6 +26,8 @@ BlazeDataSourceType _$BlazeDataSourceTypeFromJson(Map<String, dynamic> json) {
       return BlazeDataSourceTypeSearch.fromJson(json);
     case 'composite':
       return BlazeDataSourceTypeComposite.fromJson(json);
+    case 'followedEntities':
+      return BlazeDataSourceTypeFollowedEntities.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'BlazeDataSourceType',
@@ -55,6 +57,12 @@ mixin _$BlazeDataSourceType {
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +85,12 @@ mixin _$BlazeDataSourceType {
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -99,6 +113,12 @@ mixin _$BlazeDataSourceType {
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -110,6 +130,8 @@ mixin _$BlazeDataSourceType {
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -120,6 +142,8 @@ mixin _$BlazeDataSourceType {
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -129,6 +153,8 @@ mixin _$BlazeDataSourceType {
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -358,6 +384,12 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) {
     return labels(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -384,6 +416,12 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) {
     return labels?.call(this.labels, orderType, labelsPriority, maxItems,
         advancedOrderType, personalizedType);
@@ -410,6 +448,12 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -428,6 +472,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) {
     return labels(this);
   }
@@ -441,6 +487,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) {
     return labels?.call(this);
   }
@@ -453,6 +501,8 @@ class _$BlazeDataSourceTypeLabelsImpl implements BlazeDataSourceTypeLabels {
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (labels != null) {
@@ -627,6 +677,12 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) {
     return ids(this.ids, orderType, advancedOrderType);
   }
@@ -652,6 +708,12 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) {
     return ids?.call(this.ids, orderType, advancedOrderType);
   }
@@ -677,6 +739,12 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -694,6 +762,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) {
     return ids(this);
   }
@@ -707,6 +777,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) {
     return ids?.call(this);
   }
@@ -719,6 +791,8 @@ class _$BlazeDataSourceTypeIdsImpl implements BlazeDataSourceTypeIds {
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (ids != null) {
@@ -872,6 +946,12 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) {
     return recommendations(recommendationsType);
   }
@@ -897,6 +977,12 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) {
     return recommendations?.call(recommendationsType);
   }
@@ -922,6 +1008,12 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -939,6 +1031,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) {
     return recommendations(this);
   }
@@ -952,6 +1046,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) {
     return recommendations?.call(this);
   }
@@ -964,6 +1060,8 @@ class _$BlazeDataSourceTypeRecommendationsImpl
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (recommendations != null) {
@@ -1141,6 +1239,12 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) {
     return search(searchText, maxItems, this.labels);
   }
@@ -1166,6 +1270,12 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) {
     return search?.call(searchText, maxItems, this.labels);
   }
@@ -1191,6 +1301,12 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1208,6 +1324,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) {
     return search(this);
   }
@@ -1221,6 +1339,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) {
     return search?.call(this);
   }
@@ -1233,6 +1353,8 @@ class _$BlazeDataSourceTypeSearchImpl implements BlazeDataSourceTypeSearch {
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -1388,6 +1510,12 @@ class _$BlazeDataSourceTypeCompositeImpl
         search,
     required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
         composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
   }) {
     return composite(dataSources);
   }
@@ -1413,6 +1541,12 @@ class _$BlazeDataSourceTypeCompositeImpl
         search,
     TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
   }) {
     return composite?.call(dataSources);
   }
@@ -1438,6 +1572,12 @@ class _$BlazeDataSourceTypeCompositeImpl
         search,
     TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
         composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (composite != null) {
@@ -1455,6 +1595,8 @@ class _$BlazeDataSourceTypeCompositeImpl
         recommendations,
     required TResult Function(BlazeDataSourceTypeSearch value) search,
     required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
   }) {
     return composite(this);
   }
@@ -1468,6 +1610,8 @@ class _$BlazeDataSourceTypeCompositeImpl
         recommendations,
     TResult? Function(BlazeDataSourceTypeSearch value)? search,
     TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
   }) {
     return composite?.call(this);
   }
@@ -1480,6 +1624,8 @@ class _$BlazeDataSourceTypeCompositeImpl
     TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
     TResult Function(BlazeDataSourceTypeSearch value)? search,
     TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
     required TResult orElse(),
   }) {
     if (composite != null) {
@@ -1512,6 +1658,325 @@ abstract class BlazeDataSourceTypeComposite implements BlazeDataSourceType {
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeDataSourceTypeCompositeImplCopyWith<
           _$BlazeDataSourceTypeCompositeImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BlazeDataSourceTypeFollowedEntitiesImplCopyWith<$Res> {
+  factory _$$BlazeDataSourceTypeFollowedEntitiesImplCopyWith(
+          _$BlazeDataSourceTypeFollowedEntitiesImpl value,
+          $Res Function(_$BlazeDataSourceTypeFollowedEntitiesImpl) then) =
+      __$$BlazeDataSourceTypeFollowedEntitiesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {Set<BlazeFollowedEntityCategory> entityTypes,
+      BlazeOrderType? orderType,
+      BlazeAdvancedOrderType? advancedOrderType,
+      int? maxItems});
+}
+
+/// @nodoc
+class __$$BlazeDataSourceTypeFollowedEntitiesImplCopyWithImpl<$Res>
+    extends _$BlazeDataSourceTypeCopyWithImpl<$Res,
+        _$BlazeDataSourceTypeFollowedEntitiesImpl>
+    implements _$$BlazeDataSourceTypeFollowedEntitiesImplCopyWith<$Res> {
+  __$$BlazeDataSourceTypeFollowedEntitiesImplCopyWithImpl(
+      _$BlazeDataSourceTypeFollowedEntitiesImpl _value,
+      $Res Function(_$BlazeDataSourceTypeFollowedEntitiesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? entityTypes = null,
+    Object? orderType = freezed,
+    Object? advancedOrderType = freezed,
+    Object? maxItems = freezed,
+  }) {
+    return _then(_$BlazeDataSourceTypeFollowedEntitiesImpl(
+      entityTypes: null == entityTypes
+          ? _value._entityTypes
+          : entityTypes // ignore: cast_nullable_to_non_nullable
+              as Set<BlazeFollowedEntityCategory>,
+      orderType: freezed == orderType
+          ? _value.orderType
+          : orderType // ignore: cast_nullable_to_non_nullable
+              as BlazeOrderType?,
+      advancedOrderType: freezed == advancedOrderType
+          ? _value.advancedOrderType
+          : advancedOrderType // ignore: cast_nullable_to_non_nullable
+              as BlazeAdvancedOrderType?,
+      maxItems: freezed == maxItems
+          ? _value.maxItems
+          : maxItems // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeDataSourceTypeFollowedEntitiesImpl
+    implements BlazeDataSourceTypeFollowedEntities {
+  const _$BlazeDataSourceTypeFollowedEntitiesImpl(
+      {final Set<BlazeFollowedEntityCategory> entityTypes =
+          const <BlazeFollowedEntityCategory>{},
+      this.orderType,
+      this.advancedOrderType,
+      this.maxItems,
+      final String? $type})
+      : _entityTypes = entityTypes,
+        $type = $type ?? 'followedEntities';
+
+  factory _$BlazeDataSourceTypeFollowedEntitiesImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeDataSourceTypeFollowedEntitiesImplFromJson(json);
+
+  /// The entity categories to include. Empty means every category;
+  /// entities without a category always match.
+  final Set<BlazeFollowedEntityCategory> _entityTypes;
+
+  /// The entity categories to include. Empty means every category;
+  /// entities without a category always match.
+  @override
+  @JsonKey()
+  Set<BlazeFollowedEntityCategory> get entityTypes {
+    if (_entityTypes is EqualUnmodifiableSetView) return _entityTypes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_entityTypes);
+  }
+
+  @override
+  final BlazeOrderType? orderType;
+  @override
+  final BlazeAdvancedOrderType? advancedOrderType;
+  @override
+  final int? maxItems;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'BlazeDataSourceType.followedEntities(entityTypes: $entityTypes, orderType: $orderType, advancedOrderType: $advancedOrderType, maxItems: $maxItems)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeDataSourceTypeFollowedEntitiesImpl &&
+            const DeepCollectionEquality()
+                .equals(other._entityTypes, _entityTypes) &&
+            (identical(other.orderType, orderType) ||
+                other.orderType == orderType) &&
+            (identical(other.advancedOrderType, advancedOrderType) ||
+                other.advancedOrderType == advancedOrderType) &&
+            (identical(other.maxItems, maxItems) ||
+                other.maxItems == maxItems));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_entityTypes),
+      orderType,
+      advancedOrderType,
+      maxItems);
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeDataSourceTypeFollowedEntitiesImplCopyWith<
+          _$BlazeDataSourceTypeFollowedEntitiesImpl>
+      get copyWith => __$$BlazeDataSourceTypeFollowedEntitiesImplCopyWithImpl<
+          _$BlazeDataSourceTypeFollowedEntitiesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)
+        labels,
+    required TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)
+        ids,
+    required TResult Function(BlazeRecommendationsType recommendationsType)
+        recommendations,
+    required TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)
+        search,
+    required TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)
+        composite,
+    required TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)
+        followedEntities,
+  }) {
+    return followedEntities(
+        entityTypes, orderType, advancedOrderType, maxItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult? Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult? Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult? Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+    TResult? Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
+    TResult? Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
+  }) {
+    return followedEntities?.call(
+        entityTypes, orderType, advancedOrderType, maxItems);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            BlazeWidgetLabel labels,
+            BlazeOrderType? orderType,
+            List<BlazeWidgetLabel>? labelsPriority,
+            int? maxItems,
+            BlazeAdvancedOrderType? advancedOrderType,
+            BlazeDataSourcePersonalizedType? personalizedType)?
+        labels,
+    TResult Function(List<String> ids, BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType)?
+        ids,
+    TResult Function(BlazeRecommendationsType recommendationsType)?
+        recommendations,
+    TResult Function(
+            String searchText, int? maxItems, BlazeWidgetLabel? labels)?
+        search,
+    TResult Function(List<BlazeCompositeDataSourceEntry> dataSources)?
+        composite,
+    TResult Function(
+            Set<BlazeFollowedEntityCategory> entityTypes,
+            BlazeOrderType? orderType,
+            BlazeAdvancedOrderType? advancedOrderType,
+            int? maxItems)?
+        followedEntities,
+    required TResult orElse(),
+  }) {
+    if (followedEntities != null) {
+      return followedEntities(
+          entityTypes, orderType, advancedOrderType, maxItems);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BlazeDataSourceTypeLabels value) labels,
+    required TResult Function(BlazeDataSourceTypeIds value) ids,
+    required TResult Function(BlazeDataSourceTypeRecommendations value)
+        recommendations,
+    required TResult Function(BlazeDataSourceTypeSearch value) search,
+    required TResult Function(BlazeDataSourceTypeComposite value) composite,
+    required TResult Function(BlazeDataSourceTypeFollowedEntities value)
+        followedEntities,
+  }) {
+    return followedEntities(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult? Function(BlazeDataSourceTypeIds value)? ids,
+    TResult? Function(BlazeDataSourceTypeRecommendations value)?
+        recommendations,
+    TResult? Function(BlazeDataSourceTypeSearch value)? search,
+    TResult? Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult? Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
+  }) {
+    return followedEntities?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BlazeDataSourceTypeLabels value)? labels,
+    TResult Function(BlazeDataSourceTypeIds value)? ids,
+    TResult Function(BlazeDataSourceTypeRecommendations value)? recommendations,
+    TResult Function(BlazeDataSourceTypeSearch value)? search,
+    TResult Function(BlazeDataSourceTypeComposite value)? composite,
+    TResult Function(BlazeDataSourceTypeFollowedEntities value)?
+        followedEntities,
+    required TResult orElse(),
+  }) {
+    if (followedEntities != null) {
+      return followedEntities(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeDataSourceTypeFollowedEntitiesImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class BlazeDataSourceTypeFollowedEntities
+    implements BlazeDataSourceType {
+  const factory BlazeDataSourceTypeFollowedEntities(
+      {final Set<BlazeFollowedEntityCategory> entityTypes,
+      final BlazeOrderType? orderType,
+      final BlazeAdvancedOrderType? advancedOrderType,
+      final int? maxItems}) = _$BlazeDataSourceTypeFollowedEntitiesImpl;
+
+  factory BlazeDataSourceTypeFollowedEntities.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeDataSourceTypeFollowedEntitiesImpl.fromJson;
+
+  /// The entity categories to include. Empty means every category;
+  /// entities without a category always match.
+  Set<BlazeFollowedEntityCategory> get entityTypes;
+  BlazeOrderType? get orderType;
+  BlazeAdvancedOrderType? get advancedOrderType;
+  int? get maxItems;
+
+  /// Create a copy of BlazeDataSourceType
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeDataSourceTypeFollowedEntitiesImplCopyWith<
+          _$BlazeDataSourceTypeFollowedEntitiesImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

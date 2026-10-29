@@ -6,11 +6,25 @@ import '../types/shared_types.dart';
 part 'blaze_follow_entities_delegate.freezed.dart';
 part 'blaze_follow_entities_delegate.g.dart';
 
+/// The category of a followable entity.
+enum BlazeFollowedEntityCategory { team, player, property }
+
 /// Represents a followable entity (e.g. a player, team or property).
+///
+/// Two entities with the same [id] are the same entity for the native SDK;
+/// `null` metadata never clears metadata the SDK already knows.
 @freezed
 class BlazeFollowEntity with _$BlazeFollowEntity {
   const factory BlazeFollowEntity({
     required String id,
+
+    /// The data provider the [id] belongs to.
+    String? providerName,
+
+    /// The entity's category. Unrecognized native values decode to `null`.
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    BlazeFollowedEntityCategory? entityType,
   }) = _BlazeFollowEntity;
 
   factory BlazeFollowEntity.fromJson(Map<String, dynamic> json) =>
@@ -34,7 +48,7 @@ class BlazeOnFollowEntityClickedParams with _$BlazeOnFollowEntityClickedParams {
 
 /// Internal data class for parsing the flat follow-entity-clicked payload sent
 /// by the native side (`{ playerType, sourceId, newFollowingState,
-/// followEntityId }`).
+/// followEntityId, providerName, entityType }`).
 @freezed
 class BlazeOnFollowEntityClickedInternalData
     with _$BlazeOnFollowEntityClickedInternalData {
@@ -43,6 +57,10 @@ class BlazeOnFollowEntityClickedInternalData
     String? sourceId,
     required bool newFollowingState,
     required String followEntityId,
+    String? providerName,
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    BlazeFollowedEntityCategory? entityType,
   }) = _BlazeOnFollowEntityClickedInternalData;
 
   factory BlazeOnFollowEntityClickedInternalData.fromJson(
@@ -87,8 +105,11 @@ class BlazeFollowEntitiesDelegateHelper {
               playerType: internalData.playerType,
               sourceId: internalData.sourceId,
               newFollowingState: internalData.newFollowingState,
-              followEntity:
-                  BlazeFollowEntity(id: internalData.followEntityId),
+              followEntity: BlazeFollowEntity(
+                id: internalData.followEntityId,
+                providerName: internalData.providerName,
+                entityType: internalData.entityType,
+              ),
             );
             callback(params);
           } catch (e, stackTrace) {

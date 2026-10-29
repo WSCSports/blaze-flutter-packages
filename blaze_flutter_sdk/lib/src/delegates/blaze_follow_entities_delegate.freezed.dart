@@ -22,6 +22,15 @@ BlazeFollowEntity _$BlazeFollowEntityFromJson(Map<String, dynamic> json) {
 mixin _$BlazeFollowEntity {
   String get id => throw _privateConstructorUsedError;
 
+  /// The data provider the [id] belongs to.
+  String? get providerName => throw _privateConstructorUsedError;
+
+  /// The entity's category. Unrecognized native values decode to `null`.
+// ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  BlazeFollowedEntityCategory? get entityType =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeFollowEntity value) $default,
@@ -55,7 +64,11 @@ abstract class $BlazeFollowEntityCopyWith<$Res> {
           BlazeFollowEntity value, $Res Function(BlazeFollowEntity) then) =
       _$BlazeFollowEntityCopyWithImpl<$Res, BlazeFollowEntity>;
   @useResult
-  $Res call({String id});
+  $Res call(
+      {String id,
+      String? providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      BlazeFollowedEntityCategory? entityType});
 }
 
 /// @nodoc
@@ -74,12 +87,22 @@ class _$BlazeFollowEntityCopyWithImpl<$Res, $Val extends BlazeFollowEntity>
   @override
   $Res call({
     Object? id = null,
+    Object? providerName = freezed,
+    Object? entityType = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowedEntityCategory?,
     ) as $Val);
   }
 }
@@ -92,7 +115,11 @@ abstract class _$$BlazeFollowEntityImplCopyWith<$Res>
       __$$BlazeFollowEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id});
+  $Res call(
+      {String id,
+      String? providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      BlazeFollowedEntityCategory? entityType});
 }
 
 /// @nodoc
@@ -109,12 +136,22 @@ class __$$BlazeFollowEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? providerName = freezed,
+    Object? entityType = freezed,
   }) {
     return _then(_$BlazeFollowEntityImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowedEntityCategory?,
     ));
   }
 }
@@ -122,7 +159,11 @@ class __$$BlazeFollowEntityImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
-  const _$BlazeFollowEntityImpl({required this.id});
+  const _$BlazeFollowEntityImpl(
+      {required this.id,
+      this.providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      this.entityType});
 
   factory _$BlazeFollowEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeFollowEntityImplFromJson(json);
@@ -130,9 +171,19 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
   @override
   final String id;
 
+  /// The data provider the [id] belongs to.
+  @override
+  final String? providerName;
+
+  /// The entity's category. Unrecognized native values decode to `null`.
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  final BlazeFollowedEntityCategory? entityType;
+
   @override
   String toString() {
-    return 'BlazeFollowEntity(id: $id)';
+    return 'BlazeFollowEntity(id: $id, providerName: $providerName, entityType: $entityType)';
   }
 
   @override
@@ -140,12 +191,16 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BlazeFollowEntityImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.providerName, providerName) ||
+                other.providerName == providerName) &&
+            (identical(other.entityType, entityType) ||
+                other.entityType == entityType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, providerName, entityType);
 
   /// Create a copy of BlazeFollowEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -193,14 +248,27 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
 }
 
 abstract class _BlazeFollowEntity implements BlazeFollowEntity {
-  const factory _BlazeFollowEntity({required final String id}) =
-      _$BlazeFollowEntityImpl;
+  const factory _BlazeFollowEntity(
+      {required final String id,
+      final String? providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      final BlazeFollowedEntityCategory? entityType}) = _$BlazeFollowEntityImpl;
 
   factory _BlazeFollowEntity.fromJson(Map<String, dynamic> json) =
       _$BlazeFollowEntityImpl.fromJson;
 
   @override
   String get id;
+
+  /// The data provider the [id] belongs to.
+  @override
+  String? get providerName;
+
+  /// The entity's category. Unrecognized native values decode to `null`.
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  BlazeFollowedEntityCategory? get entityType;
 
   /// Create a copy of BlazeFollowEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -515,6 +583,11 @@ mixin _$BlazeOnFollowEntityClickedInternalData {
   String? get sourceId => throw _privateConstructorUsedError;
   bool get newFollowingState => throw _privateConstructorUsedError;
   String get followEntityId => throw _privateConstructorUsedError;
+  String? get providerName =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  BlazeFollowedEntityCategory? get entityType =>
+      throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
@@ -556,7 +629,10 @@ abstract class $BlazeOnFollowEntityClickedInternalDataCopyWith<$Res> {
       {BlazePlayerType playerType,
       String? sourceId,
       bool newFollowingState,
-      String followEntityId});
+      String followEntityId,
+      String? providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      BlazeFollowedEntityCategory? entityType});
 }
 
 /// @nodoc
@@ -579,6 +655,8 @@ class _$BlazeOnFollowEntityClickedInternalDataCopyWithImpl<$Res,
     Object? sourceId = freezed,
     Object? newFollowingState = null,
     Object? followEntityId = null,
+    Object? providerName = freezed,
+    Object? entityType = freezed,
   }) {
     return _then(_value.copyWith(
       playerType: null == playerType
@@ -597,6 +675,14 @@ class _$BlazeOnFollowEntityClickedInternalDataCopyWithImpl<$Res,
           ? _value.followEntityId
           : followEntityId // ignore: cast_nullable_to_non_nullable
               as String,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowedEntityCategory?,
     ) as $Val);
   }
 }
@@ -614,7 +700,10 @@ abstract class _$$BlazeOnFollowEntityClickedInternalDataImplCopyWith<$Res>
       {BlazePlayerType playerType,
       String? sourceId,
       bool newFollowingState,
-      String followEntityId});
+      String followEntityId,
+      String? providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      BlazeFollowedEntityCategory? entityType});
 }
 
 /// @nodoc
@@ -636,6 +725,8 @@ class __$$BlazeOnFollowEntityClickedInternalDataImplCopyWithImpl<$Res>
     Object? sourceId = freezed,
     Object? newFollowingState = null,
     Object? followEntityId = null,
+    Object? providerName = freezed,
+    Object? entityType = freezed,
   }) {
     return _then(_$BlazeOnFollowEntityClickedInternalDataImpl(
       playerType: null == playerType
@@ -654,6 +745,14 @@ class __$$BlazeOnFollowEntityClickedInternalDataImplCopyWithImpl<$Res>
           ? _value.followEntityId
           : followEntityId // ignore: cast_nullable_to_non_nullable
               as String,
+      providerName: freezed == providerName
+          ? _value.providerName
+          : providerName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      entityType: freezed == entityType
+          ? _value.entityType
+          : entityType // ignore: cast_nullable_to_non_nullable
+              as BlazeFollowedEntityCategory?,
     ));
   }
 }
@@ -666,7 +765,10 @@ class _$BlazeOnFollowEntityClickedInternalDataImpl
       {required this.playerType,
       this.sourceId,
       required this.newFollowingState,
-      required this.followEntityId});
+      required this.followEntityId,
+      this.providerName,
+      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+      this.entityType});
 
   factory _$BlazeOnFollowEntityClickedInternalDataImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -680,10 +782,16 @@ class _$BlazeOnFollowEntityClickedInternalDataImpl
   final bool newFollowingState;
   @override
   final String followEntityId;
+  @override
+  final String? providerName;
+// ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  final BlazeFollowedEntityCategory? entityType;
 
   @override
   String toString() {
-    return 'BlazeOnFollowEntityClickedInternalData(playerType: $playerType, sourceId: $sourceId, newFollowingState: $newFollowingState, followEntityId: $followEntityId)';
+    return 'BlazeOnFollowEntityClickedInternalData(playerType: $playerType, sourceId: $sourceId, newFollowingState: $newFollowingState, followEntityId: $followEntityId, providerName: $providerName, entityType: $entityType)';
   }
 
   @override
@@ -698,13 +806,17 @@ class _$BlazeOnFollowEntityClickedInternalDataImpl
             (identical(other.newFollowingState, newFollowingState) ||
                 other.newFollowingState == newFollowingState) &&
             (identical(other.followEntityId, followEntityId) ||
-                other.followEntityId == followEntityId));
+                other.followEntityId == followEntityId) &&
+            (identical(other.providerName, providerName) ||
+                other.providerName == providerName) &&
+            (identical(other.entityType, entityType) ||
+                other.entityType == entityType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, playerType, sourceId, newFollowingState, followEntityId);
+  int get hashCode => Object.hash(runtimeType, playerType, sourceId,
+      newFollowingState, followEntityId, providerName, entityType);
 
   /// Create a copy of BlazeOnFollowEntityClickedInternalData
   /// with the given fields replaced by the non-null parameter values.
@@ -759,7 +871,10 @@ abstract class _BlazeOnFollowEntityClickedInternalData
           {required final BlazePlayerType playerType,
           final String? sourceId,
           required final bool newFollowingState,
-          required final String followEntityId}) =
+          required final String followEntityId,
+          final String? providerName,
+          @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+          final BlazeFollowedEntityCategory? entityType}) =
       _$BlazeOnFollowEntityClickedInternalDataImpl;
 
   factory _BlazeOnFollowEntityClickedInternalData.fromJson(
@@ -774,6 +889,11 @@ abstract class _BlazeOnFollowEntityClickedInternalData
   bool get newFollowingState;
   @override
   String get followEntityId;
+  @override
+  String? get providerName; // ignore: invalid_annotation_target
+  @override
+  @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+  BlazeFollowedEntityCategory? get entityType;
 
   /// Create a copy of BlazeOnFollowEntityClickedInternalData
   /// with the given fields replaced by the non-null parameter values.

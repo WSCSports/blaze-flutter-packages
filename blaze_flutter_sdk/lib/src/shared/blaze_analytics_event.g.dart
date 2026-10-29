@@ -140,9 +140,11 @@ _$StoryPropsImpl _$$StoryPropsImplFromJson(Map<String, dynamic> json) =>
           _$PlayableNavigationDirectionEnumMap,
           json['story_page_navigation_direction']),
       story_start_trigger: $enumDecodeNullable(
-          _$PlayerStartTriggersEnumMap, json['story_start_trigger']),
+          _$PlayerStartTriggersEnumMap, json['story_start_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       story_exit_trigger: $enumDecodeNullable(
-          _$PlayerExitTriggersEnumMap, json['story_exit_trigger']),
+          _$PlayerExitTriggersEnumMap, json['story_exit_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       story_page_duration: (json['story_page_duration'] as num?)?.toDouble(),
       story_page_duration_viewed_percent:
           (json['story_page_duration_viewed_percent'] as num?)?.toDouble(),
@@ -209,10 +211,15 @@ const _$PlayerStartTriggersEnumMap = {
   PlayerStartTriggers.widget: 'Widget',
   PlayerStartTriggers.deeplink: 'Deeplink',
   PlayerStartTriggers.entryPoint: 'Entry Point',
-  PlayerStartTriggers.widgetAutoPlay: 'Auto Play From Widget',
+  PlayerStartTriggers.widgetAutoPlay: 'Auto Play from Widget',
   PlayerStartTriggers.notification: 'Notification',
   PlayerStartTriggers.appForeground: 'App Foreground',
+  PlayerStartTriggers.inline: 'Inline',
+  PlayerStartTriggers.momentsContainer: 'Moments Container',
+  PlayerStartTriggers.viewingModeTransition: 'Viewing Mode Transition',
   PlayerStartTriggers.skip: 'Skip',
+  PlayerStartTriggers.swipe: 'Swipe',
+  PlayerStartTriggers.autoSkip: 'Auto Skip',
 };
 
 const _$PlayerExitTriggersEnumMap = {
@@ -229,6 +236,9 @@ const _$PlayerExitTriggersEnumMap = {
   PlayerExitTriggers.appBackground: 'App Background',
   PlayerExitTriggers.backButton: 'Back Button',
   PlayerExitTriggers.userSwipeToDismiss: 'User Swipe To Dismiss',
+  PlayerExitTriggers.inline: 'Inline',
+  PlayerExitTriggers.viewingModeTransition: 'Viewing Mode Transition',
+  PlayerExitTriggers.pipDismissed: 'PIP Dismissed',
 };
 
 const _$PlaybackActionMethodEnumMap = {
@@ -253,9 +263,11 @@ _$MomentsPropsImpl _$$MomentsPropsImplFromJson(Map<String, dynamic> json) =>
           _$PlayableNavigationDirectionEnumMap,
           json['moment_navigation_direction']),
       moment_start_trigger: $enumDecodeNullable(
-          _$PlayerStartTriggersEnumMap, json['moment_start_trigger']),
+          _$PlayerStartTriggersEnumMap, json['moment_start_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       moment_exit_trigger: $enumDecodeNullable(
-          _$PlayerExitTriggersEnumMap, json['moment_exit_trigger']),
+          _$PlayerExitTriggersEnumMap, json['moment_exit_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       moment_duration: (json['moment_duration'] as num?)?.toDouble(),
       moment_duration_viewed_percent:
           (json['moment_duration_viewed_percent'] as num?)?.toDouble(),
@@ -305,11 +317,14 @@ _$VideoPropsImpl _$$VideoPropsImplFromJson(Map<String, dynamic> json) =>
       audio_state:
           $enumDecodeNullable(_$AudioStateEnumMap, json['audio_state']),
       video_start_trigger: $enumDecodeNullable(
-          _$PlayerStartTriggersEnumMap, json['video_start_trigger']),
+          _$PlayerStartTriggersEnumMap, json['video_start_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       video_end_trigger: $enumDecodeNullable(
-          _$PlayerExitTriggersEnumMap, json['video_end_trigger']),
+          _$PlayerExitTriggersEnumMap, json['video_end_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       video_duration: (json['video_duration'] as num?)?.toDouble(),
-      seek_type: $enumDecodeNullable(_$VideoSeekTypeEnumMap, json['seek_type']),
+      seek_type: $enumDecodeNullable(_$VideoSeekTypeEnumMap, json['seek_type'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       seek_total_time: (json['seek_total_time'] as num?)?.toDouble(),
       seek_direction: $enumDecodeNullable(
           _$VideoSeekDirectionEnumMap, json['seek_direction']),
@@ -358,6 +373,7 @@ Map<String, dynamic> _$$VideoPropsImplToJson(_$VideoPropsImpl instance) =>
 const _$VideoSeekTypeEnumMap = {
   VideoSeekType.seekbar: 'Seek Bar',
   VideoSeekType.doubleTap: 'Double Tap',
+  VideoSeekType.seekButton: 'Seek Button',
 };
 
 const _$VideoSeekDirectionEnumMap = {
@@ -390,7 +406,8 @@ _$AdEventPropsImpl _$$AdEventPropsImplFromJson(Map<String, dynamic> json) =>
         (k, e) => MapEntry(k, e as String),
       ),
       ad_exit_trigger: $enumDecodeNullable(
-          _$PlayerExitTriggersEnumMap, json['ad_exit_trigger']),
+          _$PlayerExitTriggersEnumMap, json['ad_exit_trigger'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
       ad_duration_viewed_percent:
           (json['ad_duration_viewed_percent'] as num?)?.toDouble(),
       playback_action_method: $enumDecodeNullable(
@@ -515,9 +532,11 @@ _$BlazeAnalyticsEventImpl _$$BlazeAnalyticsEventImplFromJson(
       timestamp_user_tz: json['timestamp_user_tz'] as String,
       sdk_version: json['sdk_version'] as String,
       sdk_type: json['sdk_type'] as String,
-      event_category:
-          $enumDecode(_$EventCategoryEnumMap, json['event_category']),
-      event_action: $enumDecode(_$EventActionNameEnumMap, json['event_action']),
+      event_category: $enumDecode(
+          _$EventCategoryEnumMap, json['event_category'],
+          unknownValue: EventCategory.unknown),
+      event_action: $enumDecode(_$EventActionNameEnumMap, json['event_action'],
+          unknownValue: EventActionName.unknown),
       user: UserProps.fromJson(json['user'] as Map<String, dynamic>),
       referring: ReferringPropsAnalytics.fromJson(
           json['referring'] as Map<String, dynamic>),
@@ -568,6 +587,8 @@ const _$EventCategoryEnumMap = {
   EventCategory.video: 'Video',
   EventCategory.ad: 'Ad',
   EventCategory.interaction: 'Interaction',
+  EventCategory.search: 'Search',
+  EventCategory.unknown: 'Unknown',
 };
 
 const _$EventActionNameEnumMap = {
@@ -631,4 +652,26 @@ const _$EventActionNameEnumMap = {
   EventActionName.imaAdRequested: 'ima_ad_requested',
   EventActionName.interactionView: 'interaction_view',
   EventActionName.interactionAnswer: 'interaction_answer',
+  EventActionName.follow: 'follow',
+  EventActionName.unfollow: 'unfollow',
+  EventActionName.castingStarted: 'casting_started',
+  EventActionName.castingEnded: 'casting_ended',
+  EventActionName.pipEnabled: 'pip_enabled',
+  EventActionName.pipDisabled: 'pip_disabled',
+  EventActionName.searchClick: 'search_click',
+  EventActionName.searchOpened: 'search_opened',
+  EventActionName.searchQuerySubmitted: 'search_query_submitted',
+  EventActionName.searchResultsShown: 'search_results_shown',
+  EventActionName.searchResultClicked: 'search_result_clicked',
+  EventActionName.searchSuggestionsShown: 'search_suggestions_shown',
+  EventActionName.searchSuggestionsClicked: 'search_suggestions_clicked',
+  EventActionName.backToLive: 'back_to_live',
+  EventActionName.playbackSpeedChange: 'playback_speed_change',
+  EventActionName.videoChangedStatus: 'video_changed_status',
+  EventActionName.viewingModeTransition: 'viewing_mode_transition',
+  EventActionName.viewingOrientationChanged: 'viewing_orientation_changed',
+  EventActionName.containerDataLoad: 'container_data_load',
+  EventActionName.descriptionExpanded: 'description_expanded',
+  EventActionName.descriptionCollapsed: 'description_collapsed',
+  EventActionName.unknown: 'unknown',
 };

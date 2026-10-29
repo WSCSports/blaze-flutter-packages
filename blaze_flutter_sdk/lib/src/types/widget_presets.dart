@@ -28,6 +28,14 @@ enum BlazeWidgetLayoutPreset {
   /// The returned layout can be further modified if needed.
   stories_row_singleItemHorizontalRectangle,
 
+  /// Returns a horizontally aligned layout consisting of **circles** `widget` items with animated thumbnails.
+  /// The returned layout can be further modified if needed.
+  stories_row_animatedThumbnailsCircles,
+
+  /// Returns a horizontally aligned layout consisting of **vertical rectangles** `widget` items with animated thumbnails.
+  /// The returned layout can be further modified if needed.
+  stories_row_verticalAnimatedThumbnailsRectangles,
+
   // Stories Widget - Grid presets
 
   /// Returns a vertically aligned grid layout consisting of **horizontal rectangles in one** `column` per `row`.
@@ -131,6 +139,10 @@ enum BlazeWidgetLayoutPreset {
   /// Returns a horizontally aligned layout consisting of **vertical rectangle** `widget` items with support for animated thumbnails.
   /// The returned layout can be further modified if needed.
   videos_row_verticalAnimatedThumbnailsRectangles,
+
+  /// Returns a horizontally aligned layout consisting of **horizontal rectangle** `widget` items with animated thumbnails.
+  /// The returned layout can be further modified if needed.
+  videos_row_horizontalAnimatedThumbnailsRectangles,
 
   // Videos Widget - Grid presets
 

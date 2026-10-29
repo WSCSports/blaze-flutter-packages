@@ -103,6 +103,14 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         }
     }
 
+    // Unset (nil) inherits the global interactionLinkHandling from initSDK
+    var interactionLinkHandling: BlazeInteractionLinkHandleType {
+        return resolveLinkHandling(
+            widget: creationParams["interactionLinkHandling"] as? String,
+            global: BlazeFlutterSDKModule.shared.interactionLinkHandling
+        )
+    }
+
     // Moments-only: raw "widget to tabs" configuration from creation params. Ignored by
     // Stories/Videos widgets (Dart never sends it for them).
     var tabsConfigurationMap: [String: AnyHashable]? {
@@ -207,6 +215,22 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             return self?.onShareClicked(playerType: params.playerType,
                                         sourceId: params.sourceId,
                                         shareParams: params.shareParams) ?? nil
+        },
+
+        onContentRestricted: { [weak self] params in
+            return self?.onContentRestricted(playerType: params.playerType,
+                                             sourceId: params.sourceId,
+                                             reason: params.reason,
+                                             contentParams: params.contentParams) ?? .sdkShouldHandle
+        },
+
+        onTriggerInteractionLink: { [weak self] params in
+            return self?.onTriggerInteractionLink(playerType: params.playerType,
+                                                  sourceId: params.sourceId,
+                                                  interactionId: params.interactionId,
+                                                  interactionType: params.interactionType,
+                                                  url: params.url)
+                ?? resolveLinkHandling(widget: nil, global: BlazeFlutterSDKModule.shared.interactionLinkHandling)
         }
 
     )
@@ -265,6 +289,25 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             return self?.onMomentsContainerTabsShareClicked(playerType: params.playerType,
                                                              sourceId: params.sourceId,
                                                              shareParams: params.shareParams) ?? nil
+        },
+        onContentRestricted: { [weak self] params in
+            return self?.onMomentsContainerTabsContentRestricted(playerType: params.playerType,
+                                                                  sourceId: params.sourceId,
+                                                                  reason: params.reason,
+                                                                  contentParams: params.contentParams) ?? .sdkShouldHandle
+        },
+        onTriggerInteractionLink: { [weak self] params in
+            return self?.onMomentsContainerTabsTriggerInteractionLink(playerType: params.playerType,
+                                                                       sourceId: params.sourceId,
+                                                                       interactionId: params.interactionId,
+                                                                       interactionType: params.interactionType,
+                                                                       url: params.url)
+                ?? resolveLinkHandling(widget: nil, global: BlazeFlutterSDKModule.shared.interactionLinkHandling)
+        },
+        onTabReselected: { [weak self] params in
+            self?.onMomentsContainerTabsTabReselected(playerType: params.playerType,
+                                                      sourceId: params.sourceId,
+                                                      tabIndex: params.tabIndex)
         }
         // `onSearchClicked` (sync return the async bridge can't provide) is intentionally
         // left at its native default — see the observer-only note on `onShareClicked` in
@@ -325,8 +368,11 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
             case ChannelConstants.reloadTabByContainerIdMessageName:
                 self.reloadTabByContainerId(call: call)
             default:
-                break
+                result(FlutterMethodNotImplemented)
+                return
             }
+            // Complete the Dart future for every handled command
+            result(nil)
         }
     }
     
@@ -651,6 +697,37 @@ extension BlazeWidgetBase {
         }
     }
 
+    func onContentRestricted(playerType: BlazePlayerType,
+                             sourceId: String?,
+                             reason: BlazeContentRestrictionReason,
+                             contentParams: BlazeRestrictedContentParams) -> BlazeContentRestrictionHandleType {
+        return sharedDelegateHandler.onContentRestricted(
+            playerType: playerType,
+            sourceId: sourceId,
+            reason: reason,
+            contentParams: contentParams
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onContentRestricted", encodable: params)
+        }
+    }
+
+    func onTriggerInteractionLink(playerType: BlazePlayerType,
+                  sourceId: String?,
+                  interactionId: String,
+                  interactionType: String,
+                  url: String) -> BlazeInteractionLinkHandleType {
+        return sharedDelegateHandler.onTriggerInteractionLink(
+            playerType: playerType,
+            sourceId: sourceId,
+            interactionId: interactionId,
+            interactionType: interactionType,
+            url: url,
+            handling: interactionLinkHandling
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onTriggerInteractionLink", encodable: params)
+        }
+    }
+
 }
 
 // MARK: - Moments "widget to tabs" container delegate callbacks
@@ -752,6 +829,17 @@ extension BlazeWidgetBase {
         }
     }
 
+    func onMomentsContainerTabsTabReselected(playerType: BlazePlayerType, sourceId: String?, tabIndex: Int) {
+        // Same payload as onTabSelected.
+        sharedDelegateHandler.onTabSelected(
+            playerType: playerType,
+            sourceId: sourceId,
+            tabIndex: tabIndex
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsTabReselected", encodable: params)
+        }
+    }
+
     func onMomentsContainerTabsShareClicked(playerType: BlazePlayerType, sourceId: String?, shareParams: BlazeShareParams) -> String? {
         return sharedDelegateHandler.onShareClicked(
             playerType: playerType,
@@ -759,6 +847,37 @@ extension BlazeWidgetBase {
             shareParams: shareParams
         ) { [weak self] params in
             self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsShareClicked", encodable: params)
+        }
+    }
+
+    func onMomentsContainerTabsContentRestricted(playerType: BlazePlayerType,
+                                                 sourceId: String?,
+                                                 reason: BlazeContentRestrictionReason,
+                                                 contentParams: BlazeRestrictedContentParams) -> BlazeContentRestrictionHandleType {
+        return sharedDelegateHandler.onContentRestricted(
+            playerType: playerType,
+            sourceId: sourceId,
+            reason: reason,
+            contentParams: contentParams
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsContentRestricted", encodable: params)
+        }
+    }
+
+    func onMomentsContainerTabsTriggerInteractionLink(playerType: BlazePlayerType,
+                  sourceId: String?,
+                  interactionId: String,
+                  interactionType: String,
+                  url: String) -> BlazeInteractionLinkHandleType {
+        return sharedDelegateHandler.onTriggerInteractionLink(
+            playerType: playerType,
+            sourceId: sourceId,
+            interactionId: interactionId,
+            interactionType: interactionType,
+            url: url,
+            handling: interactionLinkHandling
+        ) { [weak self] params in
+            self?.methodChannel.invokeMethod(methodName: "onMomentsContainerTabsTriggerInteractionLink", encodable: params)
         }
     }
 

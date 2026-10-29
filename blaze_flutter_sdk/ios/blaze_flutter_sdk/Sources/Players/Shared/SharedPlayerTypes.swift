@@ -5,6 +5,7 @@
 //
 
 import Foundation
+import BlazeSDK
 
 // =================================
 // SHARED STRUCTS
@@ -38,6 +39,25 @@ struct BlazeReactPlayerButtonStyle: Codable {
     var isVisible: Bool?
     var isVisibleForAds: Bool?
     var customImage: BlazeReactPlayerButtonCustomImageStates?
+    var glassBackground: BlazeReactGlassBackgroundState?
+}
+
+/// Dart `BlazeGlassBackgroundState`.
+enum BlazeReactGlassBackgroundState: String, Codable {
+    case automatic
+    case on
+    case off
+
+    var asNative: BlazeGlassBackgroundState {
+        switch self {
+        case .automatic:
+            return .automatic
+        case .on:
+            return .on
+        case .off:
+            return .off
+        }
+    }
 }
 
 struct BlazeReactPlayerButtonCustomImageStates: Codable {

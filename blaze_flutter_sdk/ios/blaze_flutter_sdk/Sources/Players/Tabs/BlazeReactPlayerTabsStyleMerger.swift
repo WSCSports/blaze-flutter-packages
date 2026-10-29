@@ -43,6 +43,8 @@ extension BlazePlayerTabsStyle {
         merged.isTabTitleVisibleWhenSingleTab =
             customization.isTabTitleVisibleWhenSingleTab ?? merged.isTabTitleVisibleWhenSingleTab
         merged.isTabVisibleWhenEmpty = customization.isTabVisibleWhenEmpty ?? merged.isTabVisibleWhenEmpty
+        merged.ignoresTopSafeArea = customization.ignoresTopSafeArea ?? merged.ignoresTopSafeArea
+        merged.ignoresBottomSafeArea = customization.ignoresBottomSafeArea ?? merged.ignoresBottomSafeArea
 
         return merged
     }

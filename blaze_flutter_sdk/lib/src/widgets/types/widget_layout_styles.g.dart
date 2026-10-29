@@ -391,6 +391,8 @@ _$BlazeWidgetItemDurationElementStateStyleImpl
           cornerRadiusRatio: (json['cornerRadiusRatio'] as num?)?.toDouble(),
           borderColor: json['borderColor'] as String?,
           borderWidth: (json['borderWidth'] as num?)?.toDouble(),
+          glassBackground: $enumDecodeNullable(
+              _$BlazeGlassBackgroundStateEnumMap, json['glassBackground']),
         );
 
 Map<String, dynamic> _$$BlazeWidgetItemDurationElementStateStyleImplToJson(
@@ -404,7 +406,15 @@ Map<String, dynamic> _$$BlazeWidgetItemDurationElementStateStyleImplToJson(
       'cornerRadiusRatio': instance.cornerRadiusRatio,
       'borderColor': instance.borderColor,
       'borderWidth': instance.borderWidth,
+      'glassBackground':
+          _$BlazeGlassBackgroundStateEnumMap[instance.glassBackground],
     };
+
+const _$BlazeGlassBackgroundStateEnumMap = {
+  BlazeGlassBackgroundState.automatic: 'automatic',
+  BlazeGlassBackgroundState.on: 'on',
+  BlazeGlassBackgroundState.off: 'off',
+};
 
 _$BlazeWidgetItemDurationElementStyleImpl
     _$$BlazeWidgetItemDurationElementStyleImplFromJson(
@@ -455,4 +465,68 @@ Map<String, dynamic> _$$BlazeWidgetItemDurationElementStyleImplToJson(
       'liveReadState': instance.liveReadState?.toJson(),
       'unreadState': instance.unreadState?.toJson(),
       'readState': instance.readState?.toJson(),
+    };
+
+_$BlazeWidgetItemSubtitleStyleImpl _$$BlazeWidgetItemSubtitleStyleImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeWidgetItemSubtitleStyleImpl(
+      isVisible: json['isVisible'] as bool?,
+      topSpacing: (json['topSpacing'] as num?)?.toDouble(),
+      unreadState: json['unreadState'] == null
+          ? null
+          : BlazeTitleStyle.fromJson(
+              json['unreadState'] as Map<String, dynamic>),
+      readState: json['readState'] == null
+          ? null
+          : BlazeTitleStyle.fromJson(json['readState'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$BlazeWidgetItemSubtitleStyleImplToJson(
+        _$BlazeWidgetItemSubtitleStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'topSpacing': instance.topSpacing,
+      'unreadState': instance.unreadState?.toJson(),
+      'readState': instance.readState?.toJson(),
+    };
+
+_$BlazeWidgetItemDescriptionStyleImpl
+    _$$BlazeWidgetItemDescriptionStyleImplFromJson(Map<String, dynamic> json) =>
+        _$BlazeWidgetItemDescriptionStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          topSpacing: (json['topSpacing'] as num?)?.toDouble(),
+          unreadState: json['unreadState'] == null
+              ? null
+              : BlazeTitleStyle.fromJson(
+                  json['unreadState'] as Map<String, dynamic>),
+          readState: json['readState'] == null
+              ? null
+              : BlazeTitleStyle.fromJson(
+                  json['readState'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeWidgetItemDescriptionStyleImplToJson(
+        _$BlazeWidgetItemDescriptionStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'topSpacing': instance.topSpacing,
+      'unreadState': instance.unreadState?.toJson(),
+      'readState': instance.readState?.toJson(),
+    };
+
+_$BlazeWidgetItemPlayIconElementStyleImpl
+    _$$BlazeWidgetItemPlayIconElementStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeWidgetItemPlayIconElementStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          glassBackground: $enumDecodeNullable(
+              _$BlazeGlassBackgroundStateEnumMap, json['glassBackground']),
+        );
+
+Map<String, dynamic> _$$BlazeWidgetItemPlayIconElementStyleImplToJson(
+        _$BlazeWidgetItemPlayIconElementStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'glassBackground':
+          _$BlazeGlassBackgroundStateEnumMap[instance.glassBackground],
     };

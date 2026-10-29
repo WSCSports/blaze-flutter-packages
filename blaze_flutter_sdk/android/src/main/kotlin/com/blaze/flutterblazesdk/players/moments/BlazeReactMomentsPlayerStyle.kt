@@ -64,8 +64,23 @@ data class BlazeReactMomentsPlayerFollowEntityAvatarStyle(
 data class BlazeReactMomentsPlayerFollowEntityChipStyle(
     val backgroundColor: String?,
     val iconColor: String?,
-    val contentSource: ChipContentSource?
+    val contentSource: ChipContentSource?,
+    val iconSource: IconSource?
 ) {
+    @Keep
+    enum class IconSource(
+        override val rawValue: String
+    ) : BlazeEnumMapper<BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityIconSource> {
+        DEFAULT("Default") {
+            override fun mapToBlazeEnumClass() =
+                BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityIconSource.DEFAULT
+        },
+        STAR("Star") {
+            override fun mapToBlazeEnumClass() =
+                BlazeMomentsPlayerFollowEntityChipStyle.BlazeMomentsPlayerFollowEntityIconSource.STAR
+        }
+    }
+
     @Keep
     enum class ChipContentSource(
         override val rawValue: String

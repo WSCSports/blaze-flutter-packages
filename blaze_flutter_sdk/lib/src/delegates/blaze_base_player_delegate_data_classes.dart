@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import '../shared/errors/errors.dart';
 import '../types/shared_types.dart';
+import '../types/entitlements.dart';
 import '../shared/blaze_logger.dart';
 
 part 'blaze_base_player_delegate_data_classes.freezed.dart';
@@ -291,4 +292,54 @@ extension BlazePlayerEventDataParser on BlazePlayerEventData {
 
     return null;
   }
+}
+
+/// The restricted content item reported by `onContentRestricted`.
+@freezed
+class BlazeRestrictedContentParams with _$BlazeRestrictedContentParams {
+  const factory BlazeRestrictedContentParams({
+    /// The item's position in the player's content list.
+    required int contentIndex,
+    required String contentId,
+    @Default({}) Map<String, String> extraInfo,
+    String? contentThumbnailUrl,
+  }) = _BlazeRestrictedContentParams;
+
+  factory BlazeRestrictedContentParams.fromJson(Map<String, dynamic> json) =>
+      _$BlazeRestrictedContentParamsFromJson(json);
+}
+
+/// Shared content restricted parameters - used by Widget, Moments tabs and
+/// EntryPoint delegates
+@freezed
+class BlazeOnContentRestrictedParams with _$BlazeOnContentRestrictedParams {
+  const factory BlazeOnContentRestrictedParams({
+    required BlazePlayerType playerType,
+    String? sourceId,
+    // ignore: invalid_annotation_target
+    @JsonKey(unknownEnumValue: BlazeContentRestrictionReason.unknown)
+    required BlazeContentRestrictionReason reason,
+    required BlazeRestrictedContentParams contentParams,
+  }) = _BlazeOnContentRestrictedParams;
+
+  factory BlazeOnContentRestrictedParams.fromJson(Map<String, dynamic> json) =>
+      _$BlazeOnContentRestrictedParamsFromJson(json);
+}
+
+/// Shared trigger interaction link parameters - used by Widget, Moments tabs
+/// and EntryPoint delegates
+@freezed
+class BlazeOnTriggerInteractionLinkParams
+    with _$BlazeOnTriggerInteractionLinkParams {
+  const factory BlazeOnTriggerInteractionLinkParams({
+    required BlazePlayerType playerType,
+    String? sourceId,
+    required String interactionId,
+    required String interactionType,
+    required String url,
+  }) = _BlazeOnTriggerInteractionLinkParams;
+
+  factory BlazeOnTriggerInteractionLinkParams.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeOnTriggerInteractionLinkParamsFromJson(json);
 }

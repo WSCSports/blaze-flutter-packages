@@ -88,6 +88,10 @@ class BlazePlayerButtonStyle with _$BlazePlayerButtonStyle {
     BlazeButtonScaleType? scaleType,
     bool? isVisibleForAds,
     BlazePlayerItemButtonImageStates? customImage,
+    /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+    /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+    /// is kept.
+    BlazeGlassBackgroundState? glassBackground,
   }) = _BlazePlayerButtonStyle;
 
   factory BlazePlayerButtonStyle.fromJson(Map<String, dynamic> json) =>
@@ -200,4 +204,17 @@ class BlazeSeekBarStyle with _$BlazeSeekBarStyle {
 
   factory BlazeSeekBarStyle.fromJson(Map<String, dynamic> json) =>
       _$BlazeSeekBarStyleFromJson(json);
+}
+
+/// Liquid Glass background state of a player or widget element. iOS-only.
+enum BlazeGlassBackgroundState {
+  /// Glass when `BlazeSDK.setLiquidGlassEnabled(true)` was called and the
+  /// element has a background.
+  automatic,
+
+  /// Always glass on iOS 26+.
+  on,
+
+  /// Never glass.
+  off,
 }

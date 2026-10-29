@@ -6,6 +6,12 @@ import com.blaze.blazesdk.delegates.BlazePipState
 import com.blaze.blazesdk.delegates.models.BlazeCTAActionType
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeInteractionLinkHandleType
+import com.blaze.blazesdk.delegates.models.BlazeRestrictedContentParams
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionHandleType
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionReason
+import com.blaze.blazesdk.follow.models.BlazeFollowEntity
+import com.blaze.flutterblazesdk.follow.toFlutterValue
 import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.results.BlazeResult
@@ -198,6 +204,77 @@ class BlazeSharedDelegateHandler {
         completion(params)
     }
 
+    // Observer-only: always returns the native default. Native treats a refused item
+    // the same whatever this returns, so there is nothing for the app to declare.
+    fun onContentRestricted(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        reason: BlazeContentRestrictionReason,
+        contentParams: BlazeRestrictedContentParams,
+        completion: (Any) -> Unit
+    ): BlazeContentRestrictionHandleType {
+        @Keep
+        data class ContentParams(
+            val contentIndex: Int,
+            val contentId: String,
+            val extraInfo: Map<String, String>,
+            val contentThumbnailUrl: String?
+        )
+
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val reason: String,
+            val contentParams: ContentParams
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            reason = reason.value,
+            contentParams = ContentParams(
+                contentIndex = contentParams.contentIndex,
+                contentId = contentParams.contentId,
+                extraInfo = contentParams.extraInfo,
+                contentThumbnailUrl = contentParams.contentThumbnailUrl
+            )
+        )
+
+        completion(params)
+        return BlazeContentRestrictionHandleType.SDK_SHOULD_HANDLE
+    }
+
+    fun onTriggerInteractionLink(
+        playerType: BlazePlayerType,
+        sourceId: String?,
+        interactionId: String,
+        interactionType: String,
+        url: String,
+        handling: BlazeInteractionLinkHandleType,
+        completion: (Any) -> Unit
+    ): BlazeInteractionLinkHandleType {
+        @Keep
+        data class Params(
+            val playerType: String,
+            val sourceId: String?,
+            val interactionId: String,
+            val interactionType: String,
+            val url: String
+        )
+
+        val params = Params(
+            playerType = playerType.toFlutterValue(),
+            sourceId = sourceId,
+            interactionId = interactionId,
+            interactionType = interactionType,
+            url = url
+        )
+
+        completion(params)
+        return handling
+    }
+
     // Observer-only: always returns null so the SDK falls back to its own
     // sdkGeneratedLink. Overriding the shared link would need a synchronous
     // return value from Dart, which the async bridge (a ~2s round-trip) can't
@@ -283,7 +360,7 @@ class BlazeSharedDelegateHandler {
         playerType: BlazePlayerType,
         sourceId: String?,
         newFollowingState: Boolean,
-        followEntityId: String,
+        followEntity: BlazeFollowEntity,
         completion: (Any) -> Unit
     ) {
         @Keep
@@ -291,14 +368,18 @@ class BlazeSharedDelegateHandler {
             val playerType: String,
             val sourceId: String?,
             val newFollowingState: Boolean,
-            val followEntityId: String
+            val followEntityId: String,
+            val providerName: String?,
+            val entityType: String?
         )
 
         val params = Params(
             playerType = playerType.toFlutterValue(),
             sourceId = sourceId,
             newFollowingState = newFollowingState,
-            followEntityId = followEntityId
+            followEntityId = followEntity.entityId,
+            providerName = followEntity.providerName,
+            entityType = followEntity.entityType?.toFlutterValue()
         )
 
         completion(params)

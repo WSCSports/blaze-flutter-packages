@@ -15,6 +15,7 @@ import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerProgressBarStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerTitleImageStyle
 import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerTitleTextStyle
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerSubtitleTextStyle
 import com.blaze.blazesdk.style.shared.models.blazeDp
 import com.blaze.flutterblazesdk.players.shared.BlazeReactCustomActionButton
 import com.blaze.flutterblazesdk.players.shared.mergeButtonThemes
@@ -35,6 +36,7 @@ fun BlazeStoryPlayerStyle.mergedWith(
     val merged = this
 
     merged.title = this.title.mergedWith(customization.title, context)
+    merged.subtitle = this.subtitle.mergedWith(customization.subtitle, context)
     merged.lastUpdate = this.lastUpdate.mergedWith(customization.lastUpdate, context)
     merged.buttons = this.buttons.mergedWith(customization.buttons, context)
     merged.chips = this.chips.mergedWith(customization.chips)
@@ -92,6 +94,22 @@ fun BlazeStoryPlayerTitleTextStyle.mergedWith(
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
     merged.isVisible = customization.isVisible ?: this.isVisible
     merged.image = merged.image.mergedWith(customization.image, context)
+
+    return merged
+}
+
+fun BlazeStoryPlayerSubtitleTextStyle.mergedWith(
+    customization: BlazeReactStoryPlayerSubtitleTextStyle?,
+    context: Context
+): BlazeStoryPlayerSubtitleTextStyle {
+    customization ?: return this
+
+    val merged = this
+    // An omitted font keeps the native default font.
+    merged.fontResId = customization.font?.toFontResId(context) ?: merged.fontResId
+    merged.textSize = customization.textSize ?: merged.textSize
+    merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
+    merged.isVisible = customization.isVisible ?: this.isVisible
 
     return merged
 }

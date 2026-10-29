@@ -18,6 +18,14 @@ struct BlazeReactStoryPlayerStyle: Codable {
     var progressBar: BlazeReactStoryPlayerProgressBarStyle?
     var firstTimeSlide: BlazeReactStoryPlayerFirstTimeSlideStyle?
     var captions: BlazeReactCaptionsStyle?
+    var subtitle: BlazeReactStoryPlayerSubtitleTextStyle?
+}
+
+struct BlazeReactStoryPlayerSubtitleTextStyle: Codable {
+    var font: BlazeReactTitleFont?
+    let textSize: CGFloat?
+    var textColor: String?
+    var isVisible: Bool?
 }
 
 struct BlazeReactStoryPlayerTitleTextStyle : Codable {

@@ -24,6 +24,10 @@ class BlazeStoryPlayerStyle with _$BlazeStoryPlayerStyle {
     /// Styles the rendered captions text. To style the CC toggle button
     /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
     BlazeCaptionsStyle? captions,
+
+    /// Styles the page subtitle shown under the page title. When omitted,
+    /// the native default is kept.
+    BlazeStoryPlayerSubtitleTextStyle? subtitle,
   }) = _BlazeStoryPlayerStyle;
 
   factory BlazeStoryPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -140,6 +144,22 @@ class BlazeStoryPlayerTitleTextStyle with _$BlazeStoryPlayerTitleTextStyle {
 
   factory BlazeStoryPlayerTitleTextStyle.fromJson(Map<String, dynamic> json) =>
       _$BlazeStoryPlayerTitleTextStyleFromJson(json);
+}
+
+/// Story player page subtitle text style configuration
+@freezed
+class BlazeStoryPlayerSubtitleTextStyle
+    with _$BlazeStoryPlayerSubtitleTextStyle {
+  const factory BlazeStoryPlayerSubtitleTextStyle({
+    BlazeFont? font,
+    double? textSize,
+    String? textColor,
+    bool? isVisible,
+  }) = _BlazeStoryPlayerSubtitleTextStyle;
+
+  factory BlazeStoryPlayerSubtitleTextStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeStoryPlayerSubtitleTextStyleFromJson(json);
 }
 
 /// Story player title image style configuration

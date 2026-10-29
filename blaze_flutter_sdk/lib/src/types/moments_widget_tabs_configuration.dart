@@ -133,6 +133,15 @@ class BlazePlayerTabsStyle with _$BlazePlayerTabsStyle {
     /// presents the player's empty/error state. Set to `false` to have such
     /// tabs auto-removed instead (the first tab is always kept regardless).
     bool? isTabVisibleWhenEmpty,
+
+    /// iOS-only. No-op on Android. Whether the tabs content extends under the
+    /// top safe area. When omitted, the native default (`true`) is kept.
+    bool? ignoresTopSafeArea,
+
+    /// iOS-only. No-op on Android. Whether the tabs content extends under the
+    /// bottom safe area (behind the host's bottom chrome). When omitted, the
+    /// native default (`false`) is kept.
+    bool? ignoresBottomSafeArea,
   }) = _BlazePlayerTabsStyle;
 
   factory BlazePlayerTabsStyle.fromJson(Map<String, dynamic> json) =>

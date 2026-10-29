@@ -5,5 +5,5 @@
 import Foundation
 
 internal struct BlazeFlutterSDKVersion {
-    static let version = "1.20.0"
+    static let version = "1.21.0"
 }

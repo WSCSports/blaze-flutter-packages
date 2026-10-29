@@ -46,6 +46,10 @@ _$BlazeStoryPlayerStyleImpl _$$BlazeStoryPlayerStyleImplFromJson(
           ? null
           : BlazeCaptionsStyle.fromJson(
               json['captions'] as Map<String, dynamic>),
+      subtitle: json['subtitle'] == null
+          ? null
+          : BlazeStoryPlayerSubtitleTextStyle.fromJson(
+              json['subtitle'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeStoryPlayerStyleImplToJson(
@@ -61,6 +65,7 @@ Map<String, dynamic> _$$BlazeStoryPlayerStyleImplToJson(
       'firstTimeSlide': instance.firstTimeSlide?.toJson(),
       'progressBar': instance.progressBar?.toJson(),
       'captions': instance.captions?.toJson(),
+      'subtitle': instance.subtitle?.toJson(),
     };
 
 _$BlazeStoryPlayerFirstTimeSlideStyleImpl
@@ -231,6 +236,27 @@ Map<String, dynamic> _$$BlazeStoryPlayerTitleTextStyleImplToJson(
       'textColor': instance.textColor,
       'isVisible': instance.isVisible,
       'image': instance.image?.toJson(),
+    };
+
+_$BlazeStoryPlayerSubtitleTextStyleImpl
+    _$$BlazeStoryPlayerSubtitleTextStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeStoryPlayerSubtitleTextStyleImpl(
+          font: json['font'] == null
+              ? null
+              : BlazeFont.fromJson(json['font'] as Map<String, dynamic>),
+          textSize: (json['textSize'] as num?)?.toDouble(),
+          textColor: json['textColor'] as String?,
+          isVisible: json['isVisible'] as bool?,
+        );
+
+Map<String, dynamic> _$$BlazeStoryPlayerSubtitleTextStyleImplToJson(
+        _$BlazeStoryPlayerSubtitleTextStyleImpl instance) =>
+    <String, dynamic>{
+      'font': instance.font?.toJson(),
+      'textSize': instance.textSize,
+      'textColor': instance.textColor,
+      'isVisible': instance.isVisible,
     };
 
 _$BlazeStoryPlayerTitleImageStyleImpl

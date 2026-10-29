@@ -10,13 +10,25 @@ _$BlazeFollowEntityImpl _$$BlazeFollowEntityImplFromJson(
         Map<String, dynamic> json) =>
     _$BlazeFollowEntityImpl(
       id: json['id'] as String,
+      providerName: json['providerName'] as String?,
+      entityType: $enumDecodeNullable(
+          _$BlazeFollowedEntityCategoryEnumMap, json['entityType'],
+          unknownValue: JsonKey.nullForUndefinedEnumValue),
     );
 
 Map<String, dynamic> _$$BlazeFollowEntityImplToJson(
         _$BlazeFollowEntityImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
+      'providerName': instance.providerName,
+      'entityType': _$BlazeFollowedEntityCategoryEnumMap[instance.entityType],
     };
+
+const _$BlazeFollowedEntityCategoryEnumMap = {
+  BlazeFollowedEntityCategory.team: 'team',
+  BlazeFollowedEntityCategory.player: 'player',
+  BlazeFollowedEntityCategory.property: 'property',
+};
 
 _$BlazeOnFollowEntityClickedParamsImpl
     _$$BlazeOnFollowEntityClickedParamsImplFromJson(
@@ -52,6 +64,10 @@ _$BlazeOnFollowEntityClickedInternalDataImpl
           sourceId: json['sourceId'] as String?,
           newFollowingState: json['newFollowingState'] as bool,
           followEntityId: json['followEntityId'] as String,
+          providerName: json['providerName'] as String?,
+          entityType: $enumDecodeNullable(
+              _$BlazeFollowedEntityCategoryEnumMap, json['entityType'],
+              unknownValue: JsonKey.nullForUndefinedEnumValue),
         );
 
 Map<String, dynamic> _$$BlazeOnFollowEntityClickedInternalDataImplToJson(
@@ -61,4 +77,6 @@ Map<String, dynamic> _$$BlazeOnFollowEntityClickedInternalDataImplToJson(
       'sourceId': instance.sourceId,
       'newFollowingState': instance.newFollowingState,
       'followEntityId': instance.followEntityId,
+      'providerName': instance.providerName,
+      'entityType': _$BlazeFollowedEntityCategoryEnumMap[instance.entityType],
     };

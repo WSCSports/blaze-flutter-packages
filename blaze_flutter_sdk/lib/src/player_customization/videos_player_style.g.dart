@@ -32,6 +32,14 @@ _$BlazeVideosPlayerStyleImpl _$$BlazeVideosPlayerStyleImplFromJson(
           ? null
           : BlazeCaptionsStyle.fromJson(
               json['captions'] as Map<String, dynamic>),
+      statusIndicator: json['statusIndicator'] == null
+          ? null
+          : BlazeVideosPlayerStatusIndicatorStyle.fromJson(
+              json['statusIndicator'] as Map<String, dynamic>),
+      backToLiveButton: json['backToLiveButton'] == null
+          ? null
+          : BlazeVideosPlayerBackToLiveButtonStyle.fromJson(
+              json['backToLiveButton'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$BlazeVideosPlayerStyleImplToJson(
@@ -44,6 +52,8 @@ Map<String, dynamic> _$$BlazeVideosPlayerStyleImplToJson(
       'seekBar': instance.seekBar?.toJson(),
       'overlayVisibilityThresholdMs': instance.overlayVisibilityThresholdMs,
       'captions': instance.captions?.toJson(),
+      'statusIndicator': instance.statusIndicator?.toJson(),
+      'backToLiveButton': instance.backToLiveButton?.toJson(),
     };
 
 _$BlazeVideosPlayerHeadingTextStyleImpl
@@ -133,6 +143,14 @@ _$BlazeVideosPlayerButtonsStyleImpl
               ? null
               : BlazePlayerButtonStyle.fromJson(
                   json['seekBackward'] as Map<String, dynamic>),
+          audio: json['audio'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['audio'] as Map<String, dynamic>),
+          liveCatchup: json['liveCatchup'] == null
+              ? null
+              : BlazePlayerButtonStyle.fromJson(
+                  json['liveCatchup'] as Map<String, dynamic>),
         );
 
 Map<String, dynamic> _$$BlazeVideosPlayerButtonsStyleImplToJson(
@@ -151,6 +169,8 @@ Map<String, dynamic> _$$BlazeVideosPlayerButtonsStyleImplToJson(
       'pictureInPicture': instance.pictureInPicture?.toJson(),
       'seekForward': instance.seekForward?.toJson(),
       'seekBackward': instance.seekBackward?.toJson(),
+      'audio': instance.audio?.toJson(),
+      'liveCatchup': instance.liveCatchup?.toJson(),
     };
 
 _$BlazeVideosPlayerCtaStyleImpl _$$BlazeVideosPlayerCtaStyleImplFromJson(
@@ -236,3 +256,185 @@ Map<String, dynamic> _$$BlazeVideosPlayerSeekBarStyleImplToJson(
       'horizontalSpacing': instance.horizontalSpacing,
       'bottomSpacing': instance.bottomSpacing,
     };
+
+_$BlazeVideosPlayerTextStyleImpl _$$BlazeVideosPlayerTextStyleImplFromJson(
+        Map<String, dynamic> json) =>
+    _$BlazeVideosPlayerTextStyleImpl(
+      font: json['font'] == null
+          ? null
+          : BlazeFont.fromJson(json['font'] as Map<String, dynamic>),
+      textSize: (json['textSize'] as num?)?.toDouble(),
+      textColor: json['textColor'] as String?,
+    );
+
+Map<String, dynamic> _$$BlazeVideosPlayerTextStyleImplToJson(
+        _$BlazeVideosPlayerTextStyleImpl instance) =>
+    <String, dynamic>{
+      'font': instance.font?.toJson(),
+      'textSize': instance.textSize,
+      'textColor': instance.textColor,
+    };
+
+_$BlazeVideosPlayerStatusIndicatorStyleImpl
+    _$$BlazeVideosPlayerStatusIndicatorStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerStatusIndicatorStyleImpl(
+          isVisible: json['isVisible'] as bool?,
+          padding: json['padding'] == null
+              ? null
+              : BlazeMargins.fromJson(json['padding'] as Map<String, dynamic>),
+          streamStates: json['streamStates'] == null
+              ? null
+              : BlazeVideosPlayerStatusIndicatorStreamStatesStyle.fromJson(
+                  json['streamStates'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeVideosPlayerStatusIndicatorStyleImplToJson(
+        _$BlazeVideosPlayerStatusIndicatorStyleImpl instance) =>
+    <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'padding': instance.padding?.toJson(),
+      'streamStates': instance.streamStates?.toJson(),
+    };
+
+_$BlazeVideosPlayerStatusIndicatorStreamStatesStyleImpl
+    _$$BlazeVideosPlayerStatusIndicatorStreamStatesStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerStatusIndicatorStreamStatesStyleImpl(
+          liveStreamState: json['liveStreamState'] == null
+              ? null
+              : BlazeVideosPlayerStatusIndicatorStateStyle.fromJson(
+                  json['liveStreamState'] as Map<String, dynamic>),
+          upcomingStreamState: json['upcomingStreamState'] == null
+              ? null
+              : BlazeVideosPlayerStatusIndicatorStateStyle.fromJson(
+                  json['upcomingStreamState'] as Map<String, dynamic>),
+          endedStreamState: json['endedStreamState'] == null
+              ? null
+              : BlazeVideosPlayerStatusIndicatorStateStyle.fromJson(
+                  json['endedStreamState'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic>
+    _$$BlazeVideosPlayerStatusIndicatorStreamStatesStyleImplToJson(
+            _$BlazeVideosPlayerStatusIndicatorStreamStatesStyleImpl instance) =>
+        <String, dynamic>{
+          'liveStreamState': instance.liveStreamState?.toJson(),
+          'upcomingStreamState': instance.upcomingStreamState?.toJson(),
+          'endedStreamState': instance.endedStreamState?.toJson(),
+        };
+
+_$BlazeVideosPlayerStatusIndicatorStateStyleImpl
+    _$$BlazeVideosPlayerStatusIndicatorStateStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerStatusIndicatorStateStyleImpl(
+          textStyle: json['textStyle'] == null
+              ? null
+              : BlazeVideosPlayerTextStyle.fromJson(
+                  json['textStyle'] as Map<String, dynamic>),
+          isVisible: json['isVisible'] as bool?,
+          text: json['text'] as String?,
+          backgroundColor: json['backgroundColor'] as String?,
+          backgroundImage: json['backgroundImage'] == null
+              ? null
+              : BlazeImage.fromJson(
+                  json['backgroundImage'] as Map<String, dynamic>),
+          cornerRadius: (json['cornerRadius'] as num?)?.toDouble(),
+          cornerRadiusRatio: (json['cornerRadiusRatio'] as num?)?.toDouble(),
+          borderColor: json['borderColor'] as String?,
+          borderWidth: (json['borderWidth'] as num?)?.toDouble(),
+        );
+
+Map<String, dynamic> _$$BlazeVideosPlayerStatusIndicatorStateStyleImplToJson(
+        _$BlazeVideosPlayerStatusIndicatorStateStyleImpl instance) =>
+    <String, dynamic>{
+      'textStyle': instance.textStyle?.toJson(),
+      'isVisible': instance.isVisible,
+      'text': instance.text,
+      'backgroundColor': instance.backgroundColor,
+      'backgroundImage': instance.backgroundImage?.toJson(),
+      'cornerRadius': instance.cornerRadius,
+      'cornerRadiusRatio': instance.cornerRadiusRatio,
+      'borderColor': instance.borderColor,
+      'borderWidth': instance.borderWidth,
+    };
+
+_$BlazeVideosPlayerBackToLiveButtonStyleImpl
+    _$$BlazeVideosPlayerBackToLiveButtonStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerBackToLiveButtonStyleImpl(
+          margins: json['margins'] == null
+              ? null
+              : BlazeMargins.fromJson(json['margins'] as Map<String, dynamic>),
+          padding: json['padding'] == null
+              ? null
+              : BlazeMargins.fromJson(json['padding'] as Map<String, dynamic>),
+          playbackStates: json['playbackStates'] == null
+              ? null
+              : BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle.fromJson(
+                  json['playbackStates'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$BlazeVideosPlayerBackToLiveButtonStyleImplToJson(
+        _$BlazeVideosPlayerBackToLiveButtonStyleImpl instance) =>
+    <String, dynamic>{
+      'margins': instance.margins?.toJson(),
+      'padding': instance.padding?.toJson(),
+      'playbackStates': instance.playbackStates?.toJson(),
+    };
+
+_$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleImpl
+    _$$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleImpl(
+          atLiveEdgeState: json['atLiveEdgeState'] == null
+              ? null
+              : BlazeVideosPlayerBackToLiveButtonStateStyle.fromJson(
+                  json['atLiveEdgeState'] as Map<String, dynamic>),
+          behindLiveState: json['behindLiveState'] == null
+              ? null
+              : BlazeVideosPlayerBackToLiveButtonStateStyle.fromJson(
+                  json['behindLiveState'] as Map<String, dynamic>),
+        );
+
+Map<String,
+    dynamic> _$$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleImplToJson(
+        _$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleImpl instance) =>
+    <String, dynamic>{
+      'atLiveEdgeState': instance.atLiveEdgeState?.toJson(),
+      'behindLiveState': instance.behindLiveState?.toJson(),
+    };
+
+_$BlazeVideosPlayerBackToLiveButtonStateStyleImpl
+    _$$BlazeVideosPlayerBackToLiveButtonStateStyleImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeVideosPlayerBackToLiveButtonStateStyleImpl(
+          textStyle: json['textStyle'] == null
+              ? null
+              : BlazeVideosPlayerTextStyle.fromJson(
+                  json['textStyle'] as Map<String, dynamic>),
+          text: json['text'] as String?,
+          backgroundColor: json['backgroundColor'] as String?,
+          cornerRadius: (json['cornerRadius'] as num?)?.toDouble(),
+          cornerRadiusRatio: (json['cornerRadiusRatio'] as num?)?.toDouble(),
+          glassBackground: $enumDecodeNullable(
+              _$BlazeGlassBackgroundStateEnumMap, json['glassBackground']),
+        );
+
+Map<String, dynamic> _$$BlazeVideosPlayerBackToLiveButtonStateStyleImplToJson(
+        _$BlazeVideosPlayerBackToLiveButtonStateStyleImpl instance) =>
+    <String, dynamic>{
+      'textStyle': instance.textStyle?.toJson(),
+      'text': instance.text,
+      'backgroundColor': instance.backgroundColor,
+      'cornerRadius': instance.cornerRadius,
+      'cornerRadiusRatio': instance.cornerRadiusRatio,
+      'glassBackground':
+          _$BlazeGlassBackgroundStateEnumMap[instance.glassBackground],
+    };
+
+const _$BlazeGlassBackgroundStateEnumMap = {
+  BlazeGlassBackgroundState.automatic: 'automatic',
+  BlazeGlassBackgroundState.on: 'on',
+  BlazeGlassBackgroundState.off: 'off',
+};

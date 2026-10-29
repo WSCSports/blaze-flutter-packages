@@ -130,6 +130,42 @@ Map<String, dynamic> _$$BlazeDataSourceTypeCompositeImplToJson(
       'runtimeType': instance.$type,
     };
 
+_$BlazeDataSourceTypeFollowedEntitiesImpl
+    _$$BlazeDataSourceTypeFollowedEntitiesImplFromJson(
+            Map<String, dynamic> json) =>
+        _$BlazeDataSourceTypeFollowedEntitiesImpl(
+          entityTypes: (json['entityTypes'] as List<dynamic>?)
+                  ?.map((e) =>
+                      $enumDecode(_$BlazeFollowedEntityCategoryEnumMap, e))
+                  .toSet() ??
+              const <BlazeFollowedEntityCategory>{},
+          orderType:
+              $enumDecodeNullable(_$BlazeOrderTypeEnumMap, json['orderType']),
+          advancedOrderType: $enumDecodeNullable(
+              _$BlazeAdvancedOrderTypeEnumMap, json['advancedOrderType']),
+          maxItems: (json['maxItems'] as num?)?.toInt(),
+          $type: json['runtimeType'] as String?,
+        );
+
+Map<String, dynamic> _$$BlazeDataSourceTypeFollowedEntitiesImplToJson(
+        _$BlazeDataSourceTypeFollowedEntitiesImpl instance) =>
+    <String, dynamic>{
+      'entityTypes': instance.entityTypes
+          .map((e) => _$BlazeFollowedEntityCategoryEnumMap[e]!)
+          .toList(),
+      'orderType': _$BlazeOrderTypeEnumMap[instance.orderType],
+      'advancedOrderType':
+          _$BlazeAdvancedOrderTypeEnumMap[instance.advancedOrderType],
+      'maxItems': instance.maxItems,
+      'runtimeType': instance.$type,
+    };
+
+const _$BlazeFollowedEntityCategoryEnumMap = {
+  BlazeFollowedEntityCategory.team: 'team',
+  BlazeFollowedEntityCategory.player: 'player',
+  BlazeFollowedEntityCategory.property: 'property',
+};
+
 _$BlazeCompositeDataSourceEntryImpl
     _$$BlazeCompositeDataSourceEntryImplFromJson(Map<String, dynamic> json) =>
         _$BlazeCompositeDataSourceEntryImpl(

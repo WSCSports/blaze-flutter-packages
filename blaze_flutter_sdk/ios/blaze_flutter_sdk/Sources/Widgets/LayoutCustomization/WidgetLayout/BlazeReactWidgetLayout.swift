@@ -132,6 +132,22 @@ struct BlazeReactWidgetItemStyle: Codable {
     var statusIndicator: BlazeReactWidgetItemStatusIndicatorStyle?
     var badge: BlazeReactWidgetItemBadgeStyle?
     var durationElement: BlazeReactWidgetItemDurationElementStyle?
+    var subtitle: BlazeReactWidgetItemSecondaryTextStyle?
+    var description: BlazeReactWidgetItemSecondaryTextStyle?
+    var playIconElement: BlazeReactWidgetItemPlayIconElementStyle?
+}
+
+/// Dart `BlazeWidgetItemSubtitleStyle` / `BlazeWidgetItemDescriptionStyle` (same shape).
+struct BlazeReactWidgetItemSecondaryTextStyle: Codable {
+    var isVisible: Bool?
+    var topSpacing: CGFloat?
+    var unreadState: BlazeReactTitleStyle?
+    var readState: BlazeReactTitleStyle?
+}
+
+struct BlazeReactWidgetItemPlayIconElementStyle: Codable {
+    var isVisible: Bool?
+    var glassBackground: BlazeReactGlassBackgroundState?
 }
 
 struct BlazeReactWidgetItemDurationElementStyle: Codable {
@@ -154,6 +170,7 @@ struct BlazeReactWidgetItemDurationElementStyle: Codable {
         var cornerRadiusRatio: CGFloat?
         var borderColor: String?
         var borderWidth: CGFloat?
+        var glassBackground: BlazeReactGlassBackgroundState?
     }
 }
 

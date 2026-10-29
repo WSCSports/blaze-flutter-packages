@@ -26,6 +26,14 @@ class BlazeVideosPlayerStyle with _$BlazeVideosPlayerStyle {
     /// Styles the rendered captions text. To style the CC toggle button
     /// itself, use [BlazeVideosPlayerButtonsStyle.captions].
     BlazeCaptionsStyle? captions,
+
+    /// The live status pill (live, upcoming, ended). When omitted, the native
+    /// preset value is kept.
+    BlazeVideosPlayerStatusIndicatorStyle? statusIndicator,
+
+    /// The back-to-live button shown on a live stream. When omitted, the
+    /// native preset value is kept.
+    BlazeVideosPlayerBackToLiveButtonStyle? backToLiveButton,
   }) = _BlazeVideosPlayerStyle;
 
   factory BlazeVideosPlayerStyle.fromJson(Map<String, dynamic> json) =>
@@ -67,6 +75,14 @@ class BlazeVideosPlayerButtonsStyle with _$BlazeVideosPlayerButtonsStyle {
     BlazePlayerButtonStyle? pictureInPicture,
     BlazePlayerButtonStyle? seekForward,
     BlazePlayerButtonStyle? seekBackward,
+
+    /// The live-stream audio-track button. When omitted, the native preset
+    /// value is kept.
+    BlazePlayerButtonStyle? audio,
+
+    /// The live-stream catch-up (recap) button, shown when a recap exists.
+    /// When omitted, the native preset value is kept.
+    BlazePlayerButtonStyle? liveCatchup,
   }) = _BlazeVideosPlayerButtonsStyle;
 
   factory BlazeVideosPlayerButtonsStyle.fromJson(Map<String, dynamic> json) =>
@@ -139,4 +155,118 @@ enum BlazeVideosPlayerHeadingTextContentSource {
 enum BlazeVideosPlayerCTAIconPositioning {
   @JsonValue('Start')
   start,
+}
+
+/// Text style for the live status indicator and the back-to-live button.
+@freezed
+class BlazeVideosPlayerTextStyle with _$BlazeVideosPlayerTextStyle {
+  const factory BlazeVideosPlayerTextStyle({
+    BlazeFont? font,
+    double? textSize,
+    String? textColor,
+  }) = _BlazeVideosPlayerTextStyle;
+
+  factory BlazeVideosPlayerTextStyle.fromJson(Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerTextStyleFromJson(json);
+}
+
+/// Videos player live status indicator style (the "LIVE" pill).
+@freezed
+class BlazeVideosPlayerStatusIndicatorStyle
+    with _$BlazeVideosPlayerStatusIndicatorStyle {
+  const factory BlazeVideosPlayerStatusIndicatorStyle({
+    bool? isVisible,
+    BlazeMargins? padding,
+    BlazeVideosPlayerStatusIndicatorStreamStatesStyle? streamStates,
+  }) = _BlazeVideosPlayerStatusIndicatorStyle;
+
+  factory BlazeVideosPlayerStatusIndicatorStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerStatusIndicatorStyleFromJson(json);
+}
+
+/// Per stream state styles of the live status indicator.
+@freezed
+class BlazeVideosPlayerStatusIndicatorStreamStatesStyle
+    with _$BlazeVideosPlayerStatusIndicatorStreamStatesStyle {
+  const factory BlazeVideosPlayerStatusIndicatorStreamStatesStyle({
+    BlazeVideosPlayerStatusIndicatorStateStyle? liveStreamState,
+    BlazeVideosPlayerStatusIndicatorStateStyle? upcomingStreamState,
+    BlazeVideosPlayerStatusIndicatorStateStyle? endedStreamState,
+  }) = _BlazeVideosPlayerStatusIndicatorStreamStatesStyle;
+
+  factory BlazeVideosPlayerStatusIndicatorStreamStatesStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerStatusIndicatorStreamStatesStyleFromJson(json);
+}
+
+/// One stream state of the live status indicator.
+@freezed
+class BlazeVideosPlayerStatusIndicatorStateStyle
+    with _$BlazeVideosPlayerStatusIndicatorStateStyle {
+  const factory BlazeVideosPlayerStatusIndicatorStateStyle({
+    BlazeVideosPlayerTextStyle? textStyle,
+    bool? isVisible,
+    String? text,
+    String? backgroundColor,
+    BlazeImage? backgroundImage,
+    double? cornerRadius,
+    double? cornerRadiusRatio,
+    String? borderColor,
+    double? borderWidth,
+  }) = _BlazeVideosPlayerStatusIndicatorStateStyle;
+
+  factory BlazeVideosPlayerStatusIndicatorStateStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerStatusIndicatorStateStyleFromJson(json);
+}
+
+/// Videos player back-to-live button style.
+@freezed
+class BlazeVideosPlayerBackToLiveButtonStyle
+    with _$BlazeVideosPlayerBackToLiveButtonStyle {
+  const factory BlazeVideosPlayerBackToLiveButtonStyle({
+    BlazeMargins? margins,
+    BlazeMargins? padding,
+    BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle? playbackStates,
+  }) = _BlazeVideosPlayerBackToLiveButtonStyle;
+
+  factory BlazeVideosPlayerBackToLiveButtonStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerBackToLiveButtonStyleFromJson(json);
+}
+
+/// Back-to-live button styles at the live edge and behind it.
+@freezed
+class BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle
+    with _$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle {
+  const factory BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle({
+    BlazeVideosPlayerBackToLiveButtonStateStyle? atLiveEdgeState,
+    BlazeVideosPlayerBackToLiveButtonStateStyle? behindLiveState,
+  }) = _BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle;
+
+  factory BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerBackToLiveButtonPlaybackStatesStyleFromJson(json);
+}
+
+/// One playback state of the back-to-live button.
+@freezed
+class BlazeVideosPlayerBackToLiveButtonStateStyle
+    with _$BlazeVideosPlayerBackToLiveButtonStateStyle {
+  const factory BlazeVideosPlayerBackToLiveButtonStateStyle({
+    BlazeVideosPlayerTextStyle? textStyle,
+    String? text,
+    String? backgroundColor,
+    double? cornerRadius,
+    double? cornerRadiusRatio,
+    /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+    /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+    /// is kept.
+    BlazeGlassBackgroundState? glassBackground,
+  }) = _BlazeVideosPlayerBackToLiveButtonStateStyle;
+
+  factory BlazeVideosPlayerBackToLiveButtonStateStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeVideosPlayerBackToLiveButtonStateStyleFromJson(json);
 }

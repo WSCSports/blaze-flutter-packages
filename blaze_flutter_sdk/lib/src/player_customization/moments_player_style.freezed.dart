@@ -49,6 +49,14 @@ mixin _$BlazeMomentsPlayerStyle {
   /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
   BlazeCaptionsStyle? get captions => throw _privateConstructorUsedError;
 
+  /// iOS-only. No-op on Android. Whether the player content extends under
+  /// the bottom safe area (behind the home indicator or the host's bottom
+  /// chrome); the player controls stay above it. Has no effect inside a
+  /// Moments tabs container, which uses
+  /// [BlazePlayerTabsStyle.ignoresBottomSafeArea]. When omitted, the native
+  /// default (`false`) is kept.
+  bool? get ignoresBottomSafeArea => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeMomentsPlayerStyle value) $default,
@@ -96,7 +104,8 @@ abstract class $BlazeMomentsPlayerStyleCopyWith<$Res> {
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
       BlazePlayerDisplayMode? playerDisplayMode,
       BlazeMomentsPlayerFollowEntityStyle? followEntity,
-      BlazeCaptionsStyle? captions});
+      BlazeCaptionsStyle? captions,
+      bool? ignoresBottomSafeArea});
 
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
   $BlazeMomentsPlayerBodyTextStyleCopyWith<$Res>? get bodyText;
@@ -141,6 +150,7 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
     Object? playerDisplayMode = freezed,
     Object? followEntity = freezed,
     Object? captions = freezed,
+    Object? ignoresBottomSafeArea = freezed,
   }) {
     return _then(_value.copyWith(
       headingText: freezed == headingText
@@ -199,6 +209,10 @@ class _$BlazeMomentsPlayerStyleCopyWithImpl<$Res,
           ? _value.captions
           : captions // ignore: cast_nullable_to_non_nullable
               as BlazeCaptionsStyle?,
+      ignoresBottomSafeArea: freezed == ignoresBottomSafeArea
+          ? _value.ignoresBottomSafeArea
+          : ignoresBottomSafeArea // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -388,7 +402,8 @@ abstract class _$$BlazeMomentsPlayerStyleImplCopyWith<$Res>
       BlazeMomentsPlayerBottomComponentsAlignment? bottomComponentsAlignment,
       BlazePlayerDisplayMode? playerDisplayMode,
       BlazeMomentsPlayerFollowEntityStyle? followEntity,
-      BlazeCaptionsStyle? captions});
+      BlazeCaptionsStyle? captions,
+      bool? ignoresBottomSafeArea});
 
   @override
   $BlazeMomentsPlayerHeadingTextStyleCopyWith<$Res>? get headingText;
@@ -443,6 +458,7 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
     Object? playerDisplayMode = freezed,
     Object? followEntity = freezed,
     Object? captions = freezed,
+    Object? ignoresBottomSafeArea = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerStyleImpl(
       headingText: freezed == headingText
@@ -501,6 +517,10 @@ class __$$BlazeMomentsPlayerStyleImplCopyWithImpl<$Res>
           ? _value.captions
           : captions // ignore: cast_nullable_to_non_nullable
               as BlazeCaptionsStyle?,
+      ignoresBottomSafeArea: freezed == ignoresBottomSafeArea
+          ? _value.ignoresBottomSafeArea
+          : ignoresBottomSafeArea // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -522,7 +542,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       this.bottomComponentsAlignment,
       this.playerDisplayMode,
       this.followEntity,
-      this.captions});
+      this.captions,
+      this.ignoresBottomSafeArea});
 
   factory _$BlazeMomentsPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeMomentsPlayerStyleImplFromJson(json);
@@ -559,9 +580,18 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
   @override
   final BlazeCaptionsStyle? captions;
 
+  /// iOS-only. No-op on Android. Whether the player content extends under
+  /// the bottom safe area (behind the home indicator or the host's bottom
+  /// chrome); the player controls stay above it. Has no effect inside a
+  /// Moments tabs container, which uses
+  /// [BlazePlayerTabsStyle.ignoresBottomSafeArea]. When omitted, the native
+  /// default (`false`) is kept.
+  @override
+  final bool? ignoresBottomSafeArea;
+
   @override
   String toString() {
-    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode, followEntity: $followEntity, captions: $captions)';
+    return 'BlazeMomentsPlayerStyle(headingText: $headingText, bodyText: $bodyText, buttons: $buttons, chips: $chips, backgroundColor: $backgroundColor, cta: $cta, headerGradient: $headerGradient, footerGradient: $footerGradient, firstTimeSlide: $firstTimeSlide, seekBar: $seekBar, bottomComponentsAlignment: $bottomComponentsAlignment, playerDisplayMode: $playerDisplayMode, followEntity: $followEntity, captions: $captions, ignoresBottomSafeArea: $ignoresBottomSafeArea)';
   }
 
   @override
@@ -593,7 +623,9 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
             (identical(other.followEntity, followEntity) ||
                 other.followEntity == followEntity) &&
             (identical(other.captions, captions) ||
-                other.captions == captions));
+                other.captions == captions) &&
+            (identical(other.ignoresBottomSafeArea, ignoresBottomSafeArea) ||
+                other.ignoresBottomSafeArea == ignoresBottomSafeArea));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -613,7 +645,8 @@ class _$BlazeMomentsPlayerStyleImpl implements _BlazeMomentsPlayerStyle {
       bottomComponentsAlignment,
       playerDisplayMode,
       followEntity,
-      captions);
+      captions,
+      ignoresBottomSafeArea);
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -676,7 +709,8 @@ abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
           bottomComponentsAlignment,
       final BlazePlayerDisplayMode? playerDisplayMode,
       final BlazeMomentsPlayerFollowEntityStyle? followEntity,
-      final BlazeCaptionsStyle? captions}) = _$BlazeMomentsPlayerStyleImpl;
+      final BlazeCaptionsStyle? captions,
+      final bool? ignoresBottomSafeArea}) = _$BlazeMomentsPlayerStyleImpl;
 
   factory _BlazeMomentsPlayerStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeMomentsPlayerStyleImpl.fromJson;
@@ -712,6 +746,15 @@ abstract class _BlazeMomentsPlayerStyle implements BlazeMomentsPlayerStyle {
   /// itself, use [BlazeMomentsPlayerButtonsStyle.captions].
   @override
   BlazeCaptionsStyle? get captions;
+
+  /// iOS-only. No-op on Android. Whether the player content extends under
+  /// the bottom safe area (behind the home indicator or the host's bottom
+  /// chrome); the player controls stay above it. Has no effect inside a
+  /// Moments tabs container, which uses
+  /// [BlazePlayerTabsStyle.ignoresBottomSafeArea]. When omitted, the native
+  /// default (`false`) is kept.
+  @override
+  bool? get ignoresBottomSafeArea;
 
   /// Create a copy of BlazeMomentsPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -5789,6 +5832,12 @@ mixin _$BlazeMomentsPlayerFollowEntityChipStyle {
   BlazeMomentsPlayerFollowEntityChipContentSource? get contentSource =>
       throw _privateConstructorUsedError;
 
+  /// The follow / following icons: the default `+` and checkmark, or an
+  /// outlined and filled star. No effect while the chip shows text
+  /// ([contentSource] `text`). When omitted, the native default is kept.
+  BlazeMomentsPlayerFollowEntityIconSource? get iconSource =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeMomentsPlayerFollowEntityChipStyle value) $default,
@@ -5829,7 +5878,8 @@ abstract class $BlazeMomentsPlayerFollowEntityChipStyleCopyWith<$Res> {
   $Res call(
       {String? backgroundColor,
       String? iconColor,
-      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource});
+      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource,
+      BlazeMomentsPlayerFollowEntityIconSource? iconSource});
 }
 
 /// @nodoc
@@ -5852,6 +5902,7 @@ class _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl<$Res,
     Object? backgroundColor = freezed,
     Object? iconColor = freezed,
     Object? contentSource = freezed,
+    Object? iconSource = freezed,
   }) {
     return _then(_value.copyWith(
       backgroundColor: freezed == backgroundColor
@@ -5866,6 +5917,10 @@ class _$BlazeMomentsPlayerFollowEntityChipStyleCopyWithImpl<$Res,
           ? _value.contentSource
           : contentSource // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerFollowEntityChipContentSource?,
+      iconSource: freezed == iconSource
+          ? _value.iconSource
+          : iconSource // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityIconSource?,
     ) as $Val);
   }
 }
@@ -5882,7 +5937,8 @@ abstract class _$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWith<$Res>
   $Res call(
       {String? backgroundColor,
       String? iconColor,
-      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource});
+      BlazeMomentsPlayerFollowEntityChipContentSource? contentSource,
+      BlazeMomentsPlayerFollowEntityIconSource? iconSource});
 }
 
 /// @nodoc
@@ -5903,6 +5959,7 @@ class __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<$Res>
     Object? backgroundColor = freezed,
     Object? iconColor = freezed,
     Object? contentSource = freezed,
+    Object? iconSource = freezed,
   }) {
     return _then(_$BlazeMomentsPlayerFollowEntityChipStyleImpl(
       backgroundColor: freezed == backgroundColor
@@ -5917,6 +5974,10 @@ class __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<$Res>
           ? _value.contentSource
           : contentSource // ignore: cast_nullable_to_non_nullable
               as BlazeMomentsPlayerFollowEntityChipContentSource?,
+      iconSource: freezed == iconSource
+          ? _value.iconSource
+          : iconSource // ignore: cast_nullable_to_non_nullable
+              as BlazeMomentsPlayerFollowEntityIconSource?,
     ));
   }
 }
@@ -5926,7 +5987,10 @@ class __$$BlazeMomentsPlayerFollowEntityChipStyleImplCopyWithImpl<$Res>
 class _$BlazeMomentsPlayerFollowEntityChipStyleImpl
     implements _BlazeMomentsPlayerFollowEntityChipStyle {
   const _$BlazeMomentsPlayerFollowEntityChipStyleImpl(
-      {this.backgroundColor, this.iconColor, this.contentSource});
+      {this.backgroundColor,
+      this.iconColor,
+      this.contentSource,
+      this.iconSource});
 
   factory _$BlazeMomentsPlayerFollowEntityChipStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -5939,9 +6003,15 @@ class _$BlazeMomentsPlayerFollowEntityChipStyleImpl
   @override
   final BlazeMomentsPlayerFollowEntityChipContentSource? contentSource;
 
+  /// The follow / following icons: the default `+` and checkmark, or an
+  /// outlined and filled star. No effect while the chip shows text
+  /// ([contentSource] `text`). When omitted, the native default is kept.
+  @override
+  final BlazeMomentsPlayerFollowEntityIconSource? iconSource;
+
   @override
   String toString() {
-    return 'BlazeMomentsPlayerFollowEntityChipStyle(backgroundColor: $backgroundColor, iconColor: $iconColor, contentSource: $contentSource)';
+    return 'BlazeMomentsPlayerFollowEntityChipStyle(backgroundColor: $backgroundColor, iconColor: $iconColor, contentSource: $contentSource, iconSource: $iconSource)';
   }
 
   @override
@@ -5954,13 +6024,15 @@ class _$BlazeMomentsPlayerFollowEntityChipStyleImpl
             (identical(other.iconColor, iconColor) ||
                 other.iconColor == iconColor) &&
             (identical(other.contentSource, contentSource) ||
-                other.contentSource == contentSource));
+                other.contentSource == contentSource) &&
+            (identical(other.iconSource, iconSource) ||
+                other.iconSource == iconSource));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, backgroundColor, iconColor, contentSource);
+  int get hashCode => Object.hash(
+      runtimeType, backgroundColor, iconColor, contentSource, iconSource);
 
   /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -6013,10 +6085,11 @@ class _$BlazeMomentsPlayerFollowEntityChipStyleImpl
 abstract class _BlazeMomentsPlayerFollowEntityChipStyle
     implements BlazeMomentsPlayerFollowEntityChipStyle {
   const factory _BlazeMomentsPlayerFollowEntityChipStyle(
-      {final String? backgroundColor,
-      final String? iconColor,
-      final BlazeMomentsPlayerFollowEntityChipContentSource?
-          contentSource}) = _$BlazeMomentsPlayerFollowEntityChipStyleImpl;
+          {final String? backgroundColor,
+          final String? iconColor,
+          final BlazeMomentsPlayerFollowEntityChipContentSource? contentSource,
+          final BlazeMomentsPlayerFollowEntityIconSource? iconSource}) =
+      _$BlazeMomentsPlayerFollowEntityChipStyleImpl;
 
   factory _BlazeMomentsPlayerFollowEntityChipStyle.fromJson(
           Map<String, dynamic> json) =
@@ -6028,6 +6101,12 @@ abstract class _BlazeMomentsPlayerFollowEntityChipStyle
   String? get iconColor;
   @override
   BlazeMomentsPlayerFollowEntityChipContentSource? get contentSource;
+
+  /// The follow / following icons: the default `+` and checkmark, or an
+  /// outlined and filled star. No effect while the chip shows text
+  /// ([contentSource] `text`). When omitted, the native default is kept.
+  @override
+  BlazeMomentsPlayerFollowEntityIconSource? get iconSource;
 
   /// Create a copy of BlazeMomentsPlayerFollowEntityChipStyle
   /// with the given fields replaced by the non-null parameter values.

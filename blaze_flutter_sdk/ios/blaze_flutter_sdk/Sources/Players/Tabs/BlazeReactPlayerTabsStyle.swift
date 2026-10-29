@@ -20,6 +20,8 @@ struct BlazeReactPlayerTabsStyle: Codable {
     var activeTabIndicator: BlazeReactPlayerActiveTabIndicatorStyle?
     var isTabTitleVisibleWhenSingleTab: Bool?
     var isTabVisibleWhenEmpty: Bool?
+    var ignoresTopSafeArea: Bool?
+    var ignoresBottomSafeArea: Bool?
 }
 
 struct BlazeReactPlayerActiveTabIndicatorStyle: Codable {

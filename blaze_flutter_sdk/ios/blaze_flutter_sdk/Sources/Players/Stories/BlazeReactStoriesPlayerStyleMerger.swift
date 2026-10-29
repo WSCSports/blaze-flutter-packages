@@ -15,6 +15,7 @@ extension BlazeStoryPlayerStyle {
         var merged = self
 
         merged.title = merged.title.mergedWith(customization.title)
+        merged.subtitle = merged.subtitle.mergedWith(customization.subtitle)
         merged.lastUpdate = merged.lastUpdate.mergedWith(customization.lastUpdate)
         merged.buttons = merged.buttons.mergedWith(customization.buttons)
         merged.chips = merged.chips.mergedWith(customization.chips)
@@ -131,6 +132,7 @@ extension BlazeStoryPlayerButtonStyle {
         merged.contentHorizontalAlignment = .center
         merged.contentVerticalAlignment = .center
 
+        merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
     }
 }
@@ -160,6 +162,18 @@ extension BlazeStoryPlayerTitleTextStyle {
         merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.image = merged.image.mergedWith(customization.image)
+        return merged
+    }
+}
+
+extension BlazeStoryPlayerSubtitleTextStyle {
+    func mergedWith(_ customization: BlazeReactStoryPlayerSubtitleTextStyle?) -> Self {
+        guard let customization else { return self }
+
+        var merged = self
+        merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
+        merged.textColor = UIColor(hexString: customization.textColor) ?? merged.textColor
+        merged.isVisible = customization.isVisible ?? merged.isVisible
         return merged
     }
 }

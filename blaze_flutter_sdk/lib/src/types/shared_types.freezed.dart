@@ -620,6 +620,12 @@ mixin _$BlazePlayerButtonStyle {
   BlazePlayerItemButtonImageStates? get customImage =>
       throw _privateConstructorUsedError;
 
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  BlazeGlassBackgroundState? get glassBackground =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazePlayerButtonStyle value) $default,
@@ -660,7 +666,8 @@ abstract class $BlazePlayerButtonStyleCopyWith<$Res> {
       bool? isVisible,
       BlazeButtonScaleType? scaleType,
       bool? isVisibleForAds,
-      BlazePlayerItemButtonImageStates? customImage});
+      BlazePlayerItemButtonImageStates? customImage,
+      BlazeGlassBackgroundState? glassBackground});
 
   $BlazePlayerItemButtonImageStatesCopyWith<$Res>? get customImage;
 }
@@ -688,6 +695,7 @@ class _$BlazePlayerButtonStyleCopyWithImpl<$Res,
     Object? scaleType = freezed,
     Object? isVisibleForAds = freezed,
     Object? customImage = freezed,
+    Object? glassBackground = freezed,
   }) {
     return _then(_value.copyWith(
       width: freezed == width
@@ -718,6 +726,10 @@ class _$BlazePlayerButtonStyleCopyWithImpl<$Res,
           ? _value.customImage
           : customImage // ignore: cast_nullable_to_non_nullable
               as BlazePlayerItemButtonImageStates?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
     ) as $Val);
   }
 
@@ -753,7 +765,8 @@ abstract class _$$BlazePlayerButtonStyleImplCopyWith<$Res>
       bool? isVisible,
       BlazeButtonScaleType? scaleType,
       bool? isVisibleForAds,
-      BlazePlayerItemButtonImageStates? customImage});
+      BlazePlayerItemButtonImageStates? customImage,
+      BlazeGlassBackgroundState? glassBackground});
 
   @override
   $BlazePlayerItemButtonImageStatesCopyWith<$Res>? get customImage;
@@ -781,6 +794,7 @@ class __$$BlazePlayerButtonStyleImplCopyWithImpl<$Res>
     Object? scaleType = freezed,
     Object? isVisibleForAds = freezed,
     Object? customImage = freezed,
+    Object? glassBackground = freezed,
   }) {
     return _then(_$BlazePlayerButtonStyleImpl(
       width: freezed == width
@@ -811,6 +825,10 @@ class __$$BlazePlayerButtonStyleImplCopyWithImpl<$Res>
           ? _value.customImage
           : customImage // ignore: cast_nullable_to_non_nullable
               as BlazePlayerItemButtonImageStates?,
+      glassBackground: freezed == glassBackground
+          ? _value.glassBackground
+          : glassBackground // ignore: cast_nullable_to_non_nullable
+              as BlazeGlassBackgroundState?,
     ));
   }
 }
@@ -825,7 +843,8 @@ class _$BlazePlayerButtonStyleImpl implements _BlazePlayerButtonStyle {
       this.isVisible,
       this.scaleType,
       this.isVisibleForAds,
-      this.customImage});
+      this.customImage,
+      this.glassBackground});
 
   factory _$BlazePlayerButtonStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazePlayerButtonStyleImplFromJson(json);
@@ -845,9 +864,15 @@ class _$BlazePlayerButtonStyleImpl implements _BlazePlayerButtonStyle {
   @override
   final BlazePlayerItemButtonImageStates? customImage;
 
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  final BlazeGlassBackgroundState? glassBackground;
+
   @override
   String toString() {
-    return 'BlazePlayerButtonStyle(width: $width, height: $height, color: $color, isVisible: $isVisible, scaleType: $scaleType, isVisibleForAds: $isVisibleForAds, customImage: $customImage)';
+    return 'BlazePlayerButtonStyle(width: $width, height: $height, color: $color, isVisible: $isVisible, scaleType: $scaleType, isVisibleForAds: $isVisibleForAds, customImage: $customImage, glassBackground: $glassBackground)';
   }
 
   @override
@@ -865,13 +890,15 @@ class _$BlazePlayerButtonStyleImpl implements _BlazePlayerButtonStyle {
             (identical(other.isVisibleForAds, isVisibleForAds) ||
                 other.isVisibleForAds == isVisibleForAds) &&
             (identical(other.customImage, customImage) ||
-                other.customImage == customImage));
+                other.customImage == customImage) &&
+            (identical(other.glassBackground, glassBackground) ||
+                other.glassBackground == glassBackground));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, width, height, color, isVisible,
-      scaleType, isVisibleForAds, customImage);
+      scaleType, isVisibleForAds, customImage, glassBackground);
 
   /// Create a copy of BlazePlayerButtonStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -926,7 +953,8 @@ abstract class _BlazePlayerButtonStyle implements BlazePlayerButtonStyle {
           final bool? isVisible,
           final BlazeButtonScaleType? scaleType,
           final bool? isVisibleForAds,
-          final BlazePlayerItemButtonImageStates? customImage}) =
+          final BlazePlayerItemButtonImageStates? customImage,
+          final BlazeGlassBackgroundState? glassBackground}) =
       _$BlazePlayerButtonStyleImpl;
 
   factory _BlazePlayerButtonStyle.fromJson(Map<String, dynamic> json) =
@@ -946,6 +974,12 @@ abstract class _BlazePlayerButtonStyle implements BlazePlayerButtonStyle {
   bool? get isVisibleForAds;
   @override
   BlazePlayerItemButtonImageStates? get customImage;
+
+  /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+  /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+  /// is kept.
+  @override
+  BlazeGlassBackgroundState? get glassBackground;
 
   /// Create a copy of BlazePlayerButtonStyle
   /// with the given fields replaced by the non-null parameter values.

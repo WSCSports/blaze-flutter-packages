@@ -35,6 +35,21 @@ mixin _$BlazeWidgetItemStyle {
   BlazeWidgetItemDurationElementStyle? get durationElement =>
       throw _privateConstructorUsedError;
 
+  /// The subtitle row under the title. When omitted, the native preset
+  /// value (hidden) is kept.
+  BlazeWidgetItemSubtitleStyle? get subtitle =>
+      throw _privateConstructorUsedError;
+
+  /// The description row under the subtitle. When omitted, the native
+  /// preset value (hidden) is kept.
+  BlazeWidgetItemDescriptionStyle? get description =>
+      throw _privateConstructorUsedError;
+
+  /// The play icon over the thumbnail. When omitted, the native preset
+  /// value (hidden) is kept.
+  BlazeWidgetItemPlayIconElementStyle? get playIconElement =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeWidgetItemStyle value) $default,
@@ -77,7 +92,10 @@ abstract class $BlazeWidgetItemStyleCopyWith<$Res> {
       double? cornerRadiusRatio,
       BlazeMargins? margins,
       BlazeWidgetItemBadgeStyle? badge,
-      BlazeWidgetItemDurationElementStyle? durationElement});
+      BlazeWidgetItemDurationElementStyle? durationElement,
+      BlazeWidgetItemSubtitleStyle? subtitle,
+      BlazeWidgetItemDescriptionStyle? description,
+      BlazeWidgetItemPlayIconElementStyle? playIconElement});
 
   $BlazeWidgetItemTitleStyleCopyWith<$Res>? get title;
   $BlazeWidgetItemImageStyleCopyWith<$Res>? get image;
@@ -85,6 +103,9 @@ abstract class $BlazeWidgetItemStyleCopyWith<$Res> {
   $BlazeMarginsCopyWith<$Res>? get margins;
   $BlazeWidgetItemBadgeStyleCopyWith<$Res>? get badge;
   $BlazeWidgetItemDurationElementStyleCopyWith<$Res>? get durationElement;
+  $BlazeWidgetItemSubtitleStyleCopyWith<$Res>? get subtitle;
+  $BlazeWidgetItemDescriptionStyleCopyWith<$Res>? get description;
+  $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res>? get playIconElement;
 }
 
 /// @nodoc
@@ -112,6 +133,9 @@ class _$BlazeWidgetItemStyleCopyWithImpl<$Res,
     Object? margins = freezed,
     Object? badge = freezed,
     Object? durationElement = freezed,
+    Object? subtitle = freezed,
+    Object? description = freezed,
+    Object? playIconElement = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -150,6 +174,18 @@ class _$BlazeWidgetItemStyleCopyWithImpl<$Res,
           ? _value.durationElement
           : durationElement // ignore: cast_nullable_to_non_nullable
               as BlazeWidgetItemDurationElementStyle?,
+      subtitle: freezed == subtitle
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemSubtitleStyle?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemDescriptionStyle?,
+      playIconElement: freezed == playIconElement
+          ? _value.playIconElement
+          : playIconElement // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemPlayIconElementStyle?,
     ) as $Val);
   }
 
@@ -238,6 +274,51 @@ class _$BlazeWidgetItemStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(durationElement: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeWidgetItemStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeWidgetItemSubtitleStyleCopyWith<$Res>? get subtitle {
+    if (_value.subtitle == null) {
+      return null;
+    }
+
+    return $BlazeWidgetItemSubtitleStyleCopyWith<$Res>(_value.subtitle!,
+        (value) {
+      return _then(_value.copyWith(subtitle: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeWidgetItemStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeWidgetItemDescriptionStyleCopyWith<$Res>? get description {
+    if (_value.description == null) {
+      return null;
+    }
+
+    return $BlazeWidgetItemDescriptionStyleCopyWith<$Res>(_value.description!,
+        (value) {
+      return _then(_value.copyWith(description: value) as $Val);
+    });
+  }
+
+  /// Create a copy of BlazeWidgetItemStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res>? get playIconElement {
+    if (_value.playIconElement == null) {
+      return null;
+    }
+
+    return $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res>(
+        _value.playIconElement!, (value) {
+      return _then(_value.copyWith(playIconElement: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -257,7 +338,10 @@ abstract class _$$BlazeWidgetItemStyleImplCopyWith<$Res>
       double? cornerRadiusRatio,
       BlazeMargins? margins,
       BlazeWidgetItemBadgeStyle? badge,
-      BlazeWidgetItemDurationElementStyle? durationElement});
+      BlazeWidgetItemDurationElementStyle? durationElement,
+      BlazeWidgetItemSubtitleStyle? subtitle,
+      BlazeWidgetItemDescriptionStyle? description,
+      BlazeWidgetItemPlayIconElementStyle? playIconElement});
 
   @override
   $BlazeWidgetItemTitleStyleCopyWith<$Res>? get title;
@@ -271,6 +355,12 @@ abstract class _$$BlazeWidgetItemStyleImplCopyWith<$Res>
   $BlazeWidgetItemBadgeStyleCopyWith<$Res>? get badge;
   @override
   $BlazeWidgetItemDurationElementStyleCopyWith<$Res>? get durationElement;
+  @override
+  $BlazeWidgetItemSubtitleStyleCopyWith<$Res>? get subtitle;
+  @override
+  $BlazeWidgetItemDescriptionStyleCopyWith<$Res>? get description;
+  @override
+  $BlazeWidgetItemPlayIconElementStyleCopyWith<$Res>? get playIconElement;
 }
 
 /// @nodoc
@@ -295,6 +385,9 @@ class __$$BlazeWidgetItemStyleImplCopyWithImpl<$Res>
     Object? margins = freezed,
     Object? badge = freezed,
     Object? durationElement = freezed,
+    Object? subtitle = freezed,
+    Object? description = freezed,
+    Object? playIconElement = freezed,
   }) {
     return _then(_$BlazeWidgetItemStyleImpl(
       title: freezed == title
@@ -333,6 +426,18 @@ class __$$BlazeWidgetItemStyleImplCopyWithImpl<$Res>
           ? _value.durationElement
           : durationElement // ignore: cast_nullable_to_non_nullable
               as BlazeWidgetItemDurationElementStyle?,
+      subtitle: freezed == subtitle
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemSubtitleStyle?,
+      description: freezed == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemDescriptionStyle?,
+      playIconElement: freezed == playIconElement
+          ? _value.playIconElement
+          : playIconElement // ignore: cast_nullable_to_non_nullable
+              as BlazeWidgetItemPlayIconElementStyle?,
     ));
   }
 }
@@ -349,7 +454,10 @@ class _$BlazeWidgetItemStyleImpl implements _BlazeWidgetItemStyle {
       this.cornerRadiusRatio,
       this.margins,
       this.badge,
-      this.durationElement});
+      this.durationElement,
+      this.subtitle,
+      this.description,
+      this.playIconElement});
 
   factory _$BlazeWidgetItemStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeWidgetItemStyleImplFromJson(json);
@@ -376,9 +484,24 @@ class _$BlazeWidgetItemStyleImpl implements _BlazeWidgetItemStyle {
   @override
   final BlazeWidgetItemDurationElementStyle? durationElement;
 
+  /// The subtitle row under the title. When omitted, the native preset
+  /// value (hidden) is kept.
+  @override
+  final BlazeWidgetItemSubtitleStyle? subtitle;
+
+  /// The description row under the subtitle. When omitted, the native
+  /// preset value (hidden) is kept.
+  @override
+  final BlazeWidgetItemDescriptionStyle? description;
+
+  /// The play icon over the thumbnail. When omitted, the native preset
+  /// value (hidden) is kept.
+  @override
+  final BlazeWidgetItemPlayIconElementStyle? playIconElement;
+
   @override
   String toString() {
-    return 'BlazeWidgetItemStyle(title: $title, image: $image, statusIndicator: $statusIndicator, backgroundColor: $backgroundColor, cornerRadius: $cornerRadius, cornerRadiusRatio: $cornerRadiusRatio, margins: $margins, badge: $badge, durationElement: $durationElement)';
+    return 'BlazeWidgetItemStyle(title: $title, image: $image, statusIndicator: $statusIndicator, backgroundColor: $backgroundColor, cornerRadius: $cornerRadius, cornerRadiusRatio: $cornerRadiusRatio, margins: $margins, badge: $badge, durationElement: $durationElement, subtitle: $subtitle, description: $description, playIconElement: $playIconElement)';
   }
 
   @override
@@ -399,7 +522,13 @@ class _$BlazeWidgetItemStyleImpl implements _BlazeWidgetItemStyle {
             (identical(other.margins, margins) || other.margins == margins) &&
             (identical(other.badge, badge) || other.badge == badge) &&
             (identical(other.durationElement, durationElement) ||
-                other.durationElement == durationElement));
+                other.durationElement == durationElement) &&
+            (identical(other.subtitle, subtitle) ||
+                other.subtitle == subtitle) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.playIconElement, playIconElement) ||
+                other.playIconElement == playIconElement));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -414,7 +543,10 @@ class _$BlazeWidgetItemStyleImpl implements _BlazeWidgetItemStyle {
       cornerRadiusRatio,
       margins,
       badge,
-      durationElement);
+      durationElement,
+      subtitle,
+      description,
+      playIconElement);
 
   /// Create a copy of BlazeWidgetItemStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -472,7 +604,10 @@ abstract class _BlazeWidgetItemStyle implements BlazeWidgetItemStyle {
           final double? cornerRadiusRatio,
           final BlazeMargins? margins,
           final BlazeWidgetItemBadgeStyle? badge,
-          final BlazeWidgetItemDurationElementStyle? durationElement}) =
+          final BlazeWidgetItemDurationElementStyle? durationElement,
+          final BlazeWidgetItemSubtitleStyle? subtitle,
+          final BlazeWidgetItemDescriptionStyle? description,
+          final BlazeWidgetItemPlayIconElementStyle? playIconElement}) =
       _$BlazeWidgetItemStyleImpl;
 
   factory _BlazeWidgetItemStyle.fromJson(Map<String, dynamic> json) =
@@ -499,6 +634,21 @@ abstract class _BlazeWidgetItemStyle implements BlazeWidgetItemStyle {
   /// Note: This property is only applicable for `Videos` and `Moments` player type.
   @override
   BlazeWidgetItemDurationElementStyle? get durationElement;
+
+  /// The subtitle row under the title. When omitted, the native preset
+  /// value (hidden) is kept.
+  @override
+  BlazeWidgetItemSubtitleStyle? get subtitle;
+
+  /// The description row under the subtitle. When omitted, the native
+  /// preset value (hidden) is kept.
+  @override
+  BlazeWidgetItemDescriptionStyle? get description;
+
+  /// The play icon over the thumbnail. When omitted, the native preset
+  /// value (hidden) is kept.
+  @override
+  BlazeWidgetItemPlayIconElementStyle? get playIconElement;
 
   /// Create a copy of BlazeWidgetItemStyle
   /// with the given fields replaced by the non-null parameter values.

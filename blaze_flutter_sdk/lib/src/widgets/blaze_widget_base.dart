@@ -10,6 +10,7 @@ import 'package:flutter/widgets.dart';
 import '../types/blaze_data_source_type.dart';
 import '../types/blaze_videos_filter_params.dart';
 import '../types/shared_types.dart';
+import '../types/entitlements.dart';
 import '../types/widget_presets.dart';
 import '../types/moments_widget_tabs_configuration.dart';
 import '../player_customization/stories_player_style.dart';
@@ -74,6 +75,11 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
       perItemStyleOverrides;
   final BlazeWidgetDelegate? widgetDelegate;
   final bool? appOverridesCTAHandling;
+
+  /// How interaction links opened from this widget are handled. When
+  /// omitted, the value set in `BlazeSDK.initSDK` applies, then the native
+  /// default ([BlazeInteractionLinkHandleType.deeplink]).
+  final BlazeInteractionLinkHandleType? interactionLinkHandling;
   final BlazeWidgetController? controller;
 
   /// Moments-only: when set, tapping a widget item opens a fullscreen tabs
@@ -101,6 +107,7 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
     this.perItemStyleOverrides,
     this.widgetDelegate,
     this.appOverridesCTAHandling,
+    this.interactionLinkHandling,
     this.controller,
     this.tabsConfiguration,
     this.momentsContainerTabsDelegate,
@@ -212,6 +219,18 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
           widget.widgetDelegate?.onShareClicked,
         );
         break;
+      case 'onContentRestricted':
+        BlazeBasePlayerDelegateHandler.handleContentRestricted(
+          json.decode(call.arguments),
+          widget.widgetDelegate?.onContentRestricted,
+        );
+        break;
+      case 'onTriggerInteractionLink':
+        BlazeBasePlayerDelegateHandler.handleTriggerInteractionLink(
+          json.decode(call.arguments),
+          widget.widgetDelegate?.onTriggerInteractionLink,
+        );
+        break;
       // Moments "widget to tabs" fullscreen player callbacks - forwarded to the
       // per-widget momentsContainerTabsDelegate (Moments-only).
       case 'onMomentsContainerTabsDataLoadStarted':
@@ -268,10 +287,28 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
           widget.momentsContainerTabsDelegate?.onTabSelected,
         );
         break;
+      case 'onMomentsContainerTabsTabReselected':
+        BlazePlayerContainerTabsDelegateHandler.handleTabReselected(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTabReselected,
+        );
+        break;
       case 'onMomentsContainerTabsShareClicked':
         BlazeBasePlayerDelegateHandler.handleShareClicked(
           json.decode(call.arguments),
           widget.momentsContainerTabsDelegate?.onShareClicked,
+        );
+        break;
+      case 'onMomentsContainerTabsContentRestricted':
+        BlazeBasePlayerDelegateHandler.handleContentRestricted(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onContentRestricted,
+        );
+        break;
+      case 'onMomentsContainerTabsTriggerInteractionLink':
+        BlazeBasePlayerDelegateHandler.handleTriggerInteractionLink(
+          json.decode(call.arguments),
+          widget.momentsContainerTabsDelegate?.onTriggerInteractionLink,
         );
         break;
       case 'updateHeight':
@@ -337,7 +374,9 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
       "presetWidgetLayout": widget.presetWidgetLayout.name,
       "blazeWidgetLayout": widget.blazeWidgetLayout?.toJson(),
       "shouldOrderWidgetByReadStatus": widget.shouldOrderWidgetByReadStatus,
-      "appOverridesCTAHandling": widget.appOverridesCTAHandling
+      "appOverridesCTAHandling": widget.appOverridesCTAHandling,
+      // Null means inherit the global value from initSDK.
+      "interactionLinkHandling": widget.interactionLinkHandling?.name,
     };
 
     // Moments-only: turn the widget into a fullscreen tabs player entry point.
@@ -514,14 +553,14 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
     _channel.invokeMethod('reloadNonActiveTabs');
   }
 
-  /// Reloads a single tab by its position. iOS only - a documented no-op on
-  /// Android; see [BlazeWidgetController.reloadTab].
+  /// Reloads a single tab by its position; see
+  /// [BlazeWidgetController.reloadTab].
   void _reloadTab({required int at}) {
     _channel.invokeMethod('reloadTab', {'at': at});
   }
 
-  /// Reloads a single tab by its `containerId`. iOS only - a documented
-  /// no-op on Android; see [BlazeWidgetController.reloadTabByContainerId].
+  /// Reloads a single tab by its `containerId`; see
+  /// [BlazeWidgetController.reloadTabByContainerId].
   void _reloadTabByContainerId({required String containerId}) {
     _channel
         .invokeMethod('reloadTabByContainerId', {'containerId': containerId});

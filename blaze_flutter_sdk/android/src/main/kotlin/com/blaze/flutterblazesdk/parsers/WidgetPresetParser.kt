@@ -15,6 +15,11 @@ fun String.asWidgetLayoutPreset(): BlazeWidgetLayout? {
                         BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemVerticalRectangle
                 "stories_row_singleItemHorizontalRectangle" ->
                         BlazeWidgetLayout.Presets.StoriesWidget.Row.singleItemHorizontalRectangle
+                "stories_row_animatedThumbnailsCircles" ->
+                        BlazeWidgetLayout.Presets.StoriesWidget.Row.animatedThumbnailsCircles
+                "stories_row_verticalAnimatedThumbnailsRectangles" ->
+                        BlazeWidgetLayout.Presets.StoriesWidget.Row
+                                .verticalAnimatedThumbnailsRectangles
 
                 // Stories Widget - Grid (Flutter enum names)
                 "stories_grid_oneColumnHorizontalRectangles" ->
@@ -75,6 +80,9 @@ fun String.asWidgetLayoutPreset(): BlazeWidgetLayout? {
                 "videos_row_verticalAnimatedThumbnailsRectangles" ->
                         BlazeWidgetLayout.Presets.VideosWidget.Row
                                 .verticalAnimatedThumbnailsRectangles
+                "videos_row_horizontalAnimatedThumbnailsRectangles" ->
+                        BlazeWidgetLayout.Presets.VideosWidget.Row
+                                .horizontalAnimatedThumbnailsRectangles
 
                 // Videos Widget - Grid (Flutter enum names)
                 "videos_grid_oneColumnHorizontalRectangles" ->

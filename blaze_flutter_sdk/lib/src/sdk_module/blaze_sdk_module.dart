@@ -7,6 +7,7 @@ import '../player_customization/videos_player_style.dart';
 import '../types/blaze_data_source_type.dart';
 import '../types/blaze_videos_filter_params.dart';
 import '../types/shared_types.dart';
+import '../types/entitlements.dart';
 import '../types/playback/videos_playback_configuration.dart';
 import '../types/playback/moments_playback_configuration.dart';
 import '../types/playback/stories_playback_configuration.dart';
@@ -35,6 +36,8 @@ class BlazeSDK {
     BlazeGlobalDelegate? globalDelegate,
     BlazePlayerEntryPointDelegate? playerEntryPointDelegate,
     BlazeLayoutDirection? forceLayoutDirection,
+    String? externalUserToken,
+    BlazeInteractionLinkHandleType? interactionLinkHandling,
   }) =>
       _sdk.initSDK(
         apiKey: apiKey,
@@ -49,6 +52,8 @@ class BlazeSDK {
         globalDelegate: globalDelegate,
         playerEntryPointDelegate: playerEntryPointDelegate,
         forceLayoutDirection: forceLayoutDirection,
+        externalUserToken: externalUserToken,
+        interactionLinkHandling: interactionLinkHandling,
       );
 
   // Stories API
@@ -306,21 +311,36 @@ class BlazeSDK {
   // FOLLOW ENTITIES
   // ======================================
 
+  /// Manages the entities the user follows, with their metadata.
+  static const followEntitiesManager = BlazeFollowEntitiesManager._();
+
   /// Replaces the set of followed entities with [entityIds].
+  @Deprecated('Use BlazeSDK.followEntitiesManager.setFollowedEntities, '
+      'which carries entity metadata.')
   static Future<void> setFollowedEntities(List<String> entityIds) =>
-      _sdk.setFollowedEntities(entityIds);
+      followEntitiesManager.setFollowedEntities(_idOnlyEntities(entityIds));
 
   /// Inserts [entityIds] into the set of followed entities.
+  @Deprecated('Use BlazeSDK.followEntitiesManager.insertFollowedEntities, '
+      'which carries entity metadata.')
   static Future<void> insertFollowedEntities(List<String> entityIds) =>
-      _sdk.insertFollowedEntities(entityIds);
+      followEntitiesManager.insertFollowedEntities(_idOnlyEntities(entityIds));
 
   /// Removes [entityIds] from the set of followed entities.
+  @Deprecated('Use BlazeSDK.followEntitiesManager.removeFollowedEntities.')
   static Future<void> removeFollowedEntities(List<String> entityIds) =>
-      _sdk.removeFollowedEntities(entityIds);
+      followEntitiesManager.removeFollowedEntities(_idOnlyEntities(entityIds));
 
   /// Returns the ids of the currently followed entities.
-  static Future<List<String>> getFollowedEntities() =>
-      _sdk.getFollowedEntities();
+  @Deprecated('Use BlazeSDK.followEntitiesManager.getFollowedEntities, '
+      'which returns entity metadata.')
+  static Future<List<String>> getFollowedEntities() async =>
+      (await followEntitiesManager.getFollowedEntities())
+          .map((entity) => entity.id)
+          .toList();
+
+  static List<BlazeFollowEntity> _idOnlyEntities(List<String> entityIds) =>
+      entityIds.map((id) => BlazeFollowEntity(id: id)).toList();
 
   // ======================================
   // CASTING
@@ -339,6 +359,33 @@ class BlazeSDK {
 
   /// Returns whether a picture-in-picture session is currently active.
   static Future<bool> isPiPActive() => _sdk.isPiPActive();
+
+  // ======================================
+  // LIQUID GLASS
+  // ======================================
+
+  /// iOS-only. No-op on Android. Turns Liquid Glass (iOS 26+) on or off for
+  /// player and widget elements whose `glassBackground` is `automatic`.
+  ///
+  /// Call it before `initSDK` and before creating widgets: only styles
+  /// applied afterwards pick it up.
+  static Future<void> setLiquidGlassEnabled(bool isEnabled) =>
+      _sdk.setLiquidGlassEnabled(isEnabled);
+
+  /// iOS-only. Returns whether Liquid Glass is enabled. Always `false` on
+  /// Android.
+  static Future<bool> isLiquidGlassEnabled() => _sdk.isLiquidGlassEnabled();
+
+  // ======================================
+  // COLD START
+  // ======================================
+
+  /// Returns whether the user is in cold start for [playerType], as decided
+  /// by the native SDK from the user's activity.
+  ///
+  /// Returns `null` until native has a user-activity answer.
+  static Future<bool?> isInColdStart(BlazePlayerType playerType) =>
+      _sdk.isInColdStart(playerType);
 
   static Future<bool> canHandleUniversalLink({required String link}) =>
       _sdk.canHandleUniversalLink(link: link);
@@ -363,6 +410,18 @@ class BlazeSDK {
   // Utility methods
   static Future<void> setExternalUserId(String? externalUserId) =>
       _sdk.setExternalUserId(externalUserId);
+
+  /// Sets the external user token the SDK sends for content entitlements, or
+  /// clears it when [externalUserToken] is `null`.
+  ///
+  /// [cachedContentPolicy] decides whether content fetched for the previous
+  /// token is kept or evicted. Returns the token the SDK stored.
+  ///
+  /// The token is a credential; the SDK never logs it.
+  static Future<String?> setExternalUserToken(String? externalUserToken,
+          {required BlazeFetchedContentPolicy cachedContentPolicy}) =>
+      _sdk.setExternalUserToken(externalUserToken,
+          cachedContentPolicy: cachedContentPolicy);
 
   /// Handles a Blaze universal link.
   ///
@@ -456,6 +515,32 @@ class BlazeHostingAppContext {
       _sdk.hostingAppContextDeleteValue(key);
 }
 
+/// Manages the entities the user follows, with their metadata. Access it
+/// through [BlazeSDK.followEntitiesManager].
+///
+/// Changes persist locally and sync through the user's activity; calls made
+/// before `initSDK` are buffered by the native SDK.
+class BlazeFollowEntitiesManager {
+  const BlazeFollowEntitiesManager._();
+
+  /// Replaces the set of followed entities with [entities].
+  Future<void> setFollowedEntities(List<BlazeFollowEntity> entities) =>
+      BlazeSDK._sdk.followEntitiesManagerSet(entities);
+
+  /// Inserts [entities] into the set of followed entities. For an entity
+  /// already followed, the metadata passed here wins.
+  Future<void> insertFollowedEntities(List<BlazeFollowEntity> entities) =>
+      BlazeSDK._sdk.followEntitiesManagerInsert(entities);
+
+  /// Removes [entities] from the set of followed entities, matched by id.
+  Future<void> removeFollowedEntities(List<BlazeFollowEntity> entities) =>
+      BlazeSDK._sdk.followEntitiesManagerRemove(entities);
+
+  /// Returns the currently followed entities.
+  Future<List<BlazeFollowEntity>> getFollowedEntities() =>
+      BlazeSDK._sdk.followEntitiesManagerGet();
+}
+
 class _BlazeSDKInternal {
   // Private instance variable to hold the singleton instance.
   static final _BlazeSDKInternal _instance = _BlazeSDKInternal._();
@@ -479,6 +564,8 @@ class _BlazeSDKInternal {
     BlazeGlobalDelegate? globalDelegate,
     BlazePlayerEntryPointDelegate? playerEntryPointDelegate,
     BlazeLayoutDirection? forceLayoutDirection,
+    String? externalUserToken,
+    BlazeInteractionLinkHandleType? interactionLinkHandling,
   }) async {
     Map<String, dynamic> params = {
       'apiKey': apiKey,
@@ -510,6 +597,12 @@ class _BlazeSDKInternal {
     }
     if (forceLayoutDirection != null) {
       params['forceLayoutDirection'] = forceLayoutDirection.name;
+    }
+    if (externalUserToken != null) {
+      params['externalUserToken'] = externalUserToken;
+    }
+    if (interactionLinkHandling != null) {
+      params['interactionLinkHandling'] = interactionLinkHandling.name;
     }
 
     // Register delegates if provided during init
@@ -1081,30 +1174,30 @@ class _BlazeSDKInternal {
   }
 
   // Replace the set of followed entities
-  Future<void> setFollowedEntities(List<String> entityIds) async {
+  Future<void> followEntitiesManagerSet(List<BlazeFollowEntity> entities) async {
     try {
-      await _channel
-          .invokeMethod('setFollowedEntities', {'entityIds': entityIds});
+      await _channel.invokeMethod('followEntitiesManagerSet',
+          {'entities': entities.map((entity) => entity.toJson()).toList()});
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }
   }
 
   // Insert entities into the set of followed entities
-  Future<void> insertFollowedEntities(List<String> entityIds) async {
+  Future<void> followEntitiesManagerInsert(List<BlazeFollowEntity> entities) async {
     try {
-      await _channel
-          .invokeMethod('insertFollowedEntities', {'entityIds': entityIds});
+      await _channel.invokeMethod('followEntitiesManagerInsert',
+          {'entities': entities.map((entity) => entity.toJson()).toList()});
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }
   }
 
   // Remove entities from the set of followed entities
-  Future<void> removeFollowedEntities(List<String> entityIds) async {
+  Future<void> followEntitiesManagerRemove(List<BlazeFollowEntity> entities) async {
     try {
-      await _channel
-          .invokeMethod('removeFollowedEntities', {'entityIds': entityIds});
+      await _channel.invokeMethod('followEntitiesManagerRemove',
+          {'entities': entities.map((entity) => entity.toJson()).toList()});
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }
@@ -1139,11 +1232,46 @@ class _BlazeSDKInternal {
     }
   }
 
-  // Get the ids of the currently followed entities
-  Future<List<String>> getFollowedEntities() async {
+  // Turns Liquid Glass on or off (iOS-only)
+  Future<void> setLiquidGlassEnabled(bool isEnabled) async {
     try {
-      final result = await _channel.invokeMethod('getFollowedEntities');
-      return (result as List).map((e) => e as String).toList();
+      await _channel
+          .invokeMethod('setLiquidGlassEnabled', {'isEnabled': isEnabled});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Returns whether Liquid Glass is enabled (iOS-only)
+  Future<bool> isLiquidGlassEnabled() async {
+    try {
+      final result = await _channel.invokeMethod('isLiquidGlassEnabled');
+      return result as bool;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
+  // Returns whether the user is in cold start for the player type
+  Future<bool?> isInColdStart(BlazePlayerType playerType) async {
+    try {
+      final result = await _channel
+          .invokeMethod('isInColdStart', {'playerType': playerType.name});
+      return result as bool?;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
+    }
+  }
+
+  // Get the currently followed entities
+  Future<List<BlazeFollowEntity>> followEntitiesManagerGet() async {
+    try {
+      final result = await _channel.invokeMethod('followEntitiesManagerGet');
+      return (result as List)
+          .map((e) => BlazeFollowEntity.fromJson(Map<String, dynamic>.from(e)))
+          .toList();
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
       rethrow;
@@ -1195,6 +1323,21 @@ class _BlazeSDKInternal {
           'setExternalUserId', {'externalUserId': externalUserId});
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Sets or clears the external user token and returns the stored token
+  Future<String?> setExternalUserToken(String? externalUserToken,
+      {required BlazeFetchedContentPolicy cachedContentPolicy}) async {
+    try {
+      final result = await _channel.invokeMethod('setExternalUserToken', {
+        'externalUserToken': externalUserToken,
+        'cachedContentPolicy': cachedContentPolicy.name,
+      });
+      return result as String?;
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+      rethrow;
     }
   }
 

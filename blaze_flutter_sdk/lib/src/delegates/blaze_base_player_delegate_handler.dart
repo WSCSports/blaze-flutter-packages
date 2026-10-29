@@ -164,6 +164,46 @@ class BlazeBasePlayerDelegateHandler {
     }
   }
 
+  static void handleContentRestricted(
+    Map<String, dynamic> args,
+    void Function(BlazeOnContentRestrictedParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnContentRestrictedParams.fromJson(
+        args,
+      );
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onContentRestricted',
+      );
+    }
+  }
+
+  static void handleTriggerInteractionLink(
+    Map<String, dynamic> args,
+    void Function(BlazeOnTriggerInteractionLinkParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnTriggerInteractionLinkParams.fromJson(
+        args,
+      );
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onTriggerInteractionLink',
+      );
+    }
+  }
+
   static void handleReadStatusChanged(
     Map<String, dynamic> args,
     void Function(BlazeOnReadStatusChangedParams)? callback,

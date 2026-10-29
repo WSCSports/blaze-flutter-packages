@@ -181,21 +181,18 @@ class BlazeMomentsWidgetController extends BlazeWidgetController {
     _executeWhenReady(() => _onReloadNonActiveTabs?.call());
   }
 
-  /// Reloads a single tab by its position.
-  ///
-  /// **iOS only** - a documented no-op on Android, where the widget-driven
-  /// tabs flow has no native per-tab reload hook (confirmed absent through
-  /// `publicSDK/v1.20.4`; only whole-container reload is available there via
-  /// [reloadAllTabs] / [reloadNonActiveTabs]). Same applicability constraints
-  /// as [reloadAllTabs] otherwise. An out-of-range [at] is a no-op.
+  /// Reloads a single tab by its position among the visible tabs (the index
+  /// `onTabReselected` reports). Same applicability constraints as
+  /// [reloadAllTabs]. An out-of-range [at], or a tab whose content isn't
+  /// loaded yet, is a silent no-op.
   void reloadTab({required int at}) {
     _executeWhenReady(() => _onReloadTab?.call(at: at));
   }
 
   /// Reloads a single tab by its `containerId`.
   ///
-  /// **iOS only** - see [reloadTab] for the Android constraint. An unmatched
-  /// [containerId] is a no-op.
+  /// Same applicability constraints as [reloadAllTabs]. An unmatched
+  /// [containerId] is a silent no-op.
   void reloadTabByContainerId({required String containerId}) {
     _executeWhenReady(
         () => _onReloadTabByContainerId?.call(containerId: containerId));

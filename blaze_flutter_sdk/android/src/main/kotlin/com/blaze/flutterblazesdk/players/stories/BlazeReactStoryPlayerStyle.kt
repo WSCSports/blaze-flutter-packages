@@ -25,7 +25,16 @@ data class BlazeReactStoryPlayerStyle(
         val headerGradient: BlazeReactStoryPlayerHeaderGradientStyle?,
         val progressBar: BlazeReactStoryPlayerProgressBarStyle?,
         val firstTimeSlide: BlazeReactStoryPlayerFirstTimeSlideStyle?,
-        val captions: BlazeReactCaptionsStyle?
+        val captions: BlazeReactCaptionsStyle?,
+        val subtitle: BlazeReactStoryPlayerSubtitleTextStyle?
+)
+
+@Keep
+data class BlazeReactStoryPlayerSubtitleTextStyle(
+        val font: BlazeReactTitleFont?,
+        val textSize: Float?,
+        val textColor: String?,
+        val isVisible: Boolean?
 )
 
 @Keep

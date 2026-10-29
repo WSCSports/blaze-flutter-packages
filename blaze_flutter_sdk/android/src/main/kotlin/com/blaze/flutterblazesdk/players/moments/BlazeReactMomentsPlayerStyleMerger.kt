@@ -102,6 +102,7 @@ fun BlazeMomentsPlayerFollowEntityChipStyle.mergedWith(
     merged.backgroundColor = safeParseColor(customization.backgroundColor) ?: this.backgroundColor
     merged.iconColor = safeParseColor(customization.iconColor) ?: this.iconColor
     customization.contentSource?.let { merged.contentSource = it.mapToBlazeEnumClass() }
+    customization.iconSource?.let { merged.iconSource = it.mapToBlazeEnumClass() }
     return merged
 }
 

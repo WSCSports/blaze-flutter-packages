@@ -124,12 +124,13 @@ data class BlazeReactWidgetItemImageContainerBorderStateStyle(
     val width: Int?
 )
 
+// Float, not Int: Dart sends doubles, and a fractional value would fail the whole style decode
 @Keep
 data class BlazeReactMargins(
-    val top: Int?,
-    val leading: Int?,
-    val bottom: Int?,
-    val trailing: Int?
+    val top: Float?,
+    val leading: Float?,
+    val bottom: Float?,
+    val trailing: Float?
 )
 
 @Keep
@@ -219,7 +220,53 @@ data class BlazeReactWidgetItemStyle(
     val cornerRadiusRatio: Float?,
     val margins: BlazeReactMargins?,
     val statusIndicator: BlazeReactWidgetItemStatusIndicatorStyle?,
-    val badge: BlazeReactWidgetItemBadgeStyle?
+    val badge: BlazeReactWidgetItemBadgeStyle?,
+    val durationElement: BlazeReactWidgetItemDurationElementStyle?,
+    val subtitle: BlazeReactWidgetItemSecondaryTextStyle?,
+    val description: BlazeReactWidgetItemSecondaryTextStyle?,
+    val playIconElement: BlazeReactWidgetItemPlayIconElementStyle?
+)
+
+/// Dart `BlazeWidgetItemDurationElementStyle`. `insets` / `contentPadding` map to the native
+/// `margins` / `padding`.
+@Keep
+data class BlazeReactWidgetItemDurationElementStyle(
+    val isVisible: Boolean?,
+    val position: BlazeReactObjectPositioning?,
+    val insets: BlazeReactMargins?,
+    val contentPadding: BlazeReactMargins?,
+    val icon: BlazeReactImage?,
+    val liveUnreadState: BlazeReactWidgetItemDurationElementStateStyle?,
+    val liveReadState: BlazeReactWidgetItemDurationElementStateStyle?,
+    val unreadState: BlazeReactWidgetItemDurationElementStateStyle?,
+    val readState: BlazeReactWidgetItemDurationElementStateStyle?
+)
+
+/// Dart `BlazeWidgetItemDurationElementStateStyle`. Its iOS-only `glassBackground` isn't mirrored.
+@Keep
+data class BlazeReactWidgetItemDurationElementStateStyle(
+    val isVisible: Boolean?,
+    val backgroundColor: String?,
+    val backgroundImage: BlazeReactImage?,
+    val textStyle: BlazeReactTitleStyle?,
+    val cornerRadius: Float?,
+    val cornerRadiusRatio: Float?,
+    val borderColor: String?,
+    val borderWidth: Float?
+)
+
+/// Dart `BlazeWidgetItemSubtitleStyle` / `BlazeWidgetItemDescriptionStyle` (same shape)
+@Keep
+data class BlazeReactWidgetItemSecondaryTextStyle(
+    val isVisible: Boolean?,
+    val topSpacing: Float?,
+    val unreadState: BlazeReactTitleStyle?,
+    val readState: BlazeReactTitleStyle?
+)
+
+@Keep
+data class BlazeReactWidgetItemPlayIconElementStyle(
+    val isVisible: Boolean?
 )
 
 @Keep

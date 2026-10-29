@@ -18,6 +18,10 @@ extension String {
             return .Presets.StoriesWidget.Row.verticalRectangles
         case "stories_row_horizontalRectangles":
             return .Presets.StoriesWidget.Row.horizontalRectangles
+        case "stories_row_animatedThumbnailsCircles":
+            return .Presets.StoriesWidget.Row.animatedThumbnailsCircles
+        case "stories_row_verticalAnimatedThumbnailsRectangles":
+            return .Presets.StoriesWidget.Row.verticalAnimatedThumbnailsRectangles
         case "stories_row_singleItemVerticalRectangle":
             return .Presets.StoriesWidget.Row.singleItemVerticalRectangle
         case "stories_row_singleItemHorizontalRectangle":
@@ -78,6 +82,8 @@ extension String {
             return .Presets.VideosWidget.Row.singleItemHorizontalRectangle
         case "videos_row_verticalAnimatedThumbnailsRectangles":
             return .Presets.VideosWidget.Row.verticalAnimatedThumbnailsRectangles
+        case "videos_row_horizontalAnimatedThumbnailsRectangles":
+            return .Presets.VideosWidget.Row.horizontalAnimatedThumbnailsRectangles
             
         // Videos Widget - Grid (Flutter enum names)
         case "videos_grid_oneColumnHorizontalRectangles":

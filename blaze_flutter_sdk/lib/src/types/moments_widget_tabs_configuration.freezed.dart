@@ -1564,6 +1564,15 @@ mixin _$BlazePlayerTabsStyle {
   /// tabs auto-removed instead (the first tab is always kept regardless).
   bool? get isTabVisibleWhenEmpty => throw _privateConstructorUsedError;
 
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// top safe area. When omitted, the native default (`true`) is kept.
+  bool? get ignoresTopSafeArea => throw _privateConstructorUsedError;
+
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// bottom safe area (behind the host's bottom chrome). When omitted, the
+  /// native default (`false`) is kept.
+  bool? get ignoresBottomSafeArea => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazePlayerTabsStyle value) $default,
@@ -1605,7 +1614,9 @@ abstract class $BlazePlayerTabsStyleCopyWith<$Res> {
       BlazePlayerTabItemStyle? unselectedTabState,
       BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
       bool? isTabTitleVisibleWhenSingleTab,
-      bool? isTabVisibleWhenEmpty});
+      bool? isTabVisibleWhenEmpty,
+      bool? ignoresTopSafeArea,
+      bool? ignoresBottomSafeArea});
 
   $BlazeMarginsCopyWith<$Res>? get padding;
   $BlazePlayerTabsGradientStyleCopyWith<$Res>? get gradient;
@@ -1639,6 +1650,8 @@ class _$BlazePlayerTabsStyleCopyWithImpl<$Res,
     Object? activeTabIndicator = freezed,
     Object? isTabTitleVisibleWhenSingleTab = freezed,
     Object? isTabVisibleWhenEmpty = freezed,
+    Object? ignoresTopSafeArea = freezed,
+    Object? ignoresBottomSafeArea = freezed,
   }) {
     return _then(_value.copyWith(
       padding: freezed == padding
@@ -1672,6 +1685,14 @@ class _$BlazePlayerTabsStyleCopyWithImpl<$Res,
       isTabVisibleWhenEmpty: freezed == isTabVisibleWhenEmpty
           ? _value.isTabVisibleWhenEmpty
           : isTabVisibleWhenEmpty // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      ignoresTopSafeArea: freezed == ignoresTopSafeArea
+          ? _value.ignoresTopSafeArea
+          : ignoresTopSafeArea // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      ignoresBottomSafeArea: freezed == ignoresBottomSafeArea
+          ? _value.ignoresBottomSafeArea
+          : ignoresBottomSafeArea // ignore: cast_nullable_to_non_nullable
               as bool?,
     ) as $Val);
   }
@@ -1781,7 +1802,9 @@ abstract class _$$BlazePlayerTabsStyleImplCopyWith<$Res>
       BlazePlayerTabItemStyle? unselectedTabState,
       BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
       bool? isTabTitleVisibleWhenSingleTab,
-      bool? isTabVisibleWhenEmpty});
+      bool? isTabVisibleWhenEmpty,
+      bool? ignoresTopSafeArea,
+      bool? ignoresBottomSafeArea});
 
   @override
   $BlazeMarginsCopyWith<$Res>? get padding;
@@ -1818,6 +1841,8 @@ class __$$BlazePlayerTabsStyleImplCopyWithImpl<$Res>
     Object? activeTabIndicator = freezed,
     Object? isTabTitleVisibleWhenSingleTab = freezed,
     Object? isTabVisibleWhenEmpty = freezed,
+    Object? ignoresTopSafeArea = freezed,
+    Object? ignoresBottomSafeArea = freezed,
   }) {
     return _then(_$BlazePlayerTabsStyleImpl(
       padding: freezed == padding
@@ -1852,6 +1877,14 @@ class __$$BlazePlayerTabsStyleImplCopyWithImpl<$Res>
           ? _value.isTabVisibleWhenEmpty
           : isTabVisibleWhenEmpty // ignore: cast_nullable_to_non_nullable
               as bool?,
+      ignoresTopSafeArea: freezed == ignoresTopSafeArea
+          ? _value.ignoresTopSafeArea
+          : ignoresTopSafeArea // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      ignoresBottomSafeArea: freezed == ignoresBottomSafeArea
+          ? _value.ignoresBottomSafeArea
+          : ignoresBottomSafeArea // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -1867,7 +1900,9 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
       this.unselectedTabState,
       this.activeTabIndicator,
       this.isTabTitleVisibleWhenSingleTab,
-      this.isTabVisibleWhenEmpty});
+      this.isTabVisibleWhenEmpty,
+      this.ignoresTopSafeArea,
+      this.ignoresBottomSafeArea});
 
   factory _$BlazePlayerTabsStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazePlayerTabsStyleImplFromJson(json);
@@ -1900,9 +1935,20 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
   @override
   final bool? isTabVisibleWhenEmpty;
 
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// top safe area. When omitted, the native default (`true`) is kept.
+  @override
+  final bool? ignoresTopSafeArea;
+
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// bottom safe area (behind the host's bottom chrome). When omitted, the
+  /// native default (`false`) is kept.
+  @override
+  final bool? ignoresBottomSafeArea;
+
   @override
   String toString() {
-    return 'BlazePlayerTabsStyle(padding: $padding, gradient: $gradient, icon: $icon, selectedTabState: $selectedTabState, unselectedTabState: $unselectedTabState, activeTabIndicator: $activeTabIndicator, isTabTitleVisibleWhenSingleTab: $isTabTitleVisibleWhenSingleTab, isTabVisibleWhenEmpty: $isTabVisibleWhenEmpty)';
+    return 'BlazePlayerTabsStyle(padding: $padding, gradient: $gradient, icon: $icon, selectedTabState: $selectedTabState, unselectedTabState: $unselectedTabState, activeTabIndicator: $activeTabIndicator, isTabTitleVisibleWhenSingleTab: $isTabTitleVisibleWhenSingleTab, isTabVisibleWhenEmpty: $isTabVisibleWhenEmpty, ignoresTopSafeArea: $ignoresTopSafeArea, ignoresBottomSafeArea: $ignoresBottomSafeArea)';
   }
 
   @override
@@ -1925,7 +1971,11 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
                 other.isTabTitleVisibleWhenSingleTab ==
                     isTabTitleVisibleWhenSingleTab) &&
             (identical(other.isTabVisibleWhenEmpty, isTabVisibleWhenEmpty) ||
-                other.isTabVisibleWhenEmpty == isTabVisibleWhenEmpty));
+                other.isTabVisibleWhenEmpty == isTabVisibleWhenEmpty) &&
+            (identical(other.ignoresTopSafeArea, ignoresTopSafeArea) ||
+                other.ignoresTopSafeArea == ignoresTopSafeArea) &&
+            (identical(other.ignoresBottomSafeArea, ignoresBottomSafeArea) ||
+                other.ignoresBottomSafeArea == ignoresBottomSafeArea));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1939,7 +1989,9 @@ class _$BlazePlayerTabsStyleImpl implements _BlazePlayerTabsStyle {
       unselectedTabState,
       activeTabIndicator,
       isTabTitleVisibleWhenSingleTab,
-      isTabVisibleWhenEmpty);
+      isTabVisibleWhenEmpty,
+      ignoresTopSafeArea,
+      ignoresBottomSafeArea);
 
   /// Create a copy of BlazePlayerTabsStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -1996,7 +2048,9 @@ abstract class _BlazePlayerTabsStyle implements BlazePlayerTabsStyle {
       final BlazePlayerTabItemStyle? unselectedTabState,
       final BlazePlayerActiveTabIndicatorStyle? activeTabIndicator,
       final bool? isTabTitleVisibleWhenSingleTab,
-      final bool? isTabVisibleWhenEmpty}) = _$BlazePlayerTabsStyleImpl;
+      final bool? isTabVisibleWhenEmpty,
+      final bool? ignoresTopSafeArea,
+      final bool? ignoresBottomSafeArea}) = _$BlazePlayerTabsStyleImpl;
 
   factory _BlazePlayerTabsStyle.fromJson(Map<String, dynamic> json) =
       _$BlazePlayerTabsStyleImpl.fromJson;
@@ -2028,6 +2082,17 @@ abstract class _BlazePlayerTabsStyle implements BlazePlayerTabsStyle {
   /// tabs auto-removed instead (the first tab is always kept regardless).
   @override
   bool? get isTabVisibleWhenEmpty;
+
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// top safe area. When omitted, the native default (`true`) is kept.
+  @override
+  bool? get ignoresTopSafeArea;
+
+  /// iOS-only. No-op on Android. Whether the tabs content extends under the
+  /// bottom safe area (behind the host's bottom chrome). When omitted, the
+  /// native default (`false`) is kept.
+  @override
+  bool? get ignoresBottomSafeArea;
 
   /// Create a copy of BlazePlayerTabsStyle
   /// with the given fields replaced by the non-null parameter values.

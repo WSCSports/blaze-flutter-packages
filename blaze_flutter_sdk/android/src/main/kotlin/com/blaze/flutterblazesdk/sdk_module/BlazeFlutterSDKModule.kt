@@ -16,6 +16,14 @@ import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationRequest
 import com.blaze.blazesdk.delegates.models.BlazePlaybackModificationResponse
 import com.blaze.blazesdk.delegates.models.BlazePlayerEvent
 import com.blaze.blazesdk.delegates.models.BlazePlayerType
+import com.blaze.blazesdk.delegates.models.BlazeRestrictedContentParams
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionHandleType
+import com.blaze.blazesdk.entitlements.models.BlazeContentRestrictionReason
+import com.blaze.blazesdk.delegates.models.BlazeInteractionLinkHandleType
+import com.blaze.flutterblazesdk.delegates.resolveLinkHandling
+import com.blaze.flutterblazesdk.delegates.toInteractionLinkHandleType
+import com.blaze.flutterblazesdk.follow.toBlazeFollowEntity
+import com.blaze.flutterblazesdk.follow.toFlutterMap
 import com.blaze.blazesdk.delegates.models.BlazeShareParams
 import com.blaze.blazesdk.external_modules.BlazeExternalModulesBinder
 import com.blaze.blazesdk.follow.models.BlazeFollowEntity
@@ -46,6 +54,8 @@ import com.blaze.flutterblazesdk.utils.extractVideosFilterParams
 import com.blaze.flutterblazesdk.utils.handleBlazeResult
 import com.blaze.flutterblazesdk.utils.handleError
 import com.blaze.flutterblazesdk.utils.safeGetArgument
+import com.blaze.flutterblazesdk.utils.toBlazePlayerType
+import com.blaze.flutterblazesdk.utils.toFetchedContentPolicy
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -64,6 +74,10 @@ object BlazeFlutterSDKModule {
 
         // Match React Native implementation - store appOverridesCTAHandling setting
         private var appOverridesCTAHandling: Boolean = false
+
+        // Global interactionLinkHandling from initSDK; widgets fall back to it
+        var interactionLinkHandling: BlazeInteractionLinkHandleType? = null
+                private set
 
         private val flutterSDKHelper = BlazeFlutterSDKHelper()
 
@@ -124,18 +138,23 @@ object BlazeFlutterSDKModule {
                         "setPlayerSoundState" -> setPlayerSoundState(call, result)
                         "isMuted" -> isMuted(call, result)
                         "showSearchScreen" -> showSearchScreen(call, result)
-                        "setFollowedEntities" -> setFollowedEntities(call, result)
-                        "insertFollowedEntities" -> insertFollowedEntities(call, result)
-                        "removeFollowedEntities" -> removeFollowedEntities(call, result)
-                        "getFollowedEntities" -> getFollowedEntities(call, result)
+                        "followEntitiesManagerSet" -> setFollowedEntities(call, result)
+                        "followEntitiesManagerInsert" -> insertFollowedEntities(call, result)
+                        "followEntitiesManagerRemove" -> removeFollowedEntities(call, result)
+                        "followEntitiesManagerGet" -> getFollowedEntities(call, result)
                         "stopActiveCastingSession" -> stopActiveCastingSession(call, result)
                         "stopActivePiPSession" -> stopActivePiPSession(call, result)
                         "isPiPActive" -> isPiPActive(call, result)
+                        "isInColdStart" -> isInColdStart(call, result)
+                        // Liquid Glass is iOS-only: no-op and always false on Android
+                        "setLiquidGlassEnabled" -> result.success(null)
+                        "isLiquidGlassEnabled" -> result.success(false)
                         "canHandleUniversalLink" -> canHandleUniversalLink(call, result)
                         "updateGeoRestriction" -> updateGeoRestriction(call, result)
                         "canHandlePushNotification" -> canHandlePushNotification(call, result)
                         "handleNotificationPayload" -> handleNotificationPayload(call, result)
                         "setExternalUserId" -> setExternalUserId(call, result)
+                        "setExternalUserToken" -> setExternalUserToken(call, result)
                         "handleUniversalLink" -> handleUniversalLink(call, result)
                         "isInitialized" -> isInitialized(call, result)
                         else -> result.notImplemented()
@@ -265,6 +284,50 @@ object BlazeFlutterSDKModule {
                                 )
                         }
 
+                        override fun onContentRestricted(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                reason: BlazeContentRestrictionReason,
+                                contentParams: BlazeRestrictedContentParams
+                        ): BlazeContentRestrictionHandleType {
+                                return sharedDelegateHandler.onContentRestricted(
+                                        playerType = playerType,
+                                        sourceId = sourceId,
+                                        reason = reason,
+                                        contentParams = contentParams
+                                ) { params ->
+                                        asyncBridge?.sendEvent(
+                                                name = "Blaze.onContentRestricted",
+                                                params = params
+                                        )
+                                }
+                        }
+
+                        override fun onTriggerInteractionLink(
+                                playerType: BlazePlayerType,
+                                sourceId: String?,
+                                interactionId: String,
+                                interactionType: String,
+                                url: String
+                        ): BlazeInteractionLinkHandleType {
+                                return sharedDelegateHandler.onTriggerInteractionLink(
+                                        playerType = playerType,
+                                        sourceId = sourceId,
+                                        interactionId = interactionId,
+                                        interactionType = interactionType,
+                                        url = url,
+                                        handling = resolveLinkHandling(
+                                                widget = null,
+                                                global = interactionLinkHandling
+                                        )
+                                ) { params ->
+                                        asyncBridge?.sendEvent(
+                                                name = "Blaze.onTriggerInteractionLink",
+                                                params = params
+                                        )
+                                }
+                        }
+
                         override fun onReadStatusChanged(
                                 playerType: BlazePlayerType,
                                 sourceId: String?,
@@ -348,6 +411,10 @@ object BlazeFlutterSDKModule {
                 val cachingSize = call.safeGetArgument<Int>("cachingSize")
                 val cachingLevelString = call.safeGetArgument<String>("cachingLevel")
                 val geoLocation = call.safeGetArgument<String>("geoLocation")
+                val externalUserToken = call.safeGetArgument<String>("externalUserToken")
+                // Reset on every init: a re-init without the parameter falls back to the native default
+                interactionLinkHandling = call.safeGetArgument<String>("interactionLinkHandling")
+                        .toInteractionLinkHandleType()
 
                 // Match React Native implementation - read appOverridesCTAHandling from init params
                 val appOverridesCTAHandlingFromInit =
@@ -368,6 +435,7 @@ object BlazeFlutterSDKModule {
                         cachingLevel = cachingLevel,
                         geoLocation = geoLocation,
                         forceLayoutDirection = forceLayoutDirection,
+                        externalUserToken = externalUserToken,
                         completionBlock = { result.success(null) },
                         errorBlock = { e ->
                                 result.handleBlazeResult(
@@ -794,6 +862,23 @@ object BlazeFlutterSDKModule {
                 }
         }
 
+        private fun setExternalUserToken(call: MethodCall, result: MethodChannel.Result) {
+                val externalUserToken = call.safeGetArgument<String>("externalUserToken")
+                val cachedContentPolicy =
+                        call.safeGetArgument<String>("cachedContentPolicy").toFetchedContentPolicy()
+                                ?: return result.handleError(
+                                        errCode = "setExternalUserToken",
+                                        errMessage = "cachedContentPolicy is invalid"
+                                )
+
+                BlazeSDK.setExternalUserToken(externalUserToken, cachedContentPolicy) { blazeResult ->
+                        when (blazeResult) {
+                                is BlazeResult.Success -> result.success(blazeResult.value)
+                                is BlazeResult.Error -> result.handleBlazeResult(blazeResult)
+                        }
+                }
+        }
+
         private fun handleUniversalLink(call: MethodCall, result: MethodChannel.Result) {
                 val link =
                         call.safeGetArgument<String>("link")
@@ -1094,33 +1179,47 @@ object BlazeFlutterSDKModule {
                 }
         }
 
-        private fun MethodCall.followEntitiesFromArgument(): Set<BlazeFollowEntity> {
-                val entityIds = safeGetArgument<List<String>>("entityIds") ?: emptyList()
-                return entityIds.map { BlazeFollowEntity(it) }.toSet()
+        /**
+         * Parses the `entities` argument. Replies with an error and returns null when it is
+         * missing or any entry has no string `id`, so a bad call never clears the follows.
+         */
+        private fun MethodCall.followEntitiesFromArgument(
+                result: MethodChannel.Result
+        ): Set<BlazeFollowEntity>? {
+                val entities = (safeGetArgument<Any>("entities") as? List<*>)
+                        ?.map { (it as? Map<*, *>)?.toBlazeFollowEntity() }
+                if (entities == null || entities.any { it == null }) {
+                        result.handleError(
+                                errCode = method,
+                                errMessage = "every entity needs a string id"
+                        )
+                        return null
+                }
+                return entities.filterNotNull().toSet()
         }
 
         private fun setFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
-                BlazeSDK.followEntitiesManager.setFollowedEntities(call.followEntitiesFromArgument())
+                val entities = call.followEntitiesFromArgument(result) ?: return
+                BlazeSDK.followEntitiesManager.setFollowedEntities(entities)
                 result.success(null)
         }
 
         private fun insertFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
-                BlazeSDK.followEntitiesManager.insertFollowedEntities(
-                        call.followEntitiesFromArgument()
-                )
+                val entities = call.followEntitiesFromArgument(result) ?: return
+                BlazeSDK.followEntitiesManager.insertFollowedEntities(entities)
                 result.success(null)
         }
 
         private fun removeFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
-                BlazeSDK.followEntitiesManager.removeFollowedEntities(
-                        call.followEntitiesFromArgument()
-                )
+                val entities = call.followEntitiesFromArgument(result) ?: return
+                BlazeSDK.followEntitiesManager.removeFollowedEntities(entities)
                 result.success(null)
         }
 
         private fun getFollowedEntities(call: MethodCall, result: MethodChannel.Result) {
-                val ids = BlazeSDK.followEntitiesManager.getFollowedEntities().map { it.entityId }
-                result.success(ids)
+                val entities = BlazeSDK.followEntitiesManager.getFollowedEntities()
+                        .map { it.toFlutterMap() }
+                result.success(entities)
         }
 
         private fun stopActiveCastingSession(call: MethodCall, result: MethodChannel.Result) {
@@ -1135,6 +1234,15 @@ object BlazeFlutterSDKModule {
 
         private fun isPiPActive(call: MethodCall, result: MethodChannel.Result) {
                 result.success(BlazeSDK.pipManager.isActive)
+        }
+
+        private fun isInColdStart(call: MethodCall, result: MethodChannel.Result) {
+                val playerType = call.safeGetArgument<String>("playerType").toBlazePlayerType()
+                        ?: return result.handleError(
+                                errCode = "isInColdStart",
+                                errMessage = "playerType is invalid"
+                        )
+                result.success(BlazeSDK.isInColdStart(playerType))
         }
 
         private fun canHandleUniversalLink(call: MethodCall, result: MethodChannel.Result) {
@@ -1409,7 +1517,7 @@ object BlazeFlutterSDKModule {
                         playerType = followEntityParams.playerType,
                         sourceId = followEntityParams.sourceId,
                         newFollowingState = followEntityParams.newFollowingState,
-                        followEntityId = followEntityParams.followEntity.entityId
+                        followEntity = followEntityParams.followEntity
                 ) { params ->
                         asyncBridge?.sendEvent(
                                 name = "Blaze.onFollowEntityClicked",

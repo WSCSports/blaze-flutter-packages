@@ -59,6 +59,28 @@ abstract class BlazeBasePlayerDelegate {
   /// [params] The share clicked parameters.
   final void Function(BlazeOnShareClickedParams params)? onShareClicked;
 
+  /// Called when the SDK withholds a content item, with the reason and the
+  /// item.
+  ///
+  /// Notification only: the SDK applies its restricted treatment to the item
+  /// either way.
+  ///
+  /// [params] The content restricted parameters.
+  final void Function(BlazeOnContentRestrictedParams params)?
+      onContentRestricted;
+
+  /// Called when an interaction (for example a poll or quiz in the
+  /// Engagement Layer) opens a link.
+  ///
+  /// Notification only: native asks how to open the link synchronously,
+  /// which the async bridge cannot answer from Dart. Declare the answer up
+  /// front with `interactionLinkHandling` in `BlazeSDK.initSDK` or on the
+  /// widget; use `handled` to open the link yourself from this callback.
+  ///
+  /// [params] The trigger interaction link parameters.
+  final void Function(BlazeOnTriggerInteractionLinkParams params)?
+      onTriggerInteractionLink;
+
   /// Constructor with shared function parameters - matches iOS BlazePlayerSourceDelegate pattern
   const BlazeBasePlayerDelegate({
     this.onDataLoadStarted,
@@ -70,5 +92,7 @@ abstract class BlazeBasePlayerDelegate {
     this.onPlayerEventTriggered,
     this.onTriggerCustomActionButton,
     this.onShareClicked,
+    this.onContentRestricted,
+    this.onTriggerInteractionLink,
   });
 }

@@ -41,6 +41,11 @@ mixin _$BlazeStoryPlayerStyle {
   /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
   BlazeCaptionsStyle? get captions => throw _privateConstructorUsedError;
 
+  /// Styles the page subtitle shown under the page title. When omitted,
+  /// the native default is kept.
+  BlazeStoryPlayerSubtitleTextStyle? get subtitle =>
+      throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_BlazeStoryPlayerStyle value) $default,
@@ -84,7 +89,8 @@ abstract class $BlazeStoryPlayerStyleCopyWith<$Res> {
       BlazeStoryPlayerHeaderGradientStyle? headerGradient,
       BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
       BlazeStoryPlayerProgressBarStyle? progressBar,
-      BlazeCaptionsStyle? captions});
+      BlazeCaptionsStyle? captions,
+      BlazeStoryPlayerSubtitleTextStyle? subtitle});
 
   $BlazeStoryPlayerTitleTextStyleCopyWith<$Res>? get title;
   $BlazeStoryPlayerLastUpdateTextStyleCopyWith<$Res>? get lastUpdate;
@@ -95,6 +101,7 @@ abstract class $BlazeStoryPlayerStyleCopyWith<$Res> {
   $BlazeStoryPlayerFirstTimeSlideStyleCopyWith<$Res>? get firstTimeSlide;
   $BlazeStoryPlayerProgressBarStyleCopyWith<$Res>? get progressBar;
   $BlazeCaptionsStyleCopyWith<$Res>? get captions;
+  $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res>? get subtitle;
 }
 
 /// @nodoc
@@ -123,6 +130,7 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
     Object? firstTimeSlide = freezed,
     Object? progressBar = freezed,
     Object? captions = freezed,
+    Object? subtitle = freezed,
   }) {
     return _then(_value.copyWith(
       title: freezed == title
@@ -165,6 +173,10 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
           ? _value.captions
           : captions // ignore: cast_nullable_to_non_nullable
               as BlazeCaptionsStyle?,
+      subtitle: freezed == subtitle
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerSubtitleTextStyle?,
     ) as $Val);
   }
 
@@ -299,6 +311,21 @@ class _$BlazeStoryPlayerStyleCopyWithImpl<$Res,
       return _then(_value.copyWith(captions: value) as $Val);
     });
   }
+
+  /// Create a copy of BlazeStoryPlayerStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res>? get subtitle {
+    if (_value.subtitle == null) {
+      return null;
+    }
+
+    return $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res>(_value.subtitle!,
+        (value) {
+      return _then(_value.copyWith(subtitle: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -320,7 +347,8 @@ abstract class _$$BlazeStoryPlayerStyleImplCopyWith<$Res>
       BlazeStoryPlayerHeaderGradientStyle? headerGradient,
       BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
       BlazeStoryPlayerProgressBarStyle? progressBar,
-      BlazeCaptionsStyle? captions});
+      BlazeCaptionsStyle? captions,
+      BlazeStoryPlayerSubtitleTextStyle? subtitle});
 
   @override
   $BlazeStoryPlayerTitleTextStyleCopyWith<$Res>? get title;
@@ -340,6 +368,8 @@ abstract class _$$BlazeStoryPlayerStyleImplCopyWith<$Res>
   $BlazeStoryPlayerProgressBarStyleCopyWith<$Res>? get progressBar;
   @override
   $BlazeCaptionsStyleCopyWith<$Res>? get captions;
+  @override
+  $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res>? get subtitle;
 }
 
 /// @nodoc
@@ -366,6 +396,7 @@ class __$$BlazeStoryPlayerStyleImplCopyWithImpl<$Res>
     Object? firstTimeSlide = freezed,
     Object? progressBar = freezed,
     Object? captions = freezed,
+    Object? subtitle = freezed,
   }) {
     return _then(_$BlazeStoryPlayerStyleImpl(
       title: freezed == title
@@ -408,6 +439,10 @@ class __$$BlazeStoryPlayerStyleImplCopyWithImpl<$Res>
           ? _value.captions
           : captions // ignore: cast_nullable_to_non_nullable
               as BlazeCaptionsStyle?,
+      subtitle: freezed == subtitle
+          ? _value.subtitle
+          : subtitle // ignore: cast_nullable_to_non_nullable
+              as BlazeStoryPlayerSubtitleTextStyle?,
     ));
   }
 }
@@ -425,7 +460,8 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
       this.headerGradient,
       this.firstTimeSlide,
       this.progressBar,
-      this.captions});
+      this.captions,
+      this.subtitle});
 
   factory _$BlazeStoryPlayerStyleImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeStoryPlayerStyleImplFromJson(json);
@@ -454,9 +490,14 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
   @override
   final BlazeCaptionsStyle? captions;
 
+  /// Styles the page subtitle shown under the page title. When omitted,
+  /// the native default is kept.
+  @override
+  final BlazeStoryPlayerSubtitleTextStyle? subtitle;
+
   @override
   String toString() {
-    return 'BlazeStoryPlayerStyle(title: $title, lastUpdate: $lastUpdate, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, chips: $chips, headerGradient: $headerGradient, firstTimeSlide: $firstTimeSlide, progressBar: $progressBar, captions: $captions)';
+    return 'BlazeStoryPlayerStyle(title: $title, lastUpdate: $lastUpdate, buttons: $buttons, backgroundColor: $backgroundColor, cta: $cta, chips: $chips, headerGradient: $headerGradient, firstTimeSlide: $firstTimeSlide, progressBar: $progressBar, captions: $captions, subtitle: $subtitle)';
   }
 
   @override
@@ -479,7 +520,9 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
             (identical(other.progressBar, progressBar) ||
                 other.progressBar == progressBar) &&
             (identical(other.captions, captions) ||
-                other.captions == captions));
+                other.captions == captions) &&
+            (identical(other.subtitle, subtitle) ||
+                other.subtitle == subtitle));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -495,7 +538,8 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
       headerGradient,
       firstTimeSlide,
       progressBar,
-      captions);
+      captions,
+      subtitle);
 
   /// Create a copy of BlazeStoryPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -544,16 +588,18 @@ class _$BlazeStoryPlayerStyleImpl implements _BlazeStoryPlayerStyle {
 
 abstract class _BlazeStoryPlayerStyle implements BlazeStoryPlayerStyle {
   const factory _BlazeStoryPlayerStyle(
-      {final BlazeStoryPlayerTitleTextStyle? title,
-      final BlazeStoryPlayerLastUpdateTextStyle? lastUpdate,
-      final BlazeStoryPlayerButtonsStyle? buttons,
-      final String? backgroundColor,
-      final BlazeStoryPlayerCtaStyle? cta,
-      final BlazeStoryPlayerChipsStyle? chips,
-      final BlazeStoryPlayerHeaderGradientStyle? headerGradient,
-      final BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
-      final BlazeStoryPlayerProgressBarStyle? progressBar,
-      final BlazeCaptionsStyle? captions}) = _$BlazeStoryPlayerStyleImpl;
+          {final BlazeStoryPlayerTitleTextStyle? title,
+          final BlazeStoryPlayerLastUpdateTextStyle? lastUpdate,
+          final BlazeStoryPlayerButtonsStyle? buttons,
+          final String? backgroundColor,
+          final BlazeStoryPlayerCtaStyle? cta,
+          final BlazeStoryPlayerChipsStyle? chips,
+          final BlazeStoryPlayerHeaderGradientStyle? headerGradient,
+          final BlazeStoryPlayerFirstTimeSlideStyle? firstTimeSlide,
+          final BlazeStoryPlayerProgressBarStyle? progressBar,
+          final BlazeCaptionsStyle? captions,
+          final BlazeStoryPlayerSubtitleTextStyle? subtitle}) =
+      _$BlazeStoryPlayerStyleImpl;
 
   factory _BlazeStoryPlayerStyle.fromJson(Map<String, dynamic> json) =
       _$BlazeStoryPlayerStyleImpl.fromJson;
@@ -581,6 +627,11 @@ abstract class _BlazeStoryPlayerStyle implements BlazeStoryPlayerStyle {
   /// itself, use [BlazeStoryPlayerButtonsStyle.captions].
   @override
   BlazeCaptionsStyle? get captions;
+
+  /// Styles the page subtitle shown under the page title. When omitted,
+  /// the native default is kept.
+  @override
+  BlazeStoryPlayerSubtitleTextStyle? get subtitle;
 
   /// Create a copy of BlazeStoryPlayerStyle
   /// with the given fields replaced by the non-null parameter values.
@@ -2664,6 +2715,292 @@ abstract class _BlazeStoryPlayerTitleTextStyle
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlazeStoryPlayerTitleTextStyleImplCopyWith<
           _$BlazeStoryPlayerTitleTextStyleImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+BlazeStoryPlayerSubtitleTextStyle _$BlazeStoryPlayerSubtitleTextStyleFromJson(
+    Map<String, dynamic> json) {
+  return _BlazeStoryPlayerSubtitleTextStyle.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BlazeStoryPlayerSubtitleTextStyle {
+  BlazeFont? get font => throw _privateConstructorUsedError;
+  double? get textSize => throw _privateConstructorUsedError;
+  String? get textColor => throw _privateConstructorUsedError;
+  bool? get isVisible => throw _privateConstructorUsedError;
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerSubtitleTextStyle value) $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeStoryPlayerSubtitleTextStyle value)? $default,
+  ) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerSubtitleTextStyle value)? $default, {
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+
+  /// Serializes this BlazeStoryPlayerSubtitleTextStyle to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $BlazeStoryPlayerSubtitleTextStyleCopyWith<BlazeStoryPlayerSubtitleTextStyle>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res> {
+  factory $BlazeStoryPlayerSubtitleTextStyleCopyWith(
+          BlazeStoryPlayerSubtitleTextStyle value,
+          $Res Function(BlazeStoryPlayerSubtitleTextStyle) then) =
+      _$BlazeStoryPlayerSubtitleTextStyleCopyWithImpl<$Res,
+          BlazeStoryPlayerSubtitleTextStyle>;
+  @useResult
+  $Res call(
+      {BlazeFont? font, double? textSize, String? textColor, bool? isVisible});
+
+  $BlazeFontCopyWith<$Res>? get font;
+}
+
+/// @nodoc
+class _$BlazeStoryPlayerSubtitleTextStyleCopyWithImpl<$Res,
+        $Val extends BlazeStoryPlayerSubtitleTextStyle>
+    implements $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res> {
+  _$BlazeStoryPlayerSubtitleTextStyleCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? font = freezed,
+    Object? textSize = freezed,
+    Object? textColor = freezed,
+    Object? isVisible = freezed,
+  }) {
+    return _then(_value.copyWith(
+      font: freezed == font
+          ? _value.font
+          : font // ignore: cast_nullable_to_non_nullable
+              as BlazeFont?,
+      textSize: freezed == textSize
+          ? _value.textSize
+          : textSize // ignore: cast_nullable_to_non_nullable
+              as double?,
+      textColor: freezed == textColor
+          ? _value.textColor
+          : textColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
+  }
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $BlazeFontCopyWith<$Res>? get font {
+    if (_value.font == null) {
+      return null;
+    }
+
+    return $BlazeFontCopyWith<$Res>(_value.font!, (value) {
+      return _then(_value.copyWith(font: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$BlazeStoryPlayerSubtitleTextStyleImplCopyWith<$Res>
+    implements $BlazeStoryPlayerSubtitleTextStyleCopyWith<$Res> {
+  factory _$$BlazeStoryPlayerSubtitleTextStyleImplCopyWith(
+          _$BlazeStoryPlayerSubtitleTextStyleImpl value,
+          $Res Function(_$BlazeStoryPlayerSubtitleTextStyleImpl) then) =
+      __$$BlazeStoryPlayerSubtitleTextStyleImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {BlazeFont? font, double? textSize, String? textColor, bool? isVisible});
+
+  @override
+  $BlazeFontCopyWith<$Res>? get font;
+}
+
+/// @nodoc
+class __$$BlazeStoryPlayerSubtitleTextStyleImplCopyWithImpl<$Res>
+    extends _$BlazeStoryPlayerSubtitleTextStyleCopyWithImpl<$Res,
+        _$BlazeStoryPlayerSubtitleTextStyleImpl>
+    implements _$$BlazeStoryPlayerSubtitleTextStyleImplCopyWith<$Res> {
+  __$$BlazeStoryPlayerSubtitleTextStyleImplCopyWithImpl(
+      _$BlazeStoryPlayerSubtitleTextStyleImpl _value,
+      $Res Function(_$BlazeStoryPlayerSubtitleTextStyleImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? font = freezed,
+    Object? textSize = freezed,
+    Object? textColor = freezed,
+    Object? isVisible = freezed,
+  }) {
+    return _then(_$BlazeStoryPlayerSubtitleTextStyleImpl(
+      font: freezed == font
+          ? _value.font
+          : font // ignore: cast_nullable_to_non_nullable
+              as BlazeFont?,
+      textSize: freezed == textSize
+          ? _value.textSize
+          : textSize // ignore: cast_nullable_to_non_nullable
+              as double?,
+      textColor: freezed == textColor
+          ? _value.textColor
+          : textColor // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isVisible: freezed == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BlazeStoryPlayerSubtitleTextStyleImpl
+    implements _BlazeStoryPlayerSubtitleTextStyle {
+  const _$BlazeStoryPlayerSubtitleTextStyleImpl(
+      {this.font, this.textSize, this.textColor, this.isVisible});
+
+  factory _$BlazeStoryPlayerSubtitleTextStyleImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$BlazeStoryPlayerSubtitleTextStyleImplFromJson(json);
+
+  @override
+  final BlazeFont? font;
+  @override
+  final double? textSize;
+  @override
+  final String? textColor;
+  @override
+  final bool? isVisible;
+
+  @override
+  String toString() {
+    return 'BlazeStoryPlayerSubtitleTextStyle(font: $font, textSize: $textSize, textColor: $textColor, isVisible: $isVisible)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BlazeStoryPlayerSubtitleTextStyleImpl &&
+            (identical(other.font, font) || other.font == font) &&
+            (identical(other.textSize, textSize) ||
+                other.textSize == textSize) &&
+            (identical(other.textColor, textColor) ||
+                other.textColor == textColor) &&
+            (identical(other.isVisible, isVisible) ||
+                other.isVisible == isVisible));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, font, textSize, textColor, isVisible);
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BlazeStoryPlayerSubtitleTextStyleImplCopyWith<
+          _$BlazeStoryPlayerSubtitleTextStyleImpl>
+      get copyWith => __$$BlazeStoryPlayerSubtitleTextStyleImplCopyWithImpl<
+          _$BlazeStoryPlayerSubtitleTextStyleImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerSubtitleTextStyle value) $default,
+  ) {
+    return $default(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_BlazeStoryPlayerSubtitleTextStyle value)? $default,
+  ) {
+    return $default?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_BlazeStoryPlayerSubtitleTextStyle value)? $default, {
+    required TResult orElse(),
+  }) {
+    if ($default != null) {
+      return $default(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BlazeStoryPlayerSubtitleTextStyleImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BlazeStoryPlayerSubtitleTextStyle
+    implements BlazeStoryPlayerSubtitleTextStyle {
+  const factory _BlazeStoryPlayerSubtitleTextStyle(
+      {final BlazeFont? font,
+      final double? textSize,
+      final String? textColor,
+      final bool? isVisible}) = _$BlazeStoryPlayerSubtitleTextStyleImpl;
+
+  factory _BlazeStoryPlayerSubtitleTextStyle.fromJson(
+          Map<String, dynamic> json) =
+      _$BlazeStoryPlayerSubtitleTextStyleImpl.fromJson;
+
+  @override
+  BlazeFont? get font;
+  @override
+  double? get textSize;
+  @override
+  String? get textColor;
+  @override
+  bool? get isVisible;
+
+  /// Create a copy of BlazeStoryPlayerSubtitleTextStyle
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$BlazeStoryPlayerSubtitleTextStyleImplCopyWith<
+          _$BlazeStoryPlayerSubtitleTextStyleImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

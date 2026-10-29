@@ -7,9 +7,15 @@ import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerCtaStyle
 import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerHeadingTextStyle
 import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerSeekBarStyle
 import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerBackToLiveButtonStateStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerBackToLiveButtonStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerStatusIndicatorStateStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerStatusIndicatorStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerTextStyle
 import com.blaze.blazesdk.style.shared.models.blazeDp
 import com.blaze.flutterblazesdk.players.shared.mergeButtonThemes
 import com.blaze.flutterblazesdk.players.shared.mergedWith
+import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
 import com.blaze.flutterblazesdk.utils.parsing.toFontResId
 import com.blaze.flutterblazesdk.utils.parsing.toImageResId
@@ -38,6 +44,8 @@ fun BlazeVideosPlayerStyle.mergedWith(
     }
 
     merged.captions = this.captions.mergedWith(customization.captions, context)
+    merged.statusIndicator = this.statusIndicator.mergedWith(customization.statusIndicator, context)
+    merged.backToLiveButton = this.backToLiveButton.mergedWith(customization.backToLiveButton, context)
 
     return merged
 }
@@ -79,6 +87,8 @@ fun BlazeVideosPlayerButtonsStyle.mergedWith(
     merged.pip = merged.pip.mergeButtonThemes(customization.pictureInPicture, context)
     merged.seekForward = merged.seekForward.mergeButtonThemes(customization.seekForward, context)
     merged.seekBackward = merged.seekBackward.mergeButtonThemes(customization.seekBackward, context)
+    merged.audio = merged.audio.mergeButtonThemes(customization.audio, context)
+    merged.liveCatchup = merged.liveCatchup.mergeButtonThemes(customization.liveCatchup, context)
     return merged
 }
 
@@ -144,6 +154,102 @@ fun BlazeVideosPlayerSeekBarStyle.mergedWith(
     merged.pausedState = merged.pausedState.mergedWith(customization.pausedState, context)
     merged.horizontalMargin = customization.horizontalSpacing?.blazeDp ?: merged.horizontalMargin
     merged.bottomMargin = customization.bottomSpacing?.blazeDp ?: this.bottomMargin
+
+    return merged
+}
+
+fun BlazeVideosPlayerTextStyle.mergedWith(
+    customization: BlazeReactVideosPlayerTextStyle?,
+    context: Context
+): BlazeVideosPlayerTextStyle {
+    customization ?: return this
+
+    val merged = this
+    // An omitted font keeps the preset font.
+    merged.fontResId = customization.font?.toFontResId(context) ?: merged.fontResId
+    merged.textSize = customization.textSize ?: merged.textSize
+    merged.textColor = safeParseColor(customization.textColor) ?: merged.textColor
+
+    return merged
+}
+
+fun BlazeVideosPlayerStatusIndicatorStyle.mergedWith(
+    customization: BlazeReactVideosPlayerStatusIndicatorStyle?,
+    context: Context
+): BlazeVideosPlayerStatusIndicatorStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.isVisible = customization.isVisible ?: merged.isVisible
+    merged.padding = merged.padding.mergedWith(customization.padding)
+    customization.streamStates?.let { states ->
+        val streamStates = merged.streamStates
+        streamStates.liveStreamState =
+            streamStates.liveStreamState.mergedWith(states.liveStreamState, context)
+        streamStates.upcomingStreamState =
+            streamStates.upcomingStreamState.mergedWith(states.upcomingStreamState, context)
+        streamStates.endedStreamState =
+            streamStates.endedStreamState.mergedWith(states.endedStreamState, context)
+        merged.streamStates = streamStates
+    }
+
+    return merged
+}
+
+fun BlazeVideosPlayerStatusIndicatorStateStyle.mergedWith(
+    customization: BlazeReactVideosPlayerStatusIndicatorStateStyle?,
+    context: Context
+): BlazeVideosPlayerStatusIndicatorStateStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.textStyle = merged.textStyle.mergedWith(customization.textStyle, context)
+    merged.isVisible = customization.isVisible ?: merged.isVisible
+    merged.text = customization.text ?: merged.text
+    merged.backgroundColor = safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
+    merged.backgroundImageResId =
+        customization.backgroundImage?.toImageResId(context) ?: merged.backgroundImageResId
+    merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
+    merged.cornerRadiusRatio = customization.cornerRadiusRatio ?: merged.cornerRadiusRatio
+    merged.borderColor = safeParseColor(customization.borderColor) ?: merged.borderColor
+    merged.borderWidth = customization.borderWidth?.toInt()?.blazeDp ?: merged.borderWidth
+
+    return merged
+}
+
+fun BlazeVideosPlayerBackToLiveButtonStyle.mergedWith(
+    customization: BlazeReactVideosPlayerBackToLiveButtonStyle?,
+    context: Context
+): BlazeVideosPlayerBackToLiveButtonStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.margins = merged.margins.mergedWith(customization.margins)
+    merged.padding = merged.padding.mergedWith(customization.padding)
+    customization.playbackStates?.let { states ->
+        val playbackStates = merged.playbackStates
+        playbackStates.atLiveEdgeState =
+            playbackStates.atLiveEdgeState.mergedWith(states.atLiveEdgeState, context)
+        playbackStates.behindLiveState =
+            playbackStates.behindLiveState.mergedWith(states.behindLiveState, context)
+        merged.playbackStates = playbackStates
+    }
+
+    return merged
+}
+
+fun BlazeVideosPlayerBackToLiveButtonStateStyle.mergedWith(
+    customization: BlazeReactVideosPlayerBackToLiveButtonStateStyle?,
+    context: Context
+): BlazeVideosPlayerBackToLiveButtonStateStyle {
+    customization ?: return this
+
+    val merged = this
+    merged.textStyle = merged.textStyle.mergedWith(customization.textStyle, context)
+    merged.text = customization.text ?: merged.text
+    merged.backgroundColor = safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
+    merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
+    merged.cornerRadiusRatio = customization.cornerRadiusRatio ?: merged.cornerRadiusRatio
 
     return merged
 }

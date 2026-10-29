@@ -59,6 +59,7 @@ _$BlazeMomentsPlayerStyleImpl _$$BlazeMomentsPlayerStyleImplFromJson(
           ? null
           : BlazeCaptionsStyle.fromJson(
               json['captions'] as Map<String, dynamic>),
+      ignoresBottomSafeArea: json['ignoresBottomSafeArea'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
@@ -81,6 +82,7 @@ Map<String, dynamic> _$$BlazeMomentsPlayerStyleImplToJson(
           _$BlazePlayerDisplayModeEnumMap[instance.playerDisplayMode],
       'followEntity': instance.followEntity?.toJson(),
       'captions': instance.captions?.toJson(),
+      'ignoresBottomSafeArea': instance.ignoresBottomSafeArea,
     };
 
 const _$BlazeMomentsPlayerBottomComponentsAlignmentEnumMap = {
@@ -558,6 +560,9 @@ _$BlazeMomentsPlayerFollowEntityChipStyleImpl
           contentSource: $enumDecodeNullable(
               _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap,
               json['contentSource']),
+          iconSource: $enumDecodeNullable(
+              _$BlazeMomentsPlayerFollowEntityIconSourceEnumMap,
+              json['iconSource']),
         );
 
 Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityChipStyleImplToJson(
@@ -567,11 +572,18 @@ Map<String, dynamic> _$$BlazeMomentsPlayerFollowEntityChipStyleImplToJson(
       'iconColor': instance.iconColor,
       'contentSource': _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap[
           instance.contentSource],
+      'iconSource': _$BlazeMomentsPlayerFollowEntityIconSourceEnumMap[
+          instance.iconSource],
     };
 
 const _$BlazeMomentsPlayerFollowEntityChipContentSourceEnumMap = {
   BlazeMomentsPlayerFollowEntityChipContentSource.icon: 'Icon',
   BlazeMomentsPlayerFollowEntityChipContentSource.text: 'Text',
+};
+
+const _$BlazeMomentsPlayerFollowEntityIconSourceEnumMap = {
+  BlazeMomentsPlayerFollowEntityIconSource.defaultIcon: 'Default',
+  BlazeMomentsPlayerFollowEntityIconSource.star: 'Star',
 };
 
 _$BlazeFollowEntityTypeImpl _$$BlazeFollowEntityTypeImplFromJson(

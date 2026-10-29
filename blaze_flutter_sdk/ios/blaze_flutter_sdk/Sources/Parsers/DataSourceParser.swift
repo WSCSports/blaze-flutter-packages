@@ -16,8 +16,21 @@ extension Dictionary where Key == String, Value == AnyHashable {
             return parseRecommendationsDataSource()
         } else if self["dataSources"] != nil {
             return parseCompositeDataSource()
+        } else if self["entityTypes"] != nil {
+            return parseFollowedEntitiesDataSource()
         }
         return nil
+    }
+
+    private func parseFollowedEntitiesDataSource() -> BlazeDataSourceType {
+        let entityTypes = (self["entityTypes"] as? [String] ?? []).compactMap { $0.asFollowedEntityCategory }
+
+        return .followedEntities(
+            entityTypes: Set(entityTypes),
+            orderType: (self["orderType"] as? String)?.toBlazeOrderType,
+            advancedOrderType: (self["advancedOrderType"] as? String)?.toBlazeAdvancedOrderType,
+            maxItems: self["maxItems"] as? Int
+        )
     }
 
     private func parseSearchDataSource() -> BlazeDataSourceType? {
@@ -192,7 +205,33 @@ extension Array where Element == AnyHashable {
 }
 
 extension String {
-    
+
+    /// Parses a Dart `BlazePlayerType` wire value, the inverse of `BlazePlayerType.toFlutterValue()`.
+    var asBlazePlayerType: BlazePlayerType? {
+        switch self {
+        case "moments":
+            return .moments
+        case "stories":
+            return .stories
+        case "videos":
+            return .videos
+        default:
+            return nil
+        }
+    }
+
+    /// Parses a Dart `BlazeFetchedContentPolicy` wire value.
+    var asFetchedContentPolicy: BlazeFetchedContentPolicy? {
+        switch self {
+        case "keep":
+            return .keep
+        case "evict":
+            return .evict
+        default:
+            return nil
+        }
+    }
+
     var toBlazeOrderType: BlazeOrderType? {
         switch self {
         case "manual":

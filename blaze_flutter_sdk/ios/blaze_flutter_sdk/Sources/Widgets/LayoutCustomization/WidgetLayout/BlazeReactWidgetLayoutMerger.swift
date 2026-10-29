@@ -45,7 +45,50 @@ extension BlazeWidgetItemStyle {
         merged.statusIndicator = merged.statusIndicator.mergedWith(customization.statusIndicator)
         merged.badge = merged.badge.mergedWith(customization.badge)
         merged.durationElement = merged.durationElement.mergedWith(customization.durationElement)
+        merged.subtitle = merged.subtitle.mergedWith(customization.subtitle)
+        merged.description = merged.description.mergedWith(customization.description)
+        merged.playIconElement = merged.playIconElement.mergedWith(customization.playIconElement)
         
+        return merged
+    }
+}
+
+extension BlazeWidgetItemSubtitleStyle {
+    func mergedWith(_ customization: BlazeReactWidgetItemSecondaryTextStyle?) -> Self {
+        guard let customization else { return self }
+
+        var merged = self
+
+        merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.topSpacing = customization.topSpacing ?? merged.topSpacing
+        merged.unreadState = merged.unreadState.mergedWith(customization.unreadState)
+        merged.readState = merged.readState.mergedWith(customization.readState)
+        return merged
+    }
+}
+
+extension BlazeWidgetItemDescriptionStyle {
+    func mergedWith(_ customization: BlazeReactWidgetItemSecondaryTextStyle?) -> Self {
+        guard let customization else { return self }
+
+        var merged = self
+
+        merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.topSpacing = customization.topSpacing ?? merged.topSpacing
+        merged.unreadState = merged.unreadState.mergedWith(customization.unreadState)
+        merged.readState = merged.readState.mergedWith(customization.readState)
+        return merged
+    }
+}
+
+extension BlazeWidgetItemPlayIconElementStyle {
+    func mergedWith(_ customization: BlazeReactWidgetItemPlayIconElementStyle?) -> Self {
+        guard let customization else { return self }
+
+        var merged = self
+
+        merged.isVisible = customization.isVisible ?? merged.isVisible
+        merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
     }
 }
@@ -425,6 +468,7 @@ extension BlazeWidgetItemDurationElementStateStyle {
         merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
         merged.borderWidth = customization.borderWidth ?? merged.borderWidth
         
+        merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
     }
 } 

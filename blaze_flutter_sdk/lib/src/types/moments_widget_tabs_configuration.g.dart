@@ -147,6 +147,8 @@ _$BlazePlayerTabsStyleImpl _$$BlazePlayerTabsStyleImplFromJson(
       isTabTitleVisibleWhenSingleTab:
           json['isTabTitleVisibleWhenSingleTab'] as bool?,
       isTabVisibleWhenEmpty: json['isTabVisibleWhenEmpty'] as bool?,
+      ignoresTopSafeArea: json['ignoresTopSafeArea'] as bool?,
+      ignoresBottomSafeArea: json['ignoresBottomSafeArea'] as bool?,
     );
 
 Map<String, dynamic> _$$BlazePlayerTabsStyleImplToJson(
@@ -160,6 +162,8 @@ Map<String, dynamic> _$$BlazePlayerTabsStyleImplToJson(
       'activeTabIndicator': instance.activeTabIndicator?.toJson(),
       'isTabTitleVisibleWhenSingleTab': instance.isTabTitleVisibleWhenSingleTab,
       'isTabVisibleWhenEmpty': instance.isTabVisibleWhenEmpty,
+      'ignoresTopSafeArea': instance.ignoresTopSafeArea,
+      'ignoresBottomSafeArea': instance.ignoresBottomSafeArea,
     };
 
 _$BlazePlayerActiveTabIndicatorStyleImpl

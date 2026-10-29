@@ -6,6 +6,7 @@ import com.blaze.blazesdk.style.shared.models.BlazeInsets
 import com.blaze.blazesdk.style.shared.models.blazeDp
 import com.blaze.flutterblazesdk.widgets.customization.BlazeReactMargins
 import androidx.core.graphics.toColorInt
+import kotlin.math.roundToInt
 
 fun String?.toColorResId(context: Context): Int? {
     this ?: return null
@@ -67,10 +68,10 @@ fun BlazeInsets.mergedWith(customization: BlazeReactMargins?): BlazeInsets {
 
     val merged = this
 
-    merged.top = customization.top?.blazeDp ?: this.top
-    merged.bottom = customization.bottom?.blazeDp ?: this.bottom
-    merged.start = customization.leading?.blazeDp ?: this.start
-    merged.end = customization.trailing?.blazeDp ?: this.end
+    merged.top = customization.top?.roundToInt()?.blazeDp ?: this.top
+    merged.bottom = customization.bottom?.roundToInt()?.blazeDp ?: this.bottom
+    merged.start = customization.leading?.roundToInt()?.blazeDp ?: this.start
+    merged.end = customization.trailing?.roundToInt()?.blazeDp ?: this.end
 
     return merged
 }

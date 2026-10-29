@@ -24,6 +24,8 @@ class BlazePlayerEntryPointDelegate extends BlazeBasePlayerDelegate {
     super.onPlayerEventTriggered,
     super.onTriggerCustomActionButton,
     super.onShareClicked,
+    super.onContentRestricted,
+    super.onTriggerInteractionLink,
     // Entry-point-only delegate method
     this.onReadStatusChanged,
   });
@@ -42,6 +44,8 @@ class BlazePlayerEntryPointDelegateHelper {
     _onPlayerEventTriggered(delegate?.onPlayerEventTriggered);
     _onTriggerCustomActionButton(delegate?.onTriggerCustomActionButton);
     _onShareClicked(delegate?.onShareClicked);
+    _onContentRestricted(delegate?.onContentRestricted);
+    _onTriggerInteractionLink(delegate?.onTriggerInteractionLink);
     _onReadStatusChanged(delegate?.onReadStatusChanged);
   }
 
@@ -173,6 +177,40 @@ class BlazePlayerEntryPointDelegateHelper {
         methodName,
         (args) async {
           BlazeBasePlayerDelegateHandler.handleTriggerCustomActionButton(
+              args.params, callback);
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _onContentRestricted(
+    void Function(BlazeOnContentRestrictedParams params)? callback,
+  ) {
+    const methodName = 'Blaze.onContentRestricted';
+    if (callback != null) {
+      BlazeAsyncBridge.registerDartEventHandler(
+        methodName,
+        (args) async {
+          BlazeBasePlayerDelegateHandler.handleContentRestricted(
+              args.params, callback);
+        },
+      );
+    } else {
+      BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _onTriggerInteractionLink(
+    void Function(BlazeOnTriggerInteractionLinkParams params)? callback,
+  ) {
+    const methodName = 'Blaze.onTriggerInteractionLink';
+    if (callback != null) {
+      BlazeAsyncBridge.registerDartEventHandler(
+        methodName,
+        (args) async {
+          BlazeBasePlayerDelegateHandler.handleTriggerInteractionLink(
               args.params, callback);
         },
       );

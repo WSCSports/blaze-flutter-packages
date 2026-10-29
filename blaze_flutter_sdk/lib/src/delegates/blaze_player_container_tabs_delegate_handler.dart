@@ -21,4 +21,22 @@ class BlazePlayerContainerTabsDelegateHandler {
       );
     }
   }
+
+  static void handleTabReselected(
+    Map<String, dynamic> args,
+    void Function(BlazeOnTabSelectedParams)? callback,
+  ) {
+    if (callback == null) return;
+
+    try {
+      final params = BlazeOnTabSelectedParams.fromJson(args);
+      callback(params);
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onTabReselected',
+      );
+    }
+  }
 }

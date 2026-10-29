@@ -19,6 +19,7 @@ class BlazeMomentsRowView extends BlazeWidgetBase {
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_moments_row_view',
@@ -44,6 +45,7 @@ class BlazeMomentsRowView extends BlazeWidgetBase {
     super.widgetDelegate,
     super.momentsContainerTabsDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_moments_row_view',

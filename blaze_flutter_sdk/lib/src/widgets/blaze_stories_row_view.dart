@@ -18,6 +18,7 @@ class BlazeStoriesRowView extends BlazeWidgetBase {
     super.perItemStyleOverrides,
     super.widgetDelegate,
     super.appOverridesCTAHandling,
+    super.interactionLinkHandling,
     super.controller,
   }) : super(
           viewType: 'blaze_stories_row_view',

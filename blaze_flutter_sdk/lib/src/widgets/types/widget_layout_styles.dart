@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'widget_layout_common.dart';
+import '../../types/shared_types.dart';
 
 part 'widget_layout_styles.freezed.dart';
 part 'widget_layout_styles.g.dart';
@@ -210,6 +211,10 @@ class BlazeWidgetItemDurationElementStateStyle
     double? cornerRadiusRatio,
     String? borderColor,
     double? borderWidth,
+    /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+    /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+    /// is kept.
+    BlazeGlassBackgroundState? glassBackground,
   }) = _BlazeWidgetItemDurationElementStateStyle;
 
   factory BlazeWidgetItemDurationElementStateStyle.fromJson(
@@ -236,4 +241,56 @@ class BlazeWidgetItemDurationElementStyle
   factory BlazeWidgetItemDurationElementStyle.fromJson(
           Map<String, dynamic> json) =>
       _$BlazeWidgetItemDurationElementStyleFromJson(json);
+}
+
+/// Widget item subtitle style: a text row under the title. Hidden in every
+/// native preset; set [isVisible] to show it.
+@freezed
+class BlazeWidgetItemSubtitleStyle with _$BlazeWidgetItemSubtitleStyle {
+  const factory BlazeWidgetItemSubtitleStyle({
+    bool? isVisible,
+
+    /// Space between the title and the subtitle.
+    double? topSpacing,
+    BlazeTitleStyle? unreadState,
+    BlazeTitleStyle? readState,
+  }) = _BlazeWidgetItemSubtitleStyle;
+
+  factory BlazeWidgetItemSubtitleStyle.fromJson(Map<String, dynamic> json) =>
+      _$BlazeWidgetItemSubtitleStyleFromJson(json);
+}
+
+/// Widget item description style: a text row under the subtitle. Hidden in
+/// every native preset; set [isVisible] to show it.
+@freezed
+class BlazeWidgetItemDescriptionStyle with _$BlazeWidgetItemDescriptionStyle {
+  const factory BlazeWidgetItemDescriptionStyle({
+    bool? isVisible,
+
+    /// Space between the row above and the description.
+    double? topSpacing,
+    BlazeTitleStyle? unreadState,
+    BlazeTitleStyle? readState,
+  }) = _BlazeWidgetItemDescriptionStyle;
+
+  factory BlazeWidgetItemDescriptionStyle.fromJson(Map<String, dynamic> json) =>
+      _$BlazeWidgetItemDescriptionStyleFromJson(json);
+}
+
+/// Widget item play icon style: a play icon drawn over the thumbnail. Hidden
+/// in every native preset; set [isVisible] to show it.
+@freezed
+class BlazeWidgetItemPlayIconElementStyle
+    with _$BlazeWidgetItemPlayIconElementStyle {
+  const factory BlazeWidgetItemPlayIconElementStyle({
+    bool? isVisible,
+    /// iOS-only. No-op on Android. Liquid Glass background (iOS 26+). When
+    /// omitted, the native default ([BlazeGlassBackgroundState.automatic])
+    /// is kept.
+    BlazeGlassBackgroundState? glassBackground,
+  }) = _BlazeWidgetItemPlayIconElementStyle;
+
+  factory BlazeWidgetItemPlayIconElementStyle.fromJson(
+          Map<String, dynamic> json) =>
+      _$BlazeWidgetItemPlayIconElementStyleFromJson(json);
 }
