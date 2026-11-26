@@ -89,6 +89,10 @@ class BlazeStoryPlayerButtonsStyle with _$BlazeStoryPlayerButtonsStyle {
     BlazePlayerButtonStyle? exit,
     BlazePlayerButtonStyle? share,
     BlazePlayerButtonStyle? captions,
+
+    /// At most 2 buttons, each with a unique `customParams.id`; anything else
+    /// throws an [ArgumentError]. An empty list removes the custom action
+    /// buttons. When omitted, the current buttons are kept.
     List<BlazeCustomActionButton>? customActionButtons,
   }) = _BlazeStoryPlayerButtonsStyle;
 

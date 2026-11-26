@@ -61,10 +61,38 @@ public extension BlazeFlutterError {
             underlyingErrorString = nil
         }
         
-        return .init(domain: String(describing: error.domain),
-                     reason: nil, // Currently the reason could not be extracted from BlazeError.
+        // Mapped errors send Android's declared strings. Every other error keeps the
+        // Swift description of its domain and no reason.
+        let codes = flutterCodes(error.domain)
+
+        return .init(domain: codes?.domain ?? String(describing: error.domain),
+                     reason: codes?.reason,
                      message: error.errorMessage,
                      metadata: error.metadata,
                      underlyingError: underlyingErrorString)
+    }
+
+    /// The `domain` and `reason` strings sent to Dart. iOS domains and reasons carry no
+    /// raw value, so each error reported here is mapped by hand to the strings Android
+    /// native declares for the same failure. Unmapped errors return `nil`.
+    ///
+    /// Internal, not private, so the example's `RunnerTests` can check every case.
+    internal static func flutterCodes(
+        _ domain: BlazeError.ErrorDomain
+    ) -> (domain: String, reason: String)? {
+        switch domain {
+        case .userManagement(reason: .settingExternalIdFailed):
+            return ("userManagement", "failedToSetExternalUserId")
+        case .userManagement(reason: .invalidExternalUserId):
+            return ("userManagement", "invalidExternalUserId")
+        case .userManagement(reason: .logoutFailed):
+            return ("userManagement", "failedToLogout")
+        case .widget(reason: .missingWidgetIdentifier):
+            return ("widget", "missingWidgetIdentifier")
+        case .initialization(reason: .initializationIsRequired):
+            return ("initialization", "applicationNotInitialised")
+        default:
+            return nil
+        }
     }
 }

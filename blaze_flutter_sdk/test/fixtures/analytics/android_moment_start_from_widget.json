@@ -1,0 +1,61 @@
+{
+  "event_action": "moment_start",
+  "event_category": "moment",
+  "moment": {
+    "audio_state": "mute",
+    "cc_state": "not_available",
+    "content_ratio": "9:16",
+    "cta_shown": false,
+    "custom_action_button_shown": false,
+    "follow_button_visible": false,
+    "is_liked": false,
+    "localization": {},
+    "loop_number": 0,
+    "loop_settings": {
+      "infinite_loop": true
+    },
+    "moment_duration": 18.68,
+    "moment_id": "64ee1f9f1396e4277f0595dd",
+    "moment_index": 0,
+    "moment_start_trigger": "widget",
+    "moment_title": " Novak Djokovic:",
+    "moments_session_id": "f89be2ab-028a-451a-afc9-50a62234a93a",
+    "next_moment_id": "64ee1f9f1396e4277f0595ea",
+    "playback_speed": 1.0,
+    "remaining_unread_count": 25,
+    "tabs_enabled": false,
+    "total_moments_count": 26
+  },
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "moments",
+    "origin_source_id": [
+      "home-moments-grid"
+    ],
+    "origin_source_type": [
+      "widget"
+    ],
+    "origin_widget_type": "grid"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:02:35.578",
+  "timestamp_utc": "2026-11-12 15:02:35.578",
+  "user": {
+    "experiments": {},
+    "followed_entities": [],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  }
+}

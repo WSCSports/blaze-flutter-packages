@@ -2148,7 +2148,9 @@ BlazeVideosPlayerCtaIconStyle _$BlazeVideosPlayerCtaIconStyleFromJson(
 /// @nodoc
 mixin _$BlazeVideosPlayerCtaIconStyle {
   BlazeImage? get iconImage => throw _privateConstructorUsedError;
-  BlazeVideosPlayerCTAIconPositioning? get iconPositioning =>
+
+  /// Android only. No effect on iOS. The position of the icon inside the CTA.
+  BlazeVideosPlayerCTAIconPositioning get iconPositioning =>
       throw _privateConstructorUsedError;
   String? get iconTint => throw _privateConstructorUsedError;
 
@@ -2189,7 +2191,7 @@ abstract class $BlazeVideosPlayerCtaIconStyleCopyWith<$Res> {
   @useResult
   $Res call(
       {BlazeImage? iconImage,
-      BlazeVideosPlayerCTAIconPositioning? iconPositioning,
+      BlazeVideosPlayerCTAIconPositioning iconPositioning,
       String? iconTint});
 
   $BlazeImageCopyWith<$Res>? get iconImage;
@@ -2212,7 +2214,7 @@ class _$BlazeVideosPlayerCtaIconStyleCopyWithImpl<$Res,
   @override
   $Res call({
     Object? iconImage = freezed,
-    Object? iconPositioning = freezed,
+    Object? iconPositioning = null,
     Object? iconTint = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2220,10 +2222,10 @@ class _$BlazeVideosPlayerCtaIconStyleCopyWithImpl<$Res,
           ? _value.iconImage
           : iconImage // ignore: cast_nullable_to_non_nullable
               as BlazeImage?,
-      iconPositioning: freezed == iconPositioning
+      iconPositioning: null == iconPositioning
           ? _value.iconPositioning
           : iconPositioning // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCTAIconPositioning?,
+              as BlazeVideosPlayerCTAIconPositioning,
       iconTint: freezed == iconTint
           ? _value.iconTint
           : iconTint // ignore: cast_nullable_to_non_nullable
@@ -2257,7 +2259,7 @@ abstract class _$$BlazeVideosPlayerCtaIconStyleImplCopyWith<$Res>
   @useResult
   $Res call(
       {BlazeImage? iconImage,
-      BlazeVideosPlayerCTAIconPositioning? iconPositioning,
+      BlazeVideosPlayerCTAIconPositioning iconPositioning,
       String? iconTint});
 
   @override
@@ -2280,7 +2282,7 @@ class __$$BlazeVideosPlayerCtaIconStyleImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? iconImage = freezed,
-    Object? iconPositioning = freezed,
+    Object? iconPositioning = null,
     Object? iconTint = freezed,
   }) {
     return _then(_$BlazeVideosPlayerCtaIconStyleImpl(
@@ -2288,10 +2290,10 @@ class __$$BlazeVideosPlayerCtaIconStyleImplCopyWithImpl<$Res>
           ? _value.iconImage
           : iconImage // ignore: cast_nullable_to_non_nullable
               as BlazeImage?,
-      iconPositioning: freezed == iconPositioning
+      iconPositioning: null == iconPositioning
           ? _value.iconPositioning
           : iconPositioning // ignore: cast_nullable_to_non_nullable
-              as BlazeVideosPlayerCTAIconPositioning?,
+              as BlazeVideosPlayerCTAIconPositioning,
       iconTint: freezed == iconTint
           ? _value.iconTint
           : iconTint // ignore: cast_nullable_to_non_nullable
@@ -2305,7 +2307,7 @@ class __$$BlazeVideosPlayerCtaIconStyleImplCopyWithImpl<$Res>
 class _$BlazeVideosPlayerCtaIconStyleImpl
     implements _BlazeVideosPlayerCtaIconStyle {
   const _$BlazeVideosPlayerCtaIconStyleImpl(
-      {this.iconImage, this.iconPositioning, this.iconTint});
+      {this.iconImage, required this.iconPositioning, this.iconTint});
 
   factory _$BlazeVideosPlayerCtaIconStyleImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -2313,8 +2315,10 @@ class _$BlazeVideosPlayerCtaIconStyleImpl
 
   @override
   final BlazeImage? iconImage;
+
+  /// Android only. No effect on iOS. The position of the icon inside the CTA.
   @override
-  final BlazeVideosPlayerCTAIconPositioning? iconPositioning;
+  final BlazeVideosPlayerCTAIconPositioning iconPositioning;
   @override
   final String? iconTint;
 
@@ -2391,7 +2395,7 @@ abstract class _BlazeVideosPlayerCtaIconStyle
     implements BlazeVideosPlayerCtaIconStyle {
   const factory _BlazeVideosPlayerCtaIconStyle(
       {final BlazeImage? iconImage,
-      final BlazeVideosPlayerCTAIconPositioning? iconPositioning,
+      required final BlazeVideosPlayerCTAIconPositioning iconPositioning,
       final String? iconTint}) = _$BlazeVideosPlayerCtaIconStyleImpl;
 
   factory _BlazeVideosPlayerCtaIconStyle.fromJson(Map<String, dynamic> json) =
@@ -2399,8 +2403,10 @@ abstract class _BlazeVideosPlayerCtaIconStyle
 
   @override
   BlazeImage? get iconImage;
+
+  /// Android only. No effect on iOS. The position of the icon inside the CTA.
   @override
-  BlazeVideosPlayerCTAIconPositioning? get iconPositioning;
+  BlazeVideosPlayerCTAIconPositioning get iconPositioning;
   @override
   String? get iconTint;
 

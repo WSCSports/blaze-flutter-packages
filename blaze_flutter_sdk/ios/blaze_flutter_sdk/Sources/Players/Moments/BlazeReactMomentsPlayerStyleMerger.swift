@@ -229,7 +229,7 @@ extension BlazeMomentsPlayerCtaStyle {
             customization.layoutPositioning)
         merged.horizontalAlignment = merged.horizontalAlignment.mergedWith(
             customization.horizontalAlignment)
-        merged.icon = UIImage.imageWith(customization.icon?.iconImage)
+        merged.icon = UIImage.imageWith(customization.icon?.iconImage) ?? merged.icon
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
         merged.borderWidth = customization.borderWidth ?? merged.borderWidth
@@ -310,11 +310,10 @@ extension BlazeMomentsPlayerButtonsStyle {
         merged.seekBackward = merged.seekBackward.mergedWith(customization.seekBackward)
         merged.search = merged.search.mergedWith(customization.search)
 
-        if let customActionButtons = customization.customActionButtons, !customActionButtons.isEmpty {
+        // An empty list clears the buttons; an omitted list keeps them.
+        if let customActionButtons = customization.customActionButtons {
             let nativeButtons = customActionButtons.compactMap { $0.toNativeMomentsCustomActionButton() }
-            if !nativeButtons.isEmpty {
-                merged.setBottomStackCustomActionButtons(nativeButtons)
-            }
+            merged.setBottomStackCustomActionButtons(nativeButtons)
         }
 
         merged.shouldPreserveLikesCountBelowThreshold =
@@ -336,8 +335,6 @@ extension BlazeMomentsPlayerButtonStyle {
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.isVisibleForAds = customization.isVisibleForAds ?? merged.isVisibleForAds
         merged.customImage = merged.customImage.mergedWith(customization.customImage)
-        merged.contentHorizontalAlignment = .center
-        merged.contentVerticalAlignment = .center
 
         merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
@@ -446,9 +443,10 @@ extension BlazeSDK.BlazeMomentsPlayerButtonCustomImageStates? {
             return self
         }
 
+        // An omitted selected image keeps the existing one.
         return .init(
             default: defaultImage,
-            selected: UIImage.imageWith(customization.selectedImage))
+            selected: UIImage.imageWith(customization.selectedImage) ?? self?.selected)
     }
 
 }

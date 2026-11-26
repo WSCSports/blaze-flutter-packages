@@ -1,0 +1,64 @@
+{
+  "event_action": "moment_start",
+  "sdk_version": "2.0.0;2.0.0",
+  "timestamp_utc": "2026-11-15 10:38:23.607",
+  "user": {
+    "locale": "en_US",
+    "followed_entities": [],
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "experiments": {}
+  },
+  "referring": {
+    "origin_source_id": [
+      "blaze_inner_search_moments"
+    ],
+    "origin_source_type": [
+      "widget"
+    ],
+    "search_session_id": "FD3AA83E-64F3-4161-958F-FAD6FCB426FA",
+    "data_source_value": "goal",
+    "data_source_type": "search",
+    "search_result_id": "A7345BDF-8786-477C-8A44-20B7BF20F6C7",
+    "search_query_id": "06745D93-1EAA-4217-AC0C-B32397C7C921",
+    "origin_widget_type": "row"
+  },
+  "moment": {
+    "is_liked": false,
+    "remaining_unread_count": 7,
+    "moments_session_id": "EEA4216E-06C4-4C7D-AC30-0F00CF998A09",
+    "moment_id": "64ee1f9f1396e4277f0595f4",
+    "loop_settings": {
+      "infinite_loop": true
+    },
+    "moment_duration": 14.88,
+    "total_moments_count": 9,
+    "follow_button_visible": false,
+    "moment_title": "Messi's 1st goal for Miami ",
+    "audio_state": "mute",
+    "playback_speed": 1,
+    "moment_index": 1,
+    "next_moment_id": "64ee1f9f1396e4277f0595e4",
+    "cc_state": "not_available",
+    "tabs_enabled": false,
+    "content_ratio": "9:16",
+    "localization": {},
+    "moment_start_trigger": "widget",
+    "custom_action_button_shown": false,
+    "loop_number": 0,
+    "cta_shown": false
+  },
+  "event_category": "moment",
+  "timestamp_user_tz": "2026-11-15 12:38:23.607",
+  "sdk_type": "ios-flutter",
+  "tech": {
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "connection_type": "wifi",
+    "screen_resolution": "1206x2622",
+    "operating_system": "ios",
+    "device_type": "phone",
+    "device_model": "SimulatoriPhone17,1",
+    "app_version": "1.0.0 (1)",
+    "device_brand": "apple",
+    "operating_system_version": "18.2"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "event_action": "user_logout",
+  "event_category": "global",
+  "referring": {},
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;2.0.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-15 14:11:40.899",
+  "timestamp_utc": "2026-11-15 12:11:40.899",
+  "user": {
+    "experiments": {},
+    "external_user_id": "toggle-user",
+    "generated_user_id": "77ee4caa-08a4-4d5b-9765-9003b392b2cb",
+    "locale": "en_US",
+    "logout_trigger": "init"
+  }
+}

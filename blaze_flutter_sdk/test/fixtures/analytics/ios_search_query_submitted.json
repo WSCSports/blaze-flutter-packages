@@ -1,0 +1,30 @@
+{
+  "referring": {},
+  "sdk_type": "ios-flutter",
+  "event_category": "search",
+  "event_action": "search_query_submitted",
+  "sdk_version": "2.0.0;2.0.0",
+  "timestamp_utc": "2026-11-15 10:38:13.154",
+  "tech": {
+    "app_version": "1.0.0 (1)",
+    "device_brand": "apple",
+    "connection_type": "wifi",
+    "device_model": "SimulatoriPhone17,1",
+    "screen_resolution": "1206x2622",
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "operating_system": "ios",
+    "operating_system_version": "18.2",
+    "device_type": "phone"
+  },
+  "search": {
+    "query": "goal",
+    "query_id": "06745D93-1EAA-4217-AC0C-B32397C7C921",
+    "search_session_id": "FD3AA83E-64F3-4161-958F-FAD6FCB426FA"
+  },
+  "timestamp_user_tz": "2026-11-15 12:38:13.154",
+  "user": {
+    "locale": "en_US",
+    "experiments": {},
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5"
+  }
+}

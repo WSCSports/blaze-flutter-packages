@@ -1,0 +1,46 @@
+{
+  "event_action": "tab_data_load",
+  "event_category": "tab",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "moments",
+    "origin_source_id": [
+      "home-moments-tabs-row",
+      "tab-for-you"
+    ],
+    "origin_source_type": [
+      "widget",
+      "moments_tab"
+    ],
+    "origin_widget_type": "row"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tab": {
+    "content_count": 26,
+    "tab_id": "tab-for-you",
+    "tab_index": 0,
+    "tab_title": "For You",
+    "tabs_source_id": "moments-tabs-demo",
+    "total_tabs_count": 3
+  },
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:02:04.666",
+  "timestamp_utc": "2026-11-12 15:02:04.666",
+  "user": {
+    "experiments": {},
+    "followed_entities": [],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "sdk_type": "ios-flutter",
+  "tech": {
+    "device_brand": "apple",
+    "device_model": "SimulatoriPhone17,1",
+    "connection_type": "wifi",
+    "operating_system_version": "18.2",
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "device_type": "phone",
+    "app_version": "1.0.0 (1)",
+    "operating_system": "ios",
+    "screen_resolution": "1206x2622"
+  },
+  "event_category": "story",
+  "timestamp_user_tz": "2026-11-15 10:54:43.913",
+  "timestamp_utc": "2026-11-15 08:54:43.913",
+  "story": {
+    "story_page_index": 0,
+    "story_page_duration_viewed_percent": 9.22,
+    "story_session_id": "564055CE-6038-4409-82A4-A005953FBB60",
+    "story_page_navigation_type": "manual",
+    "story_page_navigation_direction": "forward",
+    "cc_state": "not_available",
+    "story_title": "WSC V Amazon",
+    "custom_action_button_shown": false,
+    "story_page_type": "content",
+    "is_last_page": false,
+    "remaining_unread_count": 8,
+    "story_page_count": 2,
+    "audio_state": "mute",
+    "story_id": "64ee20bd1396e4277f059a47",
+    "story_page_duration": 86.76,
+    "content_ratio": "9:16",
+    "cta_shown": false,
+    "total_stories_count": 9,
+    "story_index": 0,
+    "next_story_id": "64ee20bd1396e4277f059a44",
+    "story_page_id": "649c32359503bc65ac52f8fe",
+    "remaining_unread_pages": 1
+  },
+  "referring": {
+    "origin_widget_type": "row",
+    "origin_source_type": [
+      "widget"
+    ],
+    "origin_source_id": [
+      "home-stories-row"
+    ],
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "event_action": "story_page_exit",
+  "sdk_version": "2.0.0;1.21.0",
+  "user": {
+    "experiments": {},
+    "locale": "en_US",
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5"
+  }
+}

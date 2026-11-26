@@ -1,0 +1,64 @@
+{
+  "event_action": "moment_start",
+  "event_category": "moment",
+  "moment": {
+    "audio_state": "mute",
+    "cc_state": "not_available",
+    "content_ratio": "9:16",
+    "cta_shown": false,
+    "custom_action_button_shown": false,
+    "follow_button_visible": false,
+    "is_liked": false,
+    "localization": {},
+    "loop_number": 0,
+    "loop_settings": {
+      "infinite_loop": true
+    },
+    "moment_duration": 19.52,
+    "moment_id": "64ee1f9f1396e4277f0595ef",
+    "moment_index": 0,
+    "moment_start_trigger": "widget",
+    "moment_title": "Joselu's crazy goal✂️",
+    "moments_session_id": "edb3bcdb-da68-4524-96d1-7241dcf31f74",
+    "next_moment_id": "64ee1f9f1396e4277f0595f4",
+    "playback_speed": 1.0,
+    "remaining_unread_count": 8,
+    "tabs_enabled": false,
+    "total_moments_count": 9
+  },
+  "referring": {
+    "data_source_type": "search",
+    "data_source_value": "goal",
+    "origin_source_id": [
+      "blaze_inner_search_moments"
+    ],
+    "origin_source_type": [
+      "widget"
+    ],
+    "origin_widget_type": "row",
+    "search_query_id": "80d82900-e359-42f8-8296-12621fb4c639",
+    "search_result_id": "e883c2b2-5a6a-4233-bb06-fdf26586bcfc",
+    "search_session_id": "a9d0bdd0-6a63-42f1-89f7-a313ba48c3c3"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;2.0.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-15 14:13:59.396",
+  "timestamp_utc": "2026-11-15 12:13:59.396",
+  "user": {
+    "experiments": {},
+    "followed_entities": [],
+    "generated_user_id": "77ee4caa-08a4-4d5b-9765-9003b392b2cb",
+    "locale": "en_US"
+  }
+}

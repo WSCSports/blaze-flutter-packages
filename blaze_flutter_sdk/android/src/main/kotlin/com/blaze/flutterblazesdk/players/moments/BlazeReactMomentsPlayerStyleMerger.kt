@@ -148,7 +148,7 @@ fun BlazeMomentsPlayerHeadingTextStyle.mergedWith(
 
     merged.textSize = customization.textSize ?: this.textSize
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.contentSource = customization.contentSource?.mapToBlazeEnumClass() ?: this.contentSource
     merged.isVisible = customization.isVisible ?: this.isVisible
 
@@ -165,7 +165,7 @@ fun BlazeMomentsPlayerBodyTextStyle.mergedWith(
 
     merged.textSize = customization.textSize ?: this.textSize
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.contentSource = customization.contentSource?.mapToBlazeEnumClass() ?: this.contentSource
     merged.isVisible = customization.isVisible ?: this.isVisible
 
@@ -211,7 +211,7 @@ private fun mergeCustomActionButtons(
         button.style = button.style.mergeButtonThemes(reactButton.style, context)
         button
     }
-    return nativeButtons.ifEmpty { return null }
+    return nativeButtons
 }
 
 fun BlazeMomentsPlayerCtaStyle.mergedWith(
@@ -223,7 +223,7 @@ fun BlazeMomentsPlayerCtaStyle.mergedWith(
     val merged = this
     merged.cornerRadius = customization.cornerRadius?.blazeDp ?: this.cornerRadius
     merged.textSize = customization.textSize ?: this.textSize
-    merged.fontResId = customization.font?.toFontResId(context = context)
+    merged.fontResId = customization.font?.toFontResId(context = context) ?: this.fontResId
     merged.width = customization.width?.blazeDp ?: this.width
     merged.height = customization.height?.blazeDp ?: this.height
     customization.layoutPositioning?.let { merged.layoutPositioning = it.mapToBlazeEnumClass() }
@@ -244,25 +244,24 @@ fun BlazeMomentsPlayerCtaIconStyle?.mergeWith(
 
     val iconPositioning = customization.iconPositioning?.mapToBlazeEnumClass()
 
-    val merged = this
+    val iconTint = safeParseColor(customization.iconTint)
 
-    merged?.let { iconStyle ->
-        merged.iconTint = safeParseColor(customization.iconTint) ?: iconStyle.iconTint
-        merged.iconPositioning = iconPositioning ?: iconStyle.iconPositioning
-        merged.iconResId = imageResId ?: iconStyle.iconResId
+    this?.let { existing ->
+        existing.iconTint = iconTint ?: existing.iconTint
+        existing.iconPositioning = iconPositioning ?: existing.iconPositioning
+        existing.iconResId = imageResId ?: existing.iconResId
+        return existing
     }
-        ?: run {
-            imageResId ?: return null
-            iconPositioning ?: return null
 
-            BlazeMomentsPlayerCtaIconStyle(
-                iconResId = imageResId,
-                iconPositioning = iconPositioning,
-                iconTint = safeParseColor(customization.iconTint) ?: this?.iconTint
-            )
-        }
+    // No icon yet: native needs both the image and the positioning to build one.
+    imageResId ?: return null
+    iconPositioning ?: return null
 
-    return merged
+    return BlazeMomentsPlayerCtaIconStyle(
+        iconResId = imageResId,
+        iconPositioning = iconPositioning,
+        iconTint = iconTint
+    )
 }
 
 fun BlazeMomentsPlayerChipsStyle.mergedWith(

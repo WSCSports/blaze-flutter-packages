@@ -31,6 +31,9 @@ import com.blaze.blazesdk.features.moments.models.configuration.BlazeMomentsLoop
 import com.blaze.blazesdk.features.search.models.BlazeSearchScreenParams
 import com.blaze.blazesdk.features.shared.models.ui_shared.BlazeLinkActionHandleType
 import com.blaze.blazesdk.shared.BlazeSDK
+import com.blaze.blazesdk.style.players.moments.BlazeMomentsPlayerStyle
+import com.blaze.blazesdk.style.players.stories.BlazeStoryPlayerStyle
+import com.blaze.blazesdk.style.players.videos.BlazeVideosPlayerStyle
 import com.blaze.blazesdk.shared.models.BlazeEntryPointTriggerSource
 import com.blaze.blazesdk.shared.models.BlazePlayerSoundState
 import com.blaze.blazesdk.shared.results.BlazeResult
@@ -154,6 +157,7 @@ object BlazeFlutterSDKModule {
                         "canHandlePushNotification" -> canHandlePushNotification(call, result)
                         "handleNotificationPayload" -> handleNotificationPayload(call, result)
                         "setExternalUserId" -> setExternalUserId(call, result)
+                        "logout" -> logout(result)
                         "setExternalUserToken" -> setExternalUserToken(call, result)
                         "handleUniversalLink" -> handleUniversalLink(call, result)
                         "isInitialized" -> isInitialized(call, result)
@@ -408,6 +412,8 @@ object BlazeFlutterSDKModule {
 
                 // Extract optional parameters
                 val externalUserId = call.safeGetArgument<String>("externalUserId")
+                // Absent unless the app set it: the native default then applies.
+                val restoreExternalUserId = call.safeGetArgument<Boolean>("restoreExternalUserId")
                 val cachingSize = call.safeGetArgument<Int>("cachingSize")
                 val cachingLevelString = call.safeGetArgument<String>("cachingLevel")
                 val geoLocation = call.safeGetArgument<String>("geoLocation")
@@ -428,23 +434,37 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<String>("forceLayoutDirection")
                                 .asBlazeLayoutDirection()
 
-                BlazeSDK.init(
-                        apiKey = apiKey,
-                        externalUserId = externalUserId,
-                        cachingSize = cachingSize,
-                        cachingLevel = cachingLevel,
-                        geoLocation = geoLocation,
-                        forceLayoutDirection = forceLayoutDirection,
-                        externalUserToken = externalUserToken,
-                        completionBlock = { result.success(null) },
-                        errorBlock = { e ->
-                                result.handleBlazeResult(
-                                        result = e
-                                )
-                        },
-                        sdkDelegate = globalDelegate,
-                        playerEntryPointDelegate = playerEntryPointDelegate
-                )
+                val onInitError: (BlazeResult.Error) -> Unit = { e -> result.handleBlazeResult(result = e) }
+                if (restoreExternalUserId == null) {
+                        BlazeSDK.init(
+                                apiKey = apiKey,
+                                externalUserId = externalUserId,
+                                cachingSize = cachingSize,
+                                cachingLevel = cachingLevel,
+                                geoLocation = geoLocation,
+                                forceLayoutDirection = forceLayoutDirection,
+                                externalUserToken = externalUserToken,
+                                completionBlock = { result.success(null) },
+                                errorBlock = onInitError,
+                                sdkDelegate = globalDelegate,
+                                playerEntryPointDelegate = playerEntryPointDelegate
+                        )
+                } else {
+                        BlazeSDK.init(
+                                apiKey = apiKey,
+                                externalUserId = externalUserId,
+                                cachingSize = cachingSize,
+                                cachingLevel = cachingLevel,
+                                geoLocation = geoLocation,
+                                forceLayoutDirection = forceLayoutDirection,
+                                externalUserToken = externalUserToken,
+                                restoreExternalUserId = restoreExternalUserId,
+                                completionBlock = { result.success(null) },
+                                errorBlock = onInitError,
+                                sdkDelegate = globalDelegate,
+                                playerEntryPointDelegate = playerEntryPointDelegate
+                        )
+                }
 
                 BlazeSDK.followEntitiesManager.delegate = followEntitiesDelegate
                 BlazeSDK.castingManager.delegate = castingDelegate
@@ -455,7 +475,10 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("defaultStoryPlayerStyle")
                 if (defaultStoryPlayerStyleMap != null) {
                         val storyPlayerStyle =
-                                defaultStoryPlayerStyleMap.extractStoriesPlayerStyle(application)
+                                defaultStoryPlayerStyleMap.extractStoriesPlayerStyle(
+                                        application,
+                                        BlazeStoryPlayerStyle.base()
+                                )
                         BlazeSDK.setDefaultStoryPlayerStyle(storyPlayerStyle = storyPlayerStyle)
                 }
 
@@ -463,7 +486,10 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("defaultMomentsPlayerStyle")
                 if (defaultMomentsPlayerStyleMap != null) {
                         val momentsPlayerStyle =
-                                defaultMomentsPlayerStyleMap.extractMomentsPlayerStyle(application)
+                                defaultMomentsPlayerStyleMap.extractMomentsPlayerStyle(
+                                        application,
+                                        BlazeMomentsPlayerStyle.base()
+                                )
                         BlazeSDK.setDefaultMomentsPlayerStyle(
                                 momentsPlayerStyle = momentsPlayerStyle
                         )
@@ -473,7 +499,10 @@ object BlazeFlutterSDKModule {
                         call.safeGetArgument<Map<String, Any>>("defaultVideosPlayerStyle")
                 if (defaultVideosPlayerStyleMap != null) {
                         val videosPlayerStyle =
-                                defaultVideosPlayerStyleMap.extractVideosPlayerStyle(application)
+                                defaultVideosPlayerStyleMap.extractVideosPlayerStyle(
+                                        application,
+                                        BlazeVideosPlayerStyle.base()
+                                )
                         BlazeSDK.setDefaultVideosPlayerStyle(videosPlayerStyle = videosPlayerStyle)
                 }
         }
@@ -855,11 +884,24 @@ object BlazeFlutterSDKModule {
         }
 
         private fun setExternalUserId(call: MethodCall, result: MethodChannel.Result) {
-                val externalUserId = call.safeGetArgument<String>("externalUserId")
+                val externalUserId =
+                        call.safeGetArgument<String>("externalUserId")
+                                ?: run {
+                                        result.handleError(
+                                                errCode = "setExternalUserId",
+                                                errMessage = "No externalUserId param found"
+                                        )
+                                        return
+                                }
 
+                // Any string goes to native, which rejects a blank id.
                 BlazeSDK.setExternalUserId(externalUserId) { blazeResult ->
                         result.handleBlazeResult(blazeResult)
                 }
+        }
+
+        private fun logout(result: MethodChannel.Result) {
+                BlazeSDK.logout { blazeResult -> result.handleBlazeResult(blazeResult) }
         }
 
         private fun setExternalUserToken(call: MethodCall, result: MethodChannel.Result) {

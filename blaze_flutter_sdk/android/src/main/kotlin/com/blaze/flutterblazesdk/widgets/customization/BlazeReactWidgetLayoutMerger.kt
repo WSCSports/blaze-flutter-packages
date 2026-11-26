@@ -27,6 +27,7 @@ import com.blaze.blazesdk.style.widgets.BlazeWidgetItemTitleStyle
 import com.blaze.blazesdk.style.widgets.BlazeWidgetLayout
 import com.blaze.blazesdk.style.widgets.BlazeWidgetShimmeringStyle
 import com.blaze.flutterblazesdk.utils.parsing.gravityMergedWith
+import com.blaze.flutterblazesdk.utils.parsing.letterSpacingPointsToEm
 import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
 import com.blaze.flutterblazesdk.utils.parsing.toFontResId
@@ -105,8 +106,8 @@ fun BlazeWidgetItemSubtitleStyle.mergedWith(
 
         merged.isVisible = customization.isVisible ?: this.isVisible
         merged.topSpacing = customization.topSpacing?.toInt()?.blazeDp ?: this.topSpacing
-        merged.unreadState = this.unreadState.mergedKeepingFont(customization.unreadState, context)
-        merged.readState = this.readState.mergedKeepingFont(customization.readState, context)
+        merged.unreadState = this.unreadState.mergedWith(customization.unreadState, context)
+        merged.readState = this.readState.mergedWith(customization.readState, context)
 
         return merged
 }
@@ -121,8 +122,8 @@ fun BlazeWidgetItemDescriptionStyle.mergedWith(
 
         merged.isVisible = customization.isVisible ?: this.isVisible
         merged.topSpacing = customization.topSpacing?.toInt()?.blazeDp ?: this.topSpacing
-        merged.unreadState = this.unreadState.mergedKeepingFont(customization.unreadState, context)
-        merged.readState = this.readState.mergedKeepingFont(customization.readState, context)
+        merged.unreadState = this.unreadState.mergedWith(customization.unreadState, context)
+        merged.readState = this.readState.mergedWith(customization.readState, context)
 
         return merged
 }
@@ -182,25 +183,13 @@ fun BlazeWidgetItemDurationElementStateStyle.mergedWith(
                 safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
         merged.backgroundImageResId =
                 customization.backgroundImage?.toImageResId(context) ?: merged.backgroundImageResId
-        merged.textStyle = this.textStyle.mergedKeepingFont(customization.textStyle, context)
+        merged.textStyle = this.textStyle.mergedWith(customization.textStyle, context)
         merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
         merged.cornerRadiusRatio = customization.cornerRadiusRatio ?: merged.cornerRadiusRatio
         merged.borderColor = safeParseColor(customization.borderColor) ?: merged.borderColor
         merged.borderWidth = customization.borderWidth?.toInt()?.blazeDp ?: merged.borderWidth
 
         return merged
-}
-
-/// Like [BlazeWidgetItemTextStyle.mergedWith], but an omitted font keeps the preset font
-/// instead of clearing it.
-private fun BlazeWidgetItemTextStyle.mergedKeepingFont(
-        customization: BlazeReactTitleStyle?,
-        context: Context
-): BlazeWidgetItemTextStyle {
-        val presetFontResId = this.fontResId
-        return this.mergedWith(customization, context).also { merged ->
-                if (customization?.font == null) merged.fontResId = presetFontResId
-        }
 }
 
 fun BlazeWidgetItemStatusIndicatorStyle.mergedWith(
@@ -237,7 +226,9 @@ fun BlazeWidgetItemStatusIndicatorStateStyle.mergedWith(
         merged.isVisible = customization.isVisible ?: merged.isVisible
         merged.backgroundColor =
                 safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
-        merged.backgroundImageResId = customization.backgroundImage?.toImageResId(context)
+        merged.backgroundImageResId =
+                customization.backgroundImage?.toImageResId(context)
+                        ?: merged.backgroundImageResId
         merged.textStyle = this.textStyle.mergedWith(customization.textStyle, context)
         merged.text = customization.text ?: merged.text
         merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
@@ -302,7 +293,9 @@ fun BlazeWidgetItemBadgeStateStyle.mergedWith(
         merged.height = customization.height?.blazeDp ?: this.height
         merged.backgroundColor =
                 safeParseColor(customization.backgroundColor) ?: merged.backgroundColor
-        merged.backgroundImageResId = customization.backgroundImage?.toImageResId(context)
+        merged.backgroundImageResId =
+                customization.backgroundImage?.toImageResId(context)
+                        ?: merged.backgroundImageResId
         merged.textStyle = this.textStyle.mergedWith(customization.textStyle, context)
         merged.text = customization.text ?: merged.text
         merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: merged.cornerRadius
@@ -347,9 +340,11 @@ fun BlazeWidgetItemTextStyle.mergedWith(
         customization ?: return this
 
         val merged = this
-        merged.fontResId = customization.font?.toFontResId(context)
+        merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
         merged.textSize = customization.textSize ?: this.textSize
-        merged.letterSpacing = customization.letterSpacing ?: this.letterSpacing
+        merged.letterSpacing =
+                customization.letterSpacing?.letterSpacingPointsToEm(merged.textSize)
+                        ?: this.letterSpacing
         merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
         merged.lineHeight = customization.lineHeight?.blazeDp ?: this.lineHeight
         merged.maxLines = customization.maxLines ?: this.maxLines

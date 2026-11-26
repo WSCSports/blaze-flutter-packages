@@ -53,6 +53,7 @@ class BlazeFlutterSDKModule {
         static let canHandlePushNotification = "canHandlePushNotification"
         static let handleNotificationPayload = "handleNotificationPayload"
         static let setExternalUserId = "setExternalUserId"
+        static let logout = "logout"
         static let setExternalUserToken = "setExternalUserToken"
         static let handleUniversalLink = "handleUniversalLink"
         static let isInitialized = "isInitialized"
@@ -196,6 +197,8 @@ class BlazeFlutterSDKModule {
             handleNotificationPayload(call: call, result: result)
         case MethodNameConstants.setExternalUserId:
             setExternalUserId(call: call, result: result)
+        case MethodNameConstants.logout:
+            logout(result: result)
         case MethodNameConstants.setExternalUserToken:
             setExternalUserToken(call: call, result: result)
         case MethodNameConstants.handleUniversalLink:
@@ -221,6 +224,8 @@ class BlazeFlutterSDKModule {
 
         // Extract optional parameters
         let externalUserId = call.safeGetArg("externalUserId", String.self)
+        // Absent unless the app set it: the native default then applies.
+        let restoreExternalUserId = call.safeGetArg("restoreExternalUserId", Bool.self)
         let cachingSize = call.safeGetArg("cachingSize", Int.self)
         let cachingLevelString = call.safeGetArg("cachingLevel", String.self)
         let geoLocation = call.safeGetArg("geoLocation", String.self)
@@ -240,17 +245,32 @@ class BlazeFlutterSDKModule {
         let forceLayoutDirection =
             call.safeGetArg("forceLayoutDirection", String.self)?.asBlazeLayoutDirection
 
-        Blaze.shared.initialize(
-            apiKey: apiKey,
-            externalUserId: externalUserId,
-            cachingSize: cachingSize,
-            prefetchingPolicy: cachingLevel,
-            geo: geoLocation,
-            forceLayoutDirection: forceLayoutDirection,
-            delegate: globalDelegate,
-            externalUserToken: externalUserToken
-        ) { blazeResult in
+        let onInitResult: BlazeResultBlock = { blazeResult in
             blazeResult.handleResult(result)
+        }
+        if let restoreExternalUserId {
+            Blaze.shared.initialize(
+                apiKey: apiKey,
+                externalUserId: externalUserId,
+                restoreExternalUserId: restoreExternalUserId,
+                cachingSize: cachingSize,
+                prefetchingPolicy: cachingLevel,
+                geo: geoLocation,
+                forceLayoutDirection: forceLayoutDirection,
+                delegate: globalDelegate,
+                externalUserToken: externalUserToken,
+                resultBlock: onInitResult)
+        } else {
+            Blaze.shared.initialize(
+                apiKey: apiKey,
+                externalUserId: externalUserId,
+                cachingSize: cachingSize,
+                prefetchingPolicy: cachingLevel,
+                geo: geoLocation,
+                forceLayoutDirection: forceLayoutDirection,
+                delegate: globalDelegate,
+                externalUserToken: externalUserToken,
+                resultBlock: onInitResult)
         }
 
         Blaze.shared.playerEntryPointDelegate = playerEntryPointDelegate
@@ -279,19 +299,22 @@ class BlazeFlutterSDKModule {
         // Set default player styles if provided
         let defaultStoryPlayerStyleMap = call.safeGetArg(
             "defaultStoryPlayerStyle", [String: AnyHashable].self)
-        if let storyPlayerStyle = defaultStoryPlayerStyleMap.extractPlayerStoryStyle() {
+        if let storyPlayerStyle = defaultStoryPlayerStyleMap.extractPlayerStoryStyle(
+            startingFrom: .base()) {
             Blaze.shared.setDefaultStoryPlayerStyle(storyPlayerStyle)
         }
 
         let defaultMomentsPlayerStyleMap = call.safeGetArg(
             "defaultMomentsPlayerStyle", [String: AnyHashable].self)
-        if let momentsPlayerStyle = defaultMomentsPlayerStyleMap.extractPlayerMomentsStyle() {
+        if let momentsPlayerStyle = defaultMomentsPlayerStyleMap.extractPlayerMomentsStyle(
+            startingFrom: .base()) {
             Blaze.shared.setDefaultMomentsPlayerStyle(momentsPlayerStyle)
         }
 
         let defaultVideosPlayerStyleMap = call.safeGetArg(
             "defaultVideosPlayerStyle", [String: AnyHashable].self)
-        if let videosPlayerStyle = defaultVideosPlayerStyleMap.extractPlayerVideosStyle() {
+        if let videosPlayerStyle = defaultVideosPlayerStyleMap.extractPlayerVideosStyle(
+            startingFrom: .base()) {
             Blaze.shared.setDefaultVideosPlayerStyle(videosPlayerStyle)
         }
     }
@@ -1070,9 +1093,22 @@ class BlazeFlutterSDKModule {
     }
 
     private func setExternalUserId(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        let userId = call.safeGetArg("externalUserId", String.self)
+        guard let userId = call.safeGetArg("externalUserId", String.self) else {
+            handleError(
+                result,
+                errCode: "setExternalUserId",
+                errMessage: "No externalUserId param found")
+            return
+        }
 
+        // Any string goes to native, which rejects a blank id.
         Blaze.shared.setExternalUserId(userId) { blazeResult in
+            blazeResult.handleResult(result)
+        }
+    }
+
+    private func logout(result: @escaping FlutterResult) {
+        Blaze.shared.logout { blazeResult in
             blazeResult.handleResult(result)
         }
     }

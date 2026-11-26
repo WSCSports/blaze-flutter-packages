@@ -1,0 +1,96 @@
+{
+  "event_action": "video_start",
+  "event_category": "video",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:00:33.432",
+  "timestamp_utc": "2026-11-12 15:00:33.432",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "followed_entities": [
+      {
+        "entity_type": "team",
+        "id": "fixture-team"
+      }
+    ],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  },
+  "video": {
+    "video_session_id": "v-s",
+    "video_id": "v-1",
+    "next_video_id": "v-2",
+    "video_title": "Title",
+    "video_index": 0,
+    "total_videos_count": 5,
+    "remaining_unread_count": 4,
+    "is_liked": false,
+    "audio_state": "unmute",
+    "video_start_trigger": "widget",
+    "video_end_trigger": "close_button",
+    "video_current_time": 12.5,
+    "video_duration": 120.0,
+    "video_time_start": 0.0,
+    "video_time_end": 12.5,
+    "seek_type": "double_tap",
+    "seek_start_time": 1.5,
+    "seek_end_time": 11.5,
+    "seek_total_time": 10.0,
+    "seek_direction": "backward",
+    "seek_interval_setting": 10.0,
+    "device_orientation": "landscape",
+    "content_ratio": "16:9",
+    "video_orientation_changed_trigger": "device_rotation",
+    "back_to_live_trigger": "back_to_live_button",
+    "cast_duration": 30.0,
+    "quality": "720p",
+    "content_extra_info": {
+      "league": "nba"
+    },
+    "viewing_mode": "picture_in_picture",
+    "cc_state": "off",
+    "cta_config": {
+      "text": "Watch now",
+      "color": "#FF0000",
+      "url": "https://example.com/cta"
+    },
+    "cta_shown": true,
+    "localization": {
+      "language": "en"
+    },
+    "playback_speed_type": "press_hold",
+    "playback_speed": 1.5,
+    "speed_start_time": 1.0,
+    "speed_end_time": 3.0,
+    "speed_total_time": 2.0,
+    "user_lifetime_engagements": 12,
+    "stream_status": "live",
+    "attribution_token": "tok",
+    "is_at_live_edge": true,
+    "catchup_target": "go_live",
+    "catchup_surface": "catchup_screen",
+    "stream_elapsed_time": 900.0,
+    "audio_track": "en",
+    "audio_track_previous": "es",
+    "audio_track_is_preferred": true,
+    "search_session_id": "ss-1",
+    "query_id": "q-1",
+    "result_id": "r-1"
+  }
+}

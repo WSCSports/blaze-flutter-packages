@@ -1,0 +1,59 @@
+{
+  "event_action": "widget_load",
+  "event_category": "widget",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:00:33.432",
+  "timestamp_utc": "2026-11-12 15:00:33.432",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "followed_entities": [
+      {
+        "entity_type": "team",
+        "id": "fixture-team"
+      }
+    ],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  },
+  "widget": {
+    "animated_thumbnail_enabled": false,
+    "content_type": "story",
+    "placement_distance": 414.0,
+    "thumbnail_aspect_ratio": "1.0",
+    "thumbnail_format": "static",
+    "thumbnail_size": "359x359",
+    "thumbnail_type": "circle",
+    "widget_content_count": 9,
+    "widget_content_list": [
+      "64ee20bd1396e4277f059a47",
+      "64ee20bd1396e4277f059a44",
+      "64ee20bd1396e4277f059a48",
+      "64ee20bd1396e4277f059a43",
+      "64ee20bd1396e4277f059a3d",
+      "64ee20bd1396e4277f059a3b",
+      "64ee20bd1396e4277f059a2e",
+      "64ee20ba1396e4277f0597ce",
+      "64f9d0b4b629c81c05e08a4c"
+    ],
+    "widget_id": "home-stories-row",
+    "widget_size": "1440x560",
+    "widget_type": "row"
+  }
+}

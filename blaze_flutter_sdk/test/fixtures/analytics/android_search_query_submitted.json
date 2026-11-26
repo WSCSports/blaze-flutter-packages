@@ -1,0 +1,30 @@
+{
+  "event_action": "search_query_submitted",
+  "event_category": "search",
+  "referring": {},
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;2.0.0",
+  "search": {
+    "query": "goal",
+    "query_id": "80d82900-e359-42f8-8296-12621fb4c639",
+    "search_session_id": "a9d0bdd0-6a63-42f1-89f7-a313ba48c3c3"
+  },
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-15 14:13:53.185",
+  "timestamp_utc": "2026-11-15 12:13:53.185",
+  "user": {
+    "experiments": {},
+    "generated_user_id": "77ee4caa-08a4-4d5b-9765-9003b392b2cb",
+    "locale": "en_US"
+  }
+}

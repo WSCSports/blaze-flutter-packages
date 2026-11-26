@@ -1,0 +1,34 @@
+{
+  "search": {
+    "position": 3,
+    "query_id": "06745D93-1EAA-4217-AC0C-B32397C7C921",
+    "content_type": "moment",
+    "content_id": "64ee1f9f1396e4277f0595f4",
+    "result_id": "A7345BDF-8786-477C-8A44-20B7BF20F6C7",
+    "search_session_id": "FD3AA83E-64F3-4161-958F-FAD6FCB426FA",
+    "query": "goal"
+  },
+  "event_action": "search_result_clicked",
+  "event_category": "search",
+  "sdk_version": "2.0.0;2.0.0",
+  "timestamp_utc": "2026-11-15 10:38:23.158",
+  "tech": {
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "device_model": "SimulatoriPhone17,1",
+    "device_type": "phone",
+    "connection_type": "wifi",
+    "app_version": "1.0.0 (1)",
+    "device_brand": "apple",
+    "operating_system_version": "18.2",
+    "operating_system": "ios",
+    "screen_resolution": "1206x2622"
+  },
+  "user": {
+    "experiments": {},
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "locale": "en_US"
+  },
+  "referring": {},
+  "timestamp_user_tz": "2026-11-15 12:38:23.158",
+  "sdk_type": "ios-flutter"
+}

@@ -1,0 +1,60 @@
+{
+  "sdk_version": "2.0.0;1.21.0",
+  "timestamp_utc": "2026-11-15 08:55:53.994",
+  "user": {
+    "locale": "en_US",
+    "experiments": {},
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5"
+  },
+  "timestamp_user_tz": "2026-11-15 10:55:53.994",
+  "event_category": "video",
+  "referring": {
+    "origin_widget_type": "grid",
+    "origin_source_type": [
+      "widget"
+    ],
+    "data_source_value": "videos",
+    "origin_source_id": [
+      "home-videos-grid"
+    ],
+    "data_source_type": "label_expression"
+  },
+  "sdk_type": "ios-flutter",
+  "video": {
+    "playback_speed": 1,
+    "video_duration": 166.0659,
+    "cc_state": "off",
+    "is_liked": false,
+    "video_id": "682ada037d1d9f60bd56aa86",
+    "content_ratio": "16:9",
+    "device_orientation": "landscape",
+    "audio_state": "unmute",
+    "video_index": 1,
+    "cta_config": {
+      "text": "For Rubi with love",
+      "color": "#d60add",
+      "url": "https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TM4pNy40yzUxYPRiS8nMTSzOAABQcAb3&q=dimash&oq=dimash&gs_lcrp=EgZjaHJvbWUqBwgBEC4YgAQyCggAEAAY4wIYgAQyBwgBEC4YgAQyBwgCEAAYgAQyCggDEC4Y1AIYgAQyCggEEC4Y1AIYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBwgHEAAYgAQyBwgIEC4YgAQyBwgJEAAYgATSAQgzODE5ajBqOagCALACAQ&sourceid=chrome&ie=UTF-8"
+    },
+    "remaining_unread_count": 3,
+    "video_orientation_changed_trigger": "device_rotation",
+    "video_title": "Unbelievable NBA Game Recap: Intense Buzzer Beater, Game-Winning Shot, Insane Dunks, Clutch Threes, and Epic Comeback You Won’t Believe – Full Highlights from One of the Most Exciting Games of the Season!",
+    "cta_shown": true,
+    "viewing_mode": "fullscreen",
+    "video_start_trigger": "widget",
+    "video_current_time": 0,
+    "total_videos_count": 5,
+    "video_session_id": "380F6284-D10A-4BB5-824B-998D84DEFFE5"
+  },
+  "event_action": "viewing_orientation_changed",
+  "tech": {
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "operating_system_version": "18.2",
+    "screen_resolution": "1206x2622",
+    "operating_system": "ios",
+    "connection_type": "wifi",
+    "app_version": "1.0.0 (1)",
+    "device_type": "phone",
+    "device_brand": "apple",
+    "device_model": "SimulatoriPhone17,1"
+  }
+}

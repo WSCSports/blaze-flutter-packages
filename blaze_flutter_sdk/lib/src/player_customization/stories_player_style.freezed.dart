@@ -1662,6 +1662,10 @@ mixin _$BlazeStoryPlayerButtonsStyle {
   BlazePlayerButtonStyle? get exit => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get share => throw _privateConstructorUsedError;
   BlazePlayerButtonStyle? get captions => throw _privateConstructorUsedError;
+
+  /// At most 2 buttons, each with a unique `customParams.id`; anything else
+  /// throws an [ArgumentError]. An empty list removes the custom action
+  /// buttons. When omitted, the current buttons are kept.
   List<BlazeCustomActionButton>? get customActionButtons =>
       throw _privateConstructorUsedError;
 
@@ -1912,7 +1916,15 @@ class _$BlazeStoryPlayerButtonsStyleImpl
   final BlazePlayerButtonStyle? share;
   @override
   final BlazePlayerButtonStyle? captions;
+
+  /// At most 2 buttons, each with a unique `customParams.id`; anything else
+  /// throws an [ArgumentError]. An empty list removes the custom action
+  /// buttons. When omitted, the current buttons are kept.
   final List<BlazeCustomActionButton>? _customActionButtons;
+
+  /// At most 2 buttons, each with a unique `customParams.id`; anything else
+  /// throws an [ArgumentError]. An empty list removes the custom action
+  /// buttons. When omitted, the current buttons are kept.
   @override
   List<BlazeCustomActionButton>? get customActionButtons {
     final value = _customActionButtons;
@@ -2014,6 +2026,10 @@ abstract class _BlazeStoryPlayerButtonsStyle
   BlazePlayerButtonStyle? get share;
   @override
   BlazePlayerButtonStyle? get captions;
+
+  /// At most 2 buttons, each with a unique `customParams.id`; anything else
+  /// throws an [ArgumentError]. An empty list removes the custom action
+  /// buttons. When omitted, the current buttons are kept.
   @override
   List<BlazeCustomActionButton>? get customActionButtons;
 

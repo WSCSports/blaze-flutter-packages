@@ -21,10 +21,11 @@ class BlazeFollowEntity with _$BlazeFollowEntity {
     /// The data provider the [id] belongs to.
     String? providerName,
 
-    /// The entity's category. Unrecognized native values decode to `null`.
+    /// The entity's category. Pass `null` when it is not known. Unrecognized
+    /// native values decode to `null`.
     // ignore: invalid_annotation_target
     @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-    BlazeFollowedEntityCategory? entityType,
+    required BlazeFollowedEntityCategory? entityType,
   }) = _BlazeFollowEntity;
 
   factory BlazeFollowEntity.fromJson(Map<String, dynamic> json) =>

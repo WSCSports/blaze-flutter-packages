@@ -1,0 +1,70 @@
+{
+  "event_action": "moment_start",
+  "event_category": "moment",
+  "moment": {
+    "active_tab_title": "For You",
+    "audio_state": "mute",
+    "cc_state": "not_available",
+    "content_ratio": "9:16",
+    "cta_shown": false,
+    "custom_action_button_shown": false,
+    "follow_button_visible": false,
+    "initial_tab_title": "For You",
+    "is_liked": false,
+    "localization": {},
+    "loop_number": 0,
+    "loop_settings": {
+      "infinite_loop": true
+    },
+    "moment_duration": 18.68,
+    "moment_id": "64ee1f9f1396e4277f0595dd",
+    "moment_index": 0,
+    "moment_start_trigger": "moments_tabs",
+    "moment_title": " Novak Djokovic:",
+    "moments_session_id": "176C0293-78B7-4797-8224-3FA8E92C6FB2",
+    "next_moment_id": "64ee1f9f1396e4277f0595ea",
+    "playback_speed": 1,
+    "remaining_unread_count": 25,
+    "tabs_configuration": [
+      "For You",
+      "Trending",
+      "Latest"
+    ],
+    "tabs_enabled": true,
+    "total_moments_count": 26
+  },
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "moments",
+    "origin_source_id": [
+      "home-moments-tabs-row",
+      "tab-for-you"
+    ],
+    "origin_source_type": [
+      "widget",
+      "moments_tab"
+    ],
+    "origin_widget_type": "row"
+  },
+  "sdk_type": "ios-flutter",
+  "sdk_version": "2.0.0;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "app_version": "1.0.0 (1)",
+    "connection_type": "wifi",
+    "device_brand": "apple",
+    "device_model": "SimulatoriPhone17,1",
+    "device_type": "phone",
+    "operating_system": "ios",
+    "operating_system_version": "18.2",
+    "screen_resolution": "1206x2622"
+  },
+  "timestamp_user_tz": "2026-11-12 16:12:05.362",
+  "timestamp_utc": "2026-11-12 14:12:05.362",
+  "user": {
+    "experiments": {},
+    "followed_entities": [],
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "locale": "en_US"
+  }
+}

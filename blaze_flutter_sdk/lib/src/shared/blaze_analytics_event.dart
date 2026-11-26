@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
@@ -6,51 +6,49 @@ import 'package:flutter/foundation.dart';
 part 'blaze_analytics_event.freezed.dart';
 part 'blaze_analytics_event.g.dart';
 
+/// The event category. Wire values are the native 2.0 lowercase strings.
 enum EventCategory {
-  @JsonValue('Story')
+  @JsonValue('story')
   story,
-  @JsonValue('Widget')
+  @JsonValue('widget')
   widget,
-  @JsonValue('Moment')
+  @JsonValue('moment')
   moment,
-  @JsonValue('Video')
+  @JsonValue('video')
   video,
-  @JsonValue('Ad')
+  @JsonValue('ad')
   ad,
-  @JsonValue('Interaction')
+  @JsonValue('interaction')
   interaction,
-  @JsonValue('Search')
+  @JsonValue('search')
   search,
+  @JsonValue('tab')
+  tab,
+  @JsonValue('global')
+  global,
 
-  /// A category this SDK version doesn't know yet (D24).
-  @JsonValue('Unknown')
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
   unknown,
 }
 
+/// The event action. Wire values are the native 2.0 snake_case strings.
 enum EventActionName {
   // Global SDK actions
   @JsonValue('sdk_init')
   sdkInit,
-  @JsonValue('app_pause')
-  appPause,
-  @JsonValue('app_continue')
-  appContinue,
+  @JsonValue('user_logout')
+  userLogout,
 
   // Shared player
   @JsonValue('cta_click')
   ctaClick,
-  @JsonValue('audio')
-  audio,
   @JsonValue('share_click')
   shareClick,
-  @JsonValue('playback_pause')
-  playbackPause,
-  @JsonValue('playback_play')
-  playbackPlay,
-  @JsonValue('forced_playback_pause')
-  forcedPlaybackPause,
-  @JsonValue('forced_playback_play')
-  forcedPlaybackPlay,
+  @JsonValue('user_initiated_playback_pause')
+  userInitiatedPlaybackPause,
+  @JsonValue('user_initiated_playback_play')
+  userInitiatedPlaybackPlay,
   @JsonValue('cc_off')
   ccOff,
   @JsonValue('cc_on')
@@ -59,6 +57,20 @@ enum EventActionName {
   customActionButtonClick,
   @JsonValue('playback_initial_start')
   playbackInitialStart,
+  @JsonValue('like')
+  like,
+  @JsonValue('unlike')
+  unlike,
+  @JsonValue('follow')
+  follow,
+  @JsonValue('unfollow')
+  unfollow,
+  @JsonValue('description_expanded')
+  descriptionExpanded,
+  @JsonValue('description_collapsed')
+  descriptionCollapsed,
+  @JsonValue('audio_track_change')
+  audioTrackChange,
 
   // Story player
   @JsonValue('story_start')
@@ -76,35 +88,39 @@ enum EventActionName {
   @JsonValue('widget_click')
   widgetClick,
 
+  // Tabs
+  @JsonValue('tab_data_load')
+  tabDataLoad,
+  @JsonValue('tab_transition')
+  tabTransition,
+
   // Moments player
-  @JsonValue('moments_playlist_start')
-  momentsPlaylistStart,
-  @JsonValue('moments_playlist_exit')
-  momentsPlaylistExit,
   @JsonValue('moment_start')
   momentStart,
   @JsonValue('moment_exit')
   momentExit,
-  @JsonValue('like')
-  like,
-  @JsonValue('unlike')
-  unlike,
 
   // Videos player
   @JsonValue('video_start')
   videoStart,
   @JsonValue('video_end')
   videoEnd,
-  @JsonValue('buffer_start')
-  bufferStart,
-  @JsonValue('buffer_end')
-  bufferEnd,
   @JsonValue('seek')
   seek,
-  @JsonValue('cta_visible')
-  ctaVisible,
-  @JsonValue('cta_dismissed')
-  ctaDismissed,
+  @JsonValue('playback_speed_change')
+  playbackSpeedChange,
+  @JsonValue('viewing_mode_transition')
+  viewingModeTransition,
+  @JsonValue('viewing_orientation_changed')
+  viewingOrientationChanged,
+  @JsonValue('back_to_live')
+  backToLive,
+  @JsonValue('video_changed_status')
+  videoChangedStatus,
+  @JsonValue('catchup_screen_impression')
+  catchupScreenImpression,
+  @JsonValue('catchup_click')
+  catchupClick,
 
   // Ads - Banner Ads
   @JsonValue('banner_ad_load')
@@ -123,14 +139,6 @@ enum EventActionName {
   adClick,
   @JsonValue('ad_exit')
   adExit,
-  @JsonValue('ad_playback_pause')
-  adPause,
-  @JsonValue('ad_playback_play')
-  adResume,
-  @JsonValue('ad_forced_playback_pause')
-  adForcedPlaybackPause,
-  @JsonValue('ad_forced_playback_play')
-  adForcedPlaybackPlay,
   @JsonValue('ad_requested')
   adRequested,
 
@@ -167,23 +175,8 @@ enum EventActionName {
   interactionView,
   @JsonValue('interaction_answer')
   interactionAnswer,
-  // Follow
-  @JsonValue('follow')
-  follow,
-  @JsonValue('unfollow')
-  unfollow,
-  // Casting and picture-in-picture
-  @JsonValue('casting_started')
-  castingStarted,
-  @JsonValue('casting_ended')
-  castingEnded,
-  @JsonValue('pip_enabled')
-  pipEnabled,
-  @JsonValue('pip_disabled')
-  pipDisabled,
+
   // Search
-  @JsonValue('search_click')
-  searchClick,
   @JsonValue('search_opened')
   searchOpened,
   @JsonValue('search_query_submitted')
@@ -192,204 +185,508 @@ enum EventActionName {
   searchResultsShown,
   @JsonValue('search_result_clicked')
   searchResultClicked,
-  @JsonValue('search_suggestions_shown')
-  searchSuggestionsShown,
   @JsonValue('search_suggestions_clicked')
   searchSuggestionsClicked,
-  // Videos playback and viewing
-  @JsonValue('back_to_live')
-  backToLive,
-  @JsonValue('playback_speed_change')
-  playbackSpeedChange,
-  @JsonValue('video_changed_status')
-  videoChangedStatus,
-  @JsonValue('viewing_mode_transition')
-  viewingModeTransition,
-  @JsonValue('viewing_orientation_changed')
-  viewingOrientationChanged,
-  // Containers and descriptions
-  @JsonValue('container_data_load')
-  containerDataLoad,
-  @JsonValue('description_expanded')
-  descriptionExpanded,
-  @JsonValue('description_collapsed')
-  descriptionCollapsed,
 
-  /// An action this SDK version doesn't know yet (D24).
+  /// A value this SDK version does not know yet. The event is still delivered.
   @JsonValue('unknown')
   unknown,
 }
 
 enum ContentType {
-  @JsonValue('Story')
+  @JsonValue('story')
   story,
-  @JsonValue('Moment')
+  @JsonValue('moment')
   moments,
-  @JsonValue('Video')
+  @JsonValue('video')
   video,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum ThumbnailType {
-  @JsonValue('Circle')
+  @JsonValue('circle')
   circle,
-  @JsonValue('Rectangle')
+  @JsonValue('rectangle')
   rectangle,
-  @JsonValue('Main')
+  /// iOS only.
+  @JsonValue('main')
   main,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum ThumbnailFormat {
-  @JsonValue('Animated')
+  @JsonValue('animated')
   animated,
-  @JsonValue('Static')
+  @JsonValue('static')
   static,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum WidgetType {
-  @JsonValue('Row')
+  @JsonValue('row')
   row,
-  @JsonValue('Grid')
+  @JsonValue('grid')
   grid,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum PlayableNavigationType {
-  @JsonValue('Automatic')
+  @JsonValue('automatic')
   automatic,
-  @JsonValue('Manual')
+  @JsonValue('manual')
   manual,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum PlayableNavigationDirection {
-  @JsonValue('Forward')
+  @JsonValue('forward')
   forward,
-  @JsonValue('Backward')
+  @JsonValue('backward')
   backward,
-  @JsonValue('Close')
+  @JsonValue('close')
   close,
+  /// Android only.
+  @JsonValue('cta_click')
+  ctaClick,
+  /// Android only.
+  @JsonValue('ads_click')
+  adsClick,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum PlayerStartTriggers {
-  @JsonValue('Widget')
+  @JsonValue('widget')
   widget,
-  @JsonValue('Deeplink')
+  @JsonValue('deeplink')
   deeplink,
-  @JsonValue('Entry Point')
+  @JsonValue('entry_point')
   entryPoint,
-  @JsonValue('Auto Play from Widget')
+  @JsonValue('auto_play_from_widget')
   widgetAutoPlay,
-  @JsonValue('Notification')
+  @JsonValue('notification')
   notification,
-  @JsonValue('App Foreground')
+  @JsonValue('app_foreground')
   appForeground,
-  @JsonValue('Inline')
+  @JsonValue('focus_regained')
+  focusRegained,
+  @JsonValue('inline')
   inline,
-  @JsonValue('Moments Container')
+  @JsonValue('moments_tabs')
+  momentsTabs,
+  /// Android only.
+  @JsonValue('moments_container')
   momentsContainer,
-  @JsonValue('Viewing Mode Transition')
+  @JsonValue('viewing_mode_transition')
   viewingModeTransition,
-  @JsonValue('Skip')
+  @JsonValue('skip')
   skip,
-  @JsonValue('Swipe')
+  @JsonValue('swipe')
   swipe,
-  @JsonValue('Auto Skip')
+  @JsonValue('auto_skip')
   autoSkip,
+  @JsonValue('auto_advance')
+  autoAdvance,
+  @JsonValue('catchup')
+  catchup,
+  @JsonValue('catchup_return')
+  catchupReturn,
+  /// Android only.
+  @JsonValue('share')
+  share,
+  /// Android only.
+  @JsonValue('single_content')
+  singleContent,
+  /// Android only.
+  @JsonValue('embedded_player_in_viewport')
+  embeddedPlayerInViewport,
+  /// Android only.
+  @JsonValue('widget_tabs')
+  widgetTabs,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum PlayerExitTriggers {
-  @JsonValue('Swipe')
+  @JsonValue('swipe')
   swipe,
-  @JsonValue('Swipe Down')
-  swipeDown,
-  @JsonValue('Skip')
+  @JsonValue('skip')
   skip,
-  @JsonValue('Video Finished')
+  @JsonValue('auto_skip')
+  autoSkip,
+  @JsonValue('video_finished')
   videoFinished,
-  @JsonValue('User Skip Next')
+  @JsonValue('user_skip_next')
   userSkipNext,
-  @JsonValue('User Skip Previous')
+  @JsonValue('user_skip_previous')
   userSkipPrevious,
-  @JsonValue('Close Button')
+  @JsonValue('close_button')
   closeButton,
-  @JsonValue('App Close')
+  @JsonValue('app_close')
   appClose,
-  @JsonValue('URL Expiration')
+  @JsonValue('url_expiration')
   assetsExpiry,
-  @JsonValue('Stories completed')
+  @JsonValue('story_completed')
   storiesCompleted,
-  @JsonValue('App Background')
+  @JsonValue('app_background')
   appBackground,
-  @JsonValue('Back Button')
-  backButton,
-  @JsonValue('User Swipe To Dismiss')
+  @JsonValue('focus_lost')
+  focusLost,
+  @JsonValue('user_swipe_to_dismiss')
   userSwipeToDismiss,
-  @JsonValue('Inline')
+  @JsonValue('inline')
   inline,
-  @JsonValue('Viewing Mode Transition')
+  @JsonValue('viewing_mode_transition')
   viewingModeTransition,
-  @JsonValue('PIP Dismissed')
+  /// Android only.
+  @JsonValue('swipe_up')
+  swipeUp,
+  /// Android only.
+  @JsonValue('cta_click')
+  ctaClick,
+  /// Android only.
+  @JsonValue('back_button')
+  backButton,
+  /// Android only.
+  @JsonValue('pip_dismissed')
   pipDismissed,
-}
 
-enum PlaybackActionMethod {
-  @JsonValue('Press')
-  press,
-  @JsonValue('Release')
-  release,
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum AudioState {
-  @JsonValue('Mute')
+  @JsonValue('mute')
   mute,
-  @JsonValue('Unmute')
+  @JsonValue('unmute')
   unmute,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum VideoSeekType {
-  @JsonValue('Seek Bar')
+  @JsonValue('seek_bar')
   seekbar,
-  @JsonValue('Double Tap')
+  @JsonValue('double_tap')
   doubleTap,
-  @JsonValue('Seek Button')
+  @JsonValue('seek_button')
   seekButton,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum VideoSeekDirection {
-  @JsonValue('Forward')
+  @JsonValue('forward')
   forward,
-  @JsonValue('Backward')
+  @JsonValue('backward')
   backward,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum BlazeAnalyticsOrientation {
-  @JsonValue('Portrait')
+  @JsonValue('portrait')
   portrait,
-  @JsonValue('Landscape')
+  @JsonValue('landscape')
   landscape,
-}
 
-enum AnalyticsVideosCtaConfigType {
-  @JsonValue('Always Visible')
-  alwaysVisible,
-  @JsonValue('Visible After Overlay Hidden')
-  visibleAfterOverlayHidden,
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
 enum BlazeAnalyticsAdGestureType {
-  @JsonValue('Swipe-Up')
+  @JsonValue('swipe_up')
   swipeUp,
-  @JsonValue('Click')
+  @JsonValue('click')
   click,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
 }
 
-@freezed
-class AnalyticsVideosCtaConfig with _$AnalyticsVideosCtaConfig {
-  const factory AnalyticsVideosCtaConfig({
-    AnalyticsVideosCtaConfigType? type,
-    double? visible_duration,
-  }) = _AnalyticsVideosCtaConfig;
+/// Where a video is being watched.
+enum PlayerViewingMode {
+  @JsonValue('inline_preview')
+  inlinePreview,
+  @JsonValue('inline_interactive')
+  inlineInteractive,
+  @JsonValue('fullscreen')
+  fullscreen,
+  @JsonValue('picture_in_picture')
+  pictureInPicture,
+  @JsonValue('out_of_screen')
+  outOfScreen,
+  @JsonValue('casting')
+  casting,
 
-  factory AnalyticsVideosCtaConfig.fromJson(Map<String, dynamic> json) =>
-      _$AnalyticsVideosCtaConfigFromJson(json);
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The state of a live stream.
+enum AnalyticsStreamStatus {
+  @JsonValue('live')
+  live,
+  @JsonValue('upcoming')
+  upcoming,
+  @JsonValue('ended')
+  ended,
+
+  /// The status is not known, or the value is one this SDK version does not
+  /// know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// What caused a `viewing_orientation_changed` event.
+enum OrientationChangeTrigger {
+  @JsonValue('initial_request')
+  initialRequest,
+  @JsonValue('button')
+  button,
+  @JsonValue('device_rotation')
+  deviceRotation,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// How the playback speed was changed.
+enum PlaybackSpeedType {
+  @JsonValue('press_hold')
+  pressHold,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// What brought a live video back to the live edge.
+enum BackToLiveTrigger {
+  @JsonValue('back_to_live_button')
+  backToLiveButton,
+  @JsonValue('manual_scrub')
+  manualScrub,
+  @JsonValue('double_tap_forward')
+  doubleTapForward,
+  @JsonValue('seek_forward_button')
+  seekForwardButton,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The live catchup surface a catchup event came from.
+enum CatchupSurface {
+  @JsonValue('catchup_screen')
+  catchupScreen,
+  @JsonValue('banner')
+  banner,
+  @JsonValue('icon')
+  icon,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// What the user chose on a live catchup surface.
+enum CatchupTarget {
+  @JsonValue('story')
+  story,
+  @JsonValue('go_live')
+  goLive,
+  @JsonValue('close')
+  close,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The call-to-action of a story page, moment or video, as set in the CMS.
+@freezed
+class AnalyticsCtaConfig with _$AnalyticsCtaConfig {
+  const factory AnalyticsCtaConfig({
+    String? text,
+    String? color,
+    String? url,
+  }) = _AnalyticsCtaConfig;
+
+  factory AnalyticsCtaConfig.fromJson(Map<String, dynamic> json) =>
+      _$AnalyticsCtaConfigFromJson(json);
+}
+
+/// The custom action button shown in a story or moments player.
+@freezed
+class AnalyticsCustomActionButtonConfig
+    with _$AnalyticsCustomActionButtonConfig {
+  const factory AnalyticsCustomActionButtonConfig({
+    String? button_id,
+    String? button_text,
+  }) = _AnalyticsCustomActionButtonConfig;
+
+  factory AnalyticsCustomActionButtonConfig.fromJson(
+          Map<String, dynamic> json) =>
+      _$AnalyticsCustomActionButtonConfigFromJson(json);
+}
+
+/// How a moment loops.
+@freezed
+class AnalyticsLoopSettings with _$AnalyticsLoopSettings {
+  const factory AnalyticsLoopSettings({
+    bool? infinite_loop,
+
+    /// The number of plays before the player advances. Absent when
+    /// [infinite_loop] is true.
+    int? loop_and_advance,
+  }) = _AnalyticsLoopSettings;
+
+  factory AnalyticsLoopSettings.fromJson(Map<String, dynamic> json) =>
+      _$AnalyticsLoopSettingsFromJson(json);
+}
+
+/// The device class in the `tech` block.
+enum DeviceType {
+  @JsonValue('phone')
+  phone,
+  @JsonValue('tablet')
+  tablet,
+
+  /// The device class is not known, or the value is one this SDK version does
+  /// not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The network connection in the `tech` block.
+enum ConnectionType {
+  /// Android only.
+  @JsonValue('wired')
+  wired,
+  @JsonValue('wifi')
+  wifi,
+  @JsonValue('cellular')
+  cellular,
+
+  /// The connection is not known, or the value is one this SDK version does
+  /// not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// How the user moved between two tabs of a Moments tabs player.
+enum TabTransitionMethod {
+  @JsonValue('tap')
+  tap,
+  @JsonValue('swipe')
+  swipe,
+  @JsonValue('programmatic')
+  programmatic,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// What caused a `user_logout` event.
+enum LogoutTrigger {
+  /// `BlazeSDK.logout()` was called.
+  @JsonValue('logout')
+  logout,
+  /// `initSDK` ran with `restoreExternalUserId: false` while a user was stored.
+  @JsonValue('init')
+  init,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The kind of surface a player was opened from. See
+/// [ReferringPropsAnalytics.origin_source_type].
+enum OriginSourceType {
+  @JsonValue('widget')
+  widget,
+  @JsonValue('entry_point')
+  entryPoint,
+  @JsonValue('moments_tab')
+  momentsTab,
+  @JsonValue('inline')
+  inline,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// The kind of data source that produced the content.
+enum ReferringDataSourceType {
+  @JsonValue('content_list')
+  contentList,
+  @JsonValue('label_expression')
+  labelExpression,
+  @JsonValue('search')
+  search,
+  @JsonValue('composite')
+  composite,
+  @JsonValue('for_you')
+  forYou,
+  @JsonValue('trending')
+  trending,
+  @JsonValue('followed_entities')
+  followedEntities,
+
+  /// A value this SDK version does not know yet. The event is still delivered.
+  @JsonValue('unknown')
+  unknown,
+}
+
+/// A followed entity, as reported in the `user` block.
+@freezed
+class AnalyticsFollowedEntity with _$AnalyticsFollowedEntity {
+  const factory AnalyticsFollowedEntity({
+    String? id,
+    String? provider_name,
+
+    /// The entity category, for example `team` or `player`. Absent when the
+    /// category is not known.
+    String? entity_type,
+  }) = _AnalyticsFollowedEntity;
+
+  factory AnalyticsFollowedEntity.fromJson(Map<String, dynamic> json) =>
+      _$AnalyticsFollowedEntityFromJson(json);
 }
 
 @freezed
@@ -398,41 +695,154 @@ class UserProps with _$UserProps {
     required String generated_user_id,
     String? external_user_id,
     required String locale,
+    Map<String, String>? experiments,
+    List<AnalyticsFollowedEntity>? followed_entities,
+
+    /// Set on `user_logout` events only. The event's [external_user_id] is the
+    /// user that was logged out.
+    @JsonKey(unknownEnumValue: LogoutTrigger.unknown)
+    LogoutTrigger? logout_trigger,
   }) = _UserProps;
 
   factory UserProps.fromJson(Map<String, dynamic> json) =>
       _$UserPropsFromJson(json);
 }
 
+/// Device and app facts, sent with every event.
+@freezed
+class TechProps with _$TechProps {
+  const factory TechProps({
+    @JsonKey(unknownEnumValue: DeviceType.unknown)
+    DeviceType? device_type,
+    String? device_brand,
+    String? device_model,
+    String? operating_system,
+    String? operating_system_version,
+    String? screen_resolution,
+    String? app_id,
+    String? app_version,
+    @JsonKey(unknownEnumValue: ConnectionType.unknown)
+    ConnectionType? connection_type,
+    String? localization_setting,
+  }) = _TechProps;
+
+  factory TechProps.fromJson(Map<String, dynamic> json) =>
+      _$TechPropsFromJson(json);
+}
+
+/// Where the content came from and how the player was reached.
 @freezed
 class ReferringPropsAnalytics with _$ReferringPropsAnalytics {
   const factory ReferringPropsAnalytics({
-    String? origin_widget_id,
+    /// The IDs of the surfaces the player was opened through, outermost first,
+    /// for example `[home-moments-tabs-row, tab-for-you]`. Same length and
+    /// order as [origin_source_type].
+    List<String>? origin_source_id,
+
+    /// The kind of each surface in [origin_source_id].
+    @JsonKey(unknownEnumValue: OriginSourceType.unknown)
+    List<OriginSourceType>? origin_source_type,
     String? origin_widget_type,
-    String? labels_expression,
+    @JsonKey(unknownEnumValue: ReferringDataSourceType.unknown)
+    ReferringDataSourceType? data_source_type,
+    String? data_source_value,
+    String? data_source_config,
+    Map<String, String?>? widget_builder_metadata,
+    String? search_session_id,
+    String? search_query_id,
+    String? search_result_id,
   }) = _ReferringPropsAnalytics;
 
   factory ReferringPropsAnalytics.fromJson(Map<String, dynamic> json) =>
       _$ReferringPropsAnalyticsFromJson(json);
 }
 
+/// A tab of a Moments tabs player. `tab_data_load` events fill the `tab_*`
+/// fields; `tab_transition` events fill the `current_tab_*`, `next_tab_*` and
+/// [transition_method] fields.
+@freezed
+class TabProps with _$TabProps {
+  const factory TabProps({
+    String? tabs_source_id,
+    int? total_tabs_count,
+    String? tab_id,
+    String? tab_title,
+    int? tab_index,
+    int? content_count,
+    String? current_tab_id,
+    int? current_tab_index,
+    String? current_tab_title,
+    String? next_tab_id,
+    int? next_tab_index,
+    String? next_tab_title,
+    @JsonKey(unknownEnumValue: TabTransitionMethod.unknown)
+    TabTransitionMethod? transition_method,
+  }) = _TabProps;
+
+  factory TabProps.fromJson(Map<String, dynamic> json) =>
+      _$TabPropsFromJson(json);
+}
+
+/// A search session, query or result.
+@freezed
+class SearchProps with _$SearchProps {
+  const factory SearchProps({
+    String? search_session_id,
+    String? query_id,
+    String? query,
+    String? result_id,
+    List<String>? story_ids,
+    List<String>? moment_ids,
+    List<String>? video_ids,
+    int? total_results,
+    String? content_id,
+    @JsonKey(unknownEnumValue: ContentType.unknown)
+    ContentType? content_type,
+    int? position,
+  }) = _SearchProps;
+
+  factory SearchProps.fromJson(Map<String, dynamic> json) =>
+      _$SearchPropsFromJson(json);
+}
+
 @freezed
 class WidgetProps with _$WidgetProps {
   const factory WidgetProps({
     String? widget_id,
+    @JsonKey(unknownEnumValue: WidgetType.unknown)
     WidgetType? widget_type,
     String? widget_size,
     int? widget_content_count,
+
+    /// The distance of the widget from the top of its scrollable parent.
+    double? placement_distance,
     String? content_id,
+    String? content_name,
+    @JsonKey(unknownEnumValue: ContentType.unknown)
     ContentType? content_type,
     int? content_index,
     String? thumbnail_size,
     String? thumbnail_aspect_ratio,
+    @JsonKey(unknownEnumValue: ThumbnailType.unknown)
     ThumbnailType? thumbnail_type,
     List<String>? widget_content_list,
     Map<String, String>? content_extra_info,
     bool? animated_thumbnail_enabled,
+    @JsonKey(unknownEnumValue: ThumbnailFormat.unknown)
     ThumbnailFormat? thumbnail_format,
+    Map<String, String>? localization,
+
+    /// Android only.
+    String? widget_fold_position,
+
+    /// Android only.
+    String? page_view_id,
+
+    /// Android only.
+    String? placement_id,
+
+    /// Android only.
+    String? placement_name,
   }) = _WidgetProps;
 
   factory WidgetProps.fromJson(Map<String, dynamic> json) =>
@@ -445,30 +855,46 @@ class StoryProps with _$StoryProps {
     String? story_session_id,
     String? story_id,
     String? story_title,
+    int? story_index,
+    int? total_stories_count,
+    int? remaining_unread_count,
+    int? remaining_unread_pages,
+    String? next_story_id,
+    bool? is_last_page,
+    String? content_ratio,
     String? story_page_id,
     String? story_page_parent_id,
-    String? story_composition_type,
+    String? story_page_type,
     int? story_page_index,
     int? story_page_count,
+    @JsonKey(unknownEnumValue: PlayableNavigationType.unknown)
     PlayableNavigationType? story_page_navigation_type,
+    @JsonKey(unknownEnumValue: PlayableNavigationDirection.unknown)
     PlayableNavigationDirection? story_page_navigation_direction,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerStartTriggers.unknown)
     PlayerStartTriggers? story_start_trigger,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerExitTriggers.unknown)
     PlayerExitTriggers? story_exit_trigger,
     double? story_page_duration,
+
+    /// The share of the page that was watched, from 0 to 100, with two
+    /// decimals.
     double? story_page_duration_viewed_percent,
-    PlaybackActionMethod? playback_action_method,
+    @JsonKey(unknownEnumValue: AudioState.unknown)
     AudioState? audio_state,
+    String? cc_state,
     Map<String, String>? content_extra_info,
     Map<String, String>? story_page_content_extra_info,
-    String? gesture_type,
-    String? cc_state,
+    @JsonKey(unknownEnumValue: BlazeAnalyticsAdGestureType.unknown)
+    BlazeAnalyticsAdGestureType? gesture_type,
     String? custom_button_name,
+    AnalyticsCtaConfig? cta_config,
+    bool? cta_shown,
+    AnalyticsCustomActionButtonConfig? custom_action_button_config,
+    bool? custom_action_button_shown,
+    Map<String, String>? localization,
+    int? user_lifetime_engagements,
+    String? attribution_token,
   }) = _StoryProps;
 
   factory StoryProps.fromJson(Map<String, dynamic> json) =>
@@ -482,24 +908,61 @@ class MomentsProps with _$MomentsProps {
     String? moment_id,
     String? moment_title,
     int? moment_index,
+    int? total_moments_count,
+    int? remaining_unread_count,
+    String? next_moment_id,
+    bool? is_liked,
+    @JsonKey(unknownEnumValue: PlayableNavigationType.unknown)
     PlayableNavigationType? moment_navigation_type,
+    @JsonKey(unknownEnumValue: PlayableNavigationDirection.unknown)
     PlayableNavigationDirection? moment_navigation_direction,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerStartTriggers.unknown)
     PlayerStartTriggers? moment_start_trigger,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerExitTriggers.unknown)
     PlayerExitTriggers? moment_exit_trigger,
     double? moment_duration,
+
+    /// The share of the moment that was watched, from 0 to 100, with two
+    /// decimals.
     double? moment_duration_viewed_percent,
-    PlaybackActionMethod? playback_action_method,
+    @JsonKey(unknownEnumValue: AudioState.unknown)
     AudioState? audio_state,
+    String? content_ratio,
     int? loop_number,
+    AnalyticsLoopSettings? loop_settings,
     Map<String, String>? content_extra_info,
     String? cc_state,
     String? custom_button_name,
+    AnalyticsCtaConfig? cta_config,
+    bool? cta_shown,
+    AnalyticsCustomActionButtonConfig? custom_action_button_config,
+    bool? custom_action_button_shown,
+    String? attribution_token,
+    Map<String, String>? follow_state,
+    bool? follow_button_visible,
+    String? follow_subject_type,
+    String? follow_subject_id,
+    String? follow_subject_provider_name,
+    String? active_tab_title,
+    String? initial_tab_title,
+    bool? tabs_enabled,
+    List<String>? tabs_configuration,
+    Map<String, String>? localization,
+    @JsonKey(unknownEnumValue: VideoSeekType.unknown)
+    VideoSeekType? seek_type,
+    double? seek_start_time,
+    double? seek_end_time,
+    double? seek_total_time,
+    @JsonKey(unknownEnumValue: VideoSeekDirection.unknown)
+    VideoSeekDirection? seek_direction,
+    double? seek_interval_setting,
+    @JsonKey(unknownEnumValue: PlaybackSpeedType.unknown)
+    PlaybackSpeedType? playback_speed_type,
+    double? playback_speed,
+    double? speed_start_time,
+    double? speed_end_time,
+    double? speed_total_time,
+    int? user_lifetime_engagements,
   }) = _MomentsProps;
 
   factory MomentsProps.fromJson(Map<String, dynamic> json) =>
@@ -511,30 +974,83 @@ class VideoProps with _$VideoProps {
   const factory VideoProps({
     String? video_session_id,
     String? video_id,
+    String? next_video_id,
     String? video_title,
+    int? video_index,
+    int? total_videos_count,
+    int? remaining_unread_count,
+    bool? is_liked,
+    @JsonKey(unknownEnumValue: AudioState.unknown)
     AudioState? audio_state,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerStartTriggers.unknown)
     PlayerStartTriggers? video_start_trigger,
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerExitTriggers.unknown)
     PlayerExitTriggers? video_end_trigger,
+    double? video_current_time,
     double? video_duration,
-    // Unknown native seek types decode to null instead of dropping the event (D24).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-    VideoSeekType? seek_type,
-    double? seek_total_time,
-    VideoSeekDirection? seek_direction,
     double? video_time_start,
     double? video_time_end,
-    BlazeAnalyticsOrientation? player_orientation,
+    @JsonKey(unknownEnumValue: VideoSeekType.unknown)
+    VideoSeekType? seek_type,
+    double? seek_start_time,
+    double? seek_end_time,
+    double? seek_total_time,
+    @JsonKey(unknownEnumValue: VideoSeekDirection.unknown)
+    VideoSeekDirection? seek_direction,
+    double? seek_interval_setting,
+    @JsonKey(unknownEnumValue: BlazeAnalyticsOrientation.unknown)
     BlazeAnalyticsOrientation? device_orientation,
+    String? content_ratio,
+    @JsonKey(unknownEnumValue: OrientationChangeTrigger.unknown)
+    OrientationChangeTrigger? video_orientation_changed_trigger,
+
+    /// Where the video is being watched. On a `viewing_mode_transition` event
+    /// this is the mode the player moved to.
+    @JsonKey(unknownEnumValue: PlayerViewingMode.unknown)
+    PlayerViewingMode? viewing_mode,
+    double? cast_duration,
+
+    /// Android only.
+    String? quality,
     Map<String, String>? content_extra_info,
-    AnalyticsVideosCtaConfig? cta_config,
     String? cc_state,
+    AnalyticsCtaConfig? cta_config,
+    bool? cta_shown,
+    Map<String, String>? localization,
+    @JsonKey(unknownEnumValue: PlaybackSpeedType.unknown)
+    PlaybackSpeedType? playback_speed_type,
+    double? playback_speed,
+    double? speed_start_time,
+    double? speed_end_time,
+    double? speed_total_time,
+    int? user_lifetime_engagements,
+    String? attribution_token,
+
+    // Live streams
+    @JsonKey(unknownEnumValue: AnalyticsStreamStatus.unknown)
+    AnalyticsStreamStatus? stream_status,
+    bool? is_at_live_edge,
+    double? stream_elapsed_time,
+    @JsonKey(unknownEnumValue: BackToLiveTrigger.unknown)
+    BackToLiveTrigger? back_to_live_trigger,
+    @JsonKey(unknownEnumValue: CatchupSurface.unknown)
+    CatchupSurface? catchup_surface,
+    @JsonKey(unknownEnumValue: CatchupTarget.unknown)
+    CatchupTarget? catchup_target,
+
+    // Audio tracks
+    String? audio_track,
+    String? audio_track_previous,
+    bool? audio_track_is_preferred,
+
+    /// iOS only.
+    String? search_session_id,
+
+    /// iOS only.
+    String? query_id,
+
+    /// iOS only.
+    String? result_id,
   }) = _VideoProps;
 
   factory VideoProps.fromJson(Map<String, dynamic> json) =>
@@ -544,25 +1060,30 @@ class VideoProps with _$VideoProps {
 @freezed
 class AdEventProps with _$AdEventProps {
   const factory AdEventProps({
-    // Properties relevant for both IMA and CustomNative
+    // Properties relevant for IMA, banner and CustomNative ads
     String? session_id,
-    String? story_id,
-    String? story_title,
-    String? moment_id,
-    String? moment_title,
+
+    /// The ID of the story, moment or video the ad interrupted. [content_type]
+    /// tells which.
+    String? content_id,
+    String? content_title,
+    @JsonKey(unknownEnumValue: ContentType.unknown)
+    ContentType? content_type,
     double? ad_duration,
     String? advertiser_name,
-    ContentType? content_type,
     Map<String, String>? content_extra_info,
+
+    /// iOS only.
     Map<String, String>? story_page_content_extra_info,
+    String? backoffice_campaign_data,
 
     // Properties relevant only for CustomNative
-    // Unknown native triggers decode to null instead of dropping the event (D23).
-    // ignore: invalid_annotation_target
-    @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+    @JsonKey(unknownEnumValue: PlayerExitTriggers.unknown)
     PlayerExitTriggers? ad_exit_trigger,
+
+    /// The share of the ad that was watched, from 0 to 100, with two decimals.
     double? ad_duration_viewed_percent,
-    PlaybackActionMethod? playback_action_method,
+    @JsonKey(unknownEnumValue: AudioState.unknown)
     AudioState? audio_state,
     String? advertiser_id,
     String? campaign_id,
@@ -570,6 +1091,7 @@ class AdEventProps with _$AdEventProps {
     String? ad_server,
     String? ad_insertion_logic,
     int? ad_index,
+    @JsonKey(unknownEnumValue: BlazeAnalyticsAdGestureType.unknown)
     BlazeAnalyticsAdGestureType? gesture_type,
 
     // Properties relevant only for IMA
@@ -580,8 +1102,6 @@ class AdEventProps with _$AdEventProps {
     bool? skippable,
     double? skip_time_offset,
     String? ima_url,
-    String? video_id,
-    String? video_title,
 
     // Properties relevant only for Banner Ads
     String? ad_unit_id,
@@ -595,16 +1115,14 @@ class AdEventProps with _$AdEventProps {
 class InteractionProps with _$InteractionProps {
   const factory InteractionProps({
     String? content_session_id,
+    @JsonKey(unknownEnumValue: ContentType.unknown)
     ContentType? content_type,
     String? content_id,
+    String? content_name,
     String? content_page_id,
-    String? content_title,
     String? interaction_id,
     String? interaction_type,
-    String? interaction_text,
     String? interaction_selected_answer,
-    PlaybackActionMethod? playback_action_method,
-    AudioState? audio_state,
     Map<String, String>? content_extra_info,
     Map<String, String>? story_page_content_extra_info,
     String? client_enrichment_url,
@@ -626,13 +1144,11 @@ class BlazeAnalyticsEvent with _$BlazeAnalyticsEvent {
     required String timestamp_user_tz,
     required String sdk_version,
     required String sdk_type,
-    // Unknown native values decode to `unknown` instead of dropping the event (D24).
-    // ignore: invalid_annotation_target
     @JsonKey(unknownEnumValue: EventCategory.unknown)
     required EventCategory event_category,
-    // ignore: invalid_annotation_target
     @JsonKey(unknownEnumValue: EventActionName.unknown)
     required EventActionName event_action,
+    required TechProps tech,
     required UserProps user,
     required ReferringPropsAnalytics referring,
     WidgetProps? widget,
@@ -641,6 +1157,8 @@ class BlazeAnalyticsEvent with _$BlazeAnalyticsEvent {
     VideoProps? video,
     AdEventProps? ad,
     InteractionProps? interaction,
+    SearchProps? search,
+    TabProps? tab,
   }) = _BlazeAnalyticsEvent;
 
   factory BlazeAnalyticsEvent.fromJson(Map<String, dynamic> json) =>

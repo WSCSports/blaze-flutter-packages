@@ -46,8 +46,10 @@ data class BlazeFlutterError(
     companion object {
         fun fromBlazeError(error: BlazeResult.Error): BlazeFlutterError {
             return BlazeFlutterError(
-                domain = error.domain?.name,
-                reason = error.reason?.name,
+                // Native's declared values (e.g. "failedToSetExternalUserId"), the same
+                // strings the iOS bridge sends, not the enum constant names.
+                domain = error.domain?.value,
+                reason = error.reason?.value,
                 message = error.message,
                 metadata = error.metadata,
                 underlyingError = error.cause?.message

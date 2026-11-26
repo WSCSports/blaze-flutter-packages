@@ -43,6 +43,13 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         }
     }
     
+    /// The `widgetId` creation param. Native uses it as the widget's identifier.
+    var widgetId: String {
+        get {
+            return creationParams["widgetId"] as? String ?? ""
+        }
+    }
+
     var presetWidgetLayout: String? {
         get {
             return creationParams["presetWidgetLayout"] as? String
@@ -133,7 +140,8 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
     }
 
     lazy var widgetView: BlazeWidgetView = {
-        let widget = createWidget()
+        // The identifier and layout are given at construction, as native 2.0 expects.
+        let widget = createWidget(widgetIdentifier: widgetId, layout: resolvedLayout())
         widget.widgetRemoteIdentifier = widgetRemoteIdentifier
         return widget
     }()
@@ -325,13 +333,14 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         super.init()
         
         guard let widgetId = creationParams["widgetId"] as? String,
+              let channelId = creationParams["channelId"] as? String,
               let messenger = messenger else {
             // Invalid creation params.
             print("Invalid widget creation params: \(String(describing: args))")
             return
         }
         
-        setupMethodChannel(widgetId: widgetId,
+        setupMethodChannel(channelId: channelId,
                            messenger: messenger)
         
         initWidget(widgetId: widgetId)
@@ -341,9 +350,11 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         return widgetContainer
     }
     
-    private func setupMethodChannel(widgetId: String,
+    /// `channelId` names the platform channel. Dart creates one per mounted widget, so two
+    /// widgets with the same `widgetId` never share a channel.
+    private func setupMethodChannel(channelId: String,
                                     messenger: FlutterBinaryMessenger) {
-        methodChannel = FlutterMethodChannel(name: "blaze-widget-\(widgetId)",
+        methodChannel = FlutterMethodChannel(name: "blaze-widget-\(channelId)",
                                              binaryMessenger: messenger)
         methodChannel.setMethodCallHandler { [weak self] call, result in
             guard let self = self else { return }
@@ -386,7 +397,6 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         
         addWidgetToContainer()
         
-        widgetView.widgetIdentifier = widgetId
         widgetView.widgetDelegate = delegate
         
         widgetView.dataSourceType = dataSource
@@ -542,16 +552,9 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
     }
     
     func setupWidgetLayout() {
-        let layout = parseLayout(from: presetWidgetLayout)
-        
-        var finalLayout = layout
-        
-        // Apply custom widget layout if provided
-        if let customLayoutMap = customWidgetLayoutMap {
-            finalLayout = layout.mergedWith(customLayoutMap.toBlazeReactWidgetLayout())
-        }
-        
-        widgetView.layout = finalLayout
+        // Same value the widget was created with, so nothing is applied twice with a
+        // different result.
+        widgetView.layout = resolvedLayout()
         
         // Apply per-item style overrides if provided during initialization
         if let perItemStyleOverridesRaw = perItemStyleOverridesMap,
@@ -561,7 +564,19 @@ class BlazeWidgetBase: NSObject, FlutterPlatformView {
         }
     }
     
-    func createWidget() -> BlazeWidgetView {
+    /// The preset layout with the custom layout, if any, merged over it.
+    func resolvedLayout() -> BlazeWidgetLayout {
+        let layout = parseLayout(from: presetWidgetLayout)
+
+        // Apply custom widget layout if provided
+        if let customLayoutMap = customWidgetLayoutMap {
+            return layout.mergedWith(customLayoutMap.toBlazeReactWidgetLayout())
+        }
+
+        return layout
+    }
+
+    func createWidget(widgetIdentifier: String, layout: BlazeWidgetLayout) -> BlazeWidgetView {
         fatalError("Subclasses must implement")
     }
     

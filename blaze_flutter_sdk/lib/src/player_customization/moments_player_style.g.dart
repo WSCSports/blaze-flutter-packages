@@ -327,7 +327,7 @@ _$BlazeMomentsPlayerCtaIconStyleImpl
           iconImage: json['iconImage'] == null
               ? null
               : BlazeImage.fromJson(json['iconImage'] as Map<String, dynamic>),
-          iconPositioning: $enumDecodeNullable(
+          iconPositioning: $enumDecode(
               _$BlazeMomentsPlayerCTAIconPositioningEnumMap,
               json['iconPositioning']),
           iconTint: json['iconTint'] as String?,
@@ -338,7 +338,7 @@ Map<String, dynamic> _$$BlazeMomentsPlayerCtaIconStyleImplToJson(
     <String, dynamic>{
       'iconImage': instance.iconImage?.toJson(),
       'iconPositioning': _$BlazeMomentsPlayerCTAIconPositioningEnumMap[
-          instance.iconPositioning],
+          instance.iconPositioning]!,
       'iconTint': instance.iconTint,
     };
 

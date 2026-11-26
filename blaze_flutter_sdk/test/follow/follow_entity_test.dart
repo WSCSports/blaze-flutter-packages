@@ -12,7 +12,13 @@ void main() {
     expect(BlazeFollowEntity.fromJson(e.toJson()), e);
   });
 
-  test('metadata is optional', () {
+  test('a null entityType is written as an explicit null', () {
+    const e = BlazeFollowEntity(id: '1', entityType: null);
+
+    expect(e.toJson(), {'id': '1', 'providerName': null, 'entityType': null});
+  });
+
+  test('metadata is optional when decoding', () {
     final e = BlazeFollowEntity.fromJson({'id': '1'});
 
     expect(e.id, '1');

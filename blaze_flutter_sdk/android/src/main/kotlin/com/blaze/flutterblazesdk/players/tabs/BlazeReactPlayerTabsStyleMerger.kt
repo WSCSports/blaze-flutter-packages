@@ -4,6 +4,7 @@ import android.content.Context
 import com.blaze.blazesdk.style.players.tabs.BlazePlayerTabItemStyle
 import com.blaze.blazesdk.style.players.tabs.BlazePlayerTabsStyle
 import com.blaze.blazesdk.style.shared.models.blazeDp
+import com.blaze.flutterblazesdk.utils.parsing.letterSpacingPointsToEm
 import com.blaze.flutterblazesdk.utils.parsing.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.safeParseColor
 import com.blaze.flutterblazesdk.utils.parsing.toFontResId
@@ -63,9 +64,8 @@ private fun BlazePlayerTabItemStyle.mergedWith(
     customization.font?.toFontResId(context)?.let { merged.fontResId = it }
     safeParseColor(customization.textColor)?.let { merged.textColor = it }
     customization.textSize?.let { merged.textSize = it }
-    // Dart letterSpacing is in points (like iOS); Android's TextView expects em, so divide by textSize.
-    customization.letterSpacing?.let { letterSpacingPt ->
-        merged.letterSpacing = if (merged.textSize > 0f) letterSpacingPt / merged.textSize else letterSpacingPt
+    customization.letterSpacing?.let {
+        merged.letterSpacing = it.letterSpacingPointsToEm(merged.textSize)
     }
     customization.lineHeight?.let { merged.lineHeight = it.toInt().blazeDp }
 

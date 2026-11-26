@@ -150,6 +150,8 @@ class BlazeTitleStyle with _$BlazeTitleStyle {
   const factory BlazeTitleStyle({
     BlazeFont? font,
     double? textSize,
+
+    /// Letter spacing, in points.
     double? letterSpacing,
     String? textColor,
     double? lineHeight,

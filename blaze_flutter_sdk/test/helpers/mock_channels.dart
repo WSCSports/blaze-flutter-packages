@@ -46,12 +46,21 @@ Future<void> sendAsyncBridgeEvent(
   );
 }
 
-/// Delivers a native widget event on the `blaze-widget-<widgetId>` channel,
-/// with the JSON-string payload the bridges send.
+// The channel ID of each widget created while
+// `capturePlatformViewCreationParams` is active, by its `widgetId`.
+final _channelIdsByWidgetId = <Object?, Object?>{};
+
+/// The platform channel name of the last widget pumped with [widgetId].
+/// Needs `capturePlatformViewCreationParams` to be active when it is pumped.
+String widgetChannelName(String widgetId) =>
+    'blaze-widget-${_channelIdsByWidgetId[widgetId]}';
+
+/// Delivers a native widget event on the widget's platform channel, with the
+/// JSON-string payload the bridges send.
 Future<void> sendWidgetEvent(
     String widgetId, String method, Map<String, Object?> params) async {
   await _messenger.handlePlatformMessage(
-    'blaze-widget-$widgetId',
+    widgetChannelName(widgetId),
     const StandardMethodCodec()
         .encodeMethodCall(MethodCall(method, json.encode(params))),
     (_) {},
@@ -68,8 +77,10 @@ List<Map<Object?, Object?>> capturePlatformViewCreationParams() {
     if (call.method == 'create') {
       final args = call.arguments as Map;
       final bytes = args['params'] as Uint8List;
-      created.add(const StandardMessageCodec()
-          .decodeMessage(ByteData.sublistView(bytes)) as Map<Object?, Object?>);
+      final params = const StandardMessageCodec()
+          .decodeMessage(ByteData.sublistView(bytes)) as Map<Object?, Object?>;
+      created.add(params);
+      _channelIdsByWidgetId[params['widgetId']] = params['channelId'];
       return 0;
     }
     return null;

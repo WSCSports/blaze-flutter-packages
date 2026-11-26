@@ -89,7 +89,7 @@ fun BlazeStoryPlayerTitleTextStyle.mergedWith(
     customization ?: return this
 
     val merged = this
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.textSize = customization.textSize ?: merged.textSize
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
     merged.isVisible = customization.isVisible ?: this.isVisible
@@ -132,8 +132,11 @@ fun BlazeStoryPlayerTitleImageStyle.mergedWith(
                 }
             }
             "dynamic" -> {
+                // An omitted fallback keeps the one of an existing dynamic source.
+                val existingFallback =
+                    (merged.source as? BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Dynamic)?.fallback
                 merged.source = BlazeStoryPlayerTitleImageStyle.BlazeStoryPlayerTitleImageSource.Dynamic(
-                    fallback = reactSource.fallback?.toNativeStaticSource(context)
+                    fallback = reactSource.fallback?.toNativeStaticSource(context) ?: existingFallback
                 )
             }
         }
@@ -165,7 +168,7 @@ fun BlazeStoryPlayerLastUpdateTextStyle.mergedWith(
     customization ?: return this
 
     val merged = this
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.textColor = safeParseColor(customization.textColor) ?: this.textColor
     merged.textSize = customization.textSize ?: merged.textSize
     merged.textCase = merged.textCase.mergeWith(customization.textCase)
@@ -210,7 +213,7 @@ private fun mergeCustomActionButtons(
         button.style = button.style.mergeButtonThemes(reactButton.style, context)
         button
     }
-    return nativeButtons.ifEmpty { return null }
+    return nativeButtons
 }
 
 fun BlazeStoryPlayerCtaStyle.mergedWith(
@@ -222,7 +225,7 @@ fun BlazeStoryPlayerCtaStyle.mergedWith(
     val merged = this
     merged.cornerRadius = customization.cornerRadius?.blazeDp ?: this.cornerRadius
     merged.textSize = customization.textSize ?: this.textSize
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.isVisible = customization.isVisible ?: this.isVisible
     safeParseColor(customization.borderColor)?.let { merged.borderColor = it }
     merged.borderWidth = customization.borderWidth?.blazeDp ?: this.borderWidth

@@ -1,0 +1,60 @@
+{
+  "search": {
+    "result_id": "8BD18D00-C675-43F1-87A3-20EFDB2ED427",
+    "moment_ids": [
+      "64ee1f9f1396e4277f0595ef",
+      "64ee1f9f1396e4277f0595ed",
+      "64ee1f9f1396e4277f0595ee",
+      "65e5e7311d038ccb1ad5ecab",
+      "64ee1f9f1396e4277f059607",
+      "64ee1f9f1396e4277f059609",
+      "64ee1f9f1396e4277f059610",
+      "64ee1f9f1396e4277f0595fd",
+      "64ee1f9f1396e4277f05960a",
+      "64ee1f9f1396e4277f059613",
+      "64ee1f9f1396e4277f059600",
+      "64ee1f9f1396e4277f059612",
+      "64ee1f9f1396e4277f0595fa",
+      "64ee1f9f1396e4277f059601",
+      "64ee1f9f1396e4277f059608",
+      "64ee1f9f1396e4277f0595fb",
+      "64ee1f9f1396e4277f059611",
+      "64ee1f9f1396e4277f0595eb",
+      "64ee1f9f1396e4277f0595de",
+      "64ee1f9f1396e4277f0595e7",
+      "64ee1f9f1396e4277f0595e0",
+      "64ee1f9f1396e4277f059603",
+      "64ee1f9f1396e4277f059605",
+      "64ee1f9f1396e4277f0595df",
+      "64ee1f9f1396e4277f0595dd",
+      "64ee1f9f1396e4277f0595ea"
+    ],
+    "video_ids": [],
+    "story_ids": [],
+    "search_session_id": "FD3AA83E-64F3-4161-958F-FAD6FCB426FA",
+    "total_results": 26
+  },
+  "sdk_type": "ios-flutter",
+  "user": {
+    "experiments": {},
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "locale": "en_US"
+  },
+  "event_category": "search",
+  "event_action": "search_opened",
+  "tech": {
+    "operating_system": "ios",
+    "device_brand": "apple",
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "screen_resolution": "1206x2622",
+    "operating_system_version": "18.2",
+    "device_type": "phone",
+    "app_version": "1.0.0 (1)",
+    "connection_type": "wifi",
+    "device_model": "SimulatoriPhone17,1"
+  },
+  "timestamp_utc": "2026-11-15 10:38:02.466",
+  "referring": {},
+  "sdk_version": "2.0.0;2.0.0",
+  "timestamp_user_tz": "2026-11-15 12:38:02.466"
+}

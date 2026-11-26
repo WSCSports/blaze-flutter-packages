@@ -1,0 +1,65 @@
+{
+  "event_action": "widget_click",
+  "event_category": "widget",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:00:33.432",
+  "timestamp_utc": "2026-11-12 15:00:33.432",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "followed_entities": [
+      {
+        "entity_type": "team",
+        "id": "fixture-team"
+      }
+    ],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  },
+  "widget": {
+    "widget_id": "home-stories-row",
+    "widget_type": "row",
+    "widget_size": "1440x560",
+    "widget_content_count": 9,
+    "widget_fold_position": "above",
+    "page_view_id": "pv-1",
+    "placement_id": "pl-1",
+    "placement_name": "Home",
+    "placement_distance": 414.0,
+    "content_id": "st-1",
+    "content_name": "Title",
+    "content_type": "story",
+    "content_index": 0,
+    "thumbnail_size": "359x359",
+    "thumbnail_aspect_ratio": "1.0",
+    "thumbnail_type": "circle",
+    "widget_content_list": [
+      "st-1",
+      "st-2"
+    ],
+    "content_extra_info": {
+      "league": "nba"
+    },
+    "animated_thumbnail_enabled": false,
+    "thumbnail_format": "static",
+    "localization": {
+      "language": "en"
+    }
+  }
+}

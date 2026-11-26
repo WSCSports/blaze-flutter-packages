@@ -11,13 +11,14 @@ class BlazeStoriesPlaybackConfiguration
     /// Delay in milliseconds before the buffering spinner is shown while
     /// content is loading.
     ///
-    /// Negative values are clamped to `0` natively. When omitted, the native
-    /// default of `1000`ms applies.
+    /// Negative values are clamped to `0` natively. When omitted, the current
+    /// default's value is kept (`1000`ms unless the default was changed).
     int? bufferingSpinnerDelayMs,
 
     /// Ads playback options for the stories player.
     ///
-    /// When omitted, the native defaults apply (pre-roll disabled).
+    /// When omitted, the current default's values are kept (pre-roll disabled
+    /// unless the default was changed).
     BlazeStoriesAdsPlaybackConfiguration? ads,
   }) = _BlazeStoriesPlaybackConfiguration;
 
@@ -36,7 +37,7 @@ class BlazeStoriesAdsPlaybackConfiguration
     ///
     /// When `false` — the native default, kept for backward compatibility — an
     /// ad configured on that first unread page is skipped. Omit to keep the
-    /// native default.
+    /// current default's value.
     bool? enablePreroll,
   }) = _BlazeStoriesAdsPlaybackConfiguration;
 

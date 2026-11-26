@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
+import '../player_customization/custom_action_buttons_validation.dart';
 import '../player_customization/stories_player_style.dart';
 import '../player_customization/moments_player_style.dart';
 import '../player_customization/videos_player_style.dart';
@@ -23,9 +24,19 @@ class BlazeSDK {
   static final _BlazeSDKInternal _sdk = _BlazeSDKInternal._instance;
 
   // SDK Initialization with flat parameters
+  ///
+  /// [externalUserId] - The user to start with. The SDK stores it and restores
+  /// it on the next launch. A blank [externalUserId] counts as not passed.
+  ///
+  /// [restoreExternalUserId] - When no [externalUserId] is passed, whether the
+  /// user stored by the previous session is restored. Leave it `null` for the
+  /// native default (restore). Pass `false` to start this launch without a
+  /// user; a stored user is then logged out. Ignored when [externalUserId] is
+  /// passed.
   static Future<void> initSDK({
     required String apiKey,
     String? externalUserId,
+    bool? restoreExternalUserId,
     int? cachingSize,
     BlazeCachingLevel? cachingLevel,
     String? geoLocation,
@@ -42,6 +53,7 @@ class BlazeSDK {
       _sdk.initSDK(
         apiKey: apiKey,
         externalUserId: externalUserId,
+        restoreExternalUserId: restoreExternalUserId,
         cachingSize: cachingSize,
         cachingLevel: cachingLevel,
         geoLocation: geoLocation,
@@ -340,7 +352,9 @@ class BlazeSDK {
           .toList();
 
   static List<BlazeFollowEntity> _idOnlyEntities(List<String> entityIds) =>
-      entityIds.map((id) => BlazeFollowEntity(id: id)).toList();
+      entityIds
+          .map((id) => BlazeFollowEntity(id: id, entityType: null))
+          .toList();
 
   // ======================================
   // CASTING
@@ -408,8 +422,40 @@ class BlazeSDK {
       _sdk.handleNotificationPayload(payload: payload, sourceId: sourceId);
 
   // Utility methods
-  static Future<void> setExternalUserId(String? externalUserId) =>
+
+  /// Sets the external user ID. The SDK stores it and restores it on the next
+  /// launch (see `restoreExternalUserId` on [initSDK]).
+  ///
+  /// A blank ID fails with a [BlazeException] whose reason is
+  /// `invalidExternalUserId`, and the current user is unchanged. To clear the
+  /// user, call [logout].
+  ///
+  /// Call it after the [initSDK] future completes. An earlier call behaves
+  /// differently per platform:
+  /// - iOS fails with reason `applicationNotInitialised`. This can also
+  ///   happen while [initSDK] is still in progress.
+  /// - Android waits for the initialization and then sets the ID. The wait
+  ///   is limited; if the initialization does not finish in time, the call
+  ///   fails with reason `failedToSetExternalUserId`.
+  static Future<void> setExternalUserId(String externalUserId) =>
       _sdk.setExternalUserId(externalUserId);
+
+  /// Logs the current user out: clears the external user ID, including the
+  /// stored one, so the next launch starts without a user.
+  ///
+  /// Succeeds when there is no user.
+  ///
+  /// Call it after the [initSDK] future completes. An earlier call behaves
+  /// differently per platform:
+  /// - Before [initSDK] is called, both platforms fail with a
+  ///   [BlazeException] whose reason is `applicationNotInitialised`.
+  /// - While [initSDK] is still in progress, Android waits for it and then
+  ///   logs out; iOS may fail with `applicationNotInitialised`, and then
+  ///   nothing is logged out.
+  ///
+  /// To start a launch without the stored user, pass
+  /// `restoreExternalUserId: false` to [initSDK] instead.
+  static Future<void> logout() => _sdk.logout();
 
   /// Sets the external user token the SDK sends for content entitlements, or
   /// clears it when [externalUserToken] is `null`.
@@ -554,6 +600,7 @@ class _BlazeSDKInternal {
   Future<void> initSDK({
     required String apiKey,
     String? externalUserId,
+    bool? restoreExternalUserId,
     int? cachingSize,
     BlazeCachingLevel? cachingLevel,
     String? geoLocation,
@@ -567,12 +614,21 @@ class _BlazeSDKInternal {
     String? externalUserToken,
     BlazeInteractionLinkHandleType? interactionLinkHandling,
   }) async {
+    validateCustomActionButtons(
+        defaultStoryPlayerStyle?.buttons?.customActionButtons);
+    validateCustomActionButtons(
+        defaultMomentsPlayerStyle?.buttons?.customActionButtons);
+
     Map<String, dynamic> params = {
       'apiKey': apiKey,
     };
 
     if (externalUserId != null) {
       params['externalUserId'] = externalUserId;
+    }
+    // Sent only when set, so the native default applies otherwise.
+    if (restoreExternalUserId != null) {
+      params['restoreExternalUserId'] = restoreExternalUserId;
     }
     if (cachingSize != null) {
       params['cachingSize'] = cachingSize;
@@ -626,6 +682,8 @@ class _BlazeSDKInternal {
     String? eventId,
     String? sourceId,
   }) async {
+    validateCustomActionButtons(playerStyle?.buttons?.customActionButtons);
+
     Map<String, dynamic> params = {
       'storyId': storyId,
     };
@@ -690,6 +748,8 @@ class _BlazeSDKInternal {
     BlazeStoriesPlaybackConfiguration? playbackConfiguration,
     String? sourceId,
   }) async {
+    validateCustomActionButtons(playerStyle?.buttons?.customActionButtons);
+
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
@@ -757,6 +817,8 @@ class _BlazeSDKInternal {
     BlazeEntryPointTriggerSource? triggerSource,
     String? sourceId,
   }) async {
+    validateCustomActionButtons(playerStyle?.buttons?.customActionButtons);
+
     Map<String, dynamic> params = {
       'momentId': momentId,
     };
@@ -811,6 +873,8 @@ class _BlazeSDKInternal {
     BlazeEntryPointTriggerSource? triggerSource,
     String? sourceId,
   }) async {
+    validateCustomActionButtons(playerStyle?.buttons?.customActionButtons);
+
     Map<String, dynamic> params = {
       'dataSource': dataSource.toJson(),
     };
@@ -1317,10 +1381,19 @@ class _BlazeSDKInternal {
   }
 
   // Sets the external user ID.
-  Future<void> setExternalUserId(String? externalUserId) async {
+  Future<void> setExternalUserId(String externalUserId) async {
     try {
       await _channel.invokeMethod(
           'setExternalUserId', {'externalUserId': externalUserId});
+    } catch (e) {
+      mapToBlazeErrorOrRethrow(e);
+    }
+  }
+
+  // Logs the current user out.
+  Future<void> logout() async {
+    try {
+      await _channel.invokeMethod('logout');
     } catch (e) {
       mapToBlazeErrorOrRethrow(e);
     }

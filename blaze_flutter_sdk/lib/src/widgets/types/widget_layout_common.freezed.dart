@@ -909,6 +909,8 @@ BlazeTitleStyle _$BlazeTitleStyleFromJson(Map<String, dynamic> json) {
 mixin _$BlazeTitleStyle {
   BlazeFont? get font => throw _privateConstructorUsedError;
   double? get textSize => throw _privateConstructorUsedError;
+
+  /// Letter spacing, in points.
   double? get letterSpacing => throw _privateConstructorUsedError;
   String? get textColor => throw _privateConstructorUsedError;
   double? get lineHeight => throw _privateConstructorUsedError;
@@ -1124,6 +1126,8 @@ class _$BlazeTitleStyleImpl implements _BlazeTitleStyle {
   final BlazeFont? font;
   @override
   final double? textSize;
+
+  /// Letter spacing, in points.
   @override
   final double? letterSpacing;
   @override
@@ -1227,6 +1231,8 @@ abstract class _BlazeTitleStyle implements BlazeTitleStyle {
   BlazeFont? get font;
   @override
   double? get textSize;
+
+  /// Letter spacing, in points.
   @override
   double? get letterSpacing;
   @override

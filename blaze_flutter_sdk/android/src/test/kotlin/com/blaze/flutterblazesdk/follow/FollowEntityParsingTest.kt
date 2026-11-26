@@ -53,7 +53,7 @@ internal class FollowEntityParsingTest {
         )
         assertEquals(
             mapOf("id" to "2", "providerName" to null, "entityType" to null),
-            BlazeFollowEntity("2").toFlutterMap()
+            BlazeFollowEntity("2", null, null).toFlutterMap()
         )
     }
 }

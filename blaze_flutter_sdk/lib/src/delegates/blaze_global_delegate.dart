@@ -11,10 +11,19 @@ import 'dart:convert';
 class BlazeGlobalDelegate {
   /// This function will be triggered every time an analytics event is triggered.
   ///
+  /// An event this SDK version cannot decode is not delivered here. It is
+  /// reported once through [onErrorThrown] with reason
+  /// `failedToParseAnalyticsEvent`.
+  ///
   /// [params] The analytics event data.
   final void Function(BlazeOnEventTriggeredParams params)? onEventTriggered;
 
   /// Called when an error occurs in the SDK.
+  ///
+  /// Also called with domain `general` and reason
+  /// `failedToParseAnalyticsEvent` when an analytics event cannot be decoded.
+  /// The error's `metadata` then carries the event's `event_category` and
+  /// `event_action` when they could be read.
   ///
   /// [params] The error data.
   final void Function(BlazeOnErrorThrownParams params)? onErrorThrown;
@@ -43,7 +52,7 @@ class BlazeGlobalDelegate {
 class BlazeGlobalDelegateHelper {
   static void registerDelegate(BlazeGlobalDelegate? delegate) {
     // Register event listeners
-    _onEventTriggered(delegate?.onEventTriggered);
+    _onEventTriggered(delegate?.onEventTriggered, delegate?.onErrorThrown);
     _onErrorThrown(delegate?.onErrorThrown);
     _playbackModificationHandler(delegate?.playbackModificationHandler);
   }
@@ -82,27 +91,43 @@ class BlazeGlobalDelegateHelper {
     }
   }
 
+  /// The `reason` of the error reported when an analytics event cannot be
+  /// decoded.
+  static const _failedToParseAnalyticsEventReason = 'failedToParseAnalyticsEvent';
+
   static void _onEventTriggered(
     void Function(BlazeOnEventTriggeredParams params)? callback,
+    void Function(BlazeOnErrorThrownParams params)? onErrorThrown,
   ) {
     const methodName = 'Blaze.onEventTriggered';
     if (callback != null) {
       BlazeAsyncBridge.registerDartEventHandler(
         methodName,
         (args) async {
+          final BlazeAnalyticsEvent analyticsEvent;
+          Map<String, dynamic>? parsedEvent;
           try {
             // Parse using freezed object
             final eventData =
                 BlazeOnEventTriggeredInternalData.fromJson(args.params);
 
             // Parse the JSON string from eventData field
-            final Map<String, dynamic> parsedEvent =
-                jsonDecode(eventData.eventData);
-            final analyticsEvent = BlazeAnalyticsEvent.fromJson(parsedEvent);
+            parsedEvent = jsonDecode(eventData.eventData);
+            analyticsEvent = BlazeAnalyticsEvent.fromJson(parsedEvent!);
+          } catch (e, stackTrace) {
+            BlazeLogger.blazeDebugPrintException(
+              e,
+              stackTrace,
+              context: 'onEventTriggered',
+            );
+            // The event is lost, so tell the app instead of dropping it
+            // silently.
+            _reportUnparsedEvent(e, parsedEvent, onErrorThrown);
+            return;
+          }
 
-            final eventParams =
-                BlazeOnEventTriggeredParams(event: analyticsEvent);
-            callback(eventParams);
+          try {
+            callback(BlazeOnEventTriggeredParams(event: analyticsEvent));
           } catch (e, stackTrace) {
             BlazeLogger.blazeDebugPrintException(
               e,
@@ -114,6 +139,38 @@ class BlazeGlobalDelegateHelper {
       );
     } else {
       BlazeAsyncBridge.unregisterDartEventHandler(methodName);
+    }
+  }
+
+  static void _reportUnparsedEvent(
+    Object error,
+    Map<String, dynamic>? parsedEvent,
+    void Function(BlazeOnErrorThrownParams params)? onErrorThrown,
+  ) {
+    if (onErrorThrown == null) return;
+
+    // Names the event when the payload was readable JSON.
+    final metadata = <String, String>{};
+    for (final key in const ['event_category', 'event_action']) {
+      final value = parsedEvent?[key];
+      if (value is String) metadata[key] = value;
+    }
+
+    try {
+      onErrorThrown(BlazeOnErrorThrownParams(
+        error: BlazeError(
+          domain: 'general',
+          reason: _failedToParseAnalyticsEventReason,
+          message: 'An analytics event could not be decoded: $error',
+          metadata: metadata,
+        ),
+      ));
+    } catch (e, stackTrace) {
+      BlazeLogger.blazeDebugPrintException(
+        e,
+        stackTrace,
+        context: 'onErrorThrown',
+      );
     }
   }
 

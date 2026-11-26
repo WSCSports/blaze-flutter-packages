@@ -10,8 +10,8 @@ import BlazeSDK
 
 class FLStoriesRowWidget: BlazeWidgetBase {
     
-    override func createWidget() -> BlazeWidgetView {
-        let widget = BlazeStoriesWidgetRowView()
+    override func createWidget(widgetIdentifier: String, layout: BlazeWidgetLayout) -> BlazeWidgetView {
+        let widget = BlazeStoriesWidgetRowView(widgetIdentifier: widgetIdentifier, layout: layout)
 
         // Extract and set player style if provided
         if let playerStyle = playerStyleMap.extractPlayerStoryStyle() {

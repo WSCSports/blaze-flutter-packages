@@ -50,7 +50,7 @@ void main() {
       final entities =
           await BlazeSDK.followEntitiesManager.getFollowedEntities();
 
-      expect(entities, [_team, const BlazeFollowEntity(id: '2')]);
+      expect(entities, [_team, const BlazeFollowEntity(id: '2', entityType: null)]);
     });
   });
 

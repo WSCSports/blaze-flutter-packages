@@ -107,3 +107,7 @@ fun BlazeReactTitleFont.toFontResId(context: Context): Int? {
 
     return fontResId
 }
+
+// Dart letterSpacing is in points (like iOS kern); Android's TextView.letterSpacing is in em.
+fun Float.letterSpacingPointsToEm(textSize: Float): Float =
+    if (textSize > 0f) this / textSize else this

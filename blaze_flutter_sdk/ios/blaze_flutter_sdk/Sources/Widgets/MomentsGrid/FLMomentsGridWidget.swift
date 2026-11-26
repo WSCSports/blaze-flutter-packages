@@ -13,7 +13,7 @@ class FLMomentsGridWidget: BlazeWidgetBase {
     /// When the `tabsConfiguration` creation param is provided, uses the dedicated tabs
     /// initializer so tapping an item launches the fullscreen Moments tabs player; otherwise falls
     /// back to the standard widget.
-    override func createWidget() -> BlazeWidgetView {
+    override func createWidget(widgetIdentifier: String, layout: BlazeWidgetLayout) -> BlazeWidgetView {
         let widget: BlazeMomentsWidgetGridView
 
         if let tabsConfig = tabsConfigurationMap.extractMomentsWidgetTabsConfiguration(
@@ -24,11 +24,12 @@ class FLMomentsGridWidget: BlazeWidgetBase {
             // the native widget's own copy is `internal` and unreadable from here.
             momentsTabsContainer = tabsConfig
             widget = BlazeMomentsWidgetGridView(
-                layout: parseLayout(from: presetWidgetLayout),
+                widgetIdentifier: widgetIdentifier,
+                layout: layout,
                 tabsContainer: tabsConfig
             )
         } else {
-            widget = BlazeMomentsWidgetGridView()
+            widget = BlazeMomentsWidgetGridView(widgetIdentifier: widgetIdentifier, layout: layout)
         }
 
         // Extract and set player style if provided

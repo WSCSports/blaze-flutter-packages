@@ -1,0 +1,68 @@
+{
+  "event_action": "ad_view",
+  "event_category": "ad",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:00:33.432",
+  "timestamp_utc": "2026-11-12 15:00:33.432",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "followed_entities": [
+      {
+        "entity_type": "team",
+        "id": "fixture-team"
+      }
+    ],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  },
+  "ad": {
+    "session_id": "a-s",
+    "content_id": "st-1",
+    "content_title": "Title",
+    "content_type": "story",
+    "ad_duration": 15.0,
+    "advertiser_name": "Acme",
+    "content_extra_info": {
+      "league": "nba"
+    },
+    "story_page_content_extra_info": {
+      "page": "1"
+    },
+    "backoffice_campaign_data": "{\"k\":1}",
+    "ad_exit_trigger": "skip",
+    "ad_duration_viewed_percent": 50.5,
+    "audio_state": "mute",
+    "advertiser_id": "adv-1",
+    "campaign_id": "c-1",
+    "campaign_name": "Campaign",
+    "ad_server": "gam",
+    "ad_insertion_logic": "every_3",
+    "ad_index": 1,
+    "gesture_type": "click",
+    "ad_id": "ad-1",
+    "ad_title": "Ad",
+    "ad_description": "Desc",
+    "ad_system": "GDFP",
+    "skippable": true,
+    "skip_time_offset": 5.0,
+    "ima_url": "https://example.com/vast",
+    "ad_unit_id": "/123/banner"
+  }
+}

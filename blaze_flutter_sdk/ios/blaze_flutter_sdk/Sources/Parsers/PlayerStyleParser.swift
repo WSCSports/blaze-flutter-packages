@@ -14,34 +14,45 @@ import Foundation
 
 extension [String: AnyHashable]? {
 
-    func extractPlayerStoryStyle() -> BlazeStoryPlayerStyle? {
+    // Each function merges the Dart-supplied style onto `startingStyle`. The default is the
+    // app's default style (set through `initSDK`), so a per-call, per-widget or tabs style only
+    // overrides the fields it sets. `initSDK` passes the native `.base()` preset, so a second
+    // init does not stack on the previous default.
+
+    func extractPlayerStoryStyle(
+        startingFrom startingStyle: BlazeStoryPlayerStyle = Blaze.shared.getDefaultStoryPlayerStyle()
+    ) -> BlazeStoryPlayerStyle? {
         guard let self = self,
             let customization = self.toReactStoryPlayerStyle
         else {
             return nil
         }
 
-        return BlazeStoryPlayerStyle.base().mergedWith(customization)
+        return startingStyle.mergedWith(customization)
     }
 
-    func extractPlayerMomentsStyle() -> BlazeMomentsPlayerStyle? {
+    func extractPlayerMomentsStyle(
+        startingFrom startingStyle: BlazeMomentsPlayerStyle = Blaze.shared.getDefaultMomentsPlayerStyle()
+    ) -> BlazeMomentsPlayerStyle? {
         guard let self = self,
             let customization = self.toReactMomentsPlayerStyle
         else {
             return nil
         }
 
-        return BlazeMomentsPlayerStyle.base().mergedWith(customization)
+        return startingStyle.mergedWith(customization)
     }
 
-    func extractPlayerVideosStyle() -> BlazeVideosPlayerStyle? {
+    func extractPlayerVideosStyle(
+        startingFrom startingStyle: BlazeVideosPlayerStyle = Blaze.shared.getDefaultVideosPlayerStyle()
+    ) -> BlazeVideosPlayerStyle? {
         guard let self = self,
             let customization = self.toReactVideosPlayerStyle
         else {
             return nil
         }
 
-        return BlazeVideosPlayerStyle.base().mergedWith(customization)
+        return startingStyle.mergedWith(customization)
     }
 }
 

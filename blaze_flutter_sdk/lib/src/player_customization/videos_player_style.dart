@@ -122,7 +122,9 @@ class BlazeVideosPlayerCtaStyle with _$BlazeVideosPlayerCtaStyle {
 class BlazeVideosPlayerCtaIconStyle with _$BlazeVideosPlayerCtaIconStyle {
   const factory BlazeVideosPlayerCtaIconStyle({
     BlazeImage? iconImage,
-    BlazeVideosPlayerCTAIconPositioning? iconPositioning,
+
+    /// Android only. No effect on iOS. The position of the icon inside the CTA.
+    required BlazeVideosPlayerCTAIconPositioning iconPositioning,
     String? iconTint,
   }) = _BlazeVideosPlayerCtaIconStyle;
 

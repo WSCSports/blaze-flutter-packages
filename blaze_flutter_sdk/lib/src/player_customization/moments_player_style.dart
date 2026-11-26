@@ -87,6 +87,10 @@ class BlazeMomentsPlayerButtonsStyle with _$BlazeMomentsPlayerButtonsStyle {
     BlazePlayerButtonStyle? seekForward,
     BlazePlayerButtonStyle? seekBackward,
     BlazePlayerButtonStyle? search,
+
+    /// At most 2 buttons, each with a unique `customParams.id`; anything else
+    /// throws an [ArgumentError]. An empty list removes the custom action
+    /// buttons. When omitted, the current buttons are kept.
     List<BlazeCustomActionButton>? customActionButtons,
 
     /// Whether the space below the like button is preserved when the likes
@@ -163,7 +167,9 @@ class BlazeMomentsPlayerCtaStyle with _$BlazeMomentsPlayerCtaStyle {
 class BlazeMomentsPlayerCtaIconStyle with _$BlazeMomentsPlayerCtaIconStyle {
   const factory BlazeMomentsPlayerCtaIconStyle({
     BlazeImage? iconImage,
-    BlazeMomentsPlayerCTAIconPositioning? iconPositioning,
+
+    /// Android only. No effect on iOS. The position of the icon inside the CTA.
+    required BlazeMomentsPlayerCTAIconPositioning iconPositioning,
     String? iconTint,
   }) = _BlazeMomentsPlayerCtaIconStyle;
 

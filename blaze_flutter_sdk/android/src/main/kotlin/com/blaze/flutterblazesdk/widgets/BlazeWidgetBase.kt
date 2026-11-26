@@ -55,6 +55,10 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
 
     val widgetId: String = creationParams?.get("widgetId") as String
 
+    // Names the platform channel. Dart creates one per mounted widget, so two widgets with
+    // the same widgetId never share a channel.
+    private val channelId: String = creationParams?.get("channelId") as String
+
     // Parse the data source from creation params
     val dataSource: BlazeDataSourceType? by lazy {
         (creationParams?.get("dataSource") as? Map<String, Any>)?.toBlazeDataSourceType()
@@ -133,7 +137,7 @@ abstract class BlazeWidgetBase<T : BlazeBaseWidget<*, *>>(
     var tabsController: BlazeMomentsWidgetTabsController? = null
 
     private var methodChannel: MethodChannel? =
-            MethodChannel(binaryMessenger, "blaze-widget-$widgetId").apply {
+            MethodChannel(binaryMessenger, "blaze-widget-$channelId").apply {
                 setMethodCallHandler { call, result ->
                     when (call.method) {
                         "reloadData" -> {

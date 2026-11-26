@@ -10,8 +10,8 @@ import BlazeSDK
 
 class FLStoriesGridWidget: BlazeWidgetBase {
     
-    override func createWidget() -> BlazeWidgetView {
-        let widget = BlazeStoriesWidgetGridView()
+    override func createWidget(widgetIdentifier: String, layout: BlazeWidgetLayout) -> BlazeWidgetView {
+        let widget = BlazeStoriesWidgetGridView(widgetIdentifier: widgetIdentifier, layout: layout)
 
         // Extract and set player style if provided
         if let playerStyle = playerStyleMap.extractPlayerStoryStyle() {

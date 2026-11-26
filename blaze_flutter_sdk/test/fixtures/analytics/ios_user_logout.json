@@ -1,0 +1,27 @@
+{
+  "event_action": "user_logout",
+  "event_category": "global",
+  "referring": {},
+  "sdk_type": "ios-flutter",
+  "sdk_version": "2.0.0;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "app_version": "1.0.0 (1)",
+    "connection_type": "wifi",
+    "device_brand": "apple",
+    "device_model": "SimulatoriPhone17,1",
+    "device_type": "phone",
+    "operating_system": "ios",
+    "operating_system_version": "18.2",
+    "screen_resolution": "1206x2622"
+  },
+  "timestamp_user_tz": "2026-11-12 16:10:55.039",
+  "timestamp_utc": "2026-11-12 14:10:55.039",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "locale": "en_US",
+    "logout_trigger": "logout"
+  }
+}

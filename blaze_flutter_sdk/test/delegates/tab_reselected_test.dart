@@ -54,7 +54,11 @@ void main() {
       (tester) async {
     capturePlatformViewCreationParams();
     final calls = <MethodCall>[];
-    const channel = MethodChannel('blaze-widget-w-reload');
+    final controller = BlazeMomentsWidgetController();
+    await tester.pumpWidget(_tabsRow('w-reload', controller: controller));
+    await tester.pumpAndSettle();
+    // The channel name is known once the widget is created.
+    final channel = MethodChannel(widgetChannelName('w-reload'));
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, (call) async {
       calls.add(call);
@@ -63,9 +67,6 @@ void main() {
     addTearDown(() => TestDefaultBinaryMessengerBinding
         .instance.defaultBinaryMessenger
         .setMockMethodCallHandler(channel, null));
-    final controller = BlazeMomentsWidgetController();
-    await tester.pumpWidget(_tabsRow('w-reload', controller: controller));
-    await tester.pumpAndSettle();
 
     controller.reloadTab(at: 2);
     controller.reloadTabByContainerId(containerId: 't1');

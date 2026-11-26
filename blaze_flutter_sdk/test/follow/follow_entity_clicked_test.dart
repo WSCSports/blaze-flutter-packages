@@ -39,6 +39,6 @@ void main() {
   test('a click without metadata still reaches the delegate', () async {
     final p = await click(base);
 
-    expect(p?.followEntity, const BlazeFollowEntity(id: '1'));
+    expect(p?.followEntity, const BlazeFollowEntity(id: '1', entityType: null));
   });
 }

@@ -25,7 +25,8 @@ mixin _$BlazeFollowEntity {
   /// The data provider the [id] belongs to.
   String? get providerName => throw _privateConstructorUsedError;
 
-  /// The entity's category. Unrecognized native values decode to `null`.
+  /// The entity's category. Pass `null` when it is not known. Unrecognized
+  /// native values decode to `null`.
 // ignore: invalid_annotation_target
   @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
   BlazeFollowedEntityCategory? get entityType =>
@@ -163,7 +164,7 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
       {required this.id,
       this.providerName,
       @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-      this.entityType});
+      required this.entityType});
 
   factory _$BlazeFollowEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlazeFollowEntityImplFromJson(json);
@@ -175,7 +176,8 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
   @override
   final String? providerName;
 
-  /// The entity's category. Unrecognized native values decode to `null`.
+  /// The entity's category. Pass `null` when it is not known. Unrecognized
+  /// native values decode to `null`.
 // ignore: invalid_annotation_target
   @override
   @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
@@ -249,10 +251,11 @@ class _$BlazeFollowEntityImpl implements _BlazeFollowEntity {
 
 abstract class _BlazeFollowEntity implements BlazeFollowEntity {
   const factory _BlazeFollowEntity(
-      {required final String id,
-      final String? providerName,
-      @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
-      final BlazeFollowedEntityCategory? entityType}) = _$BlazeFollowEntityImpl;
+          {required final String id,
+          final String? providerName,
+          @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)
+          required final BlazeFollowedEntityCategory? entityType}) =
+      _$BlazeFollowEntityImpl;
 
   factory _BlazeFollowEntity.fromJson(Map<String, dynamic> json) =
       _$BlazeFollowEntityImpl.fromJson;
@@ -264,7 +267,8 @@ abstract class _BlazeFollowEntity implements BlazeFollowEntity {
   @override
   String? get providerName;
 
-  /// The entity's category. Unrecognized native values decode to `null`.
+  /// The entity's category. Pass `null` when it is not known. Unrecognized
+  /// native values decode to `null`.
 // ignore: invalid_annotation_target
   @override
   @JsonKey(unknownEnumValue: JsonKey.nullForUndefinedEnumValue)

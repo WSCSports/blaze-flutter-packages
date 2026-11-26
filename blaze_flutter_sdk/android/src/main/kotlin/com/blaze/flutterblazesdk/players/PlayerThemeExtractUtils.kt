@@ -13,26 +13,41 @@ import com.blaze.flutterblazesdk.players.videos.BlazeReactVideosPlayerStyle
 import com.blaze.flutterblazesdk.players.videos.mergedWith
 import com.blaze.flutterblazesdk.utils.parsing.gson.toObject
 
-fun Map<String, Any>?.extractStoriesPlayerStyle(context: Context): BlazeStoryPlayerStyle {
-    val reactTheme = this ?: return BlazeSDK.getDefaultStoryPlayerStyle()
+/**
+ * Each function merges the Dart-supplied style onto [startingStyle]. The default is the app's
+ * default style (set through `initSDK`), so a per-call, per-widget or tabs style only overrides
+ * the fields it sets. `initSDK` passes the native `base()` preset, so a second init does not
+ * stack on the previous default.
+ */
+fun Map<String, Any>?.extractStoriesPlayerStyle(
+    context: Context,
+    startingStyle: BlazeStoryPlayerStyle = BlazeSDK.getDefaultStoryPlayerStyle(),
+): BlazeStoryPlayerStyle {
+    val reactTheme = this ?: return startingStyle
 
     val customization = reactTheme.toObject<BlazeReactStoryPlayerStyle>()
 
-    return BlazeStoryPlayerStyle.base().mergedWith(customization = customization, context)
+    return startingStyle.mergedWith(customization = customization, context)
 }
 
-fun Map<String, Any>?.extractMomentsPlayerStyle(context: Context): BlazeMomentsPlayerStyle {
-    val reactTheme = this ?: return BlazeSDK.getDefaultMomentsPlayerStyle()
+fun Map<String, Any>?.extractMomentsPlayerStyle(
+    context: Context,
+    startingStyle: BlazeMomentsPlayerStyle = BlazeSDK.getDefaultMomentsPlayerStyle(),
+): BlazeMomentsPlayerStyle {
+    val reactTheme = this ?: return startingStyle
 
     val customization = reactTheme.toObject<BlazeReactMomentsPlayerStyle>()
 
-    return BlazeMomentsPlayerStyle.base().mergedWith(customization = customization, context)
+    return startingStyle.mergedWith(customization = customization, context)
 }
 
-fun Map<String, Any>?.extractVideosPlayerStyle(context: Context): BlazeVideosPlayerStyle {
-    val reactTheme = this ?: return BlazeSDK.getDefaultVideosPlayerStyle()
+fun Map<String, Any>?.extractVideosPlayerStyle(
+    context: Context,
+    startingStyle: BlazeVideosPlayerStyle = BlazeSDK.getDefaultVideosPlayerStyle(),
+): BlazeVideosPlayerStyle {
+    val reactTheme = this ?: return startingStyle
 
     val customization = reactTheme.toObject<BlazeReactVideosPlayerStyle>()
 
-    return BlazeVideosPlayerStyle.base().mergedWith(customization = customization, context)
+    return startingStyle.mergedWith(customization = customization, context)
 }

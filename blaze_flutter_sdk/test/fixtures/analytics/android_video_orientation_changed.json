@@ -1,0 +1,59 @@
+{
+  "event_action": "viewing_orientation_changed",
+  "event_category": "video",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "videos",
+    "origin_source_id": [
+      "not_provided"
+    ],
+    "origin_source_type": [
+      "entry_point"
+    ]
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;2.0.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "2976x1356"
+  },
+  "timestamp_user_tz": "2026-11-15 14:12:28.984",
+  "timestamp_utc": "2026-11-15 12:12:28.984",
+  "user": {
+    "experiments": {},
+    "generated_user_id": "77ee4caa-08a4-4d5b-9765-9003b392b2cb",
+    "locale": "en_US"
+  },
+  "video": {
+    "audio_state": "mute",
+    "cc_state": "off",
+    "content_ratio": "16:9",
+    "cta_config": {
+      "color": "#FFFFFF",
+      "text": "Click here",
+      "url": "https://google.co.il"
+    },
+    "cta_shown": true,
+    "device_orientation": "landscape",
+    "is_liked": false,
+    "playback_speed": 1.0,
+    "remaining_unread_count": 4,
+    "total_videos_count": 5,
+    "video_current_time": 2.753,
+    "video_duration": 10.026689,
+    "video_id": "69a96bcd5a49e70955dfba38",
+    "video_index": 0,
+    "video_orientation_changed_trigger": "button",
+    "video_session_id": "96422206-a21a-4432-91ed-783aa8353b66",
+    "video_start_trigger": "entry_point",
+    "video_title": "video",
+    "viewing_mode": "fullscreen"
+  }
+}

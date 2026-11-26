@@ -1,0 +1,50 @@
+{
+  "ad": {
+    "backoffice_campaign_data": "{\"type\":\"IMA\",\"adProvider\":\"GoogleAds\",\"tag\":\"https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=\",\"configuration\":{\"type\":\"Video\",\"adsLocationType\":\"FixedPercentages\",\"interval\":1,\"adPercentages\":[0],\"adLocationsIndexes\":[0],\"startTime\":\"2025-06-15T21:00:00Z\",\"endTime\":\"2028-08-03T21:00:00Z\",\"isSkippable\":false,\"isActive\":true,\"distanceOfItemsToLoadAdsInAdvance\":null,\"adCacheTTL\":null},\"context\":{\"propertyId\":\"c81e728d9d4c2f636f067f89cc14862c\",\"userGroupId\":\"BeLo0I86iSm2vQSLqkpEHA__\",\"systemId\":\"aNsPZOcOpOOXMrh4ANqnhA__\",\"systemIds\":\"aNsPZOcOpOOXMrh4ANqnhA__\"},\"externalAdServerId\":null}",
+    "content_type": "video",
+    "content_title": "Unbelievable NBA Game Recap: Intense Buzzer Beater, Game-Winning Shot, Insane Dunks, Clutch Threes, and Epic Comeback You Won’t Believe – Full Highlights from One of the Most Exciting Games of the Season!",
+    "ima_url": "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=",
+    "skippable": false,
+    "ad_duration": 10,
+    "ad_description": "External - Single Inline Linear ad",
+    "content_id": "682ada037d1d9f60bd56aa86",
+    "ad_id": "5925573263",
+    "ad_system": "GDFP",
+    "ad_title": "External - Single Inline Linear",
+    "session_id": "380F6284-D10A-4BB5-824B-998D84DEFFE5",
+    "skip_time_offset": -1
+  },
+  "event_category": "ad",
+  "tech": {
+    "app_version": "1.0.0 (1)",
+    "operating_system": "ios",
+    "device_model": "SimulatoriPhone17,1",
+    "device_brand": "apple",
+    "connection_type": "wifi",
+    "operating_system_version": "18.2",
+    "app_id": "com.wscsports.flutter.blazeFlutterSdkExample",
+    "screen_resolution": "1206x2622",
+    "device_type": "phone"
+  },
+  "sdk_version": "2.0.0;1.21.0",
+  "timestamp_user_tz": "2026-11-15 10:55:49.845",
+  "timestamp_utc": "2026-11-15 08:55:49.845",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "videos",
+    "origin_widget_type": "grid",
+    "origin_source_id": [
+      "home-videos-grid"
+    ],
+    "origin_source_type": [
+      "widget"
+    ]
+  },
+  "event_action": "ima_ad_started",
+  "sdk_type": "ios-flutter",
+  "user": {
+    "generated_user_id": "DB159943-8395-4F30-9617-F7A1BB7B3CA5",
+    "locale": "en_US",
+    "experiments": {}
+  }
+}

@@ -24,13 +24,14 @@ mixin _$BlazeStoriesPlaybackConfiguration {
   /// Delay in milliseconds before the buffering spinner is shown while
   /// content is loading.
   ///
-  /// Negative values are clamped to `0` natively. When omitted, the native
-  /// default of `1000`ms applies.
+  /// Negative values are clamped to `0` natively. When omitted, the current
+  /// default's value is kept (`1000`ms unless the default was changed).
   int? get bufferingSpinnerDelayMs => throw _privateConstructorUsedError;
 
   /// Ads playback options for the stories player.
   ///
-  /// When omitted, the native defaults apply (pre-roll disabled).
+  /// When omitted, the current default's values are kept (pre-roll disabled
+  /// unless the default was changed).
   BlazeStoriesAdsPlaybackConfiguration? get ads =>
       throw _privateConstructorUsedError;
 
@@ -185,14 +186,15 @@ class _$BlazeStoriesPlaybackConfigurationImpl
   /// Delay in milliseconds before the buffering spinner is shown while
   /// content is loading.
   ///
-  /// Negative values are clamped to `0` natively. When omitted, the native
-  /// default of `1000`ms applies.
+  /// Negative values are clamped to `0` natively. When omitted, the current
+  /// default's value is kept (`1000`ms unless the default was changed).
   @override
   final int? bufferingSpinnerDelayMs;
 
   /// Ads playback options for the stories player.
   ///
-  /// When omitted, the native defaults apply (pre-roll disabled).
+  /// When omitted, the current default's values are kept (pre-roll disabled
+  /// unless the default was changed).
   @override
   final BlazeStoriesAdsPlaybackConfiguration? ads;
 
@@ -276,14 +278,15 @@ abstract class _BlazeStoriesPlaybackConfiguration
   /// Delay in milliseconds before the buffering spinner is shown while
   /// content is loading.
   ///
-  /// Negative values are clamped to `0` natively. When omitted, the native
-  /// default of `1000`ms applies.
+  /// Negative values are clamped to `0` natively. When omitted, the current
+  /// default's value is kept (`1000`ms unless the default was changed).
   @override
   int? get bufferingSpinnerDelayMs;
 
   /// Ads playback options for the stories player.
   ///
-  /// When omitted, the native defaults apply (pre-roll disabled).
+  /// When omitted, the current default's values are kept (pre-roll disabled
+  /// unless the default was changed).
   @override
   BlazeStoriesAdsPlaybackConfiguration? get ads;
 
@@ -308,7 +311,7 @@ mixin _$BlazeStoriesAdsPlaybackConfiguration {
   ///
   /// When `false` — the native default, kept for backward compatibility — an
   /// ad configured on that first unread page is skipped. Omit to keep the
-  /// native default.
+  /// current default's value.
   bool? get enablePreroll => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -430,7 +433,7 @@ class _$BlazeStoriesAdsPlaybackConfigurationImpl
   ///
   /// When `false` — the native default, kept for backward compatibility — an
   /// ad configured on that first unread page is skipped. Omit to keep the
-  /// native default.
+  /// current default's value.
   @override
   final bool? enablePreroll;
 
@@ -512,7 +515,7 @@ abstract class _BlazeStoriesAdsPlaybackConfiguration
   ///
   /// When `false` — the native default, kept for backward compatibility — an
   /// ad configured on that first unread page is skipped. Omit to keep the
-  /// native default.
+  /// current default's value.
   @override
   bool? get enablePreroll;
 

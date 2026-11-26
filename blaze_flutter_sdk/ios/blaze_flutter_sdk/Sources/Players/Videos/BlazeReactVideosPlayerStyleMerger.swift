@@ -52,7 +52,7 @@ extension BlazeVideosPlayerCtaStyle {
         merged.height = customization.height ?? merged.height
         merged.width = customization.width ?? merged.width
         merged.font = merged.font.fontWith(customization.font, textSize: customization.textSize)
-        merged.icon = UIImage.imageWith(customization.icon?.iconImage)
+        merged.icon = UIImage.imageWith(customization.icon?.iconImage) ?? merged.icon
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.borderColor = UIColor(hexString: customization.borderColor) ?? merged.borderColor
         merged.borderWidth = customization.borderWidth ?? merged.borderWidth
@@ -95,8 +95,6 @@ extension BlazeVideosPlayerButtonStyle {
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.isVisibleForAds = customization.isVisibleForAds ?? merged.isVisibleForAds
         merged.customImage = merged.customImage.mergedWith(customization.customImage)
-        merged.contentHorizontalAlignment = .center
-        merged.contentVerticalAlignment = .center
 
         merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
@@ -142,9 +140,10 @@ extension BlazeSDK.BlazeVideosPlayerButtonCustomImageStates? {
             return self
         }
 
+        // An omitted selected image keeps the existing one.
         return .init(
             default: defaultImage,
-            selected: UIImage.imageWith(customization.selectedImage))
+            selected: UIImage.imageWith(customization.selectedImage) ?? self?.selected)
     }
 
 }

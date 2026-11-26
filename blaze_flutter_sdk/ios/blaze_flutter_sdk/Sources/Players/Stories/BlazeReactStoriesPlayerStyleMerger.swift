@@ -107,11 +107,10 @@ extension BlazeStoryPlayerButtonsStyle {
         merged.share = merged.share.mergedWith(customization.share)
         merged.captions = merged.captions.mergedWith(customization.captions)
 
-        if let customActionButtons = customization.customActionButtons, !customActionButtons.isEmpty {
+        // An empty list clears the buttons; an omitted list keeps them.
+        if let customActionButtons = customization.customActionButtons {
             let nativeButtons = customActionButtons.compactMap { $0.toNativeStoryCustomActionButton() }
-            if !nativeButtons.isEmpty {
-                merged.setTopStackCustomActionButtons(nativeButtons)
-            }
+            merged.setTopStackCustomActionButtons(nativeButtons)
         }
 
         return merged
@@ -129,8 +128,6 @@ extension BlazeStoryPlayerButtonStyle {
         merged.isVisible = customization.isVisible ?? merged.isVisible
         merged.isVisibleForAds = customization.isVisibleForAds ?? merged.isVisibleForAds
         merged.customImage = merged.customImage.mergedWith(customization.customImage)
-        merged.contentHorizontalAlignment = .center
-        merged.contentVerticalAlignment = .center
 
         merged.glassBackground = customization.glassBackground?.asNative ?? merged.glassBackground
         return merged
@@ -146,9 +143,10 @@ extension BlazeSDK.BlazeStoryPlayerButtonCustomImageStates? {
             return self
         }
 
+        // An omitted selected image keeps the existing one.
         return .init(
             default: defaultImage,
-            selected: UIImage.imageWith(customization.selectedImage))
+            selected: UIImage.imageWith(customization.selectedImage) ?? self?.selected)
     }
 
 }
@@ -193,7 +191,13 @@ extension BlazeStoryPlayerTitleImageStyle {
                     merged.source = .static(nativeStaticSource)
                 }
             case "dynamic":
-                merged.source = .dynamic(fallback: reactSource.fallback?.toNativeStaticSource())
+                // An omitted fallback keeps the one of an existing dynamic source.
+                var existingFallback: BlazeStoryPlayerTitleImageStaticSource?
+                if case .dynamic(let fallback) = merged.source {
+                    existingFallback = fallback
+                }
+                merged.source = .dynamic(
+                    fallback: reactSource.fallback?.toNativeStaticSource() ?? existingFallback)
             default:
                 break
             }

@@ -1,0 +1,104 @@
+{
+  "event_action": "moment_start",
+  "event_category": "moment",
+  "referring": {
+    "data_source_type": "label_expression",
+    "data_source_value": "top-stories"
+  },
+  "sdk_type": "android-flutter",
+  "sdk_version": "2.0.1;1.21.0",
+  "tech": {
+    "app_id": "com.wscsports.blaze_flutter_sdk_example",
+    "app_version": "1.0.0",
+    "connection_type": "wifi",
+    "device_brand": "google",
+    "device_model": "sdk_gphone64_arm64",
+    "device_type": "phone",
+    "operating_system": "android",
+    "operating_system_version": "34",
+    "screen_resolution": "1440x2892"
+  },
+  "timestamp_user_tz": "2026-11-12 17:00:33.432",
+  "timestamp_utc": "2026-11-12 15:00:33.432",
+  "user": {
+    "experiments": {},
+    "external_user_id": "fixture-user",
+    "followed_entities": [
+      {
+        "entity_type": "team",
+        "id": "fixture-team"
+      }
+    ],
+    "generated_user_id": "88baea6b-4adc-418f-b403-ef09adcc98f5",
+    "locale": "en_US"
+  },
+  "moment": {
+    "moments_session_id": "m-s",
+    "moment_id": "m-1",
+    "moment_title": "Title",
+    "moment_index": 0,
+    "total_moments_count": 26,
+    "remaining_unread_count": 25,
+    "next_moment_id": "m-2",
+    "is_liked": true,
+    "moment_navigation_type": "manual",
+    "moment_navigation_direction": "forward",
+    "moment_start_trigger": "swipe",
+    "moment_exit_trigger": "swipe",
+    "moment_duration": 18.68,
+    "moment_duration_viewed_percent": 37.25,
+    "audio_state": "mute",
+    "content_ratio": "9:16",
+    "loop_number": 1,
+    "loop_settings": {
+      "infinite_loop": false,
+      "loop_and_advance": 2
+    },
+    "content_extra_info": {
+      "league": "nba"
+    },
+    "cc_state": "not_available",
+    "custom_button_name": "Buy",
+    "cta_config": {
+      "text": "Watch now",
+      "color": "#FF0000",
+      "url": "https://example.com/cta"
+    },
+    "cta_shown": true,
+    "custom_action_button_config": {
+      "button_id": "btn-1",
+      "button_text": "Buy"
+    },
+    "custom_action_button_shown": true,
+    "attribution_token": "tok",
+    "follow_state": {
+      "team-1": "followed"
+    },
+    "follow_button_visible": true,
+    "follow_subject_type": "team",
+    "follow_subject_id": "team-1",
+    "follow_subject_provider_name": "opta",
+    "active_tab_title": "For You",
+    "initial_tab_title": "For You",
+    "tabs_enabled": true,
+    "tabs_configuration": [
+      "For You",
+      "Trending"
+    ],
+    "localization": {
+      "language": "en"
+    },
+    "seek_type": "seek_bar",
+    "seek_start_time": 1.5,
+    "seek_end_time": 4.5,
+    "seek_total_time": 3.0,
+    "seek_direction": "forward",
+    "seek_interval_setting": 10.0,
+    "playback_speed_type": "press_hold",
+    "playback_speed": 2,
+    "speed_start_time": 1.0,
+    "speed_end_time": 3.0,
+    "speed_total_time": 2.0,
+    "user_lifetime_engagements": 12
+  }
+}

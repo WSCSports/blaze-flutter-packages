@@ -30,11 +30,11 @@ extension [String: AnyHashable]? {
     }
 
     /// Builds a `BlazeMomentsPlaybackConfiguration` from a Flutter-provided map, starting from the
-    /// SDK base configuration and overriding only the keys that are present (mirroring the RN bridge).
+    /// current SDK default and overriding only the keys that are present.
     func extractMomentsPlaybackConfiguration() -> BlazeMomentsPlaybackConfiguration? {
         guard let dict = self else { return nil }
 
-        var config = BlazeMomentsPlaybackConfiguration.base()
+        var config = Blaze.shared.getDefaultMomentsPlaybackConfiguration()
 
         if let loopBehaviorDict = dict["loopBehavior"] as? [String: AnyHashable],
            let type = loopBehaviorDict["type"] as? String {
@@ -57,18 +57,18 @@ extension [String: AnyHashable]? {
     }
 
     /// Builds a `BlazeStoriesPlaybackConfiguration` from a Flutter-provided map, starting from the
-    /// SDK base configuration and overriding only the keys that are present (mirroring the RN bridge).
+    /// current SDK default and overriding only the keys that are present.
     func extractStoriesPlaybackConfiguration() -> BlazeStoriesPlaybackConfiguration? {
         guard let dict = self else { return nil }
 
-        var config = BlazeStoriesPlaybackConfiguration.base()
+        var config = Blaze.shared.getDefaultStoriesPlaybackConfiguration()
 
         if let delaySeconds = dict.bufferingSpinnerDelaySecondsFromMs() {
             config.bufferingSpinnerDelay = delaySeconds
         }
 
         // Override only the ads keys Flutter actually supplied, so omissions
-        // fall through to the native `.base()` defaults.
+        // keep the current default's values.
         if let adsDict = dict["ads"] as? [String: AnyHashable],
             let enablePreroll = adsDict["enablePreroll"] as? Bool
         {

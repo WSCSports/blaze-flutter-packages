@@ -1,5 +1,6 @@
 package com.blaze.flutterblazesdk.utils
 
+import com.blaze.blazesdk.extentions.blazeDeepCopy
 import com.blaze.blazesdk.features.moments.models.configuration.BlazeMomentsLoopBehavior
 import com.blaze.blazesdk.features.moments.models.configuration.BlazeMomentsPlaybackConfiguration
 import com.blaze.blazesdk.features.stories.models.configuration.BlazeStoriesPlaybackConfiguration
@@ -13,7 +14,8 @@ import com.blaze.blazesdk.shared.BlazeSDK
 fun Map<String, Any>?.extractVideosPlaybackConfiguration(): BlazeVideosPlaybackConfiguration? {
     val map = this ?: return null
 
-    val config = BlazeSDK.getDefaultVideosPlaybackConfiguration()
+    // The nested pip object is mutated below; deep copy so the stored default is untouched.
+    val config = BlazeSDK.getDefaultVideosPlaybackConfiguration().blazeDeepCopy()
 
     (map["multiAspectRatio"] as? Boolean)?.let { config.multiAspectRatio = it }
     (map["shouldOpenInLandscape"] as? Boolean)?.let { config.shouldOpenOnLandscape = it }
@@ -33,12 +35,13 @@ fun Map<String, Any>?.extractVideosPlaybackConfiguration(): BlazeVideosPlaybackC
 
 /**
  * Builds a [BlazeMomentsPlaybackConfiguration] from a Flutter-provided map, starting from the
- * SDK base configuration and overriding only the keys that are present (mirroring the RN bridge).
+ * current SDK default and overriding only the keys that are present.
  */
 fun Map<String, Any>?.extractMomentsPlaybackConfiguration(): BlazeMomentsPlaybackConfiguration? {
     val map = this ?: return null
 
-    val config = BlazeMomentsPlaybackConfiguration.base()
+    // loopBehavior is replaced whole, so the getter's own copy is enough.
+    val config = BlazeSDK.getDefaultMomentsPlaybackConfiguration()
 
     (map["loopBehavior"] as? Map<*, *>)?.let { loopBehaviorMap ->
         when (loopBehaviorMap["type"] as? String) {
@@ -62,19 +65,19 @@ fun Map<String, Any>?.extractMomentsPlaybackConfiguration(): BlazeMomentsPlaybac
 
 /**
  * Builds a [BlazeStoriesPlaybackConfiguration] from a Flutter-provided map, starting from the
- * SDK base configuration and overriding only the keys that are present (mirroring the RN bridge).
+ * current SDK default and overriding only the keys that are present.
  */
 fun Map<String, Any>?.extractStoriesPlaybackConfiguration(): BlazeStoriesPlaybackConfiguration? {
     val map = this ?: return null
 
-    val config = BlazeStoriesPlaybackConfiguration.base()
+    // The nested ads object is mutated below; deep copy so the stored default is untouched.
+    val config = BlazeSDK.getDefaultStoriesPlaybackConfiguration().blazeDeepCopy()
 
     map.extractBufferingSpinnerDelayMs()?.let { delayMs ->
         config.bufferingSpinnerDelayMs = delayMs
     }
 
-    // The nested ads config has an internal constructor, so start from its own
-    // base() and override only the keys Flutter actually supplied.
+    // Override only the ads keys Flutter actually supplied.
     (map["ads"] as? Map<*, *>)?.let { adsMap ->
         (adsMap["enablePreroll"] as? Boolean)?.let { enablePreroll ->
             config.ads.enablePreroll = enablePreroll

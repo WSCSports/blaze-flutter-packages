@@ -23,14 +23,15 @@ class BlazeMomentsLoopBehavior with _$BlazeMomentsLoopBehavior {
 @freezed
 class BlazeMomentsPlaybackConfiguration with _$BlazeMomentsPlaybackConfiguration {
   const factory BlazeMomentsPlaybackConfiguration({
-    /// The loop behavior applied to the moments player.
+    /// The loop behavior applied to the moments player. When omitted, the
+    /// current default's loop behavior is kept.
     BlazeMomentsLoopBehavior? loopBehavior,
 
     /// Delay in milliseconds before the buffering spinner is shown while
     /// content is loading.
     ///
-    /// Negative values are clamped to `0` natively. When omitted, the native
-    /// default of `1000`ms applies.
+    /// Negative values are clamped to `0` natively. When omitted, the current
+    /// default's value is kept (`1000`ms unless the default was changed).
     int? bufferingSpinnerDelayMs,
   }) = _BlazeMomentsPlaybackConfiguration;
 

@@ -13,6 +13,7 @@ import '../types/shared_types.dart';
 import '../types/entitlements.dart';
 import '../types/widget_presets.dart';
 import '../types/moments_widget_tabs_configuration.dart';
+import '../player_customization/custom_action_buttons_validation.dart';
 import '../player_customization/stories_player_style.dart';
 import '../player_customization/moments_player_style.dart';
 import '../player_customization/videos_player_style.dart';
@@ -29,12 +30,22 @@ import 'types/widget_style_overrides.dart';
 import 'blaze_widget_controller.dart';
 
 class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
-  /// A unique identifier for this widget instance, used internally to route
-  /// platform-channel calls to the correct native widget instance.
+  /// A stable label for this widget placement, for example
+  /// `home-stories-row`.
   ///
-  /// Must be unique across every Blaze widget simultaneously mounted in the
-  /// widget tree — two widgets sharing a `widgetId` collide on the same
-  /// platform channel and calls between them will not route as expected.
+  /// Widget analytics are aggregated by this value, so:
+  /// - give each placement its own label;
+  /// - keep the label the same across app sessions (do not generate it per
+  ///   mount);
+  /// - avoid giving two widgets that are mounted at the same time the same
+  ///   label. Each mounted widget has its own platform channel, so their
+  ///   events and controller calls do not mix. The native SDK still treats
+  ///   them as one widget: on Android they share the loaded content list and
+  ///   one `widget_load` event.
+  ///
+  /// On iOS a blank value is reported through
+  /// `BlazeGlobalDelegate.onErrorThrown` with reason
+  /// `missingWidgetIdentifier`; the widget still renders.
   final String widgetId;
   final String _viewType;
   final bool _isVerticalScroll;
@@ -122,6 +133,13 @@ class BlazeWidgetBase<T extends StatefulWidget> extends StatefulWidget {
 
 class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
     with AutomaticKeepAliveClientMixin {
+  // Counts the widgets created in this isolate. Each one takes the next value
+  // as its channel ID.
+  static int _nextChannelId = 0;
+
+  // Names this widget's platform channel. It is unique per mounted widget, so
+  // two widgets with the same `widgetId` never share a channel.
+  late final String _channelId;
   late final MethodChannel _channel;
 
   // Initial height for dynamic height widgets (embedded inline Grids for example).
@@ -132,7 +150,8 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
   void initState() {
     super.initState();
 
-    _channel = MethodChannel('blaze-widget-${widget.widgetId}');
+    _channelId = '${_nextChannelId++}';
+    _channel = MethodChannel('blaze-widget-$_channelId');
     _channel.setMethodCallHandler(_handleMethodCall);
   }
 
@@ -363,11 +382,27 @@ class BlazeWidgetBaseState<T extends BlazeWidgetBase> extends State<T>
     return (tabs != null && tabs.isNotEmpty) ? tabs.first.dataSource : null;
   }
 
+  /// Throws an [ArgumentError] when a Stories or Moments player style of this
+  /// widget breaks the custom action buttons limit.
+  void _validateCustomActionButtons() {
+    final playerStyle = widget.playerStyle;
+    if (playerStyle is BlazeStoryPlayerStyle) {
+      validateCustomActionButtons(playerStyle.buttons?.customActionButtons);
+    } else if (playerStyle is BlazeMomentsPlayerStyle) {
+      validateCustomActionButtons(playerStyle.buttons?.customActionButtons);
+    }
+    validateCustomActionButtons(
+        widget.tabsConfiguration?.playerStyle?.buttons?.customActionButtons);
+  }
+
   Widget _createPlatformView(BuildContext context) {
+    _validateCustomActionButtons();
+
     // This is used in the platform side to register the view.
     // Pass parameters to the platform side.
     Map<String, dynamic> creationParams = <String, dynamic>{
       "widgetId": widget.widgetId,
+      "channelId": _channelId,
       "isEmbeddedInScrollView": widget._isEmbeddedInScrollView,
       "dataSource": _effectiveDataSource?.toJson(),
       "cachingLevel": widget.cachingLevel?.name,

@@ -36,7 +36,7 @@ fun BlazeFirstTimeSlideTextStyle.mergedWith(
     customization.textColor?.colorFileName?.toColorResId(context)?.let {
         merged.textColorResId = it
     }
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.textSize = customization.textSize ?: this.textSize
 
     return merged
@@ -51,7 +51,7 @@ fun BlazeCaptionsStyle.mergedWith(
     customization ?: return this
 
     val merged = this
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.textSize = customization.textSize ?: this.textSize
 
     customization.positioning?.xPosition?.toBlazeCaptionsXPosition()?.let {
@@ -80,7 +80,7 @@ fun BlazeFirstTimeSlideCTAStyle.mergedWith(
         merged.textColorResId = it
     }
 
-    merged.fontResId = customization.font?.toFontResId(context)
+    merged.fontResId = customization.font?.toFontResId(context) ?: this.fontResId
     merged.textSize = customization.textSize ?: this.textSize
     return merged
 }
@@ -99,7 +99,8 @@ fun BlazeSeekBarStyle.mergedWith(
     merged.height = customization.height?.blazeDp ?: this.height
     merged.cornerRadius = customization.cornerRadius?.toInt()?.blazeDp ?: this.cornerRadius
     merged.thumbColor = safeParseColor(customization.thumbColor) ?: this.thumbColor
-    merged.thumbImageResId = customization.thumbImage?.toImageResId(context)
+    merged.thumbImageResId =
+        customization.thumbImage?.toImageResId(context) ?: this.thumbImageResId
     merged.thumbSize = customization.thumbSize?.blazeDp ?: this.thumbSize
     merged.isThumbVisible = customization.isThumbVisible ?: this.isThumbVisible
 
@@ -135,7 +136,9 @@ fun BlazePlayerButtonCustomImageStates?.mergedWith(
         customization.unselectedImage?.toImageResId(context) ?: return this
     return BlazePlayerButtonCustomImageStates(
         imageUnselectedPathResId = imageUnselectedPath,
+        // An omitted selected image keeps the existing one.
         imageSelectedPathResId = customization.selectedImage?.toImageResId(context)
+            ?: this?.imageSelectedPathResId
     )
 }
 
